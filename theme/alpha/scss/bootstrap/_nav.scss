@@ -1,0 +1,415 @@
+// Base class
+//
+// Kickstart any navigation component with a set of style resets. Works with
+// `<nav>`s, `<ul>`s or `<ol>`s.
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  text-decoration: if($link-decoration == none, null, none);
+
+  @include hover-focus() {
+    text-decoration: none;
+  }
+
+  // Disabled state lightens text
+  &.disabled {
+    color: $nav-link-disabled-color;
+    pointer-events: none;
+    cursor: default;
+
+    .theme-dark & {color: $dm-nav-link-disabled-color;}
+  }
+}
+
+//
+// TODO: Tabs
+//
+
+.nav-tabs {
+  padding: 5px;
+  margin: 0;
+
+  background-color: $gray-100;
+  border-radius: $border-radius;
+
+  font-size: .813rem;
+
+  .theme-dark & {background-color: $dm-gray-100;}
+
+  + .nav-tabs {
+    margin-top: .25rem;
+  }
+
+  .nav-item {
+    margin: 2px;
+    display: inline-flex;
+
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  .nav-link {
+    padding: 10px 12px;
+    margin-right: 0.25rem;
+    display: inline-flex;
+    position: relative;
+
+    font-weight: $font-weight-bold;
+    color: $gray-700;
+    border-radius: $border-radius;
+
+    .theme-dark & {
+      color: $dm-gray-700;
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      border: 2px solid $primary-color-400;
+      border-radius: $border-radius;
+
+      transition: $transition-base;
+
+      opacity: 0;
+    }
+
+    &:hover {
+      background-color: $gray-100;
+      color: $primary-color-600;
+      text-decoration: none;
+
+      .theme-dark & {
+        background-color: $dm-gray-100;
+        color: $primary-color-400;
+      }
+
+      &:before {
+        opacity: 1;
+      }
+    }
+
+    &.active {
+      background-color: $white;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+      .theme-dark & {background-color: $dm-rwhite;}
+
+      &::before {
+        opacity: 0;
+      }
+    }
+
+    &.disabled {
+      color: $nav-link-disabled-color;
+      background-color: transparent;
+      opacity: 0.6;
+
+      .theme-dark & {color: $dm-nav-link-disabled-color;}
+
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: $nav-tabs-link-active-color;
+    background-color: $nav-tabs-link-active-bg;
+
+    .theme-dark & {
+      color: $dm-nav-tabs-link-active-color;
+      background-color: $dm-nav-tabs-link-active-bg;
+    }
+  }
+
+  .dropdown-menu {
+    // Make dropdown border overlap tab border
+    margin-top: -$nav-tabs-border-width;
+    // Remove the top rounded corners here since there is a hard edge above the menu
+    @include border-top-radius(0);
+  }
+}
+
+    .rui-tag-tabs a {
+      margin-right: 0.25rem;
+      padding: $nav-link-padding-y $nav-link-padding-x;
+      display: inline-flex;
+      position: relative;
+
+      font-weight: $font-weight-bold;
+      color: $gray-700;
+      border-radius: $border-radius;
+
+      text-decoration: if($link-decoration == none, null, none);
+
+      .theme-dark & {color: $dm-gray-700;}
+
+      @include hover-focus() {
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: $gray-300;
+        text-decoration: none;
+
+        .theme-dark & {background-color: $dm-gray-300;}
+      }
+
+    }
+
+//
+// Pills
+//
+
+.nav-pills {
+  .nav-link {
+    @include border-radius($nav-pills-border-radius);
+    color: $nav-pills-link-active-color;
+    font-weight: $font-weight-medium;
+
+    .theme-dark & {color: $dm-nav-pills-link-active-color;}
+  }
+
+  .nav-link.active,
+  .show > .nav-link {
+    color: $body-color;
+    background-color: $nav-pills-link-active-bg;
+
+    .theme-dark & {
+      color: $dm-body-color;
+      background-color: $dm-nav-pills-link-active-bg;
+    }
+  }
+}
+
+
+//
+// Justified variants
+//
+
+.nav-fill {
+  > .nav-link,
+  .nav-item {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
+.nav-justified {
+  > .nav-link,
+  .nav-item {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+  }
+}
+
+
+// Tabbable tabs
+//
+// Hide tabbable panes to start, show them when `.active`
+
+.tab-content {
+  > .tab-pane {
+    display: none;
+
+    .list-unstyled {
+      line-height: 2;
+    }
+  }
+  > .active {
+    display: block;
+  }
+}
+
+
+/* alpha THEME */
+ .rui-courseheadermenu-container {
+  margin-top: 20px;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+
+  + .page-content {
+    margin-top:  $page-padding-global;
+  }
+
+  &.rui-topbar--custom-menu {
+    @include media-breakpoint-down(sm) {
+      position: relative;
+      top: 0;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    overflow-x: auto;
+
+    .header-links {
+      width: max-content;
+    }
+  }
+
+  .header-link-item {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+
+    margin: 5px 16px 5px 0;
+    color: $body-color;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+
+    .theme-dark & {
+      color: $dm-body-color;
+    }
+
+    .header-link-item-icon {
+      opacity: .7;
+      margin-right: .35rem;
+    }
+
+    &:after {
+      content: '';
+      background-color: $primary-color-500;
+      width: 0%;
+      height: 1px;
+
+      position: absolute;
+      left: 1px;
+      bottom: -6px;
+
+      opacity: 0;
+
+      transition: all 350ms ease;
+
+      .theme-dark & {
+        background-color: $primary-color-300;
+      }
+    }
+
+    &:hover {
+      color: $primary-color-600;
+      text-decoration: none;
+
+      .theme-dark & {
+        color: $primary-color-400;
+      }
+
+      &:after {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    &.active {
+      color: $primary-color-400;
+
+      &:after {
+        color: $primary-color-400;
+        background-color: $primary-color-400;
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+  }
+ }
+
+@include media-breakpoint-down(md) {
+  .main-nav-container-overflow {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+
+    .main-nav-container {
+      .header-link-item {
+        padding: .65rem 0;
+        margin-right: 1rem;
+      }
+    }
+
+
+
+.nav-column {
+  margin: 0;
+  padding: 0 20px 0 0;
+
+  border-right: 1px solid $border-color;
+
+  .theme-dark & {
+    border-right: 1px solid $dm-border-color;
+  }
+
+  @include media-breakpoint-between(xs,sm) {
+  padding: 0;
+  border-right: none;
+  }
+
+  li {
+    a {
+      padding: 16px 0;
+
+      display: block;
+      border-bottom: 1px solid $border-color;
+
+      color: $body-color;
+      font-weight: $font-weight-medium;
+
+      position: relative;
+
+      .theme-dark & {
+        border-bottom: 1px solid $dm-border-color;
+        color: $dm-body-color;
+      }
+
+      @include media-breakpoint-between(xs,sm) {
+      padding: 16px;
+      }
+
+      &.active,
+      &:hover {
+        color: $link-color;
+        border-color: $link-color;
+
+        .theme-dark & {
+          color: $dm-link-color;
+          border-color: $dm-link-color;
+        }      
+
+        &:before {
+          content: '';
+          background-color: rgba($link-color, .05);
+
+          position: absolute;
+          z-index: -1;
+          width: calc(100% + 12px);
+          top: 4px;
+          bottom: 4px;
+          left: -6px;
+          border-radius: $border-radius;
+
+          .theme-dark & {
+            background-color: rgba($link-color, .1);
+          }
+        }
+      }
+
+    }
+  }
+}

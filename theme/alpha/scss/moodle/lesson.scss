@@ -1,0 +1,13 @@
+//---- Lesson
+//---- Module Activity
+
+.addlinks {
+    margin-top: 2rem;
+    border-top: 1px solid $border-color;
+    text-align: center;
+
+    &:nth-of-type(1) {
+        margin-top: 0;
+        border-top: none;
+    }
+}

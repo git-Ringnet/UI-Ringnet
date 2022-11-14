@@ -1,0 +1,5 @@
+CHANGELOG
+alpha Moodle Theme
+- - - -
+## [2.0.0] - June 14, 2022
++ Released

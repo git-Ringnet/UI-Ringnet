@@ -1,0 +1,111 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+
+    @template theme_alpha/navbar
+
+    This template renders the top navbar.
+
+    Example context (json):
+    {
+        "output": {
+            "should_display_navbar_logo": true,
+            "get_compact_logo_url": "http://placekitten.com/50/50",
+            "custom_menu": "<li>..</li>",
+            "page_heading_menu": "<li>..</li>",
+            "search_box": "<div><input type='text'></div>",
+            "navbar_plugin_output": "<div class='dropdown'>Messaging</div>",
+            "user_menu": "<div class='dropdown'>John Doe</div>"
+        },
+        "config": {
+            "wwwroot": "#"
+        },
+        "sitename": "Moodle Site"
+    }
+}}
+
+<nav id="topBar" class="rui-topbar-wrapper moodle-has-zindex">
+
+    <div class="rui-topbar wrapper-page {{# output.custom_menu }}rui-topbar--custom-menu{{/ output.custom_menu }}">
+        <div id="topbarLeft" class="d-inline-flex align-items-center">
+                
+            <div class="d-inline-flex align-items-center">   
+
+                {{#topbarlogoareaonon}}
+                <a id="logo" href="{{{ config.wwwroot }}}" class="d-inline-flex rui-navbar-brand {{#customlogo}}rui-navbar-brand--img{{/customlogo}} aabtn {{# output.should_display_navbar_logo }}has-logo{{/ output.should_display_navbar_logo }}">
+                    {{#customlogo}}
+                        <span class="rui-logo {{#customdmlogo}}dark-mode-logo{{/customdmlogo}}">
+                            <img src="{{customlogo}}" class="rui-custom-logo ml-2" alt="{{sitename}}" />
+                            {{#customdmlogo}}<img src="{{customdmlogo}}" class="rui-custom-dmlogo ml-2" alt="{{sitename}}" />{{/customdmlogo}}
+                        </span>
+                    {{/customlogo}}
+
+                    {{^customlogo}}
+                    <span class="site-name">
+                        {{^ customlogotxt }}{{{ sitename }}}{{/ customlogotxt }}
+                        {{{ customlogotxt }}}
+                    </span>
+                    {{/customlogo}}
+                </a>
+                {{/topbarlogoareaonon}}
+                
+            </div>
+
+            {{^hiddensidebar}}
+                <div class="rui-drawer-toggle rui-navbar-nav--sep ml-2 pl-2" data-region="drawer-toggle">
+                    <button id="mainNav" class="rui-topbar-btn nav-drawer-btn" aria-expanded="{{#navdraweropen}}true{{/navdraweropen}}{{^navdraweropen}}false{{/navdraweropen}}" aria-controls="nav-drawer" type="button" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 9H6V15H8V9Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M2 8C2 6.34315 3.34315 5 5 5H19C20.6569 5 22 6.34315 22 8V16C22 17.6569 20.6569 19 19 19H5C3.34315 19 2 17.6569 2 16V8ZM5 7H19C19.5523 7 20 7.44771 20 8V16C20 16.5523 19.5523 17 19 17H5C4.44772 17 4 16.5523 4 16V8C4 7.44772 4.44772 7 5 7Z" fill="currentColor" /></svg>
+                    </button>
+                </div>
+            {{/hiddensidebar}}             
+        </div>
+
+        {{# output.custom_menu }}
+        <nav class="moremenu navigation">
+            <ul id="moremenu-topbar" role="{{#istablist}}tablist{{/istablist}}{{^istablist}}menubar{{/istablist}}" class="nav more-nav">
+                {{{.}}}
+                <li role="none" class="dropdown dropdownmoremenu morebutton d-none" data-region="morebutton">
+                    <a class="btn btn-icon btn--more {{#isactive}}active{{/isactive}}" href="#" id="moremenu-dropdown-topbar" role="{{#istablist}}tab{{/istablist}}{{^istablist}}menuitem{{/istablist}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" tabindex="-1">
+                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z"></path>
+                            <path fill="currentColor" d="M13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7C12.5523 7 13 7.44772 13 8Z"></path>
+                            <path fill="currentColor" d="M13 16C13 16.5523 12.5523 17 12 17C11.4477 17 11 16.5523 11 16C11 15.4477 11.4477 15 12 15C12.5523 15 13 15.4477 13 16Z"></path>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-left" data-region="moredropdown" aria-labelledby="moremenu-dropdown-topbar" role="menu">
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        {{#js}}
+            require(['core/moremenu'], function(moremenu) {
+                moremenu(document.querySelector('#moremenu-topbar'));
+            });
+        {{/js}}
+        {{/ output.custom_menu }}
+        
+        {{#topbarcustomhtml}}<div class="rui-topbar-customfield ml-auto d-none d-md-flex">{{{.}}}</div>{{/topbarcustomhtml}}
+
+        <ul class="rui-icon-menu rui-icon-menu--right {{^topbarcustomhtml}}ml-auto{{/topbarcustomhtml}}">
+            <li>{{{ output.navbar_plugin_output }}}</li>
+            <li class="rui-icon-menu-user m-0">
+                {{{ output.user_menu }}}
+            </li>        
+        </ul>
+
+    </div>
+</nav>

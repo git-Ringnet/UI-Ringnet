@@ -1,0 +1,1318 @@
+//---- Layout
+//---- alpha Moodle Theme
+.layout {
+    &.fullscreen {
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: $zindex-modal-backdrop;
+        transition: 0.5s;
+        width: 100vw;
+        margin: 0;
+        opacity: 1;
+        background-color: $modal-content-bg;
+
+        .theme-dark & {
+            background-color: $dm-modal-content-bg;
+        }
+
+        > div {
+            height: 100%;
+            width: 100%;
+        }
+
+        .loading-icon {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            top: 40%;
+            position: fixed;
+            .icon {
+                width: 1em;
+                height: 1em;
+                font-size: 4em;
+            }
+        }
+    }
+}
+
+#page-report {
+    margin: $page-padding-global 60px;
+    width: calc(100% - 120px);
+    border-radius: $border-radius;
+}
+
+#page {
+    padding: 20px;
+    width: 100%;
+    position: relative;
+}
+
+#page-popup {
+    padding: 20px;
+    background-color: $container-bg;
+    border-radius: $border-radius;
+
+    .theme-dark & {
+        background-color: $dm-container-bg;
+    }
+
+    .closewindow {
+        margin: 1rem 0;
+
+        .btn {
+            width: 100%;
+        }
+    }
+}
+
+.wrapper-xl,
+.wrapper-lg,
+.wrapper-md {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.wrapper-lg {
+    width: $wrapper-lg;
+
+    @include media-breakpoint-between(xs,md) {
+        width: 85%;
+    }
+}
+
+.wrapper-md {
+    width: $wrapper-md;
+
+    @include media-breakpoint-between(xs,md) {
+        width: 100%;
+    }
+
+    .wrapper-md {
+        width: 100%;
+    }
+}
+
+.wrapper-blocks {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.wrapper-page {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .rui-btn-show-hide {
+        position: fixed;
+        top: 100px;
+        right: 10px;
+        z-index: $zindex-fixed;
+    }
+
+.wrapper--margin {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.wrapper-xl {
+    max-width: $wrapper-xl;
+    width: 100%;
+
+    @include media-breakpoint-between(xs,md) {
+    width: 90%;
+    }
+}
+
+.wrapper-xxl {
+    width: 100%;
+}
+
+    .rui-blocks-wrapper  {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+.wrapper-fw {
+    width: 100%;
+}
+
+.region-main-content {
+    position: relative;
+}
+
+.rui-title-container {
+    margin-top: 20px;
+
+    & + .singlebutton,
+    & + .rui-nav-tabs {
+        margin-top: 20px;
+    }
+
+    &:first-of-type,#page
+    .rui-course-card-content & {
+        margin-top: 0;
+    }
+}
+
+.rui-title-container + form,
+.mform + div
+{
+    margin-top: $page-padding-global;
+}
+
+
+
+//---- UI elements
+.sep--left {
+    position: relative;
+
+    &:before {
+        content: '';
+        background-color: $border-color;
+        width: 1px;
+        height: 30px;
+
+        position: absolute;
+        top: calc(50% - 15px);
+        left: -5px;
+
+        .theme-dark & {
+            background-color: $dm-border-color;
+        }
+    }
+}
+
+
+#page-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    #page {
+        padding: 7px 40px;
+        margin: 0;
+
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+
+        @include media-breakpoint-between(xs,sm) {
+        padding: 7px 10px;
+        }
+
+        #page-content {
+            flex: 1 0 auto;
+        }
+    }
+}
+
+//---- Footer
+#s-page-footer {
+    margin: $page-padding-global 0 0;
+    padding: $page-padding-global 40px 0;
+
+    width: 100%;
+    flex-shrink: 0;
+    
+    background-color: $footer-bg;
+    color: $footer-text-color;
+
+    #page-site-index & {
+        text-align: center;
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+    padding: 30px;
+    margin: $page-padding-global 0 0;
+    width: 100%;
+    }
+
+    hr {
+        border-color: $footer-border;
+
+        .theme-dark & {
+            border-color: $dm-border-color;
+        }
+    }
+
+    .theme-dark & {
+        background-color: $dm-body-bg;
+        color: $dm-body-color-secondary;
+    }
+}
+
+.rui-topbar-wrapper {
+    padding: 10px;
+    margin: 0;
+
+    width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: $zindex-fixed + 20;
+
+    background-color: $topbar-bg;
+    border-bottom: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: rgb(0 0 0 / 5%) 0 1px 0, rgb(0 0 0 / 5%) 0 4px 16px, rgb(0 0 0 / 8%) 0 10px 20px;
+
+    font-size: 0.875rem; //14px
+    color: $topbar-text;    
+
+    @include media-breakpoint-down(sm) {
+    padding-left: 8px;
+    padding-right: 8px;
+    }
+
+    @include media-breakpoint-down(md) {
+    position: fixed;
+    top: 3px;
+    left: 7px;
+    width: calc(100% - 14px);
+    }
+
+    .theme-dark & {
+        background-color: $dm-container-bg; 
+        color: $dm-topbar-text;  
+        border-color: $dm-border-color; 
+    }
+}
+
+.rui-topbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .navbar-nav {
+        font-size: 0.875rem; //14px
+        font-weight: $font-weight-medium;
+        justify-content: space-between;
+
+        .nav-link {
+            color: $topbar-text;
+            border-radius: $border-radius;
+
+            &:hover {
+                color: $topbar-btn-hover-text;
+                background-color: $topbar-btn-hover;
+            }
+        }
+    }
+
+    .site-name {
+        width: max-content;
+        max-width: 260px;
+        font-size: 0.875rem; //14px
+        font-weight: $font-weight-bold;
+        color: $topbar-text;
+
+        .theme-dark & {
+            color: $dm-topbar-text;
+        }
+    }
+
+}
+
+        //---- TODO: sidebar button, variables
+        .sidebar-btn {
+            padding: 0;
+            margin-right: 10px;
+            margin-left: -1rem;
+
+            width: 60px;
+            height: 60px;
+            line-height: 1;
+
+            border: 0;
+            color: $topbar-text;
+
+            background-color: transparent;
+            border-right: 1px solid rgba($topbar-text, .15);
+            border-radius: $border-radius 0 0 0;
+
+            &:hover {
+                background-color: $topbar-btn-hover;
+            }
+        }
+
+
+//---- Moodle Pages mods */
+.addtagcoll {
+    margin-bottom: 40px;
+}
+
+
+
+
+//---- TODO: Course Index Page
+.course-hero {
+    width: 95%;
+    margin-top: 60px;
+    margin-bottom: $page-padding-global;
+
+    img {
+        border-radius: 5px;
+    }
+}
+
+.course-teachers-box {
+    max-width: 600px;
+    margin-bottom: $page-padding-global;
+
+    display: inline-flex;
+    align-items: center;
+
+    .course-contact-title-item {
+        margin-right: .25rem;
+    }
+
+    .course-contact-title {
+        margin-left: .5rem;
+        margin-right: .5rem;
+        margin-bottom: 0;
+
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $body-color-secondary;
+
+        .theme-dark & {
+            color: $dm-body-color-secondary;
+        }
+    }
+
+    .course-contact {
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        .course-teacher-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: $border-radius;
+            position: relative;
+        }
+    }
+}
+
+.course-hero-img {
+    border-radius: $border-radius;
+}
+
+.course-progressbar-wrapper {
+    padding: 5px 14px;
+    margin: 5px 7px;
+
+    border-radius: $border-radius;
+
+    background-color: $blue-100;
+
+    position: relative;
+
+    .theme-dark & {
+        background-color: $dm-gray-100;
+    }
+
+    .rui-progress {
+        width: 100%;
+        height: 7px;
+        border-radius: $border-radius;
+    }
+
+}
+
+
+@include media-breakpoint-down(sm) {
+.header-button-group {
+    width: 100%;
+
+    .btn {
+        width: 100%;
+    }
+}
+}
+
+.page-header-content,
+.header-content {
+    &:empty {
+        display: none;
+    }
+
+    .rui-page-title {
+        margin-bottom: 20px;
+    }
+}
+
+.rui-page-title {
+    font-size: 2.5rem;
+    line-height: 1.3;
+
+    @include media-breakpoint-between(xs,sm) {
+    font-size: 1.5rem;//24px
+    }
+}
+
+.page-header-content {
+    margin-top: 16px;
+
+    width: 100%;
+    position: relative;
+
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .rui-course-header &,
+    .rui-title-container,
+    .rui-page-title {
+        margin: 0;
+    }
+}
+
+/** Navbar logo. */
+.rui-logo img {
+    height: 100%;
+    max-height: 35px;
+}
+
+.rui-logo-ml {
+    margin-left: 10px;
+}
+
+.rui-logo-box {
+    padding: 4px;
+    border-radius: $border-radius;
+    background-color: $white;
+
+    .theme-dark & {
+        background-color: $black;
+    }
+}
+
+.rui-navbar-nav {
+    .nav-item {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .nav-link {
+            position: relative;
+            width: max-content;
+
+            margin-right: .5rem;
+            padding: 0 1rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 40px;
+            height: 40px;
+            border-radius: $btn-border-radius;
+
+            color: $topbar-btn-text;
+            line-height: 1.8;
+
+            .theme-dark & {
+                color: $dm-topbar-text;
+            }
+
+            @include media-breakpoint-down(sm) {
+                margin-right: 0;
+                width: 100%;
+            }
+
+            &[aria-expanded="true"],
+            &:hover {
+                background-color: $topbar-btn-hover;
+
+                .theme-dark & {
+                    color: $dm-topbar-btn-hover;
+                }
+            }
+        }
+
+    }
+}
+
+    .rui-navbar-nav--sep {
+        position: relative;
+
+        &:before{
+            content: '';
+            background-color: rgba($black, .15);
+            width: 1px;
+            height: 16px;
+
+            position: absolute;
+            top: calc(50% - 8px);
+            left: -6px;
+        }
+    }
+
+    .popover-region-notifications:not(.collapsed) {
+       .nav-link {
+            background-color: $gray-700;
+        }
+    }
+
+.rui-topbar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 40px;
+    width: max-content;
+    min-height: 40px;
+
+    border: none;
+    border-radius: $btn-border-radius;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $topbar-btn-text;
+
+    &[aria-expanded="true"],
+    &:hover {
+        color: $topbar-btn-hover-text;
+        background-color: $topbar-btn-hover;
+        text-decoration: none;
+    }
+}
+
+.nav-drawer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 40px;
+    width: max-content;
+    min-height: 40px;
+
+    border: none;
+    border-radius: 40px;
+
+    background-color: $topbar-btn;
+    color: $topbar-btn-text;
+
+    &[aria-expanded="true"],
+    &:hover {
+        color: $topbar-btn-hover-text;
+        background-color: $topbar-btn-hover;  
+    
+        .theme-dark & {
+            background-color: $primary-color-600;
+            color: $primary-color-100;
+        }
+    }
+}
+
+.rui-login-btn {
+    padding: 0 1rem;
+    background-color: $primary-color-600;
+    color: $primary-color-100;
+}
+
+.rui-topbar-special-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 40px;
+    font-size: $font-size-xs;
+    color: $topbar-btn-text;
+
+    @include media-breakpoint-down(sm) {
+    padding: 8px;
+    }
+
+    &.active {
+        background-color: $topbar-btn-hover;
+        color: $topbar-btn-hover-text;
+        
+        .theme-dark & {
+            background-color: $dm-topbar-btn-hover;
+            color: $dm-topbar-btn-text;
+        }
+    }
+
+    .theme-dark & {
+        background-color: $dm-topbar-btn;
+        color: $dm-topbar-btn-text;
+    }
+}
+
+    .rui-icon-menu {
+        padding: 0;
+        margin: 0;
+        display: inline-flex;
+
+        position: relative;
+        list-style: none;
+
+        li {
+            margin: 0 2px;
+        }
+
+        li, .popover-region {
+            display: inline-flex;
+        }
+
+        .popover-region {
+            margin-right: 2px;
+        }
+
+    }
+
+    .rui-icon-menu--sep {
+        &:before {
+            content: '';
+            background-color: $border-color;
+
+            position: absolute;
+            top: -14px;
+            left: calc(50% - 10px);
+
+            width: 20px;
+            height: 1px;
+
+            .theme-dark & {
+                background-color: $dm-border-color;
+            }
+        }
+    }
+
+    .nav-editswitch {
+        width: max-content;
+    }
+
+    .mobile-nav--open #topBar:before {
+        @include media-breakpoint-between(xs,sm) {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba($container-bg, .8);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        height: 100vh;
+        }
+    }
+
+    .rui-icon-menu--horizontal {
+        display: inline-flex;
+        align-items: center;
+        
+        li { 
+            display: inline-flex;
+            margin-bottom: 0; 
+            margin-left: .4rem; 
+        }
+    }
+
+.rui-drawer-toggle {
+    margin-right: 8px;
+}
+
+.rui-topbar-special-btn {
+    background: transparent;
+    color: $topbar-btn-text;
+
+    &:hover {
+        background: $topbar-btn-hover;
+        color: $topbar-btn-hover-text;       
+    }
+}
+
+.rui-nav-tabs + * {
+    margin-top: $page-padding-global;
+}
+
+
+.rui-navbar-brand,
+body:not(#rui-lang-btn).rui-navbar-lang {
+    position: relative;
+
+    @include media-breakpoint-down(sm) {
+    margin-left: 0;
+    margin-right: 0;
+    }
+}
+
+.rui-navbar-brand {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.rui-navbar-brand--img {
+    margin-left: 0;
+}
+
+.rui-navbar-brand:hover {
+    text-decoration: none;
+    opacity: .6;
+}
+
+@include media-breakpoint-between(xs,md) {
+    .rui-navbar-collapse  {
+        padding: 20px;
+
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+
+        background-color: $primary-color-700;
+
+        border-radius: 0 0 $border-radius $border-radius;
+
+        display: inline-flex;
+        flex-wrap: wrap;
+
+        @include media-breakpoint-down(sm) {
+        top: 95px;
+        }
+    }
+}
+
+.rui-custom-logo {
+    display: inline-flex;
+
+    .theme-dark & {
+        display: none;
+    }
+}
+
+.rui-custom-dmlogo {
+    display: none;
+
+    .theme-dark & {
+        display: inline-flex;
+    }
+}
+
+
+.rui-topbar-customfield {
+    position: relative;
+    margin-right: 12px;
+    padding: 0 20px;
+
+    width: inherit;
+    max-width: 280px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+
+    font-size: $font-size-xs;
+
+    @include media-breakpoint-down(md) {
+    max-width: 210px;
+    margin: 0 50px 0 0;
+    }
+
+    &:before{
+        content: '';
+        background-color: rgba($black, .15);
+        width: 1px;
+        height: 16px;
+
+        position: absolute;
+        top: calc(50% - 8px);
+        right: -6px;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+}
+
+/* Footer */
+.rui-footer-content {
+    font-size: $font-size-xs;
+}
+
+.rui-list-social {
+    margin: 0;
+    list-style: none;
+    display: inline-flex;
+
+    li {
+        color: $body-color-light;
+        margin-right: .5rem;
+
+        a {
+            color: inherit;
+            padding: 6px;
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            &:hover {
+                background-color: $container-bg;
+                opacity: .7;
+            }
+        }
+    }
+}
+
+.rui-footer-copy {
+    p {
+        margin-bottom: .25rem;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.rui-footer-nav-title {
+    font-size: $font-size-sm;
+    color: $footer-text-color;
+
+    .theme-dark & {
+        color: $dm-body-color;
+    }
+}
+
+.rui-footer-nav-items {
+    font-size: $font-size-sm;
+    color: rgba($footer-text-color, .6);
+
+    .theme-dark & {
+        color: $dm-body-color-secondary;
+    }
+
+    li {
+        margin: .65rem 0;
+
+        a {
+            color: $footer-link-color;
+
+            .theme-dark & {
+                color: $dm-body-color-secondary;
+            }
+
+            &:hover {
+                color: $footer-link-color-hover;
+            }
+        }
+    }
+}
+
+/* Enroll Page */
+.theme-dark#page-enrol-index .main-content {
+    .info {
+        background-color: $dm-gray-100;
+    }
+    .box:not(.info) {
+        border: 1px solid $dm-border-color;
+    }
+}
+
+#page-enrol-index .main-content {
+    margin: 0 auto;
+    padding: 40px 60px!important;
+    width: $wrapper-md;
+
+    @include media-breakpoint-between(xs,md) {
+        width: 100%;
+    }
+
+    .col-md-3,
+    .col-md-9
+    {
+        padding: 0;
+        text-align: left!important;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .col-md-3 {
+        margin-top: .5rem;
+    }
+
+    .info {
+        margin-top: $page-padding-global;
+        background-color: $gray-100;
+        border-radius: $border-radius;
+
+        .rui-course-card {
+            max-width: 320px;
+            margin: 30px auto;
+            box-shadow: $box-shadow-lg;
+        }
+
+        .rui-course-card-body {
+            margin-top: 0;
+        }
+
+        .rui-title-container {
+            width: auto;
+            margin-bottom: $page-padding-global;
+        }
+    }
+
+
+    .mform .form-inline .form-control {
+        width: 100%;
+    }
+
+    a.fheader {
+        margin-bottom: 0;
+    }
+
+    .fcontainer,
+    .btn, [type="submit"] {
+        width: 300px;
+        margin: 0 auto;
+    }
+
+    .box:not(.info) {
+        margin-top: 20px;
+        padding: 20px!important;
+        border: 1px solid $border-color;
+        border-radius: 5px;
+    }
+
+}
+
+body#page-enrol-index #region-main .generalbox:last-of-type {
+    width: 100%!important;
+    float: none!important;
+    margin-top: 20px!important;
+    box-shadow: none!important;
+}
+
+// Dark Mode
+.theme-dark .rui-dark-mode-status--on {
+    display: block;
+}
+
+body:not(.theme-dark) .rui-dark-mode-status--on,
+.theme-dark .rui-dark-mode-status--off {
+    display: none;
+}
+
+// Not logged in users
+.notloggedin {
+    .hidefornotloggedin {
+        display: none!important;
+    }
+}
+
+body:not(.notloggedin):not(#page-admin-setting-themesettingalpha) {
+    .hideforloggedin {
+        display: none!important;
+    }
+}
+
+.theme-dark {
+    .hide-on-darkmode {
+        display: none;
+    }
+}
+
+body:not(.theme-dark) {
+    .hide-on-lightmode {
+        display: none;
+    }
+}
+
+.rui-custom-alert {
+    padding: 14px 60px 14px 24px;
+    max-width: 600px;
+
+    @include media-breakpoint-between(xs,sm){
+	width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    left: 10px;
+    }
+
+    display: inline-flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+
+    position: fixed;
+    z-index: $zindex-fixed - 5;
+    bottom: 0;
+    left: 15px;
+
+    background-color: $container-bg;
+    color: $body-color-secondary;
+    box-shadow: $box-shadow-lg;
+
+    &.fade:not(.show) {
+        z-index: -1;
+    }
+
+    .theme-dark & {
+        background-color: $black;
+        color: $dm-body-color-secondary;
+    }
+
+    .rui-custom-alert-close {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+
+        padding: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-content: center;
+
+        background-color: transparent;
+        border: none;
+        border-radius: $border-radius-xl;
+
+        background-color: $gray-100;
+        color: $gray-600;
+
+        width: 40px;
+        height: 40px;
+
+        transition: $transition-base;
+
+        .theme-dark & {
+            background-color: $dm-gray-100;
+            color: $dm-gray-600;
+        }
+
+        &:hover {
+            background-color: $red-100;
+            color: $red-600;
+        }
+    }
+}
+
+
+.rui-main-nav {
+    .nav-item {
+        font-size: 1rem;
+    }
+}
+
+.rui-main-nav {
+    padding: 0;
+    margin: 0;
+    
+    .nav-item {
+        position: relative;
+        font-weight: $font-weight-medium;
+        list-style: none;
+
+        .nav-link {
+            width: 100%;
+            display: flex;
+            align-items: center;
+
+            padding: .35rem 1.25rem;
+            margin: 9px 0;
+
+            border-radius: $border-radius;
+            color: $body-color;
+
+            z-index: 1;
+
+            &:hover {
+                &:before { background-color: $white; } 
+            }
+
+            &.active {
+                &:before {
+                    background-color: $white;
+                    color: $body-color-light;
+                } 
+            }
+
+            &:before {
+                content: '';
+                
+                position: absolute;
+
+                width: 100%;
+                top: -3px;
+                bottom: -3px;
+                left: 0;
+
+                border-radius: $border-radius;
+
+                z-index: -1;
+            }
+
+            .nav-link-icon {
+                opacity: .6;
+            }
+        }
+    }
+}
+
+.wrapper-course {
+    width: 100%;
+    margin-top: 16px;
+    padding: 40px;
+
+    background-color: $container-bg;
+    border-radius: $border-radius;
+
+    transition: $transition-base;
+
+    @include media-breakpoint-between(xs,sm) {
+    padding: 20px;
+    }
+
+    .drawer-open-right & {
+        width: calc(100% - 340px);
+    }
+
+    .theme-dark & {
+        background-color: $dm-container-bg;
+    }
+}
+
+#blocks-dashboardonecol {
+    .block-region {
+        margin-bottom: 1.25rem;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+
+  .editmode-switch-form {
+    padding: 5px 5px 5px 10px;
+    border: none;
+    border-radius: $border-radius;
+
+    .custom-control.ios-switch {
+        color: $drawer-text; 
+    }
+  }
+
+
+  $fixed-header-y: $navbar-height;
+
+
+#page.drawers {
+    margin-top: 0;
+    
+    @include thin-scrolls($scroll-bg-track);
+    
+    .theme-dark & {
+        @include thin-scrolls($dm-drawer-scroll-bg-track);
+    }
+
+    .main-inner {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+        flex: 1 0 auto;
+    }
+    .activity-header {
+        margin: 0;
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    //the scroll to top button
+    .drawer-toggles {
+        z-index: 100;
+
+        .drawer-right-toggle,
+        .drawer-left-toggle {
+            top: calc(99vh - (#{$navbar-height} * 2.5));
+        }
+    }
+    #page.drawers.scroll-down {
+        .drawer-right-toggle {
+            transform: translateX(150%);
+            pointer-events: auto;
+            visibility: hidden;
+        }
+        .drawer-left-toggle {
+            transform: translateX(-150%);
+            pointer-events: auto;
+            visibility: hidden;
+        }
+    }
+}
+
+  @include media-breakpoint-up(lg) {
+    .drawer-left,
+    .drawer-right {
+        top: $navbar-height + 10px;
+        height: calc(100vh - #{$navbar-height - 10px});
+    }
+
+    #page.drawers {
+        position: relative;
+        overflow-y: auto;
+        @include transition(0.2s);
+        height: 100vh;
+        left: 0;
+        right: 0;
+        &.show-drawer-left {
+            margin-left: $drawer-left-width;
+            margin-right: 0;
+        }
+        &.show-drawer-right {
+            margin-left: 0;
+            margin-right: $drawer-right-width;
+            .jsenabled & .btn-footer-popover {
+                right: calc(#{$drawer-right-width} + 2rem);
+            }
+        }
+        &.show-drawer-left.show-drawer-right {
+            margin-left: $drawer-left-width;
+            margin-right: $drawer-right-width;
+        }
+    }
+}
+
+.drawercontent {
+    position: relative;
+    z-index: -1;
+    height: calc(100% - 56px);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
+    padding: 0;
+
+    .dropdown-menu .dropdown-item {
+        width: 220px;
+        white-space: normal;
+    }
+
+    @include thin-scrolls($scroll-bg-track);
+
+    .theme-dark & {
+        @include thin-scrolls($dm-drawer-scroll-bg-track);
+    }
+}

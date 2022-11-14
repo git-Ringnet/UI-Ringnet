@@ -1,0 +1,69 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template theme_alpha/maintenance
+
+    alpha maintenance layout template.
+
+    Context variables required for this template:
+    * output - The core renderer for the page
+
+    Example context (json):
+    {
+        "output": {
+            "doctype": "<!DOCTYPE html>",
+            "page_title": "Test page",
+            "favicon": "favicon.ico",
+            "main_content": "<h1>Headings make html validators happier</h1>"
+         }
+    }
+}}
+{{> theme_alpha/head }}
+
+<body {{{ output.body_attributes }}}>
+{{> core/local/toast/wrapper}}
+
+<div id="page-wrapper">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    <div id="page" class="container-fluid">
+
+        <div id="page-content" class="page-content">
+            {{{ output.page_heading }}}
+            <section id="region-main" aria-label="{{#str}}content{{/str}}">
+                <div class="rui-blocks-wrapper wrapper-lg">
+                     <div class="wrapper-course">
+                    {{{ output.main_content }}}
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        {{> theme_alpha/footer-simple }}
+    </div>
+
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_alpha/loader');
+require(['theme_alpha/loader'], function() {
+  M.util.js_complete('theme_alpha/loader');
+});
+{{/js}}

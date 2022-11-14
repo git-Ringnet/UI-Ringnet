@@ -1,0 +1,99 @@
+//---- SCORM
+//---- Module Activity
+#scormviewform,
+#page-mod-scorm-view #intro
+{
+    padding: 0!important;
+}
+
+#scormtablecontainer {
+    #attempts {
+        .c5, .c6 {
+            font-size: $font-size-xs;
+            color: $body-color-secondary;
+
+            .theme-dark & {
+                color: $dm-body-color-secondary;
+            }
+        }
+    }
+}
+
+/* Mod default styles */
+#scormpage {
+    margin-top: $page-padding-global;
+}
+
+#page-mod-scorm-player #scormpage div.yui3-u-3-4 {
+    width: calc(75% - 30px);
+    margin-left: 30px;
+}
+
+#scorm_toc_toggle_btn {
+    margin: 0 10px $page-padding-global;
+
+    background-color: $white;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.75 5.75H14.25' stroke='#{url-friendly-colour($body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M4.75 18.25H14.25' stroke='#{url-friendly-colour($body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M4.75 12H19.25' stroke='#{url-friendly-colour($body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius;
+    border: none;
+
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .26), 0 14px 44px 0 rgba(0, 0, 0, .2);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    text-indent: -99px;
+
+    .theme-dark & {
+        background-color: $black;
+        background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.75 5.75H14.25' stroke='#{url-friendly-colour($dm-body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M4.75 18.25H14.25' stroke='#{url-friendly-colour($dm-body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3Cpath d='M4.75 12H19.25' stroke='#{url-friendly-colour($dm-body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3C/path%3E%3C/svg%3E%0A");
+    }
+}
+
+#scorm_toc {
+    padding: 20px;
+    background-color: $gray-100;
+    border-radius: $border-radius;
+
+    .theme-dark & {
+        background-color: $dm-gray-100;
+    }
+}
+
+#scorm_tree {
+    .yui3-treeview-row {
+        padding: 10px;
+        border-radius: $border-radius;
+
+        .icon {
+            font-size: 11px;
+        }
+    }
+}
+
+#scorm_nav {
+    .yui3-button-disabled {
+        display: none;
+    }
+}
+
+#page-mod-scorm-player #scormpage #scorm_toc_title {
+    margin-bottom: 10px;
+    font-size: $font-size-sm;
+}
+
+#page-mod-scorm-player #scormpage div.yui3-g-r {
+    letter-spacing: normal;
+    word-spacing: normal;
+}
+
+#scorm_layout {
+    margin-bottom: $page-padding-global;
+}

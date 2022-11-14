@@ -1,0 +1,293 @@
+$courseindex-link-color: $list-group-action-color !default;
+$courseindex-link-color-selected: $primary-color-600 !default;
+$courseindex-link-dimmed-color: $gray-600 !default;
+$courseindex-link-hover-color: black !default;
+$courseindex-item-dragging-bg: theme-color-level('info', -11) !default;
+$courseindex-item-dragging-border: theme-color-level('info', -9) !default;
+$courseindex-item-active-border: $gray-300 !default;
+$courseindex-item-active-bg: $primary-color-100 !default;
+$courseindex-item-page-bg: $primary-color-100 !default;
+$courseindex-item-padding-y: .5rem;
+$courseindex-item-padding-x: .75rem;
+$courseindex-item-radius: $border-radius !default;
+$courseindex-item-current: $primary-color-100 !default;
+
+// Dark mode
+$dm-courseindex-link-color: $dm-list-group-action-color !default;
+$dm-courseindex-link-color-selected: $primary-color-600 !default;
+$dm-courseindex-link-dimmed-color: $dm-gray-600 !default;
+$dm-courseindex-link-hover-color: $white !default;
+$dm-courseindex-item-active-border: $dm-gray-300 !default;
+$dm-courseindex-item-active-bg: $primary-color-100 !default;
+$dm-courseindex-item-page-bg: $dm-gray-200 !default;
+$dm-courseindex-item-current: $primary-color-900 !default;
+$dm-courseindex-item-dragging-bg: theme-color-level('info', -11) !default;
+$dm-courseindex-item-dragging-border: theme-color-level('info', -9) !default;
+
+@mixin courseindex-item-hover() {
+    @include hover-focus() {
+        color: $courseindex-link-hover-color;
+
+        .theme-dark & {
+            color: $dm-courseindex-link-hover-color;
+        }
+
+        .courseindex-link,
+        .courseindex-chevron {
+            color: $courseindex-link-hover-color;
+            cursor: pointer;
+
+            .theme-dark & {
+                color: $dm-courseindex-link-hover-color;
+            }
+        }
+        &.dimmed {
+            color: $courseindex-link-hover-color;
+
+            .theme-dark & {
+                color: $dm-courseindex-link-hover-color;
+            }
+
+            .courseindex-link,
+            .courseindex-chevron {
+                color: $courseindex-link-hover-color;
+
+                .theme-dark & {
+                    color: $dm-courseindex-link-hover-color;
+                }
+            }
+        }
+        &.draggable {
+            cursor: pointer;
+        }
+    }
+}
+
+@mixin courseindex-item-dragging() {
+    &.dragging {
+        border: $border-width solid $courseindex-item-dragging-border;
+        background-color: $courseindex-item-dragging-bg;
+
+        .theme-dark & {
+            border: $border-width solid $dm-courseindex-item-dragging-border;
+            background-color: $dm-courseindex-item-dragging-bg;
+        }
+    }
+}
+
+.courseindex {
+    margin: 1px;
+    // Both activity and section items.
+    .courseindex-item {
+        padding: $courseindex-item-padding-y $courseindex-item-padding-x;
+        border: $border-width solid transparent;
+        @include border-radius($courseindex-item-radius);
+        position: relative;
+
+        &.courseindex-section-title a {
+            font-weight: $font-weight-medium;
+            font-size: $font-size-sm;
+            color: $headings-color;
+
+            .theme-dark & {
+                color: $dm-headings-color;
+            }
+        }
+
+        .icons-collapse-expand {
+            line-height: 1;
+        }
+
+        .courseindex-name,
+        .courseindex-link {
+            color: $body-color-secondary;
+            font-size: $font-size-xs;
+
+            .theme-dark & {
+                color: $dm-body-color-secondary;
+            }
+        }
+
+        @include courseindex-item-hover();
+        @include courseindex-item-dragging();
+
+        &.active {
+            background-color: $courseindex-item-active-bg;
+            border-color: $courseindex-item-active-border;
+        }
+
+        // Hidden elements.
+        &.dimmed {
+            color: $courseindex-link-dimmed-color;
+
+            .courseindex-link,
+            .courseindex-chevron {
+                color: $courseindex-link-dimmed-color;
+            }
+
+            // Current page dimmed item.
+            &.pageitem {
+                color: $courseindex-link-color-selected;
+
+                .theme-dark & {
+                    color: $dm-courseindex-link-color-selected;
+                }
+
+                a {
+                    color: $courseindex-link-color-selected;
+
+                    .theme-dark & {
+                        color: $dm-courseindex-link-color-selected;
+                    }
+                }
+            }
+        }
+
+        // Restrictions icon.
+        .courseindex-locked {
+            display: none;
+        }
+        &.restrictions {
+            .courseindex-locked {
+                display: block;
+
+                .rui-icon-container {
+                    background-color: $yellow-200;
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 24px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .icon {
+                    padding: 4px;
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+
+        // Current page item.
+        &.pageitem {
+            &:before {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                z-index: -1;
+                background-color: $courseindex-item-page-bg;
+                color: $courseindex-link-color-selected;
+            }
+
+            scroll-margin: 6rem;
+
+            .theme-dark & {
+                background-color: $dm-courseindex-item-page-bg;
+                color: $dm-courseindex-link-color-selected;        
+            }
+
+            a {
+                color: $courseindex-link-color-selected;
+                .theme-dark & {
+                    color: $dm-courseindex-link-color-selected;       
+                }
+            }
+
+            @include hover-focus() {
+                background-color: darken($courseindex-item-page-bg, 7.5%);
+                color: darken($courseindex-link-color-selected, 10%);
+                .courseindex-link,
+                .courseindex-chevron {
+                    color: darken($courseindex-link-color-selected, 10%);
+                }
+            }
+        }
+
+        // Completion.
+        .completioninfo {
+            line-height: 1;
+            margin-right: 5px;
+            min-width: 24px;
+
+            &.completion_complete {
+                color: $success;
+            }
+
+            &.completion_fail {
+                color: $danger;
+            }
+        }
+    }
+
+    // The full section collapsable.
+    .courseindex-section {
+        @include courseindex-item-dragging();
+        border-bottom: 1px solid $border-color;
+
+        &:last-of-type {
+            border-bottom: 0;
+        }
+
+        .theme-dark & {
+            border-color: $dm-border-color;
+        }
+
+        .current-badge {
+            line-height: $line-height-base;
+            display: none;
+        }
+
+        &.current {
+            background-color: rgba($courseindex-item-current, .5);
+
+            .current-badge {
+                display: inline-block;
+            }
+        }
+
+        &.dropready .courseindex-item-content {
+            /* Extra dropzone alpha */
+            padding-bottom: 1em;
+        }
+
+        .courseindex-sectioncontent {
+            .courseindex-item {
+                padding-left: $courseindex-item-padding-x;
+            }
+        }
+    }
+
+    .courseindex-sectioncontent {
+        margin-left: 0;
+    }
+
+    // Element visible only on editing mode.
+    .d-flex-noedit {
+        display: none;
+    }
+    &.editing {
+        .d-flex-noedit {
+            display: flex;
+        }
+    }
+
+    // Placeholders.
+    .media-list {
+        .placeholder-circle {
+            height: 20px;
+            width: 20px;
+            border-radius: $border-radius;
+        }
+
+        .placeholder-rec {
+            width: 50%;
+            height: 20px;
+            border-radius: $border-radius;
+            margin: 0.5rem 0;
+        }
+    }
+}

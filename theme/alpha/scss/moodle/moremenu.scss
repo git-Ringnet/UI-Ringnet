@@ -1,0 +1,189 @@
+
+.moremenu {
+    opacity: 0;
+    width: 100%;
+    height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+
+    @media screen and (min-width: 1680px) {
+        max-width: 500px;
+    }
+
+    @media screen and (min-width: 1920px) {
+        max-width: 700px;
+    }
+
+    &.observed {
+        opacity: 1;
+    }
+
+    .nav-link {
+        border-radius: $border-radius;
+        padding: 10px 14px;
+        margin: 0 2px;
+        height: 40px;
+
+        display: flex;
+        align-items: center;
+
+        font-size: $font-size-sm;
+        font-weight: $font-weight-medium;
+        color: $topbar-btn-text;
+
+        .theme-dark & {
+            color: $dm-body-color;
+        }
+
+        &:hover {
+            background-color: $topbar-btn-hover;
+            color: $topbar-btn-hover-text;
+
+            .theme-dark & {
+                background-color: #080808;
+                color: $dm-body-color;
+            }
+        }
+
+        &.active {
+            background-color: $topbar-btn-hover;
+            color: $topbar-btn-hover-text;
+
+            .theme-dark & {
+                background-color: #080808;
+                color: $dm-body-color;
+            }
+
+            &:focus,
+            &:hover {
+                background-color: $topbar-btn-hover;
+                color: $topbar-btn-hover-text;
+
+                .theme-dark & {
+                    background-color: #080808;
+                    color: $dm-body-color;
+                }
+            }
+        }
+        &.focus,
+        &:focus {
+            position: relative;
+        }
+        &[data-toggle="tab"] {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            &::after {
+                content: attr(data-text) / "";
+                height: 0;
+                visibility: hidden;
+                overflow: hidden;
+                user-select: none;
+                pointer-events: none;
+                font-weight: bold;
+
+                @media speech {
+                    display: none;
+                }
+            }
+        }
+    }
+    .nav-tabs {
+        margin-left: 0;
+        background-color: $body-bg;
+    }
+    .show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+        background: transparent;
+    }
+
+    // Styling for dropdown menus inside the MoreButton.
+    .dropdownmoremenu > .dropdown-menu {
+        & > .dropdown-item {
+            padding: 0;
+        }
+        .dropdown-menu {
+            position: static;
+            border: 0;
+            &.show {
+                display: block;
+            }
+            .dropdown-item {
+                &:hover {
+                    background-color: $topbar-btn-hover;
+                    color: $topbar-btn-hover-text;
+                }
+            }
+            .dropdown-divider {
+                display: none;
+            }
+        }
+    }
+
+    .dropdown-item[aria-current="true"],
+    .dropdown-item.active {
+        &:focus-within,
+        &:hover {
+            a {
+                background-color: $topbar-btn-hover;
+                color: $topbar-btn-hover-text;
+            }
+        }
+    }
+}
+
+.morebutton {
+    a {
+        color: $topbar-btn-text; 
+
+        .theme-dark & {
+            color: $primary-color-100;
+        }
+
+        &:hover {
+            color: $topbar-btn-hover-text;
+            background-color: $topbar-btn-hover;  
+        
+            .theme-dark & {
+                background-color: $primary-color-600;
+                color: $primary-color-100;
+            }
+        } 
+    }
+}
+
+
+.more-nav {
+    @include media-breakpoint-down(sm) {
+    width: 40px;
+    }
+    
+    .show {
+        .nav-link,
+        .btn--more {
+            color: $topbar-btn-hover-text;
+            background-color: $topbar-btn-hover;  
+
+            .theme-dark & {
+                background-color: $primary-color-600;
+                color: $primary-color-100;
+            }
+
+            &:hover {
+                color: $topbar-btn-hover-text;
+                background-color: $topbar-btn-hover;  
+            
+                .theme-dark & {
+                    background-color: $primary-color-600;
+                    color: $primary-color-100;
+                }
+            }
+        }
+    }
+}
+

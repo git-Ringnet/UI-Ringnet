@@ -1,0 +1,71 @@
+{{!
+    @template core/signup_form_layout
+
+    Example context (json):
+    {
+        "logourl": "https://moodle.org/logo/moodle-logo.svg",
+        "sitename": "Site name",
+        "formhtml": "<p>(Form html would go here)</p>"
+    }
+}}
+
+    <div class="rui-backtologin">
+        <a href="{{{ config.wwwroot }}}/login/index.php" class="btn--back">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.25 6.75L4.75 12L10.25 17.25"></path>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.25 12H5"></path>
+            </svg>
+        </a>
+    </div>
+
+    <div class="rui-logo-top-btn">
+        {{#stringbacktologin}}<span class="rui-login-calabel">{{{stringbacktologin}}}</span>{{/stringbacktologin}} <a href="{{{ config.wwwroot }}}/login/index.php" class="btn-link--clean">{{#str}}login{{/str}}</a>
+    </div>
+
+    <div class="rui-signup-layout">
+        <div class="rui-login-wrapper row no-gutters align-items-center justify-content-start">
+            <div class="rui-login-container row no-gutters">
+                <div class="rui-signup-box rui-book-wrapper">
+                    <div class="rui-loginpage-intro">
+
+                        <div class="d-inline-flex align-items-center border-bottom pb-4 mb-4 w-100">
+                            {{#customloginlogo}}
+                            <a href="{{{ config.wwwroot }}}"><h2 class="rui-login-logo mb-0"><img src="{{customloginlogo}}" title="{{sitename}}" alt="{{sitename}}" class="img-fluid"/></h2></a>
+                            {{/customloginlogo}}
+
+                            {{^customloginlogo}}
+                            {{#logourl}}
+                            <a href="{{{ config.wwwroot }}}"><h2 class="rui-login-logo mb-0"><img src="{{logourl}}" title="{{sitename}}" alt="{{sitename}}" class="img-fluid"/></h2></a>
+                            {{/logourl}}
+
+                            {{^logourl}}
+                            <a href="{{{ config.wwwroot }}}"><h2 class="mb-0">{{sitename}}</h2></a>
+                            {{/logourl}}
+                            {{/customloginlogo}}
+                            <h4 class="rui-login-logo--sep">{{#str}}newaccount{{/str}}</h4>
+                        </div>
+
+                        {{#signupintrotext}}
+                        <div class="rui-loginpage-intro-content">
+                            {{{signupintrotext}}}
+                        </div>
+                        {{/signupintrotext}}
+                    </div>
+
+
+                    <div class="rui-login-form">
+                        {{{formhtml}}}
+                    </div><!-- .rui-login-form -->
+
+
+                </div><!-- .rui-signup-box -->
+
+                {{#signuptext}}
+                <div class="rui-signup-additional-content">
+                    {{{signuptext}}}
+                </div>
+                {{/signuptext}}
+
+            </div>
+        </div>
+    </div><!-- .login layout #1 -->

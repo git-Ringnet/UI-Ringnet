@@ -1,0 +1,11 @@
+//---- Choice
+//---- Module Activity
+
+#page-mod-choice-view {
+    #notice {
+        p {
+            @extend .alert;
+            @extend .alert-warning;
+        }
+    }
+}

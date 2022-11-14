@@ -1,0 +1,943 @@
+//---- Front Page Blocks
+$block-el-margin-bottom: 30px;
+
+.rui-fp-margin-top {
+  margin-top: 80px;
+}
+
+.rui-fp-margin-bottom {
+  margin-bottom: 80px;
+}
+
+.rui-block-hr {
+  margin: 80px auto;
+  max-width: 260px;
+}
+
+.rui-block-title {
+  margin-bottom: $block-el-margin-bottom;
+  font-size: 3rem; // 48px
+  text-align: center;
+  color: $body-color;
+
+  .theme-dark & {
+    color: $dm-body-color;
+  }
+
+  @include media-breakpoint-only(md) {
+  font-size: 2.5rem; // 40px
+  }
+
+  @include media-breakpoint-between(xs,sm) {
+  font-size: 1.5rem; // 24px
+  }
+}
+
+.rui-block-desc {
+  font-size: 1.25rem; //18px
+  color: $body-color;
+
+  .theme-dark & {
+    color: $dm-body-color;
+  }
+
+  @include media-breakpoint-between(xs,sm) {
+  font-size: 1rem
+  }
+}
+
+.rui-block-desc--lg {
+  font-size: 2rem;
+
+  @include media-breakpoint-between(xs,sm) {
+  font-size: 1.5rem
+  }
+}
+
+.rui-block-desc--sm {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rui-block-footer {
+  margin-top: 60px;
+  font-size: .875rem; // 14px
+  color: $body-color-light;
+
+  .theme-dark & {
+    color: $dm-body-color-light;
+  }
+}
+
+// Team
+.rui-card-team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+}
+
+// Added important becaouse Atto editor adds additional classes
+.rui-block-team-item img {
+  width: 100%!important;
+  max-width: 100%!important;
+  border-radius: $border-radius;
+}
+
+.rui-block-team-title {
+  font-size: 1rem;
+  color: $body-color;
+
+  .theme-dark & {
+    color: $dm-body-color;
+  }
+}
+
+.rui-block-team-desc {
+  font-size: .938rem; // 15px
+  color: $body-color-secondary;
+
+  .theme-dark & {
+    color: $dm-body-color-secondary;
+  }
+}
+
+.rui-block-team-desc--sm {
+  font-size: .75rem; // 12px
+  color: $body-color-light;
+
+  .theme-dark & {
+    color: $dm-body-color-light;
+  }
+}
+
+.rui-block-team-list {
+    li {
+        margin-right: 10px;
+        display: inline-block;
+
+        a {
+            font-size: .875rem;
+            font-weight: $font-weight-bold;
+            color: $body-color-secondary;
+
+            .theme-dark & {
+              color: $dm-body-color-secondary;
+            }
+        }
+
+    }
+}
+
+  // Tetimonials
+  .rui-card-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+    column-gap: 80px;
+    row-gap: 80px;
+
+
+    @include media-breakpoint-only(md) {
+    grid-template-columns: repeat(auto-fill,minmax(calc(50% - 20px),1fr));
+    column-gap: 40px;
+    row-gap: 40px;
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+      grid-template-columns: repeat(auto-fill,minmax(100%,1fr));
+      column-gap: 0;
+      row-gap: 80px;
+    }
+  }
+
+  .rui-block-testimonials-item {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+
+  .rui-block-testimonials-img {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .rui-block-testimonials-rating {
+    margin-bottom: 30px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: $primary-color-500;
+
+    svg {
+      width: 16px;
+      margin-right: 4px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .rui-block-testimonials--quote {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+      color: $body-color;
+
+      .theme-dark & {
+        color: $dm-body-color;
+      }
+  }
+
+  .rui-block-testimonials--author {
+    width: 100%;
+    margin-bottom: 0;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $body-color;
+
+    .theme-dark & {
+      color: $dm-body-color;
+    }
+  }
+
+  .rui-block-testimonials--additional {
+    width: 100%;
+    font-size: $font-size-xs;
+    color: $body-color-light;
+
+    .theme-dark & {
+      color: $dm-body-color-light;
+    }
+  }
+
+
+  // Category
+  .rui-card-cat-grid {
+    display: grid;
+    flex-wrap: wrap;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+  }
+
+  .rui-block-category-item {
+    padding: 20px 15px 15px 15px;
+    position: relative;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-end;
+    align-items: flex-end;
+
+    background-color: $gray-100;
+    border: 2px solid $container-bg;
+    border-radius: $border-radius;
+
+    text-align: center;
+
+    .theme-dark & {
+      background-color: $dm-gray-100;
+      border: 2px solid $dm-container-bg;
+    }
+
+    img {
+      .theme-dark & {
+        filter: invert(1);
+      }
+    }
+
+    &:hover {
+      border: 2px solid $primary-color-400;
+      text-decoration: none;
+    }
+
+    .badge-wrapper {
+      margin: 10px 0;
+    }
+  }
+
+        .badge-sale {
+          border: 1px solid $red-600;
+          color: $red-800;
+
+          .theme-dark & {
+            border-color: $red-300;
+            color: $red-200;
+          }
+        }
+
+        .badge-new {
+          border: 1px solid $green-600;
+          color: $green-800;
+
+          .theme-dark & {
+            border-color: $green-300;
+            color: $green-200;
+          }
+        }
+
+        .badge-soon {
+          border: 1px solid $blue-700;
+          color: $blue-800;
+
+          .theme-dark & {
+            border-color: $blue-300;
+            color: $blue-200;
+          }
+        }
+
+  .rui-block-category-item-title {
+    width: 100%;
+    margin: 20px 0 10px;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $body-color;
+
+    .theme-dark & {
+      color: $dm-body-color;
+    }
+  }
+
+  .rui-block-category-item-subtitle {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    color: $body-color-light;
+
+    .theme-dark & {
+      color: $dm-body-color-light;
+    }
+  }
+
+
+  // Block 13
+  .rui-cta-wrapper {
+    padding: 80px 0;
+    color: $white;
+
+    @include media-breakpoint-between(xs,sm) {
+    padding: 20px;
+    }
+  }
+
+  .rui-cta-content {
+    margin-bottom: 2rem;
+    font-size: 1.125rem; //18px
+  }
+
+  .rui-cta-title {
+    margin-bottom: 10px;
+    font-family: $font-family-base;
+    font-size: 3rem;
+    line-height: 1.3;
+    color: $white;
+
+    @include media-breakpoint-between(xs,sm) {
+    font-size: 2rem; //32px
+    }
+  }
+
+  .rui-cta-small {
+    margin-top: $page-padding-global;
+    font-size: $font-size-xs;
+    opacity: .7;
+  }
+
+
+  // Cards
+  .rui-card {
+    padding: 30px;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    background-color: $container-bg;
+
+    .theme-dark & {
+      border-color: $dm-border-color;
+      background-color: $dm-container-bg;
+    }
+
+    @include media-breakpoint-down(md) {
+      padding: 20px;
+    }
+  }
+
+  .rui-color-card,
+  .rui-card--smpl {
+    padding: 30px;
+
+    @include media-breakpoint-down(md) {
+      padding: 10px;
+    }
+  }
+
+  .rui-color-card {
+    color: $body-color;
+  }
+
+  .rui-card-title {
+    font-size: 1.125rem;
+    color: $body-color;
+
+    .theme-dark & {
+      color: $dm-body-color;
+    }
+
+    .rui-color-card & {
+      color: inherit;
+    }
+  }
+
+  .rui-card-text {
+    font-size: $font-size-base;
+    color: $body-color-secondary;
+
+    .theme-dark & {
+      color: $dm-body-color-secondary;
+    }
+
+    .rui-color-card & {
+      color: inherit;
+    }
+  }
+
+  .rui-card--with-img {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+
+    @include media-breakpoint-between(xs,sm) {
+    display: block;
+    text-align: center;
+    }
+  }
+
+  .rui-card-btn-link  {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+
+
+  // Pricing table
+  .rui-pricing-table-title {
+    font-size: 1.5rem; //24px
+    font-weight: $font-weight-bold;
+    text-align: center;
+  }
+
+  .rui-pricing-table-price {
+    margin: 20px 0;
+    font-size: 2rem; //32px
+    font-weight: $font-weight-bold;
+    text-align: center;
+    color: $body-color;
+
+    .theme-dark & {
+      color: $dm-body-color;
+    }
+
+    .rui-pricing-table-price--smaller {
+      font-size: 1.5rem; //24px
+      color: $body-color-light;
+
+      .theme-dark & {
+        color: $dm-body-color-light;
+      }
+    }
+  }
+
+  .rui-pricing-table-text {
+    margin-top: 10px;
+
+    font-size: $font-size-sm;
+    text-align: center;
+    color: $body-color-secondary;
+
+    .theme-dark & {
+      color: $dm-body-color-secondary;
+    }
+  }
+
+  .rui-special-list {
+    padding: 0;
+    list-style: none!important;
+
+    color: $body-color-secondary;
+
+    .theme-dark & {
+      color: $dm-body-color-secondary;
+    }
+
+    li {
+      padding-left: 26px;
+      margin-bottom: 10px;
+      position: relative;
+
+      &:before {
+        content: '';
+        background-repeat: no-repeat;
+        background-size: 13px;
+        background-position: center;
+
+        position: absolute;
+        left: 0;
+        width: 18px;
+        height: 18px;
+        border-radius: 18px;
+      }
+
+      &.list-icon-x {
+        opacity: .8;
+
+        &:before {
+          background-color: $gray-100;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($gray-700)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17.25 6.75L6.75 17.25'%3E%3C/path%3E%3Cpath stroke='#{url-friendly-colour($gray-700)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6.75 6.75L17.25 17.25'%3E%3C/path%3E%3C/svg%3E%0A");
+
+          .theme-dark & {
+            background-color: $dm-gray-100;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($dm-gray-700)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17.25 6.75L6.75 17.25'%3E%3C/path%3E%3Cpath stroke='#{url-friendly-colour($dm-gray-700)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6.75 6.75L17.25 17.25'%3E%3C/path%3E%3C/svg%3E%0A");
+          }
+
+        }
+      }
+    }
+  }
+
+  .rui-special-list--light {
+    li {
+      &:before {
+        background-color: $gray-100;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($gray-700)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75'%3E%3C/path%3E%3C/svg%3E%0A");
+
+        .theme-dark & {
+          background-color: $dm-gray-100;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($dm-gray-700)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75'%3E%3C/path%3E%3C/svg%3E%0A");
+        }
+      }
+    }
+  }
+
+  .rui-special-list--primary {
+    li {
+      &:before {
+        background-color: $primary-color-200;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($primary-color-600)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75'%3E%3C/path%3E%3C/svg%3E%0A");
+
+        .theme-dark & {
+          background-color: $primary-color-800;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($primary-color-500)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5.75 12.8665L8.33995 16.4138C9.15171 17.5256 10.8179 17.504 11.6006 16.3715L18.25 6.75'%3E%3C/path%3E%3C/svg%3E%0A");
+        }
+      }
+    }
+  }
+
+  .rui-pricing-table {
+    padding: 30px 40px;
+    border-style: solid;
+    border-color: $border-color;
+    border-width: 1px 0;
+
+    @include media-breakpoint-up(lg) {
+      &:first-of-type {
+        border-radius: $border-radius 0 0 $border-radius;
+        border-width: 1px;
+      }
+      &:last-of-type {
+        border-radius: 0 $border-radius  $border-radius 0;
+        border-width: 1px;
+      }
+    }
+
+    @include media-breakpoint-between(xs,md) {
+      margin: 10px 0;
+      border-radius: $border-radius;
+      border-width: 1px;
+    }
+
+  }
+
+  .rui-pricing-table--special {
+    background-color: $primary-color-100;
+    border-color: $primary-color-300;
+    border-left: 2px dashed $primary-color-300!important;
+
+    .theme-dark & {
+      background-color: $primary-color-800;
+      border-color: $primary-color-600;
+    }
+
+    @include media-breakpoint-between(xs,md) {
+      border-left: 1px solid $primary-color-300;
+
+      .theme-dark & {
+        border-color: $primary-color-600!important;
+      }
+    }
+  }
+
+  .rui-fp-block--11,
+  .rui-fp-block--12 {
+    .swiper-button-prev, .swiper-button-next {
+      top: 160px;
+    }
+  }
+
+  .rui-fp-block {
+    .swiper-button-next {
+      top: calc(50% - 45px);
+    }
+  }
+
+  .rui-fp-block--cta {
+    padding: 60px 80px;
+
+    background-color: $primary-color-100;
+    border-radius: $border-radius;
+
+    .theme-dark & {
+      background-color: $primary-color-800;
+    }
+
+    @include media-breakpoint-only(md) {
+    padding: 40px;
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+    padding: 25px;
+    }
+
+    .swiper {
+      padding: 0 0 45px 0;
+    }
+  }
+
+  .rui-fp-block--1 {
+    .swiper-wrapper {
+      border-radius: $border-radius;
+      overflow: hidden;
+    }
+  }
+
+  .rui-fp-block-mt {
+    margin-top: 80px;
+  }
+
+  .rui-fp-block-mb {
+    margin-bottom: 80px;
+  }
+
+
+  // Full width Hero Image
+  .rui-fp-block--3 {
+    margin-top: -7px;
+  }
+
+  // Block 8
+  .rui-fp-block--8 {
+    .rui-card-title,
+    .rui-card-text {
+      .theme-dark & {
+        color: $body-color;
+      }
+    }
+  }
+
+
+  // Block 23
+  .rui-card-item {
+    transition: $transition-base;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    &.swiper-slide:hover {
+      transform: none;
+    }
+
+    .rui-card-item-img {
+      max-width: 200px;
+
+      @include media-breakpoint-between(xs,sm) {
+      max-width: 100%;
+      }
+
+      img {
+        width: 100%;
+        border: 4px solid $white;
+      }
+    }
+  }
+
+  // Block--1 -> Hero Slider
+  $block1slidewrapperbg: $black!default;
+
+  .rui-hero-content {
+    width: 500px;
+    color: $white;
+  }
+
+  .rui-hero-bg {
+    @include media-breakpoint-between(xs,sm) {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      }
+  }
+
+  .rui-hero-content-backdrop {
+    padding: 45px 60px;
+    background-color: rgba($block1slidewrapperbg, .5);
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    border-radius: $border-radius;
+
+    @include media-breakpoint-between(xs,sm) {
+    background-color: $container-bg;
+    padding: 30px 10px;
+    border-radius: 0;
+
+    .theme-dark & {
+      background-color: $dm-container-bg;
+    }
+    }
+  }
+
+  .rui-hero-content-position {
+    position: absolute;
+    z-index: 3;
+
+    @include media-breakpoint-between(xs,sm) {
+    position: relative;
+    top: 0!important;
+    }
+  }
+
+  .rui-hero-content-centered {
+    width: 700px;
+
+    text-align: center;
+    left: calc(50% - 350px);
+
+    @include media-breakpoint-only(md) {
+    width: 500px;
+    left: calc(50% - 250px);
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+    width: 100%;
+    left: 0;
+    }
+  }
+
+  .rui-hero-content-left {
+    left: 140px;
+
+    @include media-breakpoint-only(md) {
+    text-align: center;
+    width: 520px;
+    left: calc(50% - 250px);
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+    width: 100%;
+    left: 0;
+    }
+  }
+
+  .rui-hero-content-right {
+    right: 140px;
+
+    @include media-breakpoint-between(xs,sm) {
+    text-align: center;
+    width: 300px;
+    left: calc(50% - 150px);
+    }
+  }
+
+  .rui-hero-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    color: inherit;
+
+    @include media-breakpoint-between(xs,md) {
+    font-size: 2rem;
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+      color: $body-color;
+
+      .theme-dark & {
+        color: $dm-body-color;
+      }
+      }
+  }
+
+  .rui-hero-title + .rui-hero-desc {
+    margin: 20px 0 0;
+  }
+
+  .rui-hero-desc {
+    font-size: 1.125rem;
+    color: inherit;
+
+    @include media-breakpoint-only(md) {
+    font-size: $font-size-base;
+    }
+
+    @include media-breakpoint-between(xs,sm) {
+    font-size: $font-size-sm;
+    color: $body-color;
+
+    .theme-dark & {
+      color: $dm-body-color;
+    }
+    }
+  }
+
+  .rui-hero-btns {
+    margin-top:  $page-padding-global;
+  }
+
+  // Swiper inside bloks with arrows
+  .rui--swiper-arrows {
+    padding-right: 80px!important;
+    padding-left: 80px!important;
+  }
+
+
+  .rui-img--rounded-fluid img {
+    max-width: 100%;
+    height: auto;
+    border-radius: $border-radius;
+  }
+
+
+  // 2 col imgs with caption
+  .rui-text-content--absolute {
+    padding: 80px;
+
+    color: $white;
+
+    .rui-text-content-heading {
+      font-size: 2rem;
+      font-weight: $font-weight-bold;
+      color: $white;
+    }
+  }
+
+
+  // Hero IMG 
+  .rui-hero-img {
+    width: 100%;
+    overflow: hidden;
+    border-radius: $border-radius;
+
+    position: relative;
+  }
+
+
+  // Hero Video 
+  .rui-hero-video {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-radius: $border-radius;
+
+    position: relative;
+
+    .vidbg-container {
+      width: 100%;
+    }
+  }
+
+  // Default moodle front page blocks
+  #site-news-forum,
+  #frontpage-category-combo,
+  #frontpage-course-list,
+  #frontpage-available-course-list {
+    .rui-title-container .rui-main-content-title {
+      margin: $block-el-margin-bottom 0;
+
+      display: block;
+
+      font-size: 3rem;
+      font-weight: $font-weight-bold;
+      text-align: center;
+      color: $body-color;
+    
+      .theme-dark & {
+        color: $dm-body-color;
+      }
+    
+      @include media-breakpoint-only(md) {
+      font-size: 2.5rem; // 40px
+      }
+    
+      @include media-breakpoint-between(xs,sm) {
+      font-size: 1.5rem; // 24px
+      }
+    }
+  }
+
+  .sitetopic {
+    width: $wrapper-md;
+    margin: 0 auto;
+  
+    @include media-breakpoint-between(xs,md) {
+        width: 100%;
+    }
+  }
+
+
+  // Front page blocks - elements
+  .rui-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .rui-icon-box--primary {
+    background-color: $primary-color-100;
+    color: $primary-color-600;
+
+    .theme-dark & {
+      background-color: $primary-color-600;
+      color: $primary-color-100;    
+    }
+  }
+
+  .rui-icon-box--gray {
+    background-color: $gray-100;
+    color: $gray-600;
+
+    .theme-dark & {
+      background-color: $dm-gray-100;
+      color: $dm-gray-600;    
+    }
+  }
+
+  .rui-block-text--secondary {
+    color: $body-color-secondary;
+  }
+  
+  .rui-block-text--light {
+    color: $body-color-light;
+  }
+  
+  .rui-block-text--1 {
+    font-size: $font-size-lg;
+  }
+  
+  .rui-block-text--2 {
+    font-size: $font-size-sm;
+  }
+  
+  .rui-block-text--3 {
+    font-size: $font-size-xs;
+  }

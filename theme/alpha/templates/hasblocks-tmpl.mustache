@@ -1,0 +1,37 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{#hasblocks}}
+    <span id="sidepreopen-control"
+        aria-expanded="{{#draweropenright}}true{{/draweropenright}}{{^draweropenright}}false{{/draweropenright}}"
+        aria-controls="sidepre-blocks"
+        data-action="toggle-drawer"
+        data-side="right"
+        data-preference="sidepre-open">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.25 4.75V19.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M4.75 12H15.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8.25 8.75L4.75 12L8.25 15.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    </span>
+
+    <section id="sidepre-blocks" data-region="blocks-column" class="rui-blocks-column rui-blocks-area hidden-print">
+        <div class="rui-sidebar-blocks-wrapper w-100">
+            {{{ addblockbutton }}}
+            {{{ sidepreblocks }}}
+        </div>
+    </section>
+{{/hasblocks}}

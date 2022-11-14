@@ -1,0 +1,127 @@
+.block_livemood .adminbut {
+    outline: none;
+    width: 80px;
+    height: auto;
+    font-family: "Lato", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fafafa;
+    border-bottom: 1.3px solid #a2682f;
+    border-right: 1.3px solid #a26334;
+    border-top: 1.3px;
+    border-left: 1.3px;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 1em 1em 1em 1em;
+    background: #b06c34;
+    white-space: normal;
+    word-break: normal;
+}
+.block_livemood .adminbut:hover {
+    background: #b06c34;
+}
+.block_livemood .adminbut:active {
+    color: #d2d2d2;
+    background: #774923;
+}
+.block_livemood .teacbut {
+    outline: none;
+    width: 80px;
+    height: auto;
+    font-family: "Lato", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fafafa;
+    border-bottom: 1.3px solid #347ca2;
+    border-right: 1.3px solid #347ca2;
+    border-top: 1.3px;
+    border-left: 1.3px;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 1em 1em 1em 1em;
+    background: #3986b0;
+    white-space: normal;
+    word-break: normal;
+}
+.block_livemood .teacbut:hover {
+    background: #3986b0;
+}
+.block_livemood .teacbut:active {
+    color: #d2d2d2;
+    background: #2b6584;
+}
+.block_livemood .studbut {
+    outline: none;
+    height: auto;
+    width: 80px;
+    font-family: "Lato", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fafafa;
+    border-bottom: 1.3px solid #27792f;
+    border-right: 1.3px solid #236d2a;
+    border-top: 1.3px;
+    border-left: 1.3px;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 1em 1em 1em 1em;
+    background: #5f9d3a;
+    white-space: normal;
+    word-break: normal;
+}
+.block_livemood .studbut:hover {
+    background: #5f9d3a;
+}
+.block_livemood .studbut:active {
+    color: #d2d2d2;
+    background: #3b6f1c;
+}
+#block_livemood_container {
+    table-layout: fixed;
+    position: static;
+    margin: auto;
+    padding: 0;
+    width: 80px;
+    height: auto;
+    vertical-align: middle;
+    text-align: center;
+}
+#block_livemood_alert {
+    position: absolute;
+    visibility: hidden;
+    width: 80px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+    font-family: "Lato", sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #fafafa;
+    border-bottom: 1.3px solid #27792f;
+    border-right: 1.3px solid #236d2a;
+    border-top: 1.3px;
+    border-left: 1.3px;
+    padding: 4px;
+    margin: 3px;
+    border-radius: 1em 1em 1em 1em;
+    background: #fff;
+    white-space: normal;
+    word-break: normal;
+}
+#block_livemood_alertTd {
+    font-family: "Lato", sans-serif;
+    font-weight: bold;
+    font-size: 10px;
+    white-space: normal;
+    word-break: normal;
+    word-wrap: normal;
+    color: #c38005;
+    overflow: hidden;
+}
+#block_livemood_divForm {
+    display: inline;
+    margin: auto;
+    width: 80px;
+    height: 40px;
+}

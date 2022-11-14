@@ -1,0 +1,12 @@
+Documentation:
+https://rosea.gitbook.io/alphatheme
+
+Photos:
+  - Unsplash https://unsplash.com
+
+Scripts:
+  - Swiper https://swiperjs.com/
+
+Icons:
+  - https://iconic.app
+  - https://css.gg

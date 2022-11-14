@@ -1,0 +1,1998 @@
+//---- Question
+//---- Module Activity
+
+.questionbank h2 {
+    margin-top: 0;
+}
+
+.questioncategories h3 {
+    margin-top: 0;
+}
+
+#chooseqtypebox {
+    margin-top: 1em;
+}
+
+#chooseqtype h3 {
+    margin: 0 0 0.3em;
+}
+
+#chooseqtype .instruction {
+    display: none;
+}
+
+#chooseqtype .fakeqtypes {
+    border-top: 1px solid silver;
+}
+
+#chooseqtype .qtypeoption {
+    margin-bottom: 0.5em;
+}
+
+#chooseqtype label {
+    display: block;
+}
+
+#chooseqtype .qtypename img {
+    padding: 0 0.3em;
+}
+
+#chooseqtype .qtypename {
+    display: inline-table;
+    width: 16em;
+}
+
+#chooseqtype .qtypesummary {
+    display: block;
+    margin: 0 2em;
+}
+
+#chooseqtype .submitbuttons {
+    margin: 0.7em 0;
+    text-align: center;
+}
+
+#qtypechoicecontainer {
+    display: none;
+}
+
+#qtypechoicecontainer_c.yui-panel-container.shadow .underlay {
+    background: none;
+}
+
+#qtypechoicecontainer.yui-panel .hd {
+    color: #333;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 1px #fff;
+
+    @include border-top-radius(10px);
+    border: 1px solid #ccc;
+    border-bottom: 1px solid #bbb;
+
+    @include gradient-y(#fff, #ccc);
+}
+
+#qtypechoicecontainer {
+    font-size: 12px;
+    color: #333;
+    background: #f2f2f2;
+
+    @include border-radius(10px);
+    border: 1px solid #ccc;
+    border-top: 0 none;
+
+    @include box-shadow(5px 5px 20px 0 #666);
+}
+
+#qtypechoicecontainer #chooseqtype {
+    width: 40em;
+}
+
+#chooseqtypehead h3 {
+    margin: 0;
+    font-weight: normal;
+}
+
+#chooseqtype .qtypes {
+    position: relative;
+    border-bottom: 1px solid #bbb;
+    padding: 0.24em 0;
+}
+
+#chooseqtype .alloptions {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100vh - 15em);
+    width: 60%;
+}
+
+#chooseqtype .qtypeoption {
+    margin-bottom: 0;
+    padding: 0.3em 0.3em 0.3em 1.6em;
+}
+
+#chooseqtype .qtypeoption img {
+    vertical-align: text-bottom;
+    padding-left: 1em;
+    padding-right: 0.5em;
+}
+
+#chooseqtype .selected {
+    background-color: #fff;
+
+    @include box-shadow(0 0 10px 0 #ccc);
+}
+
+#chooseqtype .instruction,
+#chooseqtype .qtypesummary {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 60%;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 1.5em 1.6em;
+    background-color: #fff;
+}
+
+#chooseqtype .instruction,
+#chooseqtype .selected .qtypesummary {
+    display: block;
+}
+
+#categoryquestions {
+    margin: 0;
+
+    td,
+    th {
+        padding: 0 0.2em;
+    }
+
+    th {
+        text-align: left;
+        font-weight: normal;
+    }
+
+    .checkbox {
+        padding-left: 5px;
+    }
+
+    .checkbox input[type="checkbox"] {
+        margin-left: 0;
+        float: none;
+    }
+
+    .iconcol {
+        width: 60px;
+        padding: 3px;
+        box-sizing: content-box;
+
+        .icon {
+            padding: 0;
+            margin: 0;
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    label {
+        margin: 0;
+        display: block;
+    }
+
+    .header {
+        text-align: left;
+    }
+}
+
+
+.questionbank .singleselect {
+    margin: 0;
+}
+/* Question editing form */
+#combinedfeedbackhdr div.fhtmleditor {
+    padding: 0;
+}
+
+#combinedfeedbackhdr div.fcheckbox {
+    margin-bottom: 1em;
+}
+
+#multitriesheader div.fitem_feditor {
+    margin-top: 1em;
+}
+
+#multitriesheader div.fitem_fgroup {
+    margin-bottom: 1em;
+}
+
+#multitriesheader div.fitem_fgroup fieldset.felement label {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+}
+
+body.path-question-type {
+    /* Hacks to display the labels within a form group. */
+    .form-group .sr-only:not(legend) {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0;
+        margin: 0 0.5rem 0 0;
+        overflow: visible;
+        clip: auto;
+        clip-path: none;
+        border: 0;
+    }
+}
+
+//TODO dodać tutaj pozostałe style ze spodu
+.que .info .questionflag.editable {
+    cursor: pointer;
+}
+
+//remove icon - there is a bug, different icons on user view and different on admin view
+.que .info .editquestion img,
+.que .info .questionflag img,
+.que .info .questionflag input {
+    display: none;
+}
+
+.que {
+    .r0, .r1 {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.que.multichoice .answer div.r0 .icon.fa-check,
+.que.multichoice .answer div.r1 .icon.fa-check,
+.que.multichoice .answer div.r0 .icon.fa-remove,
+.que.multichoice .answer div.r1 .icon.fa-remove {
+    text-indent: 0;
+}
+
+.que.multichoice .answer div.r0,
+.que.multichoice .answer div.r1 {
+    padding: 10px;
+    border-radius: $border-radius;
+
+    align-items: center;
+
+    .icon {
+        margin-right: 10px;
+    }
+
+    input {
+        margin: 6px 20px 6px 10px;
+    }
+}
+
+.que.multichoice .answer .answernumber {
+    min-width: 1.5em;
+    display: inline-flex;
+    align-items: center;
+
+    font-size: .8rem;
+}
+
+.formulation input[type="text"],
+.formulation select {
+    + .icon {
+        margin-left: .35rem;
+    }
+}
+
+.que.multianswer .formulation .yui3-widget-positioned {
+    box-sizing: content-box;
+    .feedbackspan {
+        width: inherit;
+        max-width: inherit;
+    }
+}
+
+.path-mod-quiz input[size] {
+    min-width: 70px;
+    width: auto;
+    max-width: 100%;
+}
+
+.que .ablock {
+    margin: 0 0 $page-padding-global 0;
+    overflow: inherit;
+}
+
+.que .im-controls {
+    margin-top: 0.5em;
+    text-align: left;
+}
+
+.que .generalfeedback,
+.que .numpartscorrect
+.que .rightanswer,
+.que .im-feedback,
+.que p {
+    margin: .25em 0;
+    color: $body-color;
+
+    .theme-dark & {
+        color: $dm-body-color;
+    }
+}
+
+.rightanswer {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    p {
+        font-weight: $font-weight-bold;
+    }
+}
+
+.que .correctness {
+    &.correct {
+        background-color: $success;
+    }
+    &.partiallycorrect {
+        background-color: $warning;
+    }
+    &.notanswered,
+    &.incorrect {
+        background-color: $danger;
+    }
+}
+
+.que .validationerror {
+    color: map-get($theme-colors, 'danger');
+}
+// copied from .formFieldState in mixin.less
+// and made more specific
+
+.que .grading,
+.que .comment,
+.que .commentlink {
+    margin-top: 0.5rem;
+}
+
+.que .history {
+    border: none!important;
+    margin: $page-padding-global 0;
+    padding: 0!important;
+}
+
+.que .history h3 {
+    font-size: 1rem;
+}
+
+.que .history table {
+    width: 100%;
+    margin: 0;
+}
+
+.que .history .current {
+    font-weight: $font-weight-bold;
+}
+
+.que .questioncorrectnessicon {
+    vertical-align: text-bottom;
+}
+
+body.jsenabled .questionflag input[type=checkbox] {
+    display: none;
+}
+
+.que .questionflagimage {
+    padding-right: 3px;
+    height: 16px;
+    width: 16px;
+}
+
+.importerror {
+    margin-top: 10px;
+    border-bottom: 1px solid #555;
+}
+
+.mform .que.comment .fitemtitle {
+    width: 20%;
+}
+
+#page-question-preview #techinfo {
+    margin: 1em 0;
+}
+
+
+//----      imported from quiz.css
+//----
+//-----     UI for Question Edit Questions - Table
+// ----
+
+#page-mod-quiz-edit {
+    div.questionbankwindow div.header {
+        margin: 0;
+    }
+
+    div.questionbankwindow.block {
+        padding: 0;
+    }
+}
+
+#page-mod-quiz-edit .add-menu-outer {
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+#page-mod-quiz-edit .section-heading {
+    margin: 1rem 0;
+    height: auto;
+
+    .instancesectioncontainer {
+        position: relative;
+    }
+
+    .editing_section {
+        position: absolute;
+        top: 3px;
+        left: 40px;
+    }
+}
+
+#page-mod-quiz-edit .section-heading .instancesectioncontainer h3 {
+    color: inherit;
+}
+
+#page-mod-quiz-edit .last-add-menu {
+    margin: 20px 10px 0;
+    height: auto;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
+#page-mod-quiz-edit ul.slots li.section .content {
+    background-color: transparent;
+}
+
+#page-mod-quiz-edit li.activity>div, #page-mod-quiz-edit li.pagenumber {
+    margin-bottom: 0;
+}
+
+#page-mod-quiz-edit ul.slots li.section li.activity {
+    background-color: transparent;
+    padding: 1rem;
+    min-width: 40px;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+
+    &.page {
+        h4 {
+            margin: 0;
+            font-family: $font-family-base;
+            font-weight: $font-weight-bold;
+        }
+
+        .add-menu-outer {
+            position: absolute;
+            top: 3px;
+            right: 3px;
+
+            padding: 9px;
+            background-color: $container-bg;
+            border-radius: $border-radius;
+
+            &:empty {
+                display: none;
+            }
+        }
+    }
+}
+
+#page-mod-quiz-edit .section .activity .editing_move {
+    top: calc(50% - 26px);
+    left: 0;
+}
+
+#page-mod-quiz-edit ul.slots li.section li.activity .mod-indent-outer {
+    padding-left: 130px;
+}
+
+#page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmark {
+    font-weight: $font-weight-medium;
+}
+
+// Questin name and desc
+#page-mod-quiz-edit #categoryquestions .questionname,
+#page-mod-quiz-edit ul.slots li.activity div.activityinstance .questionname {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $link-color;
+}
+
+#page-mod-quiz-edit ul.slots li.activity div.activityinstance .questiontext {
+    display: block;
+    padding-left: 35px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+
+    max-width: 600px;
+
+    font-size: $font-size-sm;
+    font-weight: $font-weight-normal;
+    color: $body-color-secondary;
+}
+
+#page-mod-quiz-edit ul.section {
+    padding: 0;
+}
+
+#page-mod-quiz-edit ul.slots li.section li.activity.page {
+    padding: 22px;
+}
+
+.page_split_join {
+    width: 50%;
+}
+
+#page-mod-quiz-edit ul.slots li.section li.activity .page_split_join_wrapper {
+    display: block;
+    position: relative;
+    left: auto;
+    bottom: auto;
+
+    text-align: center;
+
+    .btn {
+        width: 300px;
+
+        .img {
+            margin: 0;
+        }
+    }
+}
+
+#page-mod-quiz-edit {
+    .numberofquestions,
+    .quizopeningstatus {
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        padding: $badge-padding-y $badge-padding-x;
+        @include font-size($badge-font-size);
+        font-weight: $badge-font-weight;
+        vertical-align: baseline;
+        @include border-radius($badge-border-radius);
+    }
+
+    .numberofquestions {
+        margin-right: .35rem;
+        @extend .badge-success;
+    }
+
+    .quizopeningstatus {
+        @extend .badge-info;
+    }
+}
+
+.instanceshufflequestions [type="checkbox"] {
+    margin: 10px;
+}
+
+#page-mod-quiz-edit .section-heading .instanceshufflequestions {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+
+    label {
+        margin: 0;
+    }
+}
+
+.path-mod-quiz .mod-quiz-edit-content {
+    margin-bottom: 0!important;
+}
+// end Questin name and desc
+
+#page-mod-quiz-edit .slotnumber {
+    width: 30px;
+    height: 30px;
+
+    margin: 0 20px 0 10px;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $gray-100;
+    color: $gray-800;
+
+    border-radius: $border-radius 0 $border-radius 0;
+
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xs;
+
+    position: absolute;
+    left: -26px;
+    top: -16px;
+}
+
+#page-mod-quiz-edit div.editq div.question div.content {
+    background-color: $body-bg;
+    border: 1px solid #ddd;
+
+    @include border-radius(2px);
+    overflow: hidden;
+}
+
+#page-mod-quiz-edit ul.slots .activityinstance img.activityicon {
+    margin: 0 0 20px 0;
+    padding: 0;
+
+    position: absolute;
+    top: calc(50% - 20px);
+    left: 70px;
+
+    width: 30px!important;
+    height: 30px!important;
+}
+
+#page-mod-quiz-edit ul.slots .activityinstance {
+    > a {
+        display: flex;
+        max-width: 100%;
+        align-items: center;
+        text-indent: 0;
+        padding-left: 0;
+    }
+    img.activityicon {
+        margin-left: 0;
+        width: 16px;
+        height: 16px;
+        padding-right: 4px;
+    }
+}
+
+#page-mod-quiz-edit .activity {
+    img.activityicon {
+        vertical-align: text-top;
+    }
+}
+
+#page-mod-quiz-edit .box.generalbox.questionbank {
+    padding: 0.5em;
+}
+
+#page-mod-quiz-edit .questionbank .categorypagingbarcontainer,
+#page-mod-quiz-edit .questionbank .categoryquestionscontainer,
+#page-mod-quiz-edit .questionbank .choosecategory {
+    padding: 0;
+}
+
+#page-mod-quiz-edit .questionbank .choosecategory select {
+    width: 100%;
+}
+
+#page-mod-quiz-edit div.questionbank .categoryquestionscontainer {
+    background: transparent;
+}
+
+#page-mod-quiz-edit #categoryquestions > thead {
+    background: #fff;
+}
+
+#page-mod-quiz-edit #categoryquestions > tbody > tr:nth-of-type(even) {
+    background: #e4e4e4;
+}
+
+#page-mod-quiz-edit .questionbankwindow div.header {
+    color: #444;
+    text-shadow: none;
+
+    @include border-top-radius(4px);
+    margin: 0 -10px 0 -10px;
+    padding: 2px 10px 2px 10px;
+    background: transparent; /* Old browsers */
+}
+
+#page-mod-quiz-edit .questionbankwindow div.header a:link,
+#page-mod-quiz-edit .questionbankwindow div.header a:visited {
+    color: $link-color;
+}
+
+.theme-dark#page-mod-quiz-edit .questionbankwindow div.header a:link,
+.theme-dark#page-mod-quiz-edit .questionbankwindow div.header a:visited {
+    color: $dm-link-color;
+}
+
+#page-mod-quiz-edit .questionbankwindow div.header a:hover {
+    color: $link-hover-color;
+}
+
+#page-mod-quiz-edit .createnewquestion {
+    padding: 0.3em 0;
+
+    div,
+    input {
+        margin: 0;
+    }
+}
+
+#page-mod-quiz-edit .questionbankwindow div.header .title {
+    color: $body-color;
+}
+
+#page-mod-quiz-edit div.container div.generalbox {
+    background-color: transparent;
+    padding: 1.5em;
+}
+
+#page-mod-quiz-edit .categoryinfo {
+    background-color: transparent;
+    border-bottom: none;
+}
+
+#page-mod-quiz-edit .createnewquestion .singlebutton input {
+    margin-bottom: 0;
+}
+
+#page-mod-quiz-edit div.questionbank .categorysortopotionscontainer,
+#page-mod-quiz-edit div.questionbank .categoryselectallcontainer {
+    padding: 0 0 1.5em 0;
+}
+
+#page-mod-quiz-edit div.questionbank .categorypagingbarcontainer {
+    background-color: transparent;
+    margin: 0;
+    border-top: 0;
+    border-bottom: 0;
+
+    .paging {
+        padding: 0 0.3em;
+    }
+}
+
+#page-mod-quiz-edit div.question div.content div.questioncontrols {
+    background-color: $body-bg;
+}
+
+#page-mod-quiz-edit div.question div.content div.points {
+    margin-top: -0.5em;
+    padding-bottom: 0;
+    border: none;
+    background-color: $body-bg;
+    position: static;
+    width: 12.1em;
+    float: right;
+    margin-right: 60px;
+}
+
+#page-mod-quiz-edit div.question div.content div.points br {
+    display: none;
+}
+
+#page-mod-quiz-edit div.question div.content div.points label {
+    display: inline-block;
+}
+
+#page-mod-quiz-edit div.quizpage .pagecontent .pagestatus {
+    background-color: $body-bg;
+}
+
+#page-mod-quiz-edit .quizpagedelete,
+#page-mod-quiz-edit .quizpagedelete img {
+    background-color: transparent;
+}
+
+#page-mod-quiz-edit div.quizpage .pagecontent {
+    border: 1px solid #ddd;
+
+    @include border-radius(2px);
+    overflow: hidden;
+}
+
+#page-mod-quiz-edit div.questionbank .categoryinfo {
+    padding: 0.3em 0;
+}
+
+#page-mod-quiz-edit div.questionbank .modulespecificbuttonscontainer {
+    padding: 0;
+
+    strong {
+        display: block;
+    }
+
+    hr,
+    br {
+        display: none;
+    }
+
+    strong {
+        margin-left: -0.3em;
+    }
+
+    strong label {
+        margin-left: 0.3em;
+    }
+
+    input {
+        margin-left: 0;
+    }
+
+    input + input {
+        margin-left: 5px;
+    }
+}
+
+#page-mod-quiz-edit ul.slots .activityinstance>a {
+    display: block;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+#page-mod-quiz-edit ul.slots .activityinstance span.instancename {
+    overflow: auto;
+    text-overflow: initial;
+    white-space: break-alphas;
+
+    margin-top: 40px;
+    display: block;
+    height: auto;
+
+    .icon {
+        margin-right: .5rem;
+        color: $link-color;
+        opacity: .7;
+
+        .theme-dark & {
+            color: $dm-link-color;
+        }
+    }
+}
+
+#page-mod-quiz-edit .section .activity .actions {
+    background-color: transparent;
+    padding: 0;
+
+    width: max-content;
+
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .icon {
+        @extend .btn-special-icon;
+
+        &.fa-trash {
+            background-color: $red-100;
+            color: $red-600;
+        }
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+#page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmarkcontainer {
+    margin-right: 0!important;
+}
+
+#page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmark.decimalplaces_2 {
+    margin-right: .35rem;
+}
+
+.questionbankwindow .module {
+    width: auto;
+}
+
+.questionbankwindow .form-autocomplete-selection {
+    margin-left: 0;
+}
+
+.path-mod-quiz .statedetails {
+    display: block;
+    font-size: $font-size-sm;
+    opacity: 0.7;
+}
+
+a#hidebankcmd {
+    color: $link-color;
+
+    .theme-dark & {
+        color: $dm-link-color;
+    }
+}
+
+// override question plugins
+
+// qtype_shortanswer
+.que.numerical .answer,
+.que.shortanswer .answer {
+    padding: 0;
+    margin-left: .35rem; //margin on the left between label and input field
+    display: inline-flex;
+    align-items: center;
+}
+
+.que label {
+    display: inline-flex;
+    margin: 0 10px 0 0;
+}
+
+body.path-question-type .mform fieldset.hidden {
+    padding: 0;
+    margin: 0.7em 0 0;
+}
+
+// Fix for accurate positioning of ddwtos drag and drop question types.
+.tag-condition-container {
+    position: relative;
+}
+
+
+.questioncategories {
+    padding: 1rem 1.5rem;
+    margin: 2rem 0 0;
+
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+
+    position: relative;
+
+    .rui-title-container {
+        margin-bottom: 0;
+        width: auto;
+    }
+
+    a {
+        .icon {
+            @extend .btn-special-icon;
+        }
+
+        &:hover {
+            text-decoration: none;
+
+            .icon {
+                @extend .btn-special-icon--hover;
+            }
+        }
+    }
+
+    .rui-main-content-title {
+        width: 100%!important;
+
+        padding: 0 0 1rem 0;
+        margin: 0 0 1rem!important;
+
+        font-family: $font-family-base;
+        font-size: $font-size-sm;
+        color: $body-color-secondary;
+        border-bottom: 1px solid $border-color;
+    }
+
+    ul {
+        margin: 0 0 0 40px;
+        padding: 0;
+
+        list-style: none;
+
+        li {
+            padding: .35rem 0;
+            position: relative;
+
+            &:last-child {
+                padding-bottom: 0;
+            }
+
+            b, .text_to_html {
+                margin-left: 4px;
+            }
+
+            .text_to_html {
+                margin-top: .35rem;
+                margin-bottom: .5rem;
+                color: $body-color-secondary;
+            }
+
+        }
+    }
+}
+
+.questionbankwindow {
+    .createnewquestion {
+        margin: 1rem 0 2rem;
+    }
+
+    .choosecategory {
+        margin-bottom: 1rem;
+    }
+
+    #displayoptions {
+        padding: 1rem 2rem;
+
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+
+        font-size: $font-size-sm!important;
+
+        border-radius: $border-radius;
+        border: 2px solid $primary-color-300;
+
+        .tag-condition-container {
+            margin: 1rem 0;
+            padding: 1rem 0;
+
+            border-top: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+
+            .form-group {
+                margin: 0;
+            }
+        }
+    }
+}
+
+#categoryquestions {
+    td.modifiername,
+    td.creatorname
+    {
+        .date {
+            display: block;
+            margin-top: .35rem;
+            color: $body-color-secondary;
+        }
+    }
+
+    th [class*="sort"] {
+        margin: 0!important;
+        padding-left: 0!important;
+    }
+
+    th, td {
+        padding: .75rem!important;
+    }
+
+    .editmenu {
+        width: 100px;
+    }
+
+    .iconcol .icon {
+        width: 18px;
+        height: 18px;
+
+        padding: 6px;
+        border-radius: $border-radius;
+    }
+
+    .addtoquizaction .icon {
+        background-color: $gray-300;
+    }
+}
+
+#categoryquestions .checkbox {
+    width: 40px;
+}
+
+#categoryquestions .qtype {
+    width: 60px;
+}
+
+
+// Modal
+.jschooser .choosercontainer #chooseform .alloptions .option .typename {
+    width: auto;
+    max-width: 150px;
+}
+
+.choosercontainer #chooseform .submitbuttons {
+    padding-bottom: 0;
+}
+
+.choosercontainer #chooseform .moduletypetitle,
+.choosercontainer #chooseform .option,
+.choosercontainer #chooseform .nonoption {
+    padding: 0;
+}
+
+.choosercontainer #chooseform .option .icon {
+    padding: .25rem;
+}
+
+.choosercontainer #chooseform .moduletypetitle {
+    padding-top: 0.85rem;
+    font-size: $font-size-sm;
+}
+
+#page-mod-quiz-report .toggleincludeauto {
+    margin: 2rem 0;
+    text-align: left;
+}
+
+#techinfo_inner {
+    background-color: $gray-100;
+    padding: 1rem;
+
+    border-radius: $border-radius;
+
+    p {
+        margin: .15rem 0;
+    }
+}
+
+
+// Question Pop-up tmpl
+#previewcontrols {
+    text-align: right;
+}
+
+// Layout
+.rui-quizreviewsummary {
+    margin: 0 auto 2rem;
+
+    &.rui-info-container {
+        display: inline-flex;
+        grid-template-columns: 1fr;
+    }
+
+    .rui-infobox {
+        padding: 16px 30px 16px 65px;
+        background-position: 20px 12px;
+        
+        &.rui-infobox--feedback {
+            width: 100%;
+        }
+    }
+}
+
+.rui-quizinfo {
+    display: block;
+    width: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: $page-margin;
+
+    border-radius: $border-radius;
+    background-color: $yellow-100;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+
+    .theme-dark & {
+        background-color: $yellow-900;
+    }
+
+    .singlebutton {
+        margin: 10px 0;
+    }
+
+    p { margin: .25rem 0; }
+}
+
+#mod_quiz_preflight_form,
+.mod_quiz_preflight_popup {
+    .col-md-3 {
+        display: none;
+    }
+
+    .col-md-9 {
+        padding: 0!important;
+        flex: 0 0 90%!important;
+        max-width: 90%!important;
+    }
+
+    #fitem_id_honestycheckmessage {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+    .mod_quiz_preflight_popup {
+        width: 400px!important;
+        max-width: 95%;
+    }
+
+
+//----
+//---- Quiz Layout
+//----
+
+#page-mod-quiz-review .rui-info-container {
+    margin-bottom: 5rem;
+}
+
+.que {
+    margin-top: 6rem;
+    position: relative;
+
+    &:before {
+        content: '';
+        background-color: $border-color;
+        width: 60px;
+        height: 1px;
+
+        position: absolute;
+        top: -3rem;
+        left: calc(50% - 30px);
+
+        .theme-dark & {
+            background-color: $dm-border-color;
+        }
+    }
+
+    &:first-of-type {
+        margin-top: 0;
+
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.que .info {
+    width: 100%;
+
+    padding: 0 0 10px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid $border-color;
+
+    font-size: $font-size-sm;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .theme-dark & {
+        border-color: $dm-border-color;
+    }
+}
+
+.que .grade,
+.que .state
+{
+    margin: 0;
+    padding: .35rem 1rem;
+
+    border-radius: $border-radius;
+
+    font-size: $font-size-xs;
+}
+
+.rui-question-no {
+    color: $body-color;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+
+    .theme-dark & {
+        color: $dm-body-color;
+    }
+}
+
+.que .grade {
+    background-color: $primary-color-100;
+    color: $primary-color-600;
+}
+
+.que .info>div {
+    margin: 0;
+    font-weight: $font-weight-medium;
+}
+
+.que .qtext {
+    margin-bottom: .5rem;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.que .content {
+    margin: 0;
+}
+
+.que.ddwtos,
+.que.ddwtos .drop {
+    box-sizing: content-box;
+}
+
+.que.ddwtos .qtext {
+    font-size: $font-size-base;
+}
+
+.que.ddwtos .draghome {
+    background-color: $primary-color-100;
+
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $primary-color-600;
+
+    border-radius: $border-radius;
+    border: none;
+}
+
+.que.ddwtos .draghome.beingdragged {
+    box-shadow: 0 1px 1px rgb(0 0 0 / 12%), 0 2px 2px rgb(0 0 0 / 12%), 0 4px 4px rgb(0 0 0 / 12%), 0 8px 8px rgb(0 0 0 / 12%), 0 16px 16px rgb(0 0 0 / 12%);
+}
+
+.que.ddwtos .drop.active {
+    border-radius: $border-radius;
+    background-color: $yellow-100;
+    border: 2px dashed $yellow-600;
+}
+
+.que.ddwtos .drop:focus, .que.ddwtos .drop.valid-drag-over-drop,
+.que.ddwtos .draghome.placed:focus:not(.beingdragged),
+.que.ddwtos .draghome.placed.valid-drag-over-drop {
+    border: 2px solid $blue-400;
+    background-color: $blue-100;
+    box-shadow: none;
+}
+
+.que .content .feedback {
+    margin-top: 2rem;
+    padding: .75rem .5rem .75rem 4rem;
+
+    background-size: 27px;
+    background-color: $gray-100;
+    background-repeat: no-repeat;
+    background-position: 22px 10px;
+
+    border-radius: $border-radius;
+
+    .numpartscorrect,
+    .rightanswer {
+        margin-left: 10px;
+        font-size: $font-size-sm;
+
+        p {
+            font-size: $font-size-base;
+        }
+    }
+}
+
+//TODO: Maybe icons with badges will look better then only label
+.que .content .feedback,
+.state {
+    .notyetanswered &,
+    .notanswered &,
+    .partiallycorrect & {
+        color: $yellow-800;
+    }
+
+    .invalidanswer &,
+    .incorrect & {
+        color: $red-700;
+    }
+
+    .correct & {
+        color: $green-600;
+    }
+
+    .answersaved & {
+        color: $blue-600;
+    }
+}
+
+.content .feedback {
+    .partiallycorrect &,
+    .notanswered & {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8.75 4.75H15.25C17.4591 4.75 19.25 6.54086 19.25 8.75V15.25C19.25 17.4591 17.4591 19.25 15.25 19.25H8.75C6.54086 19.25 4.75 17.4591 4.75 15.25V8.75C4.75 6.54086 6.54086 4.75 8.75 4.75Z' stroke='#{url-friendly-colour($body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M14.5 10C14.5 10.2761 14.2761 10.5 14 10.5C13.7239 10.5 13.5 10.2761 13.5 10C13.5 9.72386 13.7239 9.5 14 9.5C14.2761 9.5 14.5 9.72386 14.5 10Z' stroke='#{url-friendly-colour($body-color)}' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M10.5 10C10.5 10.2761 10.2761 10.5 10 10.5C9.72386 10.5 9.5 10.2761 9.5 10C9.5 9.72386 9.72386 9.5 10 9.5C10.2761 9.5 10.5 9.72386 10.5 10Z' stroke='#{url-friendly-colour($body-color)}' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8.75 14.25H15.25' stroke='#{url-friendly-colour($body-color)}' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        border-left: 2px dashed $yellow-400;
+        border-bottom: 2px solid $yellow-400;
+    }
+
+    .incorrect & {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($body-color)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M8.75 4.75H15.25C17.4591 4.75 19.25 6.54086 19.25 8.75V15.25C19.25 17.4591 17.4591 19.25 15.25 19.25H8.75C6.54086 19.25 4.75 17.4591 4.75 15.25V8.75C4.75 6.54086 6.54086 4.75 8.75 4.75Z'/%3E%3Cpath stroke='#{url-friendly-colour($body-color)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M7.75 15.25C7.75 15.25 9 12.75 12 12.75C15 12.75 16.25 15.25 16.25 15.25'/%3E%3Ccircle cx='14' cy='10' r='1' fill='#{url-friendly-colour($body-color)}'/%3E%3Ccircle cx='10' cy='10' r='1' fill='#{url-friendly-colour($body-color)}'/%3E%3C/svg%3E");
+        border-left: 2px dashed $red-400;
+        border-bottom: 2px solid $red-400;
+    }
+
+    .correct & {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($body-color)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M8.75 4.75H15.25C17.4591 4.75 19.25 6.54086 19.25 8.75V15.25C19.25 17.4591 17.4591 19.25 15.25 19.25H8.75C6.54086 19.25 4.75 17.4591 4.75 15.25V8.75C4.75 6.54086 6.54086 4.75 8.75 4.75Z'/%3E%3Cpath stroke='#{url-friendly-colour($body-color)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M7.75 12.75C7.75 12.75 9 15.25 12 15.25C15 15.25 16.25 12.75 16.25 12.75'/%3E%3Ccircle cx='14' cy='10' r='1' fill='#{url-friendly-colour($body-color)}'/%3E%3Ccircle cx='10' cy='10' r='1' fill='#{url-friendly-colour($body-color)}'/%3E%3C/svg%3E");
+        border-left: 2px dashed $green-400;
+        border-bottom: 2px solid $green-400;
+    }
+}
+
+.state {
+    .partiallycorrect &,
+    .notyetanswered &,
+    .notanswered & {
+        background-color: $yellow-100;
+    }
+
+    .invalidanswer &,
+    .incorrect & {
+        background-color: $red-100;
+    }
+
+    .correct & {
+        background-color: $green-100;
+    }
+
+    .answersaved & {
+        background-color: $blue-100;
+    }
+}
+
+.que .answer {
+    .notanswered {
+        background-color: $yellow-100;
+        color: $yellow-800;
+    }
+
+    .incorrect {
+        background-color: $red-100;
+        color: $red-700;
+    }
+
+    .partiallycorrect {
+        background-color: $yellow-100;
+        color: $yellow-600;
+    }
+
+    .correct {
+        background-color: $green-100;
+        color: $green-600;
+    }
+}
+
+.que .specificfeedback {
+    margin: 0;
+    padding: 0 10px;
+
+    border-radius: $border-radius;
+
+    background-color: transparent;
+
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+
+    p {
+        margin: 0;
+    }
+}
+
+.que .feedback {
+    @include media-breakpoint-between(xs,sm) {
+        iframe {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.que.multichoice .answer .specificfeedback {
+    margin: 3px 0;
+    padding: 0;
+
+    background-color: transparent;
+}
+
+.incorrect:after,
+.notanswered:after {
+    background-color: $gray-100;
+    background-image: url([[pix:theme|alpha/icon-message-square]]);
+    background-size: 20px;
+
+    border-radius: $border-radius;
+
+    font-size: 30px;
+    color: $red-600;
+
+    width: 60px;
+    height: 60px;
+
+    position: absolute;
+    top: 60px;
+    left: -60px;
+}
+
+.rui-submitbtns {
+    margin-top: 1rem!important;
+    margin-bottom: 1rem;
+
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+
+    font-size: $font-size-sm;
+
+    .rui-controls {
+        #page-mod-quiz-summary & {
+            width: 100%;
+        }
+    }
+}
+
+#page-mod-quiz-attempt .submitbtns .mod_quiz-next-nav,
+#page-mod-quiz-review .submitbtns .mod_quiz-next-nav,
+.rui-submitbtns .mod_quiz-next-nav
+{
+    float: none;
+}
+
+#page-mod-quiz-attempt .submitbtns,
+#page-mod-quiz-review .submitbtns {
+    padding-top: 0;
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.mod_quiz-prev-nav,
+.mod_quiz-next-nav {
+    .arrow {
+        display: none;
+    }
+}
+
+#page-mod-quiz-attempt #page .controls,
+#page-mod-quiz-summary #page .controls,
+#page-mod-quiz-review #page .controls {
+    margin: 0;
+    text-align: left;
+}
+
+.rui-quizattemptsummary {
+    min-width: max-content;
+
+    p:only-child {
+        margin: 0;
+        font-size: $font-size-sm;
+    }
+
+    .c3 a {
+        position: relative;
+        padding-left: 40px;
+        width: max-content;
+
+        &:after {
+            content: '';
+            background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M21.2635 2.29289C20.873 1.90237 20.2398 1.90237 19.8493 2.29289L18.9769 3.16525C17.8618 2.63254 16.4857 2.82801 15.5621 3.75165L4.95549 14.3582L10.6123 20.0151L21.2189 9.4085C22.1426 8.48486 22.338 7.1088 21.8053 5.99367L22.6777 5.12132C23.0682 4.7308 23.0682 4.09763 22.6777 3.70711L21.2635 2.29289ZM16.9955 10.8035L10.6123 17.1867L7.78392 14.3582L14.1671 7.9751L16.9955 10.8035ZM18.8138 8.98525L19.8047 7.99429C20.1953 7.60376 20.1953 6.9706 19.8047 6.58007L18.3905 5.16586C18 4.77534 17.3668 4.77534 16.9763 5.16586L15.9853 6.15683L18.8138 8.98525Z' fill='#{url-friendly-colour($primary-color-300)}' /%3E%3Cpath d='M2 22.9502L4.12171 15.1717L9.77817 20.8289L2 22.9502Z' fill='#{url-friendly-colour($primary-color-300)}' /%3E%3C/svg%3E");
+            background-size: 16px;
+            background-repeat: no-repeat;
+            background-position: left;
+
+            width: 24px;
+            height: 24px;
+
+            position: absolute;
+            top: calc(50% - 12px);
+            left: 14px;
+        }
+    }
+}
+
+.rui-quizattempt {
+    .continuebutton {
+        margin-top: 1rem;
+        text-align: left;
+    }
+
+    @include media-breakpoint-down(sm) {
+        width: 100%;
+
+        .singlebutton,
+        .btn {
+            width: 100%;
+        }
+    }
+}
+
+
+    // Started on
+    .rui-infobox--avatar {
+        padding: 1rem 1.25rem 1rem 1.25rem!important;
+        background-color: $gray-100;
+        position: relative;
+
+        img {
+            margin-right: 10px;
+            border-radius: $border-radius;
+        }
+
+        .rui-infobox-content--small {
+            a {
+                color: inherit;
+            }
+        }
+    }
+
+    .rui-infobox--quiz ,
+    .rui-infobox--question
+    {
+        background-color: $purple-100;
+    }
+
+    .rui-infobox--startedon {
+        background-image: url([[pix:theme|alpha/icon-calendar]]);
+
+        background-color: $purple-100;
+    }
+
+    // Attempts
+    .rui-infobox--attemptlist,
+    .rui-infobox--attempts {
+        background-image: url([[pix:theme|alpha/icon-rewind]]);
+
+        background-color: $gray-100;
+    }
+
+    // State
+    .rui-infobox--state {
+        background-image: url([[pix:theme|alpha/icon-git-commit]]);
+
+        background-color: $orange-100;
+    }
+
+    // Completed on
+    .rui-infobox--completedon {
+        background-image: url([[pix:theme|alpha/icon-award]]);
+
+        background-color: $green-100;
+    }
+
+    // Time taken
+    .rui-infobox--timetaken {
+        background-image: url([[pix:theme|alpha/icon-clock]]);
+
+        background-color: $yellow-100;
+    }
+
+    // Grade
+    .rui-infobox--grade {
+        background-image: url([[pix:theme|alpha/icon-edit]]);
+
+        background-color: $primary-color-100;
+    }
+
+    // Feedback
+    .rui-infobox--feedback {
+        background-image: url([[pix:theme|alpha/icon-message-square]]);
+
+        background-color: $gray-100;
+    }
+
+    // Overdue
+    .rui-infobox--overdue {
+        background-image: url([[pix:theme|alpha/icon-alert-triangle]]);
+
+        background-color: $red-200;
+    }
+
+    //Marks
+    .rui-infobox--marks {
+        background-image: url([[pix:theme|alpha/icon-check-square]]);
+
+        background-color: $gray-100;
+    }
+
+
+// ----
+//-----     Modal windows mod
+// ----
+.moodle-dialogue-base .moodle-dialogue.mod_quiz_preflight_popup .moodle-dialogue-bd #mod_quiz_preflight_form legend {
+    padding: 0;
+}
+
+.moodle-dialogue-base .moodle-dialogue.mod_quiz_preflight_popup .moodle-dialogue-bd #mod_quiz_preflight_form .fitem {
+    margin-left: 0;
+}
+
+    .mod_quiz_preflight_popup {
+        .fcontainer {
+            padding: 0;
+        }
+
+        #fitem_id_passwordmessage {
+            margin-top: .25rem;
+        }
+    }
+
+// ----
+//-----     UI for Report Page
+// ----
+#page-mod-quiz-report {
+
+    .resettable {
+        width: max-content;
+        margin: 1rem 0 1rem auto;
+        padding: 5px;
+        border: 2px dashed $border-color;
+        border-radius: $border-radius;
+    }
+
+    h2 + .quizattemptcounts {
+        margin: 0 1rem;
+    }
+
+    .main-content {
+        .mdl-align {
+            padding: 10px;
+            margin: $page-padding-global 0;
+
+            border: 2px dashed $border-color;
+            border-radius: $border-radius;
+            text-align: left;
+        }
+    }
+}
+
+#page-mod-quiz-report .main-content {
+    #tablecontainer {
+        margin: $page-padding-global 0;
+    }
+}
+
+.quizattemptcounts {
+    display: inline-flex;
+    align-items: center;
+
+    margin: 10px 0;
+    padding: .65rem 1.5rem;
+    @include font-size($badge-font-size);
+    font-weight: $badge-font-weight;
+    vertical-align: baseline;
+    @include border-radius($border-radius);
+
+    background-color: $primary-color-100;
+    color: $primary-color-600;
+
+    p {
+        margin: 0;
+    }
+}
+
+#page-mod-quiz-report table#attempts {
+    width: max-content;
+
+    .header,
+    .cell {
+        padding: .75rem;
+    }
+
+    td {
+        border-left: 0;
+        border-right: 0;
+    }
+
+    td.c2 {
+        a:first-of-type {
+            display: inline-flex;
+            margin-top: .25rem;
+            margin-bottom: .25rem;
+        }
+    }
+
+    td.c5,
+    td.c6,
+    td.c7 {
+        font-size: $font-size-xs;
+        color: $body-color-light;
+    }
+
+    .correct {
+        color: $green-600;
+    }
+
+    .partiallycorrect {
+        color: $yellow-700;
+    }
+
+    .incorrect {
+        color: $red-500;
+    }
+
+    a {
+        &:hover {
+            text-decoration: none;
+            opacity: .8;
+        }
+    }
+}
+
+#page-mod-quiz-report table#attempts .questionflag {
+    padding: 5px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: $border-radius;
+    background-color: $green-100;
+}
+
+#page-mod-quiz-report table#attempts.grades span.que,
+#page-mod-quiz-report table#attempts span.avgcell {
+    span { padding: .25rem .25rem .25rem .45rem; }
+}
+
+#page-mod-quiz-report table#attempts.grades span.que,
+#page-mod-quiz-report table#attempts span.avgcell {
+    display: flex;
+    align-items: center;
+}
+
+// ----
+//-----     UI for Question Edit Pages
+// ----
+.path-question  {
+    div[id^=fgroup_id_][id*=answeroptions_],
+    div[id^=fitem_id_][id*=feedback_],
+    div[id^=fitem_id_][id*=subquestions_],
+    div[id^=fitem_id_][id*=subanswers_],
+    div[id^=fitem_id_][id*=answer_],
+    div[id^=fitem_id_][id*=fraction_]
+    {
+        padding: 11px 0 13px!important;
+        background-color: transparent!important;
+        border: 1px solid $border-color!important;
+    }
+
+    div[id^=fgroup_id_][id*=answeroptions_],
+    div[id^=fitem_id_][id*=subquestions_],
+    div[id^=fitem_id_][id*=answer_]
+    {
+        border-radius: $border-radius $border-radius 0 0!important;
+    }
+
+    div[id^=fitem_id_][id*=feedback_],
+    div[id^=fitem_id_][id*=subanswers_]
+    {
+        border-radius: 0 0 $border-radius $border-radius!important;
+    }
+}
+// end UI for Question Edit Pages
+
+.content {
+    .attachments {
+        margin-top: 2rem;
+        position: relative;
+    }
+}
+
+
+div[class*="draggrouphomes"] {
+    margin-top: 2rem;
+    padding: 1rem;
+
+    border: 2px dashed $primary-color-400;
+    border-radius: $border-radius;
+}
+
+.que .validationerror {
+    margin-top: 1rem;
+
+    @extend .alert;
+    @extend .alert-danger;
+}
+
+.que.multianswer .feedbackspan {
+    padding: 1rem;
+    background-color: $yellow-100;
+    border-radius: $border-radius;
+
+    font-size: $font-size-sm;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 7%), 0 2px 4px rgb(0 0 0 / 7%), 0 4px 8px rgb(0 0 0 / 7%), 0 8px 16px rgb(0 0 0 / 7%), 0 16px 32px rgb(0 0 0 / 7%), 0 32px 64px rgb(0 0 0 / 7%);
+}
+
+//Pagination on Quiz Questions Page
+.categorypagingbarcontainer {
+    .pagination {
+        margin-bottom: .5rem;
+    }
+
+    .paging {
+        text-align: center;
+    }
+}
+
+.path-mod-quiz .othernav {
+    .singlebutton, .btn {
+        width: 100%;
+    }
+}
+
+#page-mod-quiz-edit .statusdisplay {
+    padding: .75rem 1rem .75rem 3.5rem!important;
+    margin-top: $page-padding-global;
+    margin-bottom: $page-padding-global;
+
+    background-color: $yellow-100;
+    background-image: url([[pix:theme|alpha/icon-alert-circle]]);
+    background-size: 18px;
+    background-position: 20px;
+    background-repeat: no-repeat;
+
+
+    border-radius: $border-radius;
+    font-size: $btn-font-size-sm;
+    font-weight: $font-weight-medium;
+
+    p {
+        margin: 0;
+    }
+}
+
+    .questionflagsavebutton {
+        margin: 10px 0;
+    }
+
+    .qtype_multichoice_clearchoice {
+        margin-top: 10px;
+    }
+
+    .rui-infobox--attemptlist,
+    .rui-infobox--attempts {
+        //padding: 1rem 1.25rem 1rem 1.25rem!important;
+        //border: 2px dashed $border-color;
+
+        .rui-infobox-content--small {
+            max-height: 70px;
+            overflow-y: auto;
+        }
+
+        a, strong {
+            margin: 2px;
+
+            width: 40px;
+            height: 30px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            background-color: $gray-100;
+            border-radius: $border-radius;
+
+            color: $gray-800;
+
+            &:hover {
+                background-color: $primary-color-100;
+                color: $primary-color-600;
+            }
+        }
+
+        strong {
+            opacity: .4;
+        }
+    }
+
+    #page-mod-quiz-edit ul.slots li.section li.activity .instancemaxmarkcontainer .editicon {
+        width: auto;
+    }
+
+    #page-mod-quiz-edit ul.slots li.section li.activity .question_dependency_wrapper .cm-edit-action {
+        @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
+    }
+
+
+
+    // Radio and checkbox quick mods
+    .que.multichoice .answer div.r0,
+    .que.multichoice .answer div.r1,
+    .que .answer {
+        [type="radio"],
+        [type="checkbox"] {
+            border: 0;
+            width: 20px;
+            height: 20px;
+        }
+    }
+
+
+    .path-mod-quiz #user-picture {
+        margin: 0 0 20px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        font-weight: $font-weight-medium;
+
+        .userpicture {
+            margin-right: 10px;
+        }
+    }
