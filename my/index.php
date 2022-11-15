@@ -76,7 +76,6 @@ if (isguestuser()) {  // Force them to see system default, no editing allowed
     $PAGE->set_blocks_editing_capability('moodle/my:configsyspages');  // unlikely :)
     $strguest = get_string('guest');
     $pagetitle = "$strmymoodle ($strguest)";
-
 } else {        // We are trying to view or edit our own My Moodle page
     $userid = $USER->id;  // Owner of the page
     $context = context_user::instance($USER->id);
@@ -108,12 +107,14 @@ if (!isguestuser()) {   // Skip default home page for guests
         } else if (!empty($CFG->defaulthomepage) && $CFG->defaulthomepage == HOMEPAGE_USER) {
             $frontpagenode = $PAGE->settingsnav->add(get_string('frontpagesettings'), null, navigation_node::TYPE_SETTING, null);
             $frontpagenode->force_open();
-            $frontpagenode->add(get_string('makethismyhome'), new moodle_url('/my/', array('setdefaulthome' => true)),
-                    navigation_node::TYPE_SETTING);
+            $frontpagenode->add(
+                get_string('makethismyhome'),
+                new moodle_url('/my/', array('setdefaulthome' => true)),
+                navigation_node::TYPE_SETTING
+            );
         }
     }
 }
-
 // Toggle the editing state and switches
 if (empty($CFG->forcedefaultmymoodle) && $PAGE->user_allowed_editing()) {
     if ($reset !== null) {
@@ -171,7 +172,6 @@ if (empty($CFG->forcedefaultmymoodle) && $PAGE->user_allowed_editing()) {
         $button = $OUTPUT->single_button($url, $editstring);
     }
     $PAGE->set_button($resetbutton . $button);
-
 } else {
     $USER->editing = $edit = 0;
 }
@@ -187,51 +187,51 @@ if (core_userfeedback::should_display_reminder()) {
 ?>
 
 <div class="row bg-light d-flex justify-content-center rounded h-100 d-inline-block p-3">
-			<div class="span2 rounded bg-info p-4">
-				<div class="row">
-					<div class="span2">
-						Subdasd ad 
-					</div>
-				</div>
-			</div>
-			<div class="span2 rounded bg-info p-4">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2 rounded bg-info p-4">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2 rounded bg-info p-4">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2 rounded bg-info p-4">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2 rounded bg-info p-4">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-		</div>
+    <div class="span2 rounded bg-info p-4">
+        <div class="row">
+            <div class="span2">
+                Subdasd ad
+            </div>
+        </div>
+    </div>
+    <div class="span2 rounded bg-info p-4">
+        <div class="row">
+            <div class="span2">
+                Sub Header
+            </div>
+        </div>
+    </div>
+    <div class="span2 rounded bg-info p-4">
+        <div class="row">
+            <div class="span2">
+                Sub Header
+            </div>
+        </div>
+    </div>
+    <div class="span2 rounded bg-info p-4">
+        <div class="row">
+            <div class="span2">
+                Sub Header
+            </div>
+        </div>
+    </div>
+    <div class="span2 rounded bg-info p-4">
+        <div class="row">
+            <div class="span2">
+                Sub Header
+            </div>
+        </div>
+    </div>
+    <div class="span2 rounded bg-info p-4">
+        <div class="row">
+            <div class="span2">
+                Sub Header
+            </div>
+        </div>
+    </div>
+</div>
 
-<?php 
+<?php
 echo $OUTPUT->addblockbutton('content');
 
 echo $OUTPUT->custom_block_region('content');

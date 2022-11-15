@@ -136,6 +136,12 @@ endforeach;
 $roleid = $DB->get_field('role', 'id', ['shortname' => 'editingteacher']);
 $isteacheranywhere = $DB->record_exists('role_assignments', ['userid' => $USER->id, 'roleid' => $roleid]);
 echo $isteacheranywhere;
-if (!$isteacheranywhere) {
-    echo "<script>window.location = './my/index.php'</script>";
+echo $isteacheranywhere;
+var_dump($isteacheranywhere);
+if ($isteacheranywhere==false) {
+    // echo "<script>window.location = './my/index.php'</script>";
+    header('Location: index.php');
+}else{
+    header('Location: ./my/index.php');
+
 }
