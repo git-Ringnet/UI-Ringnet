@@ -138,7 +138,7 @@ $isteacheranywhere = $DB->record_exists('role_assignments', ['userid' => $USER->
 echo $isteacheranywhere;
 echo $isteacheranywhere;
 var_dump($isteacheranywhere);
-if ($isteacheranywhere==false) {
+if ($isteacheranywhere===true) {
     // echo "<script>window.location = './my/index.php'</script>";
     header('Location: index.php');
 }else{

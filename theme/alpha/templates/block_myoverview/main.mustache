@@ -42,10 +42,11 @@ Example context (json):
         <div class="d-inline-flex justify-content-between flex-wrap w-100">
             {{> block_myoverview/nav-grouping-selector }}
             {{> block_myoverview/nav-sort-selector }}
-
+            <div class="d-none">
             {{#displaydropdown}}
             {{> block_myoverview/nav-display-selector }}
             {{/displaydropdown}}
+            </div>
         </div>
         <div class="mt-2 w-100">
             {{> block_myoverview/nav-search-widget }}
