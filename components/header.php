@@ -11,8 +11,5 @@
 	<script>
 		window.intercomSettings = {};
 	</script>
-	<meta http-equiv='cache-control' content='no-cache'>
-	<meta http-equiv='expires' content='0'>
-	<meta http-equiv='pragma' content='no-cache'>
 	<link href="https://hethongtest.talentlms.com/index/css/fmt:1664892500,tn:41,tv:1,ct:1,rtl:0" rel="stylesheet" type="text/css">
 </head>

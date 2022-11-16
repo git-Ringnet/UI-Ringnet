@@ -43,6 +43,7 @@ class renderer extends plugin_renderer_base {
      * @return string HTML string
      */
     public function render_main(main $main) {
+        // Khóa học courses.php
         return $this->render_from_template('block_myoverview/main', $main->export_for_template($this));
     }
 }
