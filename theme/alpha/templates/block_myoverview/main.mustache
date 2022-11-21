@@ -52,7 +52,27 @@ Example context (json):
             {{> block_myoverview/nav-search-widget }}
         </div>
     </div>
-
+      <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 50%">
+                          Tên khóa học
+                      </th>
+                      <th style="width: 8%">
+                          Danh mục
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Giảng viên
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Học viên
+                      </th>
+                      <th style="width: 12%" class="text-center">
+                          Action
+                      </th>
+                  </tr>
+              </thead>
+            </table>
     <div class="container-fluid p-0">
         {{> block_myoverview/courses-view }}
     </div>

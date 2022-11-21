@@ -37,23 +37,55 @@ Example context (json):
 }
 }}
 
+{{!-- Sửa list Khóa học ở đây cay thật sự --}}
+
+
 <ul class="list-group mt-2 mx-0">
     {{#courses}}
     <li class="list-group-item rui-course-listitem p-0 rui-progress-{{progress}} {{#showcoursecategory}}rui-course-listitem--cat{{/showcoursecategory}}"
         data-region="course-content" data-course-id="{{{id}}}">
-        <div class="rui-course-list-body">
-            <div class="rui-myoverview-action-menu">
+        <table class="table table-striped" style="margin-bottom: 0 !important;">
+            <thead>
+                <tr>
+                    <th style="width: 50%">
+                        <h4
+                            class="d-block {{^showshortname}}mt-3{{/showshortname}} {{#visible}}mb-3{{/visible}}{{^visible}}mb-2{{/visible}}">
+                            <a href="{{viewurl}}" class="d-inline-flex align-items-center">
+                                {{> core_course/favouriteicon }}
+                                <span class="sr-only">
+                                    {{#str}}aria:coursename, core_course{{/str}}
+                                </span>
+                                {{{fullname}}}
+                            </a>
+                        </h4>
+                    </th>
+                    <th style="width: 8%">
+                        {{#showcoursecategory}}
+                        <span class="sr-only">
+                            {{#str}}aria:coursecategory, core_course{{/str}}
+                        </span>
+                        <div class="badge badge-sm badge-dark">
+                            {{{coursecategory}}}
+                        </div>
+                        {{/showcoursecategory}}
+                    </th>
+                    <th style="width: 8%" class="text-center">
+                        Giảng viên
+                    </th>
+                    <th style="width: 8%" class="text-center">
+                        Học viên
+                    </th>
+                    <th style="width: 12%" class="text-center">
+                        <div class="rui-myoverview-action-menu">
                 {{> block_myoverview/course-action-menu }}
             </div>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        {{!-- <div class="rui-course-list-body"> --}}
+            
             <div class="d-block">
-                {{#showcoursecategory}}
-                <span class="sr-only">
-                    {{#str}}aria:coursecategory, core_course{{/str}}
-                </span>
-                <div class="badge badge-sm badge-light">
-                    {{{coursecategory}}}
-                </div>
-                {{/showcoursecategory}}
                 {{^visible}}
                 <div class="d-inline-flex flex-wrap">
                     <span class="rui-course-hidden-badge">
@@ -80,17 +112,8 @@ Example context (json):
                 </div>
                 {{/showshortname}}
 
-                <h4
-                    class="d-block {{^showshortname}}mt-3{{/showshortname}} {{#visible}}mb-3{{/visible}}{{^visible}}mb-2{{/visible}}">
-                    <a href="{{viewurl}}" class="d-inline-flex align-items-center">
-                        {{> core_course/favouriteicon }}
-                        <span class="sr-only">
-                            {{#str}}aria:coursename, core_course{{/str}}
-                        </span>
-                        {{{fullname}}}
-                    </a>
-                </h4>
-            </div>
+
+            {{!-- </div> --}}
 
             {{#hasprogress}}
             <div class="rui-course-card-progress-bar d-none">
