@@ -133,15 +133,16 @@ foreach ($queryrole as $qrole) :
 endforeach;
 
 // check role anywhere
-$roleid = $DB->get_field('role', 'id', ['shortname' => 'editingteacher']);
-$isteacheranywhere = $DB->record_exists('role_assignments', ['userid' => $USER->id, 'roleid' => $roleid]);
-echo $isteacheranywhere;
-echo $isteacheranywhere;
-var_dump($isteacheranywhere);
-if ($isteacheranywhere===true) {
-    // echo "<script>window.location = './my/index.php'</script>";
-    header('Location: index.php');
-}else{
-    header('Location: ./my/index.php');
+// $roleid = $DB->get_field('role', 'id', ['shortname' => 'editingteacher']);
+// $isteacheranywhere = $DB->get_records('role_assignments', ['userid' => $user->id]);
+// echo $isteacheranywhere;
+// echo $isteacheranywhere;
+// var_dump($isteacheranywhere);
+// if ($isteacheranywhere===true) {
+//     // echo "<script>window.location = './my/index.php'</script>";
+//     header('Location: index.php');
+// }else{
+//     header('Location: ./my/index.php');
 
-}
+// }
+
