@@ -89,7 +89,6 @@ if (core_userfeedback::should_display_reminder()) {
     core_userfeedback::print_reminder_block();
 }
 
-
 echo $OUTPUT->custom_block_region('content');
 
 echo $OUTPUT->footer();
@@ -98,3 +97,5 @@ echo $OUTPUT->footer();
 $eventparams = array('context' => $context);
 $event = \core\event\mycourses_viewed::create($eventparams);
 $event->trigger();
+
+

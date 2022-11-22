@@ -37,7 +37,7 @@ Example context (json):
 }
 }}
 
-{{!-- Sửa list Khóa học ở đây cay thật sự --}}
+{{!-- Sửa list Khóa học ở đây --}}
 
 
 <ul class="list-group mt-2 mx-0">
@@ -47,7 +47,7 @@ Example context (json):
         <table class="table table-striped" style="margin-bottom: 0 !important;">
             <thead>
                 <tr>
-                    <th style="width: 50%">
+                    <th style="width: 50%;border-bottom: 0 !important">
                         <h4
                             class="d-block {{^showshortname}}mt-3{{/showshortname}} {{#visible}}mb-3{{/visible}}{{^visible}}mb-2{{/visible}}">
                             <a href="{{viewurl}}" class="d-inline-flex align-items-center">
@@ -59,7 +59,7 @@ Example context (json):
                             </a>
                         </h4>
                     </th>
-                    <th style="width: 8%">
+                    <th style="width: 8%;border-bottom: 0 !important">
                         {{#showcoursecategory}}
                         <span class="sr-only">
                             {{#str}}aria:coursecategory, core_course{{/str}}
@@ -69,13 +69,13 @@ Example context (json):
                         </div>
                         {{/showcoursecategory}}
                     </th>
-                    <th style="width: 8%" class="text-center">
+                    <th style="width: 8%;border-bottom: 0 !important" class="text-center">
                         Giảng viên
                     </th>
-                    <th style="width: 8%" class="text-center">
+                    <th style="width: 8%;border-bottom: 0 !important" class="text-center">
                         Học viên
                     </th>
-                    <th style="width: 12%" class="text-center">
+                    <th style="width: 12%;border-bottom: 0 !important" class="text-center">
                         <div class="rui-myoverview-action-menu">
                 {{> block_myoverview/course-action-menu }}
             </div>
