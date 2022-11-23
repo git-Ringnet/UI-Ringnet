@@ -88,6 +88,10 @@ echo $OUTPUT->header();
 if (core_userfeedback::should_display_reminder()) {
     core_userfeedback::print_reminder_block();
 }
+global $CFG, $COURSE, $DB;
+$course = $DB->get_record('course', ['id' => $COURSE->id]);
+$course = new core_course_list_element($course);
+$instructors = $course->get_course_contacts();
 
 echo $OUTPUT->custom_block_region('content');
 

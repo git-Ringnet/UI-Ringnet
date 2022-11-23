@@ -53,6 +53,9 @@ class course_summary_exporter extends \core\external\exporter {
         return array('context' => '\\context', 'isfavourite' => 'bool?');
     }
 
+
+
+    //Sửa đây giáo viên
     protected function get_other_values(renderer_base $output) {
         global $CFG;
         $courseimage = self::get_course_image($this->data);
@@ -64,6 +67,7 @@ class course_summary_exporter extends \core\external\exporter {
         if ($progress === 0 || $progress > 0) {
             $hasprogress = true;
         }
+        $name = "việt";
         $progress = floor($progress);
         $coursecategory = \core_course_category::get($this->data->category, MUST_EXIST, true);
         return array(
@@ -75,7 +79,8 @@ class course_summary_exporter extends \core\external\exporter {
             'isfavourite' => $this->related['isfavourite'],
             'hidden' => boolval(get_user_preferences('block_myoverview_hidden_course_' . $this->data->id, 0)),
             'showshortname' => $CFG->courselistshortnames ? true : false,
-            'coursecategory' => $coursecategory->name
+            'coursecategory' => $coursecategory->name,
+            'name'=> $name,
         );
     }
 
@@ -117,6 +122,7 @@ class course_summary_exporter extends \core\external\exporter {
                 'type' => PARAM_BOOL,
                 'null' => NULL_ALLOWED
             ],
+         
         );
     }
 
@@ -164,6 +170,9 @@ class course_summary_exporter extends \core\external\exporter {
                 'type' => PARAM_BOOL
             ),
             'coursecategory' => array(
+                'type' => PARAM_TEXT
+            ),
+            'name' => array(
                 'type' => PARAM_TEXT
             )
         );
