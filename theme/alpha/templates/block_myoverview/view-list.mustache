@@ -41,6 +41,28 @@ Example context (json):
 
 
 <ul class="list-group mt-2 mx-0">
+  
+        <table class="table table-striped projects">
+              <thead>
+                  <tr>
+                      <th style="width: 50%">
+                          Tên khóa học
+                      </th>
+                      <th style="width: 8%">
+                          Danh mục
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Giảng viên
+                      </th>
+                      <th style="width: 8%" class="text-center">
+                          Học viên
+                      </th>
+                      <th style="width: 12%" class="text-center">
+                          Action
+                      </th>
+                  </tr>
+              </thead>
+            </table>
     {{#courses}}
     <li class="list-group-item rui-course-listitem p-0 rui-progress-{{progress}} {{#showcoursecategory}}rui-course-listitem--cat{{/showcoursecategory}}"
         data-region="course-content" data-course-id="{{{id}}}">
@@ -70,21 +92,21 @@ Example context (json):
                         {{/showcoursecategory}}
                     </th>
                     <th style="width: 8%;border-bottom: 0 !important" class="text-center">
-                        Giảng viên
+                        {{{name}}}
                     </th>
                     <th style="width: 8%;border-bottom: 0 !important" class="text-center">
-                        Học viên
+                        {{{student}}}
                     </th>
                     <th style="width: 12%;border-bottom: 0 !important" class="text-center">
                         <div class="rui-myoverview-action-menu">
-                {{> block_myoverview/course-action-menu }}
-            </div>
+                            {{> block_myoverview/course-action-menu }}
+                        </div>
                     </th>
                 </tr>
             </thead>
         </table>
         {{!-- <div class="rui-course-list-body"> --}}
-            
+
             <div class="d-block">
                 {{^visible}}
                 <div class="d-inline-flex flex-wrap">
@@ -113,7 +135,8 @@ Example context (json):
                 {{/showshortname}}
 
 
-            {{!-- </div> --}}
+                {{!--
+            </div> --}}
 
             {{#hasprogress}}
             <div class="rui-course-card-progress-bar d-none">

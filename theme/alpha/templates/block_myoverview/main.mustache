@@ -25,17 +25,18 @@ Example context (json):
 }}
 
 <div id="block-myoverview-{{uniqid}}" class="block-myoverview block-cards" data-region="myoverview" role="navigation">
-    <div class="d-inline-flex justify-content-between flex-wrap w-100">
+    <div class="d-inline-flex justify-content-between flex-wrap w-100 py-2">
         <div class="mb-1 mr-auto d-flex mt-auto">
             <a class="mr-5" href="#">
                 <h3>Khóa Học</h3>
             </a>
             <a href="#">
                 <h3>Danh Mục</h3>
-            </a>
-         
         </div>
-           <button class="btn btn-primary mb-1">Tạo Khóa Học</button>
+           </a>
+              <a href="/ringnet/course/edit.php?returnto=catmanage" class="btn btn-primary">
+        Tạo khóa học
+    </a>
     </div>
     <div data-region="filter" class="d-flex align-items-center flex-wrap"
         aria-label="{{#str}} aria:controls, block_myoverview {{/str}}">
@@ -52,27 +53,6 @@ Example context (json):
             {{> block_myoverview/nav-search-widget }}
         </div>
     </div>
-      <table class="table table-striped projects">
-              <thead>
-                  <tr>
-                      <th style="width: 50%">
-                          Tên khóa học
-                      </th>
-                      <th style="width: 8%">
-                          Danh mục
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          Giảng viên
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          Học viên
-                      </th>
-                      <th style="width: 12%" class="text-center">
-                          Action
-                      </th>
-                  </tr>
-              </thead>
-            </table>
     <div class="container-fluid p-0">
         {{> block_myoverview/courses-view }}
     </div>

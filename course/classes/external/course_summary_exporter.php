@@ -21,11 +21,15 @@
  * @copyright  2015 Damyon Wiese
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace core_course\external;
+
 defined('MOODLE_INTERNAL') || die();
 
 use renderer_base;
 use moodle_url;
+use core_course_list_element;
+use context_course;
 
 /**
  * Class for exporting a course summary from an stdClass.
@@ -33,7 +37,8 @@ use moodle_url;
  * @copyright  2015 Damyon Wiese
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class course_summary_exporter extends \core\external\exporter {
+class course_summary_exporter extends \core\external\exporter
+{
 
     /**
      * Constructor - saves the persistent object, and the related objects.
@@ -41,20 +46,23 @@ class course_summary_exporter extends \core\external\exporter {
      * @param mixed $data - Either an stdClass or an array of values.
      * @param array $related - An optional list of pre-loaded objects related to this object.
      */
-    public function __construct($data, $related = array()) {
+    public function __construct($data, $related = array())
+    {
         if (!array_key_exists('isfavourite', $related)) {
             $related['isfavourite'] = false;
         }
         parent::__construct($data, $related);
     }
 
-    protected static function define_related() {
+    protected static function define_related()
+    {
         // We cache the context so it does not need to be retrieved from the course.
         return array('context' => '\\context', 'isfavourite' => 'bool?');
     }
 
-    protected function get_other_values(renderer_base $output) {
-        global $CFG;
+    protected function get_other_values(renderer_base $output)
+    {
+        global $CFG, $DB, $PAGE;
         $courseimage = self::get_course_image($this->data);
         if (!$courseimage) {
             $courseimage = $output->get_generated_image_for_id($this->data->id);
@@ -66,6 +74,21 @@ class course_summary_exporter extends \core\external\exporter {
         }
         $progress = floor($progress);
         $coursecategory = \core_course_category::get($this->data->category, MUST_EXIST, true);
+        $name = 'a';
+        $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
+        $context = context_course::instance($this->data->id);
+        $teachers = get_role_users($role->id, $context);
+        $a = count($teachers);
+        foreach ($teachers as $teacher) {
+            $name = fullname($teacher);
+        }
+
+        $rolestudent = $DB->get_record('role', array('shortname' => 'student'));
+        $student = get_role_users($rolestudent->id, $context);
+        $count = count($student);
+
+
+
         return array(
             'fullnamedisplay' => get_course_display_name_for_list($this->data),
             'viewurl' => (new moodle_url('/course/view.php', array('id' => $this->data->id)))->out(false),
@@ -75,11 +98,14 @@ class course_summary_exporter extends \core\external\exporter {
             'isfavourite' => $this->related['isfavourite'],
             'hidden' => boolval(get_user_preferences('block_myoverview_hidden_course_' . $this->data->id, 0)),
             'showshortname' => $CFG->courselistshortnames ? true : false,
-            'coursecategory' => $coursecategory->name
+            'coursecategory' => $coursecategory->name,
+            'name' =>  $name,
+            'student' =>  $count,
         );
     }
 
-    public static function define_properties() {
+    public static function define_properties()
+    {
         return array(
             'id' => array(
                 'type' => PARAM_INT,
@@ -114,8 +140,7 @@ class course_summary_exporter extends \core\external\exporter {
                 'null' => NULL_ALLOWED
             ],
             'showcompletionconditions' => [
-                'type' => PARAM_BOOL,
-                'null' => NULL_ALLOWED
+                'type' => PARAM_TEXT
             ],
         );
     }
@@ -125,14 +150,16 @@ class course_summary_exporter extends \core\external\exporter {
      *
      * @return array
      */
-    protected function get_format_parameters_for_summary() {
+    protected function get_format_parameters_for_summary()
+    {
         return [
             'component' => 'course',
             'filearea' => 'summary',
         ];
     }
 
-    public static function define_other_properties() {
+    public static function define_other_properties()
+    {
         return array(
             'fullnamedisplay' => array(
                 'type' => PARAM_TEXT,
@@ -165,7 +192,15 @@ class course_summary_exporter extends \core\external\exporter {
             ),
             'coursecategory' => array(
                 'type' => PARAM_TEXT
-            )
+            ),
+            'name' => array(
+                'type' => PARAM_TEXT
+            ),
+            'student' => array(
+                'type' => PARAM_INT,
+                'optional' => true
+            ),
+            
         );
     }
 
@@ -175,7 +210,8 @@ class course_summary_exporter extends \core\external\exporter {
      * @param object $course
      * @return string|false url of course image or false if it's not exist.
      */
-    public static function get_course_image($course) {
+    public static function get_course_image($course)
+    {
         $image = \cache::make('core', 'course_image')->get($course->id);
 
         if (is_null($image)) {
@@ -193,7 +229,8 @@ class course_summary_exporter extends \core\external\exporter {
      * @return string datauri
      * @deprecated 3.7
      */
-    public static function get_course_pattern($course) {
+    public static function get_course_pattern($course)
+    {
         global $OUTPUT;
         debugging('course_summary_exporter::get_course_pattern() is deprecated. ' .
             'Please use $OUTPUT->get_generated_image_for_id() instead.', DEBUG_DEVELOPER);
@@ -206,7 +243,8 @@ class course_summary_exporter extends \core\external\exporter {
      * @param object $course
      * @return int progress
      */
-    public static function get_course_progress($course) {
+    public static function get_course_progress($course)
+    {
         return \core_completion\progress::get_course_progress_percentage($course);
     }
 
@@ -217,7 +255,8 @@ class course_summary_exporter extends \core\external\exporter {
      * @return string hex color code.
      * @deprecated 3.7
      */
-    public static function coursecolor($courseid) {
+    public static function coursecolor($courseid)
+    {
         global $OUTPUT;
         debugging('course_summary_exporter::coursecolor() is deprecated. ' .
             'Please use $OUTPUT->get_generated_color_for_id() instead.', DEBUG_DEVELOPER);

@@ -360,7 +360,7 @@ class core_renderer extends \core_renderer {
                     $content .= "<img src='{$picture}' class='course-teacher-avatar' alt='{$name}' title='{$name} - {$role}' data-toggle='tooltip'/>";
                     $content .= "</a></div>";
                 }
-
+                
             $content .= html_writer::end_div(); // teachers-box
             return $content;
         }
