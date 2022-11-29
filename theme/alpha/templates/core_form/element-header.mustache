@@ -29,14 +29,14 @@
     }
 }}
 {{#collapseable}}
-    <legend class="d-flex align-items-center">
+    <legend class="d-flex align-items-center" style="display: none !important;">
         <div class="position-relative d-flex ftoggler align-items-center w-100">
             <a data-toggle="collapse"
                 href="#{{id}}container"
                 role="button"
-                aria-expanded="{{#collapsed}}false{{/collapsed}}{{^collapsed}}true{{/collapsed}}"
+                aria-expanded="true"
                 aria-controls="{{id}}container"
-                class="fheader {{#collapsed}}collapsed{{/collapsed}}"
+                class="fheader"
                 >            
                 <h3 class="d-flex align-self-stretch align-items-center mb-0" aria-hidden="true">
                     {{{header}}}
@@ -49,4 +49,4 @@
 {{^collapseable}}
     <legend>{{{header}}}</legend>
 {{/collapseable}}
-<div id="{{id}}container" class="fcontainer {{#collapseable}}collapseable collapse {{/collapseable}} {{^collapsed}}show{{/collapsed}}">
+<div id="{{id}}container" class="fcontainer {{#collapseable}}collapseable collapse {{/collapseable}}show">
