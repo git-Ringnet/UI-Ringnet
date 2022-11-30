@@ -44,9 +44,15 @@ Example context (json):
 }
 }}
 <style>
-    div#id_generalcontainer,div#id_descriptionhdrcontainer,div#id_filehdrcontainer {
-        position: relative;
+    div#id_generalcontainer,
+    div#id_descriptionhdrcontainer,
+    div#id_filehdrcontainer {
+        {{!-- position: relative;
         left: 35%;
+        max-width: 65%; --}}
+    }
+    div#fgroup_id_buttonar>.col-md-10.form-inline.felement.px-0 {
+        justify-content: center;
     }
 </style>
 <div id="{{element.wrapperid}}"
@@ -71,7 +77,7 @@ Example context (json):
             {{{helpbutton}}}
         </sup>
     </div>
-    <div class="col-md-6 form-inline felement px-0" data-fieldtype="{{element.type}}">
+    <div class="col-md-10 form-inline felement px-0" data-fieldtype="{{element.type}}">
         {{$ element }}
         <!-- Element goes here -->
         {{/ element }}

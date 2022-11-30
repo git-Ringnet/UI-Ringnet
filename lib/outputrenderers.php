@@ -4287,6 +4287,8 @@ EOD;
         $html .= html_writer::end_tag('div');
         return $html;
     }
+    
+
 
     public function context_header($headerinfo = null, $headinglevel = 1) {
         global $DB, $USER, $CFG, $SITE;
@@ -5560,7 +5562,43 @@ class core_renderer_maintenance extends core_renderer {
         $output .= $this->box_end();
         return $output;
     }
+    public function course_navigate()
+    {
+        global $CFG, $COURSE, $DB;
+        $course = $DB->get_record('course', ['id' => $COURSE->id]);
+        $content = html_writer::start_div('course-teachers-box');
+        // var_dump($course);
+        $content = html_writer::start_div('course-navigation');
+        $urledit = $CFG->wwwroot . '/course/edit.php?id='. $course->id.'&returnto=catmanage';
+        $urlcontent = $CFG->wwwroot . '/course/view.php?id='.$course->id;
+        $urlparticipant = $CFG->wwwroot . '/user/index.php?id='.$course->id;
+        
+        $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
+        <div class='collapse navbar-collapse' id='navbarNav'>
+          <ul class='navbar-nav'>
+            <li class='nav-item active'>
+              <a class='nav-link' href='{$urledit}'>Thông tin <span class='sr-only'>(current)</span></a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
+            </li>
+            <li class='nav-item'>
+            <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
 
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='#'>Điều kiện</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='#'>Chứng chỉ</a>
+            </li>
+          </ul>
+        </div>
+      </nav>";
+        echo '<br/>';
+        $content .= html_writer::end_div(); // navigation-box
+        return $content;
+    }
     /**
      * Does nothing. The maintenance renderer does not support JS.
      *

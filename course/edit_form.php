@@ -273,26 +273,26 @@ class course_edit_form extends moodleform {
         }
 
         $options = range(0, 10);
-        $mform->addElement('select', 'newsitems', get_string('newsitemsnumber'), $options);
+        // $mform->addElement('select', 'newsitems', get_string('newsitemsnumber'), $options);
         $courseconfig = get_config('moodlecourse');
         $mform->setDefault('newsitems', $courseconfig->newsitems);
         $mform->addHelpButton('newsitems', 'newsitemsnumber');
 
-        $mform->addElement('selectyesno', 'showgrades', get_string('showgrades'));
+        // $mform->addElement('selectyesno', 'showgrades', get_string('showgrades'));
         $mform->addHelpButton('showgrades', 'showgrades');
         $mform->setDefault('showgrades', $courseconfig->showgrades);
 
-        $mform->addElement('selectyesno', 'showreports', get_string('showreports'));
+        // $mform->addElement('selectyesno', 'showreports', get_string('showreports'));
         $mform->addHelpButton('showreports', 'showreports');
         $mform->setDefault('showreports', $courseconfig->showreports);
 
         // Show activity dates.
-        $mform->addElement('selectyesno', 'showactivitydates', get_string('showactivitydates'));
+        // $mform->addElement('selectyesno', 'showactivitydates', get_string('showactivitydates'));
         $mform->addHelpButton('showactivitydates', 'showactivitydates');
         $mform->setDefault('showactivitydates', $courseconfig->showactivitydates);
 
         // Files and uploads.
-        $mform->addElement('header', 'filehdr', get_string('filesanduploads'));
+        // $mform->addElement('header', 'filehdr', get_string('filesanduploads'));
 
         if (!empty($course->legacyfiles) or !empty($CFG->legacyfilesinnewcourses)) {
             if (empty($course->legacyfiles)) {
