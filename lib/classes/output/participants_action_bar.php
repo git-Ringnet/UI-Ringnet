@@ -20,6 +20,7 @@ use context_course;
 use moodle_page;
 use navigation_node;
 use moodle_url;
+use html_writer;
 
 /**
  * Class responsible for generating the action bar (tertiary nav) elements in the participants page and related pages.
@@ -207,7 +208,42 @@ class participants_action_bar implements \renderable {
 
         return null;
     }
+    public function course_navigate()
+    {
+        global $CFG, $COURSE, $DB;
+        $course = $DB->get_record('course', ['id' => $COURSE->id]);
+        // var_dump($course);
+        $content = html_writer::start_div('course-navigation');
+        $urledit = $CFG->wwwroot . '/course/edit.php?id='. $course->id.'&returnto=catmanage';
+        $urlcontent = $CFG->wwwroot . '/course/view.php?id='.$course->id;
+        $urlparticipant = $CFG->wwwroot . '/user/index.php?id='.$course->id;
+        
+        $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
+        <div class='collapse navbar-collapse' id='navbarNav'>
+          <ul class='navbar-nav'>
+            <li class='nav-item active'>
+              <a class='nav-link' href='{$urledit}'>Thông tin <span class='sr-only'>(current)</span></a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
+            </li>
+            <li class='nav-item'>
+            <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
 
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='#'>Điều kiện</a>
+            </li>
+            <li class='nav-item'>
+              <a class='nav-link' href='#'>Chứng chỉ</a>
+            </li>
+          </ul>
+        </div>
+      </nav>";
+        echo '<br/>';
+        $content .= html_writer::end_div(); // navigation-box
+        return $content;
+    }
     /**
      * Export the content to be displayed on the participants page.
      *
@@ -220,6 +256,8 @@ class participants_action_bar implements \renderable {
         return [
             'urlselect' => $this->get_dropdown($output),
             'renderedcontent' => $this->renderedcontent,
+            'navigation' => $this->course_navigate(),
+
         ];
     }
 }

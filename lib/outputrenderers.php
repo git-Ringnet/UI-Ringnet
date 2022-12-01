@@ -5566,7 +5566,6 @@ class core_renderer_maintenance extends core_renderer {
     {
         global $CFG, $COURSE, $DB;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
-        $content = html_writer::start_div('course-teachers-box');
         // var_dump($course);
         $content = html_writer::start_div('course-navigation');
         $urledit = $CFG->wwwroot . '/course/edit.php?id='. $course->id.'&returnto=catmanage';
