@@ -212,14 +212,12 @@ class participants_action_bar implements \renderable {
     {
         global $CFG, $COURSE, $DB;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
-        $content = html_writer::start_div('course-teachers-box');
         // var_dump($course);
         $content = html_writer::start_div('course-navigation');
-        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-        $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
-        $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
-        $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
-        $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+        $urledit = $CFG->wwwroot . '/course/edit.php?id='. $course->id.'&returnto=catmanage';
+        $urlcontent = $CFG->wwwroot . '/course/view.php?id='.$course->id;
+        $urlparticipant = $CFG->wwwroot . '/user/index.php?id='.$course->id;
+        
         $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
         <div class='collapse navbar-collapse' id='navbarNav'>
           <ul class='navbar-nav'>
@@ -230,17 +228,15 @@ class participants_action_bar implements \renderable {
               <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
+            <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
+
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
+              <a class='nav-link' href='#'>Điều kiện</a>
             </li>
             <li class='nav-item'>
-            <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
-          </li>
-          <li class='nav-item'>
-          <a class='nav-link' href='{$urlparticipant}'>Điều kiện</a>
-        </li>
+              <a class='nav-link' href='#'>Chứng chỉ</a>
+            </li>
           </ul>
         </div>
       </nav>";

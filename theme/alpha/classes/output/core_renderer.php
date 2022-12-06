@@ -378,11 +378,10 @@ class core_renderer extends \core_renderer
         $content = html_writer::start_div('course-teachers-box');
         // var_dump($course);
         $content = html_writer::start_div('course-navigation');
-        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-        $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
-        $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
-        $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
-        $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+        $urledit = $CFG->wwwroot . '/course/edit.php?id='. $course->id.'&returnto=catmanage';
+        $urlcontent = $CFG->wwwroot . '/course/view.php?id='.$course->id;
+        $urlparticipant = $CFG->wwwroot . '/user/index.php?id='.$course->id;
+        
         $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
         <div class='collapse navbar-collapse' id='navbarNav'>
           <ul class='navbar-nav'>
@@ -396,14 +395,11 @@ class core_renderer extends \core_renderer
               <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
+              <a class='nav-link' href='#'>Điều kiện</a>
             </li>
             <li class='nav-item'>
-            <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
-          </li>
-          <li class='nav-item'>
-          <a class='nav-link' href='{$urlparticipant}'>Điều kiện</a>
-        </li>
+              <a class='nav-link' href='#'>Chứng chỉ</a>
+            </li>
           </ul>
         </div>
       </nav>";
@@ -906,7 +902,7 @@ class core_renderer extends \core_renderer
         $html .= html_writer::start_tag('div', array('class' => 'rui-course-navigation'));
         $html .= $this->course_navigate();
         $html .= html_writer::end_tag('div'); //rui-course-navigation
-
+        
         $html .= html_writer::start_tag('div', array('class' => 'rui-course-header'));
         if ($PAGE->theme->settings->cccteachers == 1) {
             $html .= $this->course_contacts();
@@ -1855,7 +1851,7 @@ class core_renderer extends \core_renderer
         } else {
             $html .= html_writer::tag('h2', $contextheader->heading, array('class' => 'rui-page-title rui-page-title--context'));
         }
-
+        
 
 
 
