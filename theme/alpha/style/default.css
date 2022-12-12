@@ -20979,6 +20979,9 @@ body.drawer-open-right.dir-rtl #sidepreopen-control svg {
 .editing #block-region-sidebartopblocks,
 .editing #block-region-sidebarbottomblocks {
   position: relative;
+  /* ẩn chỉnh sửa */
+  display: none;
+
 }
 .editing #block-region-dtopblocks:before,
 .editing #block-region-dbottomblocks:before,

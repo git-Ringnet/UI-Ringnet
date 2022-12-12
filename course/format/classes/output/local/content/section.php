@@ -294,9 +294,10 @@ class section implements named_templatable, renderable {
             $data->cmcontrols = $output->course_section_add_cm_control(
                 $course,
                 $this->section->section,
-                $this->format->get_section_number()
+           0
             );
         }
+
         return true;
     }
 

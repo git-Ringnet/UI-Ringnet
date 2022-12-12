@@ -376,6 +376,7 @@ abstract class section_renderer extends core_course_renderer {
             $classes = '';
         }
         $sectionname = html_writer::tag('span', $this->section_title($section, $course));
+        $id = 0;
         $o .= $this->output->heading($sectionname, 3, 'sectionname' . $classes, "sectionid-{$section->id}-title");
 
         $o .= $this->section_availability($section);
