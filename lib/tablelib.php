@@ -1288,7 +1288,7 @@ class flexible_table {
                         }
 
                         if ($nameformat == 'language') {
-                            $nameformat = get_string('fullnamedisplay');
+                            $nameformat = get_string('fullnametest');
                         }
 
                         $requirednames = order_in_string(\core_user\fields::get_name_fields(), $nameformat);
