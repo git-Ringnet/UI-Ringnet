@@ -54,6 +54,15 @@ class course_edit_form extends moodleform {
         $mform->setType('returnurl', PARAM_LOCALURL);
         $mform->setConstant('returnurl', $returnurl);
 
+        // ảnh đại diện
+        $summaryfields = 'summary_editor';
+        if ($overviewfilesoptions = course_overviewfiles_options($course)) {
+            $mform->addElement('filemanager', 'overviewfiles_filemanager', get_string('courseoverviewfiles'), null, $overviewfilesoptions);
+            $mform->addHelpButton('overviewfiles_filemanager', 'courseoverviewfiles');
+            $summaryfields .= ',overviewfiles_filemanager';
+        }
+
+
         $mform->addElement('text','fullname', get_string('fullnamecourse'),'maxlength="254" size="50"');
         $mform->addHelpButton('fullname', 'fullnamecourse');
         $mform->addRule('fullname', get_string('missingfullname'), 'required', null, 'client');
@@ -62,15 +71,18 @@ class course_edit_form extends moodleform {
             $mform->hardFreeze('fullname');
             $mform->setConstant('fullname', $course->fullname);
         }
+        
+        // Short name source
+        // $mform->addElement('text', 'shortname', get_string('shortnamecourse'), 'maxlength="100" size="20"');
+        // $mform->addHelpButton('shortname', 'shortnamecourse');
+        // $mform->addRule('shortname', get_string('missingshortname'), 'required', null, 'client');
+        // $mform->setType('shortname', PARAM_TEXT);
+        // if (!empty($course->id) and !has_capability('moodle/course:changeshortname', $coursecontext)) {
+        //     $mform->hardFreeze('shortname');
+        //     $mform->setConstant('shortname', $course->shortname);
+        // }
 
-        $mform->addElement('text', 'shortname', get_string('shortnamecourse'), 'maxlength="100" size="20"');
-        $mform->addHelpButton('shortname', 'shortnamecourse');
-        $mform->addRule('shortname', get_string('missingshortname'), 'required', null, 'client');
-        $mform->setType('shortname', PARAM_TEXT);
-        if (!empty($course->id) and !has_capability('moodle/course:changeshortname', $coursecontext)) {
-            $mform->hardFreeze('shortname');
-            $mform->setConstant('shortname', $course->shortname);
-        }
+      
 
         // Verify permissions to change course category or keep current.
         if (empty($course->id)) {
@@ -104,11 +116,24 @@ class course_edit_form extends moodleform {
             }
         }
 
+          // Description.
+          $mform->addElement('header', 'descriptionhdr', get_string('description'));
+          $mform->setExpanded('descriptionhdr');
+  
+          $mform->addElement('editor','summary_editor', get_string('coursesummary'), null, $editoroptions);
+          $mform->addHelpButton('summary_editor', 'coursesummary');
+          $mform->setType('summary_editor', PARAM_RAW);
+        
+        
+        // Chế độ
         $choices = array();
-        $choices['0'] = get_string('hide');
-        $choices['1'] = get_string('show');
-        $mform->addElement('select', 'visible', get_string('coursevisibility'), $choices);
-        $mform->addHelpButton('visible', 'coursevisibility');
+        $choices['0'] = $mform->createElement('radio','visible', get_string('hide'));
+        $choices['1'] = $mform->createElement('radio','visible',get_string('show'));
+        
+        // $mform->addElement('select', 'visible', get_string('coursevisibility'), $choices);
+        // $mform->addHelpButton('visible', 'coursevisibility');
+
+        $mform->addGroup($choices,$courseconfig->visible);
         $mform->setDefault('visible', $courseconfig->visible);
         if (!empty($course->id)) {
             if (!has_capability('moodle/course:visibility', $coursecontext)) {
@@ -143,35 +168,39 @@ class course_edit_form extends moodleform {
                 $mform->setConstant('downloadcontent', $downloadselectdefault);
             }
         }
+         
 
+           
+        // Thời gian bắt đầu
         $mform->addElement('date_time_selector', 'startdate', get_string('startdate'));
         $mform->addHelpButton('startdate', 'startdate');
         $date = (new DateTime())->setTimestamp(usergetmidnight(time()));
         $date->modify('+1 day');
         $mform->setDefault('startdate', $date->getTimestamp());
-
+        
+        // Thời gian hết hạn
         $mform->addElement('date_time_selector', 'enddate', get_string('enddate'), array('optional' => true));
         $mform->addHelpButton('enddate', 'enddate');
 
-        if (!empty($CFG->enablecourserelativedates)) {
-            $attributes = [
-                'aria-describedby' => 'relativedatesmode_warning'
-            ];
-            if (!empty($course->id)) {
-                $attributes['disabled'] = true;
-            }
-            $relativeoptions = [
-                0 => get_string('no'),
-                1 => get_string('yes'),
-            ];
-            $relativedatesmodegroup = [];
-            $relativedatesmodegroup[] = $mform->createElement('select', 'relativedatesmode', get_string('relativedatesmode'),
-                $relativeoptions, $attributes);
-            $relativedatesmodegroup[] = $mform->createElement('html', html_writer::span(get_string('relativedatesmode_warning'),
-                '', ['id' => 'relativedatesmode_warning']));
-            $mform->addGroup($relativedatesmodegroup, 'relativedatesmodegroup', get_string('relativedatesmode'), null, false);
-            $mform->addHelpButton('relativedatesmodegroup', 'relativedatesmode');
-        }
+        // if (!empty($CFG->enablecourserelativedates)) {
+        //     $attributes = [
+        //         'aria-describedby' => 'relativedatesmode_warning'
+        //     ];
+        //     if (!empty($course->id)) {
+        //         $attributes['disabled'] = true;
+        //     }
+        //     $relativeoptions = [
+        //         0 => get_string('no'),
+        //         1 => get_string('yes'),
+        //     ];
+        //     $relativedatesmodegroup = [];
+        //     $relativedatesmodegroup[] = $mform->createElement('select', 'relativedatesmode', get_string('relativedatesmode'),
+        //         $relativeoptions, $attributes);
+        //     $relativedatesmodegroup[] = $mform->createElement('html', html_writer::span(get_string('relativedatesmode_warning'),
+        //         '', ['id' => 'relativedatesmode_warning']));
+        //     $mform->addGroup($relativedatesmodegroup, 'relativedatesmodegroup', get_string('relativedatesmode'), null, false);
+        //     $mform->addHelpButton('relativedatesmodegroup', 'relativedatesmode');
+        // }
 
 
         
@@ -183,20 +212,7 @@ class course_edit_form extends moodleform {
         //     $mform->setConstants('idnumber', $course->idnumber);
         // }
 
-        // Description.
-        $mform->addElement('header', 'descriptionhdr', get_string('description'));
-        $mform->setExpanded('descriptionhdr');
-
-        $mform->addElement('editor','summary_editor', get_string('coursesummary'), null, $editoroptions);
-        $mform->addHelpButton('summary_editor', 'coursesummary');
-        $mform->setType('summary_editor', PARAM_RAW);
-        $summaryfields = 'summary_editor';
-
-        if ($overviewfilesoptions = course_overviewfiles_options($course)) {
-            $mform->addElement('filemanager', 'overviewfiles_filemanager', get_string('courseoverviewfiles'), null, $overviewfilesoptions);
-            $mform->addHelpButton('overviewfiles_filemanager', 'courseoverviewfiles');
-            $summaryfields .= ',overviewfiles_filemanager';
-        }
+       
 
         if (!empty($course->id) and !has_capability('moodle/course:changesummary', $coursecontext)) {
             // Remove the description header it does not contain anything any more.
@@ -287,9 +303,10 @@ class course_edit_form extends moodleform {
         $mform->setDefault('showreports', $courseconfig->showreports);
 
         // Show activity dates.
+        
         // $mform->addElement('selectyesno', 'showactivitydates', get_string('showactivitydates'));
-        $mform->addHelpButton('showactivitydates', 'showactivitydates');
-        $mform->setDefault('showactivitydates', $courseconfig->showactivitydates);
+        // $mform->addHelpButton('showactivitydates', 'showactivitydates');
+        // $mform->setDefault('showactivitydates', $courseconfig->showactivitydates);
 
         // Files and uploads.
         // $mform->addElement('header', 'filehdr', get_string('filesanduploads'));
