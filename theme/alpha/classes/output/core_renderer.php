@@ -288,7 +288,7 @@ class core_renderer extends \core_renderer
                 $templatedata = new \stdClass;
                 $templatedata->progress = \core_completion\progress::get_course_progress_percentage($course);
                 $templatedata->progresscountc = $progresscountc;
-                $templatedata->progresscounttotal  = $progresscounttotal;
+                $templatedata->progresscounttotal = $progresscounttotal;
 
                 if (!is_null($templatedata->progress)) {
                     $templatedata->progress = floor($templatedata->progress);
@@ -297,7 +297,7 @@ class core_renderer extends \core_renderer
                 }
                 if (get_config('theme_alpha', 'courseprogressbar') == 1) {
                     $progressbar = '<div class="rui-course-progresschart">' . $this->render_from_template('theme_alpha/progress-chart', $templatedata) . '</div>';
-                    if (has_capability('report/progress:view',  \context_course::instance($course->id))) {
+                    if (has_capability('report/progress:view', \context_course::instance($course->id))) {
                         $courseprogress = new \moodle_url('/report/progress/index.php');
                         $courseprogress->param('course', $course->id);
                         $courseprogress->param('sesskey', sesskey());
@@ -332,7 +332,7 @@ class core_renderer extends \core_renderer
 
         $userimg->size = $imgsize;
 
-        return  $userimg->get_url($PAGE);
+        return $userimg->get_url($PAGE);
     }
 
 
@@ -515,11 +515,13 @@ class core_renderer extends \core_renderer
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
-            ));
+            $this->page->add_header_action(
+                html_writer::div(
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    ['id' => 'region-main-settings-menu']
+                )
+            );
         }
 
         $header = new stdClass();
@@ -573,11 +575,14 @@ class core_renderer extends \core_renderer
             $html .= get_string('showhintcoursehiddengeneral', 'theme_alpha', $COURSE->id);
             // If the user has the capability to change the course settings, an additional link to the course settings is shown.
             if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
-                $html .= html_writer::tag('div', get_string(
-                    'showhintcoursehiddensettingslink',
-                    'theme_alpha',
-                    array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
-                ));
+                $html .= html_writer::tag(
+                    'div',
+                    get_string(
+                        'showhintcoursehiddensettingslink',
+                        'theme_alpha',
+                        array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
+                    )
+                );
             }
             $html .= html_writer::end_tag('div');
         }
@@ -595,7 +600,9 @@ class core_renderer extends \core_renderer
                 $url = new moodle_url(
                     '/course/switchrole.php',
                     array(
-                        'id'        => $COURSE->id, 'sesskey' => sesskey(), 'switchrole' => 0,
+                        'id' => $COURSE->id,
+                        'sesskey' => sesskey(),
+                        'switchrole' => 0,
                         'returnurl' => $this->page->url->out_as_local_url(false)
                     )
                 );
@@ -646,11 +653,14 @@ class core_renderer extends \core_renderer
             $html .= get_string('showhintcoursehiddengeneral', 'theme_alpha', $COURSE->id);
             // If the user has the capability to change the course settings, an additional link to the course settings is shown.
             if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
-                $html .= html_writer::tag('div', get_string(
-                    'showhintcoursehiddensettingslink',
-                    'theme_alpha',
-                    array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
-                ));
+                $html .= html_writer::tag(
+                    'div',
+                    get_string(
+                        'showhintcoursehiddensettingslink',
+                        'theme_alpha',
+                        array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
+                    )
+                );
             }
             $html .= html_writer::end_tag('div');
             $html .= html_writer::end_tag('div');
@@ -729,11 +739,13 @@ class core_renderer extends \core_renderer
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
-            ));
+            $this->page->add_header_action(
+                html_writer::div(
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    ['id' => 'region-main-settings-menu']
+                )
+            );
         }
 
         $header = new stdClass();
@@ -785,11 +797,14 @@ class core_renderer extends \core_renderer
             $html .= get_string('showhintcoursehiddengeneral', 'theme_alpha', $COURSE->id);
             // If the user has the capability to change the course settings, an additional link to the course settings is shown.
             if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
-                $html .= html_writer::tag('div', get_string(
-                    'showhintcoursehiddensettingslink',
-                    'theme_alpha',
-                    array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
-                ));
+                $html .= html_writer::tag(
+                    'div',
+                    get_string(
+                        'showhintcoursehiddensettingslink',
+                        'theme_alpha',
+                        array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
+                    )
+                );
             }
             $html .= html_writer::end_tag('div');
         }
@@ -807,7 +822,9 @@ class core_renderer extends \core_renderer
                 $url = new moodle_url(
                     '/course/switchrole.php',
                     array(
-                        'id'        => $COURSE->id, 'sesskey' => sesskey(), 'switchrole' => 0,
+                        'id' => $COURSE->id,
+                        'sesskey' => sesskey(),
+                        'switchrole' => 0,
                         'returnurl' => $this->page->url->out_as_local_url(false)
                     )
                 );
@@ -858,11 +875,14 @@ class core_renderer extends \core_renderer
             $html .= get_string('showhintcoursehiddengeneral', 'theme_alpha', $COURSE->id);
             // If the user has the capability to change the course settings, an additional link to the course settings is shown.
             if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
-                $html .= html_writer::tag('div', get_string(
-                    'showhintcoursehiddensettingslink',
-                    'theme_alpha',
-                    array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
-                ));
+                $html .= html_writer::tag(
+                    'div',
+                    get_string(
+                        'showhintcoursehiddensettingslink',
+                        'theme_alpha',
+                        array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
+                    )
+                );
             }
             $html .= html_writer::end_tag('div');
             $html .= html_writer::end_tag('div');
@@ -947,11 +967,13 @@ class core_renderer extends \core_renderer
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
-            ));
+            $this->page->add_header_action(
+                html_writer::div(
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    ['id' => 'region-main-settings-menu']
+                )
+            );
         }
 
         $header = new stdClass();
@@ -995,11 +1017,14 @@ class core_renderer extends \core_renderer
             $html .= get_string('showhintcoursehiddengeneral', 'theme_alpha', $COURSE->id);
             // If the user has the capability to change the course settings, an additional link to the course settings is shown.
             if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
-                $html .= html_writer::tag('div', get_string(
-                    'showhintcoursehiddensettingslink',
-                    'theme_alpha',
-                    array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
-                ));
+                $html .= html_writer::tag(
+                    'div',
+                    get_string(
+                        'showhintcoursehiddensettingslink',
+                        'theme_alpha',
+                        array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
+                    )
+                );
             }
             $html .= html_writer::end_tag('div');
         }
@@ -1017,7 +1042,9 @@ class core_renderer extends \core_renderer
                 $url = new moodle_url(
                     '/course/switchrole.php',
                     array(
-                        'id'        => $COURSE->id, 'sesskey' => sesskey(), 'switchrole' => 0,
+                        'id' => $COURSE->id,
+                        'sesskey' => sesskey(),
+                        'switchrole' => 0,
                         'returnurl' => $this->page->url->out_as_local_url(false)
                     )
                 );
@@ -1068,11 +1095,14 @@ class core_renderer extends \core_renderer
             $html .= get_string('showhintcoursehiddengeneral', 'theme_alpha', $COURSE->id);
             // If the user has the capability to change the course settings, an additional link to the course settings is shown.
             if (has_capability('moodle/course:update', context_course::instance($COURSE->id))) {
-                $html .= html_writer::tag('div', get_string(
-                    'showhintcoursehiddensettingslink',
-                    'theme_alpha',
-                    array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
-                ));
+                $html .= html_writer::tag(
+                    'div',
+                    get_string(
+                        'showhintcoursehiddensettingslink',
+                        'theme_alpha',
+                        array('url' => $CFG->wwwroot . '/course/edit.php?id=' . $COURSE->id)
+                    )
+                );
             }
             $html .= html_writer::end_tag('div');
             $html .= html_writer::end_tag('div');
@@ -1263,7 +1293,8 @@ class core_renderer extends \core_renderer
         $showusermenu = false;
 
         // We are on the course home page.
-        if (($context->contextlevel == CONTEXT_COURSE) &&
+        if (
+            ($context->contextlevel == CONTEXT_COURSE) &&
             !empty($currentnode) &&
             ($currentnode->type == navigation_node::TYPE_COURSE || $currentnode->type == navigation_node::TYPE_SECTION)
         ) {
@@ -1282,8 +1313,10 @@ class core_renderer extends \core_renderer
             // If the settings menu has been forced then show the menu.
             if ($this->page->is_settings_menu_forced()) {
                 $showcoursemenu = true;
-            } else if (!empty($activenode) && ($activenode->type == navigation_node::TYPE_ACTIVITY ||
-                $activenode->type == navigation_node::TYPE_RESOURCE)) {
+            } else if (
+                !empty($activenode) && ($activenode->type == navigation_node::TYPE_ACTIVITY ||
+                    $activenode->type == navigation_node::TYPE_RESOURCE)
+            ) {
 
                 // We only want to show the menu on the first page of the activity. This means
                 // the breadcrumb has no additional nodes.
@@ -1373,11 +1406,13 @@ class core_renderer extends \core_renderer
             // Only include the region main settings if the page has requested it and it doesn't already have
             // the settings block on it. The region main settings are included in the settings block and
             // duplicating the content causes behat failures.
-            $this->page->add_header_action(html_writer::div(
-                $this->region_main_settings_menu(),
-                'd-print-none',
-                ['id' => 'region-main-settings-menu']
-            ));
+            $this->page->add_header_action(
+                html_writer::div(
+                    $this->region_main_settings_menu(),
+                    'd-print-none',
+                    ['id' => 'region-main-settings-menu']
+                )
+            );
         }
 
         $header = new stdClass();
@@ -1416,14 +1451,100 @@ class core_renderer extends \core_renderer
 
             if ($COURSE->id > 1) {
                 $headerlinks = [
-                    'headerlinksdata' => array(
-                        array(
-                            'status' => !isguestuser(),
-                            'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
-                            'title' => get_string('sitehome', 'moodle'),
-                            'url' => new moodle_url('/'),
-                            'visability' => true,
-                        ),
+                        'headerlinksdata' => array(
+                            array(
+                                'status' => !isguestuser(),
+                                'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
+                                'title' => get_string('sitehome', 'moodle'),
+                                'url' => new moodle_url('/'),
+                                'itemid' => 'itemHome',
+                                'visability' => true,
+                            ),
+                            array(
+                                'status' => !isguestuser(),
+                                'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
+                                id="Layer_1" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M464.73,377H446V115.4A30.11,30.11,0,0,0,415.9,85.33H96.1A30.1,30.1,0,0,0,66,115.4V377H47.28A10.39,10.39,0,0,0,36.9,387.41V392a34.72,34.72,0,0,0,34.68,34.69H440.43A34.72,34.72,0,0,0,475.1,392v-4.57A10.39,10.39,0,0,0,464.73,377ZM75.09,115.4a21,21,0,0,1,21-21H415.9a21,21,0,0,1,21,21V377H75.09ZM466,392a25.64,25.64,0,0,1-25.61,25.62H71.58A25.65,25.65,0,0,1,46,392v-4.57a1.32,1.32,0,0,1,1.32-1.31H464.73a1.31,1.31,0,0,1,1.31,1.31Z" />
+                                <path
+                                    d="M398.36,126.36H113.64a4.53,4.53,0,0,0-4.53,4.53V339.31a4.53,4.53,0,0,0,4.53,4.53H398.36a4.53,4.53,0,0,0,4.54-4.53V130.89A4.53,4.53,0,0,0,398.36,126.36Zm-4.53,104.82H362v-8.7a36.27,36.27,0,0,0-21.38-33,21.77,21.77,0,1,0-29.69,0,36.27,36.27,0,0,0-21.39,33v8.7H260.53V135.42h133.3Zm-95.18,0v-8.7a27.16,27.16,0,0,1,54.32,0v8.7Zm14.47-57.62a12.7,12.7,0,1,1,12.69,12.7A12.71,12.71,0,0,1,313.12,173.56Zm-61.65-38.14v95.76H222.42v-8.7a36.27,36.27,0,0,0-21.38-33,21.77,21.77,0,1,0-29.7,0,36.27,36.27,0,0,0-21.38,33v8.7H118.17V135.42ZM159,231.18v-8.7a27.16,27.16,0,1,1,54.32,0v8.7Zm14.46-57.62a12.7,12.7,0,1,1,12.7,12.7A12.72,12.72,0,0,1,173.49,173.56Zm-55.32,66.69h133.3v94.53H222.42v-8.7a36.26,36.26,0,0,0-21.38-33,21.77,21.77,0,1,0-29.7,0,36.26,36.26,0,0,0-21.38,33v8.7H118.17Zm55.32,36.9a12.7,12.7,0,1,1,12.7,12.7A12.72,12.72,0,0,1,173.49,277.15Zm39.86,57.63H159v-8.7a27.16,27.16,0,0,1,54.32,0Zm99.77-57.63a12.7,12.7,0,1,1,12.69,12.7A12.71,12.71,0,0,1,313.12,277.15ZM353,334.78H298.65v-8.7a27.16,27.16,0,0,1,54.32,0Zm9.07,0v-8.7a36.26,36.26,0,0,0-21.38-33,21.77,21.77,0,1,0-29.69,0,36.25,36.25,0,0,0-21.39,33v8.7H260.53V240.25h133.3v94.53Z" />
+                                <path d="M160.41,355.29H113.64a4.53,4.53,0,0,0,0,9.06h46.77a4.53,4.53,0,0,0,0-9.06Z" />
+                            </svg>',
+                                'title' => get_string('meeting', 'moodle'),
+                                //Sửa meeting sidebar
+                                'url' => '',
+                                'isactiveitem' => $this->isMenuActive('/dasd'),
+                                'itemid' => 'itemMeeting',
+                                'visability' => true,
+                            ),
+    
+                            //Quản lí khóa học
+                            array(
+                                'status' => !isguestuser(),
+                                'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M22 18h-.42a2.92 2.92 0 0 0 1.17-1.31 2.871 2.871 0 0 0 .05-2.21L18.71 3.84a2.909 2.909 0 0 0-3.74-1.66l-1.14.44a2.784 2.784 0 0 0-.83.5V3a3.009 3.009 0 0 0-3-3H9a3.009 3.009 0 0 0-3 3v.77A2.984 2.984 0 0 0 4 3H3a3.009 3.009 0 0 0-3 3v10a2.958 2.958 0 0 0 1.03 2.25A2 2 0 0 0 2 22v1a1 1 0 0 0 2 0v-1h16v1a1 1 0 0 0 2 0v-1a2 2 0 0 0 0-4zM8 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3zM2 6a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6zm10.23 12a2.984 2.984 0 0 0 .77-2V8.51l3.27 8.48a2.79 2.79 0 0 0 .67 1.01h-4.71zm8.69-2.12a.937.937 0 0 1-.49.47l-1.14.44a.9.9 0 0 1-1.15-.52l-4.1-10.63a.89.89 0 0 1 .02-.68.869.869 0 0 1 .49-.47l1.14-.44a.867.867 0 0 1 .32-.06.886.886 0 0 1 .83.57l4.1 10.64a.939.939 0 0 1-.02.68z" />
+                            </svg>',
+                                'title' => get_string('coursemanager', 'moodle'),
+                                'url' => new moodle_url('/my/courses.php'),
+                                'isactiveitem' => $this->isMenuActive('/courses.php'),
+                                'itemid' => 'itemCourseManager',
+                                'visability' => true,
+                            ),
+                            // Quản lý người dùng
+                            array(
+                                'status' => is_siteadmin(),
+                                'icon' => '<svg style="fill: aliceblue;" width="32px" height="32px" viewBox="0 0 32 32" id="icon"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    fill: none;
+                                }
+                            </style>
+                        </defs>
+                        <path d="M15,20H9a3,3,0,0,0-3,3v2H8V23a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1v2h2V23A3,3,0,0,0,15,20Z"
+                            transform="translate(0 0)" />
+                        <path d="M12,19a4,4,0,1,0-4-4A4,4,0,0,0,12,19Zm0-6a2,2,0,1,1-2,2A2,2,0,0,1,12,13Z"
+                            transform="translate(0 0)" />
+                        <path d="M28,19v9H4V8H16V6H4A2,2,0,0,0,2,8V28a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V19Z"
+                            transform="translate(0 0)" />
+                        <rect x="20" y="19" width="6" height="2" />
+                        <rect x="22" y="23" width="4" height="2" />
+                        <path
+                            d="M32,10V8H29.8989a4.9678,4.9678,0,0,0-.7319-1.7529l1.49-1.49-1.414-1.414-1.49,1.49A4.9678,4.9678,0,0,0,26,4.1011V2H24V4.1011a4.9678,4.9678,0,0,0-1.7529.7319l-1.49-1.49-1.414,1.414,1.49,1.49A4.9678,4.9678,0,0,0,20.1011,8H18v2h2.1011a4.9678,4.9678,0,0,0,.7319,1.7529l-1.49,1.49,1.414,1.414,1.49-1.49A4.9678,4.9678,0,0,0,24,13.8989V16h2V13.8989a4.9678,4.9678,0,0,0,1.7529-.7319l1.49,1.49,1.414-1.414-1.49-1.49A4.9678,4.9678,0,0,0,29.8989,10Zm-7,2a3,3,0,1,1,3-3A3.0033,3.0033,0,0,1,25,12Z"
+                            transform="translate(0 0)" />
+                        <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1"
+                            width="32" height="32" />
+                    </svg>',
+                                'title' => get_string('usermanager', 'moodle'),
+                                'url' => new moodle_url('/admin/user.php'),
+                                'isactiveitem' => $this->isMenuActive('/admin/user.php'),
+                                'itemid' => 'itemCourseManager',
+                                'visability' => true,
+                            ),
+                            //Báo cáo
+                            array(
+                                'status' => !isguestuser(),
+                                'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                                'title' => get_string('reports', 'moodle'),
+                                'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
+                                'isactiveitem' => $this->isMenuActive('/reportbuilder'),
+                                'itemid' => 'itemReportBuilder',
+                                'visability' => true,
+                            ),
+                        //Thêm mục cho side bar
+                        // 'status' => !isguestuser(),
+                        // 'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 8.75V19"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8.25H19"></path></svg>',
+                        // 'title' => get_string('myhome', 'moodle'),
+                        // 'url' => new moodle_url('/my/'),
+                        // 'isactiveitem' => $this->isMenuActive('/my'),
+                        // 'visability' => true,
+
+
+
+
                         // array(
                         //     'status' => !isguestuser() ,
                         //     'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 8.75V19"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8.25H19"></path></svg>',
@@ -1470,6 +1591,80 @@ class core_renderer extends \core_renderer
                             'itemid' => 'itemHome',
                             'visability' => true,
                         ),
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
+                            id="Layer_1" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M464.73,377H446V115.4A30.11,30.11,0,0,0,415.9,85.33H96.1A30.1,30.1,0,0,0,66,115.4V377H47.28A10.39,10.39,0,0,0,36.9,387.41V392a34.72,34.72,0,0,0,34.68,34.69H440.43A34.72,34.72,0,0,0,475.1,392v-4.57A10.39,10.39,0,0,0,464.73,377ZM75.09,115.4a21,21,0,0,1,21-21H415.9a21,21,0,0,1,21,21V377H75.09ZM466,392a25.64,25.64,0,0,1-25.61,25.62H71.58A25.65,25.65,0,0,1,46,392v-4.57a1.32,1.32,0,0,1,1.32-1.31H464.73a1.31,1.31,0,0,1,1.31,1.31Z" />
+                            <path
+                                d="M398.36,126.36H113.64a4.53,4.53,0,0,0-4.53,4.53V339.31a4.53,4.53,0,0,0,4.53,4.53H398.36a4.53,4.53,0,0,0,4.54-4.53V130.89A4.53,4.53,0,0,0,398.36,126.36Zm-4.53,104.82H362v-8.7a36.27,36.27,0,0,0-21.38-33,21.77,21.77,0,1,0-29.69,0,36.27,36.27,0,0,0-21.39,33v8.7H260.53V135.42h133.3Zm-95.18,0v-8.7a27.16,27.16,0,0,1,54.32,0v8.7Zm14.47-57.62a12.7,12.7,0,1,1,12.69,12.7A12.71,12.71,0,0,1,313.12,173.56Zm-61.65-38.14v95.76H222.42v-8.7a36.27,36.27,0,0,0-21.38-33,21.77,21.77,0,1,0-29.7,0,36.27,36.27,0,0,0-21.38,33v8.7H118.17V135.42ZM159,231.18v-8.7a27.16,27.16,0,1,1,54.32,0v8.7Zm14.46-57.62a12.7,12.7,0,1,1,12.7,12.7A12.72,12.72,0,0,1,173.49,173.56Zm-55.32,66.69h133.3v94.53H222.42v-8.7a36.26,36.26,0,0,0-21.38-33,21.77,21.77,0,1,0-29.7,0,36.26,36.26,0,0,0-21.38,33v8.7H118.17Zm55.32,36.9a12.7,12.7,0,1,1,12.7,12.7A12.72,12.72,0,0,1,173.49,277.15Zm39.86,57.63H159v-8.7a27.16,27.16,0,0,1,54.32,0Zm99.77-57.63a12.7,12.7,0,1,1,12.69,12.7A12.71,12.71,0,0,1,313.12,277.15ZM353,334.78H298.65v-8.7a27.16,27.16,0,0,1,54.32,0Zm9.07,0v-8.7a36.26,36.26,0,0,0-21.38-33,21.77,21.77,0,1,0-29.69,0,36.25,36.25,0,0,0-21.39,33v8.7H260.53V240.25h133.3v94.53Z" />
+                            <path d="M160.41,355.29H113.64a4.53,4.53,0,0,0,0,9.06h46.77a4.53,4.53,0,0,0,0-9.06Z" />
+                        </svg>',
+                            'title' => get_string('meeting', 'moodle'),
+                            //Sửa meeting sidebar
+                            'url' => new moodle_url('dsad'),
+                            'isactiveitem' => $this->isMenuActive('dmaksdl'),
+                            'itemid' => 'itemMeeting',
+                            'visability' => true,
+                        ),
+
+                        //Quản lí khóa học
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M22 18h-.42a2.92 2.92 0 0 0 1.17-1.31 2.871 2.871 0 0 0 .05-2.21L18.71 3.84a2.909 2.909 0 0 0-3.74-1.66l-1.14.44a2.784 2.784 0 0 0-.83.5V3a3.009 3.009 0 0 0-3-3H9a3.009 3.009 0 0 0-3 3v.77A2.984 2.984 0 0 0 4 3H3a3.009 3.009 0 0 0-3 3v10a2.958 2.958 0 0 0 1.03 2.25A2 2 0 0 0 2 22v1a1 1 0 0 0 2 0v-1h16v1a1 1 0 0 0 2 0v-1a2 2 0 0 0 0-4zM8 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3zM2 6a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6zm10.23 12a2.984 2.984 0 0 0 .77-2V8.51l3.27 8.48a2.79 2.79 0 0 0 .67 1.01h-4.71zm8.69-2.12a.937.937 0 0 1-.49.47l-1.14.44a.9.9 0 0 1-1.15-.52l-4.1-10.63a.89.89 0 0 1 .02-.68.869.869 0 0 1 .49-.47l1.14-.44a.867.867 0 0 1 .32-.06.886.886 0 0 1 .83.57l4.1 10.64a.939.939 0 0 1-.02.68z" />
+                        </svg>',
+                            'title' => get_string('coursemanager', 'moodle'),
+                            'url' => new moodle_url('/my/courses.php'),
+                            'isactiveitem' => $this->isMenuActive('/courses.php'),
+                            'itemid' => 'itemCourseManager',
+                            'visability' => true,
+                        ),
+                        // Quản lý người dùng
+                        array(
+                            'status' => is_siteadmin(),
+                            'icon' => '<svg style="fill: aliceblue;" width="32px" height="32px" viewBox="0 0 32 32" id="icon"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                fill: none;
+                            }
+                        </style>
+                    </defs>
+                    <path d="M15,20H9a3,3,0,0,0-3,3v2H8V23a1,1,0,0,1,1-1h6a1,1,0,0,1,1,1v2h2V23A3,3,0,0,0,15,20Z"
+                        transform="translate(0 0)" />
+                    <path d="M12,19a4,4,0,1,0-4-4A4,4,0,0,0,12,19Zm0-6a2,2,0,1,1-2,2A2,2,0,0,1,12,13Z"
+                        transform="translate(0 0)" />
+                    <path d="M28,19v9H4V8H16V6H4A2,2,0,0,0,2,8V28a2,2,0,0,0,2,2H28a2,2,0,0,0,2-2V19Z"
+                        transform="translate(0 0)" />
+                    <rect x="20" y="19" width="6" height="2" />
+                    <rect x="22" y="23" width="4" height="2" />
+                    <path
+                        d="M32,10V8H29.8989a4.9678,4.9678,0,0,0-.7319-1.7529l1.49-1.49-1.414-1.414-1.49,1.49A4.9678,4.9678,0,0,0,26,4.1011V2H24V4.1011a4.9678,4.9678,0,0,0-1.7529.7319l-1.49-1.49-1.414,1.414,1.49,1.49A4.9678,4.9678,0,0,0,20.1011,8H18v2h2.1011a4.9678,4.9678,0,0,0,.7319,1.7529l-1.49,1.49,1.414,1.414,1.49-1.49A4.9678,4.9678,0,0,0,24,13.8989V16h2V13.8989a4.9678,4.9678,0,0,0,1.7529-.7319l1.49,1.49,1.414-1.414-1.49-1.49A4.9678,4.9678,0,0,0,29.8989,10Zm-7,2a3,3,0,1,1,3-3A3.0033,3.0033,0,0,1,25,12Z"
+                        transform="translate(0 0)" />
+                    <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1"
+                        width="32" height="32" />
+                </svg>',
+                            'title' => get_string('usermanager', 'moodle'),
+                            'url' => new moodle_url('/admin/user.php'),
+                            'isactiveitem' => $this->isMenuActive('/admin/user.php'),
+                            'itemid' => 'itemCourseManager',
+                            'visability' => true,
+                        ),
+                        //Báo cáo
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                            'title' => get_string('reports', 'moodle'),
+                            'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
+                            'isactiveitem' => $this->isMenuActive('/reportbuilder'),
+                            'itemid' => 'itemReportBuilder',
+                            'visability' => true,
+                        ),
                         // array(
                         //     'status' => !isguestuser() ,
                         //     'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 8.75V19"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8.25H19"></path></svg>',
@@ -1506,15 +1701,7 @@ class core_renderer extends \core_renderer
                         //     'itemid' => 'itemContentBank',
                         //     'visability' => true,
                         //     ),
-                        // array(
-                        //     'status' => !isguestuser(),
-                        //     'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-                        //     'title' => get_string('reports', 'moodle'),
-                        //     'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
-                        //     'isactiveitem' => $this->isMenuActive('/reportbuilder'),
-                        //     'itemid' => 'itemReportBuilder',
-                        //     'visability' => true,
-                        //     ),
+
 
                     ),
                 ];
@@ -1693,7 +1880,7 @@ class core_renderer extends \core_renderer
                 if ($checkactive == true) {
                     $isactive .= format_string("active");
                 }
-                $content .= '<li class="rui-sidebar-nav-item"><a href="' . $url . '" class="rui-sidebar-nav-item-link rui-sidebar-nav-item-link--sm ' . $isactive . '" title="' . $shortname . '">' . $icon . $name  . '</a></li>';
+                $content .= '<li class="rui-sidebar-nav-item"><a href="' . $url . '" class="rui-sidebar-nav-item-link rui-sidebar-nav-item-link--sm ' . $isactive . '" title="' . $shortname . '">' . $icon . $name . '</a></li>';
                 //$branch->add(format_string($course->fullname), new moodle_url('/course/view.php?id=' . $course->id) , format_string($course->shortname));
             }
         }
@@ -1871,16 +2058,24 @@ class core_renderer extends \core_renderer
                     if ($button['buttontype'] === 'message') {
                         \core_message\helper::messageuser_requirejs();
                     }
-                    $image = $this->pix_icon($button['formattedimage'], $button['title'], 'moodle', array(
-                        'class' => 'iconsmall',
-                        'role' => 'presentation'
-                    ));
+                    $image = $this->pix_icon(
+                        $button['formattedimage'],
+                        $button['title'],
+                        'moodle',
+                        array(
+                            'class' => 'iconsmall',
+                            'role' => 'presentation'
+                        )
+                    );
                     $image .= html_writer::span($button['title'], 'header-button-title ml-2');
                 } else {
-                    $image = html_writer::empty_tag('img', array(
-                        'src' => $button['formattedimage'],
-                        'role' => 'presentation'
-                    ));
+                    $image = html_writer::empty_tag(
+                        'img',
+                        array(
+                            'src' => $button['formattedimage'],
+                            'role' => 'presentation'
+                        )
+                    );
                 }
                 $html .= html_writer::link($button['url'], html_writer::tag('span', $image), $button['linkattributes']);
             }
@@ -2018,7 +2213,7 @@ class core_renderer extends \core_renderer
         // User login failures.
         if (!empty($opts->metadata['userloginfail'])) {
             $usermeta .= html_writer::div(
-                '<svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10V12"></path><circle cx="12" cy="16" r="1" fill="currentColor"></circle></svg>' .  $opts->metadata['userloginfail'],
+                '<svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10V12"></path><circle cx="12" cy="16" r="1" fill="currentColor"></circle></svg>' . $opts->metadata['userloginfail'],
                 'meta loginfailures'
             );
         }
@@ -2050,7 +2245,7 @@ class core_renderer extends \core_renderer
         $am->set_nowrap_on_items();
 
         $am->add(
-            '<div class="dropdown-user-wrapper"><div class="dropdown-user">' . $usertextcontents  . '</div>'
+            '<div class="dropdown-user-wrapper"><div class="dropdown-user">' . $usertextcontents . '</div>'
                 . '<div class="dropdown-user-mail text-truncate" title="' . $usertextmail . '">' . $usertextmail . '</div>'
                 . '<span class="dropdown-user-nick badge badge-xs badge-info mr-2">' . $usernick . '</span>'
                 . '<div class="dropdown-user-meta badge badge-sq badge-xs badge-warning mx-0">' . $usermeta . '</div>'
@@ -2558,11 +2753,14 @@ class core_renderer extends \core_renderer
             }
             $plugin = $plugins[$instance->enrol];
             if ($plugin->show_enrolme_link($instance)) {
-                $html = html_writer::tag('div', get_string(
-                    'showhintcourseguestaccesssettinglink',
-                    'theme_alpha',
-                    array('url' => $CFG->wwwroot . '/enrol/index.php?id=' . $courseid)
-                ));
+                $html = html_writer::tag(
+                    'div',
+                    get_string(
+                        'showhintcourseguestaccesssettinglink',
+                        'theme_alpha',
+                        array('url' => $CFG->wwwroot . '/enrol/index.php?id=' . $courseid)
+                    )
+                );
                 break;
             }
         }

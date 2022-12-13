@@ -38,8 +38,10 @@
         }
     }
 }}
+
 {{#showaddsection}}
-<div id="changenumsections" class="mdl-left py-2">
+<div id="changenumsections" class="mdl-left py-2 d-flex float-right">
+
     {{#increase}}
     <a href="{{{url}}}" class="increase-sections">
         {{#pix}}t/switch_plus, moodle, {{#str}} increasesections, moodle {{/str}}{{/pix}}
@@ -51,9 +53,13 @@
     </a>
     {{/decrease}}
     {{#addsections}}
+    <button class="btn btn-success section-modchooser section-modchooser-link activity-add d-flex align-items-center p-3 mb-3"
+     data-action="open-chooser" data-sectionid="{{maxsections}}" data-sectionreturnid="1">
+    <span class="activity-add-text">{{#str}}addresourceoractivity, core{{/str}}</span>
+</button>
     <a
         href="{{{url}}}"
-        class="add-sections mb-3 w-100"
+        class="add-sections mb-3 mx-2"
         data-add-sections="{{title}}"
         data-new-sections="{{newsection}}"
         data-action="addSection"
@@ -61,6 +67,8 @@
     >
         {{title}}
     </a>
+
+
     {{/addsections}}
 </div>
 {{/showaddsection}}

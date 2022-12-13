@@ -65,6 +65,7 @@ $PAGE->set_url($url);
 
 require_login();
 
+
 //check if we are adding / editing a module that has new forms using formslib
 if (!empty($add)) {
     $id          = required_param('id', PARAM_INT);

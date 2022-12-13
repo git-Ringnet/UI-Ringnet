@@ -576,6 +576,7 @@ $card-gutter : $card-deck-margin * 2;
     #block-region-sidebarbottomblocks
     {
       position: relative;
+      display: none;
 
       &:before {
         padding: 5px 10px;

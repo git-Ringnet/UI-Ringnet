@@ -33,7 +33,12 @@ body div[data-flexitour="step-background"] {
     background: inherit;
     background-image: none;
 }
-
+.course .title{
+    background: linear-gradient(90deg,#3f3dec 0%,#222192 95%);
+}
+.course .title h4{
+    color: #fff;
+}
 div[data-flexitour="step-background-fader"],
 [data-flexitour="step-backdrop"] > td,
 [data-flexitour="step-backdrop"] {

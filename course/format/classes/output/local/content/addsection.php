@@ -162,6 +162,9 @@ class addsection implements named_templatable, renderable {
             'url' => new moodle_url('/course/changenumsections.php', $params),
             'title' => $addstring,
             'newsection' => $maxsections - $lastsection,
+            // Thêm mục vào section cuối cùng
+            'maxsections' => $lastsection,
+
         ];
         return $data;
     }
