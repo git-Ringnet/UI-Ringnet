@@ -21,7 +21,9 @@
  * @copyright  2017 Ryan Wyllie <ryan@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
 namespace block_myoverview\output;
+
 defined('MOODLE_INTERNAL') || die();
 
 use renderable;
@@ -37,7 +39,8 @@ require_once($CFG->dirroot . '/blocks/myoverview/lib.php');
  * @copyright  2018 Bas Brands <bas@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class main implements renderable, templatable {
+class main implements renderable, templatable
+{
 
     /**
      * Store the grouping preference.
@@ -163,13 +166,14 @@ class main implements renderable, templatable {
      *
      * @throws \dml_exception
      */
-    public function __construct($grouping, $sort, $view, $paging, $customfieldvalue = null) {
+    public function __construct($grouping, $sort, $view, $paging, $customfieldvalue = null)
+    {
         global $CFG;
         // Get plugin config.
         $config = get_config('block_myoverview');
 
         // Build the course grouping option name to check if the given grouping is enabled afterwards.
-        $groupingconfigname = 'displaygrouping'.$grouping;
+        $groupingconfigname = 'displaygrouping' . $grouping;
         // Check the given grouping and remember it if it is enabled.
         if ($grouping && $config->$groupingconfigname == true) {
             $this->grouping = $grouping;
@@ -180,7 +184,7 @@ class main implements renderable, templatable {
         } else {
             $this->grouping = $this->get_fallback_grouping($config);
         }
-        unset ($groupingconfigname);
+        unset($groupingconfigname);
 
         // Remember which custom field value we were using, if grouping by custom field.
         $this->customfieldvalue = $customfieldvalue;
@@ -234,20 +238,22 @@ class main implements renderable, templatable {
 
         // Check and remember if the grouping selector should be shown at all or not.
         // It will be shown if more than 1 grouping option is enabled.
-        $displaygroupingselectors = array($this->displaygroupingallincludinghidden,
-                $this->displaygroupingall,
-                $this->displaygroupinginprogress,
-                $this->displaygroupingfuture,
-                $this->displaygroupingpast,
-                $this->displaygroupingfavourites,
-                $this->displaygroupinghidden);
+        $displaygroupingselectors = array(
+            $this->displaygroupingallincludinghidden,
+            $this->displaygroupingall,
+            $this->displaygroupinginprogress,
+            $this->displaygroupingfuture,
+            $this->displaygroupingpast,
+            $this->displaygroupingfavourites,
+            $this->displaygroupinghidden
+        );
         $displaygroupingselectorscount = count(array_filter($displaygroupingselectors));
         if ($displaygroupingselectorscount > 1 || $this->displaygroupingcustomfield) {
             $this->displaygroupingselector = true;
         } else {
             $this->displaygroupingselector = false;
         }
-        unset ($displaygroupingselectors, $displaygroupingselectorscount);
+        unset($displaygroupingselectors, $displaygroupingselectorscount);
     }
     /**
      * Determine the most sensible fallback grouping to use (in cases where the stored selection
@@ -255,7 +261,8 @@ class main implements renderable, templatable {
      * @param object $config
      * @return string
      */
-    private function get_fallback_grouping($config) {
+    private function get_fallback_grouping($config)
+    {
         if ($config->displaygroupingall == true) {
             return BLOCK_MYOVERVIEW_GROUPING_ALL;
         }
@@ -292,7 +299,8 @@ class main implements renderable, templatable {
      * @throws \dml_exception
      *
      */
-    public function set_available_layouts() {
+    public function set_available_layouts()
+    {
 
         if ($config = get_config('block_myoverview', 'layouts')) {
             $this->layouts = explode(',', $config);
@@ -306,7 +314,8 @@ class main implements renderable, templatable {
      *
      * @return array $preferences Array with the pref as key and value set to true
      */
-    public function get_preferences_as_booleans() {
+    public function get_preferences_as_booleans()
+    {
         $preferences = [];
         $preferences[$this->sort] = true;
         $preferences[$this->grouping] = true;
@@ -328,7 +337,8 @@ class main implements renderable, templatable {
      * @return \stdClass $layout an object representation of a layout
      * @throws \coding_exception
      */
-    public function format_layout_for_export($layoutname) {
+    public function format_layout_for_export($layoutname)
+    {
         $layout = new stdClass();
 
         $layout->id = $layoutname;
@@ -344,17 +354,18 @@ class main implements renderable, templatable {
      *
      * @return array an array of objects representing available layouts
      */
-    public function get_formatted_available_layouts_for_export() {
+    public function get_formatted_available_layouts_for_export()
+    {
 
         return array_map(array($this, 'format_layout_for_export'), $this->layouts);
-
     }
 
     /**
      * Get the list of values to add to the grouping dropdown
      * @return object[] containing name, value and active fields
      */
-    public function get_customfield_values_for_export() {
+    public function get_customfield_values_for_export()
+    {
         global $DB, $USER;
         if (!$this->displaygroupingcustomfield) {
             return [];
@@ -371,8 +382,13 @@ class main implements renderable, templatable {
         $select = "instanceid $csql AND fieldid = :fieldid";
         $params['fieldid'] = $fieldid;
         $distinctablevalue = $DB->sql_compare_text('value');
-        $values = $DB->get_records_select_menu('customfield_data', $select, $params, '',
-            "DISTINCT $distinctablevalue, $distinctablevalue AS value2");
+        $values = $DB->get_records_select_menu(
+            'customfield_data',
+            $select,
+            $params,
+            '',
+            "DISTINCT $distinctablevalue, $distinctablevalue AS value2"
+        );
         \core_collator::asort($values, \core_collator::SORT_NATURAL);
         $values = array_filter($values);
         if (!$values) {
@@ -405,8 +421,9 @@ class main implements renderable, templatable {
      * @throws \coding_exception
      *
      */
-    public function export_for_template(renderer_base $output) {
-        global $CFG, $USER;
+    public function export_for_template(renderer_base $output)
+    {
+        global $CFG, $USER, $DB;
 
         $nocoursesurl = $output->image_url('courses', 'block_myoverview')->out();
 
@@ -447,7 +464,8 @@ class main implements renderable, templatable {
         } else {
             $sort = $this->sort == BLOCK_MYOVERVIEW_SORTING_TITLE ? 'fullname' : 'ul.timeaccess desc';
         }
-
+        $roleid = $DB->get_field('role', 'id', ['shortname' => 'coursemanagement']);
+        $isteacheranywhere = $DB->record_exists('role_assignments', ['userid' => $USER->id, 'roleid' => $roleid]);
         $defaultvariables = [
             'totalcoursecount' => count(enrol_get_all_users_courses($USER->id, true)),
             'nocoursesimg' => $nocoursesurl,
@@ -459,6 +477,8 @@ class main implements renderable, templatable {
             'paging' => $this->paging,
             'layouts' => $availablelayouts,
             'displaycategories' => $this->displaycategories,
+            //nếu là admin hoặc giáo viên tạo khóa học thì có nút tạo khóa học
+            'status' => is_siteadmin() || $isteacheranywhere===true,
             'displaydropdown' => (count($availablelayouts) > 1) ? true : false,
             'displaygroupingallincludinghidden' => $this->displaygroupingallincludinghidden,
             'displaygroupingall' => $this->displaygroupingall,
@@ -476,6 +496,5 @@ class main implements renderable, templatable {
             'showsortbyshortname' => $CFG->courselistshortnames,
         ];
         return array_merge($defaultvariables, $preferences);
-
     }
 }
