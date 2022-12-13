@@ -1,52 +1,130 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+This file is part of Moodle - http://moodle.org/
 
-    Moodle is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
 }}
 {{!
-    @template core_form/element-template
+@template core_form/element-template
 
-    Template for the form element wrapper template.
+Template for the form element wrapper template.
 
-    Context variables required for this template:
-    * label
-    * required
-    * advanced
-    * helpbutton
-    * error
-    * element
-        * id
-        * name
+Context variables required for this template:
+* label
+* required
+* advanced
+* helpbutton
+* error
+* element
+* id
+* name
 
-    Example context (json):
-    {
-        "label": "Course full name",
-        "required": true,
-        "advanced": false,
-        "error": null,
-        "element": {
-            "wrapperid": "",
-            "id": "id_fullname",
-            "name": "fullname"
-        }
-    }
+Example context (json):
+{
+"label": "Course full name",
+"required": true,
+"advanced": false,
+"error": null,
+"element": {
+"wrapperid": "",
+"id": "id_fullname",
+"name": "fullname"
+}
+}
 }}
-{{!-- Edit add  new course --}}
-<div id="{{element.wrapperid}} 1111" class="form-group row px-0 {{#error}}has-danger{{/error}} fitem {{#element.emptylabel}}femptylabel col-12{{/element.emptylabel}} {{#advanced}}advanced{{/advanced}} {{{element.extraclasses}}}" {{#element.groupname}}data-groupname="{{.}}"{{/element.groupname}}>
+{{!-- Edit add new course --}}
+<style>
+    #fitem_id_overviewfiles_filemanager .col-md-3,  #fitem_id_overviewfiles_filemanager .col-md-9{
+        max-width: 100%;
+    }
+    #fitem_id_fullname{
+        margin-top: 30px;
+        display: block;
+        margin-left: calc(100% - 600px);
+    }
+    #fitem_id_fullname .col-md-3{
+        max-width: 22%;
+    }
+    #fitem_id_fullname .col-md-9{
+        width: 80%;
+    }
+      #fitem_id_fullname .col-md-9 input{
+        width: 100%;
+    }
+    #fitem_id_category{
+        display: block;
+         margin-left: calc(100% - 600px);
+    }
+    #fitem_id_category .col-md-3{
+        max-width: 18%;
+    }
+     #fitem_id_category .col-md-9{
+        max-width: 40%;
+    }
+    #fitem_id_summary_editor{
+        display: block;
+        margin-top: -70px;
+        margin-left: calc(100% - 600px);
+    }
+    #fitem_id_summary_editor .col-md-3{
+        max-width: 13%;
+    }
+    .editor_atto_content_wrap #id_summary_editoreditable{
+        height: 200px !important;
+    }
+    #fgroup_id_coursevisibility{
+        display: block;
+        margin-left: calc(100% - 600px);
+    }
+    #fgroup_id_coursevisibility .col-md-3{
+        max-width: 14%;
+    }
+    #fitem_id_startdate{
+        display: block;
+        margin-left: calc(100% - 600px);
+    }
+    #fitem_id_startdate .col-md-3{
+       max-width: 27%;
+    }
+    #fitem_id_startdate .col-md-9 ,#fitem_id_enddate .col-md-9{
+       max-width: 100%;
+    }
+    #fitem_id_enddate{
+        display: block;
+        margin-left: calc(100% - 600px);
+    }
+    #fitem_id_enddate .col-md-3{
+        display: none;
+    }
+    #fitem_id_maxbytes{
+        display: block;
+         margin-left: calc(100% - 600px);
+    }
+    #fitem_id_maxbytes .col-md-3{
+        max-width: 43%;
+    }
+    @media screen {
+        
+    }
+</style>
+<div id="{{element.wrapperid}}"
+    class="form-group row px-0 {{#error}}has-danger{{/error}} fitem {{#element.emptylabel}}femptylabel col-12{{/element.emptylabel}} {{#advanced}}advanced{{/advanced}} {{{element.extraclasses}}}"
+    {{#element.groupname}}data-groupname="{{.}}" {{/element.groupname}}>
     <div class="col-md-3 text-md-right mb-sm-2 mb-md-0">
         {{^element.staticlabel}}
-        <label class="col-form-label d-inline {{#element.hiddenlabel}}sr-only{{/element.hiddenlabel}}" for="{{element.id}}">
+        <label class="col-form-label d-inline {{#element.hiddenlabel}}sr-only{{/element.hiddenlabel}}"
+            for="{{element.id}}">
             {{{label}}}
         </label>
         {{/element.staticlabel}}
@@ -56,15 +134,19 @@
         </label>
         {{/element.staticlabel}}
     </div>
-   
+
     <div class="col-md-9 form-inline felement px-0" data-fieldtype="{{element.type}}">
         {{$ element }}
-            <!-- Element goes here -->
+        <!-- Element goes here -->
         {{/ element }}
-        <div class="form-control-feedback invalid-feedback badge-sq badge-danger w-auto my-0 mx-2 {{^error}}d-none{{/error}}" id="{{element.iderror}}" {{#error}} style="display: inline-flex;"{{/error}}>
+        <div class="form-control-feedback invalid-feedback badge-sq badge-danger w-auto my-0 mx-2 {{^error}}d-none{{/error}}"
+            id="{{element.iderror}}" {{#error}} style="display: inline-flex;" {{/error}}>
             <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z"></path>
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10V12"></path>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                    d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z">
+                </path>
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 10V12"></path>
                 <circle cx="12" cy="16" r="1" fill="currentColor"></circle>
             </svg>
             {{{error}}}
@@ -73,6 +155,6 @@
 </div>
 {{#js}}
 require(['theme_alpha/form-display-errors'], function(module) {
-    module.enhance({{#quote}}{{element.id}}{{/quote}});
+module.enhance({{#quote}}{{element.id}}{{/quote}});
 });
 {{/js}}

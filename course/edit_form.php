@@ -2,20 +2,22 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once($CFG->libdir.'/formslib.php');
-require_once($CFG->libdir.'/completionlib.php');
+require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->libdir . '/completionlib.php');
 
 /**
  * The form for handling editing a course.
  */
-class course_edit_form extends moodleform {
+class course_edit_form extends moodleform
+{
     protected $course;
     protected $context;
 
     /**
      * Form definition.
      */
-    function definition() {
+    function definition()
+    {
         global $CFG, $PAGE;
 
         $mform    = $this->_form;
@@ -44,8 +46,8 @@ class course_edit_form extends moodleform {
         $this->context = $context;
 
         // Form definition with new course defaults.
-        $mform->addElement('header','general', get_string('general', 'form'));
-        
+        $mform->addElement('header', 'general', get_string('general', 'form'));
+
         $mform->addElement('hidden', 'returnto', null);
         $mform->setType('returnto', PARAM_ALPHANUM);
         $mform->setConstant('returnto', $returnto);
@@ -63,7 +65,7 @@ class course_edit_form extends moodleform {
         }
 
 
-        $mform->addElement('text','fullname', get_string('fullnamecourse'),'maxlength="254" size="50"');
+        $mform->addElement('text', 'fullname', get_string('fullnamecourse'), 'maxlength="254" size="50"');
         $mform->addHelpButton('fullname', 'fullnamecourse');
         $mform->addRule('fullname', get_string('missingfullname'), 'required', null, 'client');
         $mform->setType('fullname', PARAM_TEXT);
@@ -71,7 +73,7 @@ class course_edit_form extends moodleform {
             $mform->hardFreeze('fullname');
             $mform->setConstant('fullname', $course->fullname);
         }
-        
+
         // Short name source
         // $mform->addElement('text', 'shortname', get_string('shortnamecourse'), 'maxlength="100" size="20"');
         // $mform->addHelpButton('shortname', 'shortnamecourse');
@@ -82,7 +84,7 @@ class course_edit_form extends moodleform {
         //     $mform->setConstant('shortname', $course->shortname);
         // }
 
-      
+
 
         // Verify permissions to change course category or keep current.
         if (empty($course->id)) {
@@ -116,25 +118,30 @@ class course_edit_form extends moodleform {
             }
         }
 
-          // Description.
-          $mform->addElement('header', 'descriptionhdr', get_string('description'));
-          $mform->setExpanded('descriptionhdr');
-  
-          $mform->addElement('editor','summary_editor', get_string('coursesummary'), null, $editoroptions);
-          $mform->addHelpButton('summary_editor', 'coursesummary');
-          $mform->setType('summary_editor', PARAM_RAW);
-        
-        
+        // Description.
+        $mform->addElement('header', 'descriptionhdr', get_string('description'));
+        $mform->setExpanded('descriptionhdr');
+
+        $mform->addElement('editor', 'summary_editor', get_string('coursesummary'), null, $editoroptions);
+        $mform->addHelpButton('summary_editor', 'coursesummary');
+        $mform->setType('summary_editor', PARAM_RAW);
+
+
         // Chế độ
-        $choices = array();
-        $choices['0'] = $mform->createElement('radio','visible', get_string('hide'));
-        $choices['1'] = $mform->createElement('radio','visible',get_string('show'));
-        
-        // $mform->addElement('select', 'visible', get_string('coursevisibility'), $choices);
+        // $choices = array();
+        // Select visible old
+        // $choices['0'] =get_string('hide');
+        // $choices['1'] =get_string('show');
+        // $mform->addElement('select', 'visible', get_string('coursevisibility'), $f);
         // $mform->addHelpButton('visible', 'coursevisibility');
 
-        $mform->addGroup($choices,$courseconfig->visible);
+        // Change select visible to radio button visible
+        $choices = array();
+        $choices['0'] = $mform->createElement('radio', 'visible', '', get_string('hide'));
+        $choices['1'] = $mform->createElement('radio', 'visible', '', get_string('show'));
+        $mform->addGroup($choices, 'coursevisibility', get_string('coursevisibility'));
         $mform->setDefault('visible', $courseconfig->visible);
+
         if (!empty($course->id)) {
             if (!has_capability('moodle/course:visibility', $coursecontext)) {
                 $mform->hardFreeze('visible');
@@ -162,24 +169,35 @@ class course_edit_form extends moodleform {
             $mform->setDefault('downloadcontent', $downloadselectdefault);
 
             if ((!empty($course->id) && !has_capability('moodle/course:configuredownloadcontent', $coursecontext)) ||
-                    (empty($course->id) &&
-                    !guess_if_creator_will_have_course_capability('moodle/course:configuredownloadcontent', $categorycontext))) {
+                (empty($course->id) &&
+                    !guess_if_creator_will_have_course_capability('moodle/course:configuredownloadcontent', $categorycontext))
+            ) {
                 $mform->hardFreeze('downloadcontent');
                 $mform->setConstant('downloadcontent', $downloadselectdefault);
             }
         }
-         
 
-           
-        // Thời gian bắt đầu
+
+
+        // Thời gian hiệu lực
+        // $mform->addElement('text', 'startdate', get_string('startdate'));
+        // $mform->addHelpButton('startdate', 'startdate');
+        // $mform->addElement('text', 'starttitme', get_string('starttitme'));
+        // $mform->addHelpButton('starttitme', 'starttitme');
+        // $mform->addElement('text', 'enddate', get_string('enddate'),array('optional' => true));
+        // $mform->addHelpButton('enddate', 'enddate');
+
         $mform->addElement('date_time_selector', 'startdate', get_string('startdate'));
         $mform->addHelpButton('startdate', 'startdate');
         $date = (new DateTime())->setTimestamp(usergetmidnight(time()));
         $date->modify('+1 day');
         $mform->setDefault('startdate', $date->getTimestamp());
         
+      
+
         // Thời gian hết hạn
-        $mform->addElement('date_time_selector', 'enddate', get_string('enddate'), array('optional' => true));
+
+        $mform->addElement('date_selector', 'enddate', get_string('enddate'), array('optional' => true));
         $mform->addHelpButton('enddate', 'enddate');
 
         // if (!empty($CFG->enablecourserelativedates)) {
@@ -203,7 +221,7 @@ class course_edit_form extends moodleform {
         // }
 
 
-        
+
         // $mform->addElement('text','idnumber', get_string('idnumbercourse'),'maxlength="100"  size="10"');
         // $mform->addHelpButton('idnumber', 'idnumbercourse');
         // $mform->setType('idnumber', PARAM_RAW);
@@ -212,7 +230,21 @@ class course_edit_form extends moodleform {
         //     $mform->setConstants('idnumber', $course->idnumber);
         // }
 
-       
+        // Description.
+        // $mform->addElement('header', 'descriptionhdr', get_string('description'));
+        // $mform->setExpanded('descriptionhdr');
+
+        // $mform->addElement('editor','summary_editor', get_string('coursesummary'), null, $editoroptions);
+        // $mform->addHelpButton('summary_editor', 'coursesummary');
+        // $mform->setType('summary_editor', PARAM_RAW);
+        // $summaryfields = 'summary_editor';
+
+        // if ($overviewfilesoptions = course_overviewfiles_options($course)) {
+        //     $mform->addElement('filemanager', 'overviewfiles_filemanager', get_string('courseoverviewfiles'), null, $overviewfilesoptions);
+        //     $mform->addHelpButton('overviewfiles_filemanager', 'courseoverviewfiles');
+        //     $summaryfields .= ',overviewfiles_filemanager';
+        // }
+
 
         if (!empty($course->id) and !has_capability('moodle/course:changesummary', $coursecontext)) {
             // Remove the description header it does not contain anything any more.
@@ -303,7 +335,7 @@ class course_edit_form extends moodleform {
         $mform->setDefault('showreports', $courseconfig->showreports);
 
         // Show activity dates.
-        
+
         // $mform->addElement('selectyesno', 'showactivitydates', get_string('showactivitydates'));
         // $mform->addHelpButton('showactivitydates', 'showactivitydates');
         // $mform->setDefault('showactivitydates', $courseconfig->showactivitydates);
@@ -314,9 +346,9 @@ class course_edit_form extends moodleform {
         if (!empty($course->legacyfiles) or !empty($CFG->legacyfilesinnewcourses)) {
             if (empty($course->legacyfiles)) {
                 //0 or missing means no legacy files ever used in this course - new course or nobody turned on legacy files yet
-                $choices = array('0'=>get_string('no'), '2'=>get_string('yes'));
+                $choices = array('0' => get_string('no'), '2' => get_string('yes'));
             } else {
-                $choices = array('1'=>get_string('no'), '2'=>get_string('yes'));
+                $choices = array('1' => get_string('no'), '2' => get_string('yes'));
             }
             $mform->addElement('select', 'legacyfiles', get_string('courselegacyfiles'), $choices);
             $mform->addHelpButton('legacyfiles', 'courselegacyfiles');
@@ -376,7 +408,8 @@ class course_edit_form extends moodleform {
         // $mform->addElement('select', 'defaultgroupingid', get_string('defaultgrouping', 'group'), $options);
 
         if ((empty($course->id) && guess_if_creator_will_have_course_capability('moodle/course:renameroles', $categorycontext))
-                || (!empty($course->id) && has_capability('moodle/course:renameroles', $coursecontext))) {
+            || (!empty($course->id) && has_capability('moodle/course:renameroles', $coursecontext))
+        ) {
             // Customizable role names in this course.
             // $mform->addElement('header', 'rolerenaming', get_string('rolerenaming'));
             // $mform->addHelpButton('rolerenaming', 'rolerenaming');
@@ -391,9 +424,11 @@ class course_edit_form extends moodleform {
             // }
         }
 
-        if (core_tag_tag::is_enabled('core', 'course') &&
-                ((empty($course->id) && guess_if_creator_will_have_course_capability('moodle/course:tag', $categorycontext))
-                || (!empty($course->id) && has_capability('moodle/course:tag', $coursecontext)))) {
+        if (
+            core_tag_tag::is_enabled('core', 'course') &&
+            ((empty($course->id) && guess_if_creator_will_have_course_capability('moodle/course:tag', $categorycontext))
+                || (!empty($course->id) && has_capability('moodle/course:tag', $coursecontext)))
+        ) {
             // $mform->addElement('header', 'tagshdr', get_string('tags', 'tag'));
             // $mform->addElement('tags', 'tags', get_string('tags'),
             //         array('itemtype' => 'course', 'component' => 'core'));
@@ -402,7 +437,7 @@ class course_edit_form extends moodleform {
         // Add custom fields to the form.
         $handler = core_course\customfield\course_handler::create();
         $handler->set_parent_context($categorycontext);
-         // For course handler only.
+        // For course handler only.
         // $handler->instance_form_definition($mform, empty($course->id) ? 0 : $course->id);
 
         // When two elements we need a group.
@@ -428,7 +463,8 @@ class course_edit_form extends moodleform {
     /**
      * Fill in the current page data for this course.
      */
-    function definition_after_data() {
+    function definition_after_data()
+    {
         global $DB;
 
         $mform = $this->_form;
@@ -437,13 +473,13 @@ class course_edit_form extends moodleform {
         $courseid = $mform->getElementValue('id');
         if ($courseid and $mform->elementExists('defaultgroupingid')) {
             $options = array();
-            if ($groupings = $DB->get_records('groupings', array('courseid'=>$courseid))) {
+            if ($groupings = $DB->get_records('groupings', array('courseid' => $courseid))) {
                 foreach ($groupings as $grouping) {
                     $options[$grouping->id] = format_string($grouping->name);
                 }
             }
             core_collator::asort($options);
-            $gr_el =& $mform->getElement('defaultgroupingid');
+            $gr_el = &$mform->getElement('defaultgroupingid');
             $gr_el->load($options);
         }
 
@@ -461,8 +497,10 @@ class course_edit_form extends moodleform {
 
             $elements = $courseformat->create_edit_form_elements($mform);
             for ($i = 0; $i < count($elements); $i++) {
-                $mform->insertElementBefore($mform->removeElement($elements[$i]->getName(), false),
-                        'addcourseformatoptionshere');
+                $mform->insertElementBefore(
+                    $mform->removeElement($elements[$i]->getName(), false),
+                    'addcourseformatoptionshere'
+                );
             }
 
             // Remove newsitems element if format does not support news.
@@ -483,7 +521,8 @@ class course_edit_form extends moodleform {
      * @param array $files
      * @return array the errors that were found
      */
-    function validation($data, $files) {
+    function validation($data, $files)
+    {
         global $DB;
 
         $errors = parent::validation($data, $files);

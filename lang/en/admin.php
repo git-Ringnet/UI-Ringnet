@@ -1261,7 +1261,6 @@ $string['smtppass'] = 'SMTP password';
 $string['smtpsecure'] = 'SMTP security';
 $string['smtpuser'] = 'SMTP username';
 $string['soaprecommended'] = 'Installing the optional SOAP extension is useful for web services and some plugins.';
-// Tên khóa học
 $string['sort_fullname'] = 'Course full name';
 $string['sort_idnumber'] = 'Course ID number';
 $string['sort_shortname'] = 'Course short name';

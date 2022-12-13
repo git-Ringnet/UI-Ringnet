@@ -103,14 +103,14 @@ Example context (json):
         }}
 
         <div class="container-fluid tertiary-navigation" id="action_bar">
-            {{!-- add bo lộc hear --}}
+
 
             <div class="row">
-                {{!#urlselect}}
+                {{#urlselect}}
                 <div class="navitem">
-                    {{!> core/url_select }}
+                    {{> core/url_select }}
                 </div>
-                {{!/urlselect}}
+                {{/urlselect}}
                 {{#renderedcontent}}
                 <div class="navitem">
                     {{{renderedcontent}}}
