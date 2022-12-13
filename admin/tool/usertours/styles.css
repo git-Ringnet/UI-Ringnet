@@ -81,6 +81,55 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     padding: 1em;
 }
 
+
+
+/* CSS */
+.pagination {
+    float: right;
+}
+#participants #user-index-participants-3_r0_c3 .visibleifjs .rui-icon-container{
+    display: none;
+}
+#user-index-participants-5_r0_c4 .rui-icon-container{
+    display: none;
+}
+#url_select6396ea5e01da131{
+    display: none;
+}
+/* .btn-light span{
+    display: none;
+} */
+.moreless-actions .felement{
+    display: none;
+}
+.containsadvancedelements legend{
+    display: none;
+}
+#id_maincontainer #fitem_id_userlist, #id_maincontainer #fitem_id_cohortlist, #id_maincontainer #fitem_id_roletoassign{
+    display: block;
+}
+.col-md-9 .d-md-inline-block{
+    width: 100%;
+}
+.col-md-9 .d-md-inline-block .form-control{
+    width: 100%;
+    margin-left: 90px;
+    margin-top: 10px;
+}
+.form-autocomplete-downarrow{
+    top: calc(50% - 10px)!important;
+    right: -80px;
+}
+.filemanager-container{
+    width: 75%;
+}
+.filemanager-container .fp-content{
+    overflow: hidden !important;
+}
+.fp-restrictions{
+    display: none;
+}
+
 @media (max-width: 575.98px) {
     span[data-flexitour="container"] {
         margin-left: 10px;
