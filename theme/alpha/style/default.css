@@ -21005,6 +21005,7 @@ body.drawer-open-right.dir-rtl #sidepreopen-control svg {
   color: #80a0ff;
   top: -3px;
   left: 3px;
+    display: none;
 }
 .theme-dark .editing #block-region-dtopblocks:before,
 .theme-dark .editing #block-region-dbottomblocks:before,
@@ -21022,6 +21023,7 @@ body.drawer-open-right.dir-rtl #sidepreopen-control svg {
 .theme-dark .editing #block-region-sidebarbottomblocks:before {
   background-color: #001e76;
   color: #bdceff;
+    display: none;
 }
 .editing #block-region-content:before {
   content: "Blocks: Main Moodle Area";
@@ -21040,6 +21042,7 @@ body.drawer-open-right.dir-rtl #sidepreopen-control svg {
 }
 .editing #block-region-dmiddleblocks:before {
   content: "Blocks: Dashboard (Middle)";
+    display: none;
 }
 .editing #block-region-ctopbl:before {
   content: "Blocks: Course Page (Top)";
