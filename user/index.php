@@ -195,14 +195,13 @@ echo '<div>';
 echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
 echo '<input type="hidden" name="returnto" value="'.s($PAGE->url->out(false)).'" />';
 
-
-// echo html_writer::tag(
-//     'p',
-//     get_string('countparticipantsfound', 'core_user', $participanttable->totalrows),
-//     [
-//         'data-region' => 'participant-count',
-//     ]
-// );
+echo html_writer::tag(
+    'p',
+    get_string('countparticipantsfound', 'core_user', $participanttable->totalrows),
+    [
+        'data-region' => 'participant-count',
+    ]
+);
 
 echo $participanttablehtml;
 

@@ -51,15 +51,13 @@
     }
 }}
 {{#component}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-<div class="btn btn-light" style="border: 1px solid gray;">
 <span class="d-inline-flex align-items-center inplaceeditable inplaceeditable-{{type}}" data-inplaceeditable="1" data-component="{{component}}" data-itemtype="{{itemtype}}" data-itemid="{{itemid}}"
     data-value="{{value}}" data-editlabel="{{editlabel}}" data-type="{{type}}" data-options="{{options}}">
         {{^ linkeverything }}{{{displayvalue}}}{{/ linkeverything }}
         <a href="#" class="quickeditlink aalink mx-2" data-inplaceeditablelink="1" title="{{edithint}}">
             {{# linkeverything }}{{{displayvalue}}}{{/ linkeverything }}
             <span class="quickediticon visibleifjs">
-               {{#editicon}}{{#pix}}{{key}}, {{component}}, {{{title}}}{{/pix}}{{/editicon}}
+                {{#editicon}}{{#pix}}{{key}}, {{component}}, {{{title}}}{{/pix}}{{/editicon}}
             </span>
         </a>
 </span>
