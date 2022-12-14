@@ -23,7 +23,7 @@
  */
 
 $string['actfilterhdr'] = 'Active filters';
-$string['addfilter'] = 'Add filter';
+$string['addfilter'] = 'Thêm mới bộ lộc';
 $string['anycategory'] = 'any category';
 $string['anycourse'] = 'any course';
 $string['anycourses'] = 'Enrolled in any course';

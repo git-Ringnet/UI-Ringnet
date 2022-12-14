@@ -138,7 +138,7 @@ class participants extends \table_sql implements dynamic_table {
             $columns[] = 'select';
         }
 
-        $headers[] = get_string('fullname');
+        $headers[] = get_string('fullnametest');
         $columns[] = 'fullname';
 
         $extrafields = \core_user\fields::get_identity_fields($this->context);
@@ -158,20 +158,21 @@ class participants extends \table_sql implements dynamic_table {
 
         // Add column for groups if the user can view them.
         $canseegroups = !isset($hiddenfields['groups']);
-        if ($canseegroups) {
-            $headers[] = get_string('groups');
-            $columns[] = 'groups';
-        }
+        // if ($canseegroups) {
+        //     $headers[] = get_string('groups');
+        //     $columns[] = 'groups';
+        // }
 
+        // Lần truy cập cuối cùng
         // Do not show the columns if it exists in the hiddenfields array.
-        if (!isset($hiddenfields['lastaccess'])) {
-            if ($this->courseid == SITEID) {
-                $headers[] = get_string('lastsiteaccess');
-            } else {
-                $headers[] = get_string('lastcourseaccess');
-            }
-            $columns[] = 'lastaccess';
-        }
+        // if (!isset($hiddenfields['lastaccess'])) {
+        //     if ($this->courseid == SITEID) {
+        //         $headers[] = get_string('lastsiteaccess');
+        //     } else {
+        //         $headers[] = get_string('lastcourseaccess');
+        //     }
+        //     $columns[] = 'lastaccess';
+        // }
 
         $canreviewenrol = has_capability('moodle/course:enrolreview', $this->context);
         if ($canreviewenrol && $this->courseid != SITEID) {
@@ -349,26 +350,27 @@ class participants extends \table_sql implements dynamic_table {
                 $actions = $ue->enrolmentplugin->get_user_enrolment_actions($manager, $ue);
                 $instancename = $ue->enrolmentinstancename;
 
+                // Show active
                 // Default status field label and value.
-                $status = get_string('participationactive', 'enrol');
-                $statusval = status_field::STATUS_ACTIVE;
-                switch ($ue->status) {
-                    case ENROL_USER_ACTIVE:
-                        $currentdate = new DateTime();
-                        $now = $currentdate->getTimestamp();
-                        $isexpired = $timestart > $now || ($timeend > 0 && $timeend < $now);
-                        $enrolmentdisabled = $ue->enrolmentinstance->status == ENROL_INSTANCE_DISABLED;
-                        // If user enrolment status has not yet started/already ended or the enrolment instance is disabled.
-                        if ($isexpired || $enrolmentdisabled) {
-                            $status = get_string('participationnotcurrent', 'enrol');
-                            $statusval = status_field::STATUS_NOT_CURRENT;
-                        }
-                        break;
-                    case ENROL_USER_SUSPENDED:
-                        $status = get_string('participationsuspended', 'enrol');
-                        $statusval = status_field::STATUS_SUSPENDED;
-                        break;
-                }
+                // $status = get_string('participationactive', 'enrol');
+                // $statusval = status_field::STATUS_ACTIVE;
+                // switch ($ue->status) {
+                //     case ENROL_USER_ACTIVE:
+                //         $currentdate = new DateTime();
+                //         $now = $currentdate->getTimestamp();
+                //         $isexpired = $timestart > $now || ($timeend > 0 && $timeend < $now);
+                //         $enrolmentdisabled = $ue->enrolmentinstance->status == ENROL_INSTANCE_DISABLED;
+                //         // If user enrolment status has not yet started/already ended or the enrolment instance is disabled.
+                //         if ($isexpired || $enrolmentdisabled) {
+                //             $status = get_string('participationnotcurrent', 'enrol');
+                //             $statusval = status_field::STATUS_NOT_CURRENT;
+                //         }
+                //         break;
+                //     case ENROL_USER_SUSPENDED:
+                //         $status = get_string('participationsuspended', 'enrol');
+                //         $statusval = status_field::STATUS_SUSPENDED;
+                //         break;
+                // }
 
                 $statusfield = new status_field($instancename, $coursename, $fullname, $status, $timestart, $timeend,
                     $actions, $timeenrolled);
@@ -486,3 +488,4 @@ class participants extends \table_sql implements dynamic_table {
         return $this->context;
     }
 }
+?>

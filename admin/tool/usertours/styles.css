@@ -33,14 +33,17 @@ body div[data-flexitour="step-background"] {
     background: inherit;
     background-image: none;
 }
-.course .title{
-    background: linear-gradient(90deg,#3f3dec 0%,#222192 95%);
+
+.course .title {
+    background: linear-gradient(90deg, #3f3dec 0%, #222192 95%);
 }
-.course .title h4{
+
+.course .title h4 {
     color: #fff;
 }
+
 div[data-flexitour="step-background-fader"],
-[data-flexitour="step-backdrop"] > td,
+[data-flexitour="step-backdrop"]>td,
 [data-flexitour="step-backdrop"] {
     position: relative;
 }
@@ -53,23 +56,23 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     font-size: inherit;
 }
 
-.tour-actions > ul {
+.tour-actions>ul {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
-.tour-actions > ul > li {
+.tour-actions>ul>li {
     background-color: #f5f5f5;
 }
 
-.tour-actions > ul {
+.tour-actions>ul {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
 }
 
-.tour-actions > ul > li {
+.tour-actions>ul>li {
     background-color: #f5f5f5;
     border-radius: 6px;
     border: 1px solid #ccc;
@@ -80,68 +83,285 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     width: 13em;
 }
 
-.tour-actions > ul > li > a {
+.tour-actions>ul>li>a {
     height: 100%;
     display: block;
     padding: 1em;
 }
 
-
-
 /* CSS */
 .pagination {
     float: right;
 }
-#participants #user-index-participants-3_r0_c3 .visibleifjs .rui-icon-container{
+
+#participants #user-index-participants-3_r0_c3 .visibleifjs .rui-icon-container {
     display: none;
 }
-#user-index-participants-5_r0_c4 .rui-icon-container{
+
+#user-index-participants-5_r0_c4 .rui-icon-container {
     display: none;
 }
-#url_select6396ea5e01da131{
+
+#url_select6396ea5e01da131 {
     display: none;
 }
-/* .btn-light span{
-    display: none;
-} */
-.moreless-actions .felement{
+
+.moreless-actions .felement {
     display: none;
 }
-.containsadvancedelements legend{
+
+.containsadvancedelements legend {
     display: none;
 }
-#id_maincontainer #fitem_id_userlist, #id_maincontainer #fitem_id_cohortlist, #id_maincontainer #fitem_id_roletoassign{
+
+#id_maincontainer #fitem_id_userlist,
+#id_maincontainer #fitem_id_cohortlist,
+#id_maincontainer #fitem_id_roletoassign {
     display: block;
+    margin-bottom: 10px;
 }
-.col-md-9 .d-md-inline-block{
+
+.col-md-9 .d-md-inline-block {
     width: 100%;
 }
-.col-md-9 .d-md-inline-block .form-control{
+
+.col-md-9 .d-md-inline-block .form-control {
     width: 100%;
     margin-left: 90px;
     margin-top: 10px;
 }
-.form-autocomplete-downarrow{
-    top: calc(50% - 10px)!important;
+
+.form-autocomplete-downarrow {
+    top: calc(50% - 10px) !important;
     right: -80px;
 }
-.filemanager-container{
-    width: 75%;
+
+.filemanager-container {
+    width: 85%;
 }
-.filemanager-container .fp-content{
+
+.filemanager-container .fp-content {
     overflow: hidden !important;
 }
-.fp-restrictions{
+
+.fp-restrictions {
     display: none;
 }
+
+/* Image course */
+#id_general p {
+    display: none;
+}
+
+#id_general .fdescription {
+    display: none;
+}
+
+#fitem_id_overviewfiles_filemanager {
+    float: left !important;
+    display: block !important;
+}
+
+#fitem_id_overviewfiles_filemanager .col-md-3,
+#fitem_id_overviewfiles_filemanager .col-md-9 {
+    max-width: 100%;
+}
+
+#filemanager-639844a710b13 .fp-navbar {
+    display: none
+}
+
+#fitem_id_overviewfiles_filemanager .col-md-3,
+#fitem_id_overviewfiles_filemanager .col-md-9 {
+    max-width: 100%;
+}
+
+#fitem_id_fullname {
+    margin-top: 30px;
+    display: block;
+    margin-left: calc(100% - 68%);
+}
+
+#fitem_id_fullname .col-md-3,
+#fitem_id_category .col-md-3,
+#fitem_id_summary_editor .col-md-3,
+#fgroup_id_coursevisibility .col-md-3,
+#fitem_id_startdate .col-md-3,
+#fitem_id_maxbytes .col-md-3 {
+    text-align: left !important;
+    max-width: 100%;
+}
+
+#fitem_id_category .col-md-9 span {
+    top: 15% !important;
+}
+
+#fitem_id_fullname .col-md-9 {
+    width: 80%;
+}
+
+#fitem_id_fullname .col-md-9 input {
+    width: 100%;
+}
+
+#fitem_id_category {
+    display: block;
+    margin-left: calc(100% - 68%);
+}
+
+#fitem_id_category .col-md-9 {
+    display: flex;
+    max-width: 40%;
+}
+
+#fitem_id_summary_editor {
+    display: block;
+    margin-top: -70px;
+    margin-left: calc(100% - 68%);
+}
+
+.editor_atto_content_wrap #id_summary_editoreditable {
+    height: 200px !important;
+}
+
+#fgroup_id_coursevisibility {
+    display: block;
+    margin-left: calc(100% - 68%);
+}
+
+#fitem_id_startdate {
+    display: block;
+    margin-left: calc(100% - 68%);
+}
+
+#fitem_id_startdate .col-md-9,
+#fitem_id_enddate .col-md-9 {
+    max-width: 100%;
+}
+
+#fitem_id_enddate {
+    display: block;
+    margin-left: calc(100% - 68%);
+}
+
+#fitem_id_enddate .col-md-3 {
+    display: none;
+}
+
+#fitem_id_maxbytes {
+    display: block;
+    margin-left: calc(100% - 68%);
+}
+
+#fitem_id_category .col-md-9 .form-control {
+    margin-left: 0px !important;
+}
+
+#fitem_id_category .col-md-9 .form-autocomplete-downarrow {
+    right: 0px !important;
+}
+
+/* CSS participants */
+.tertiary-navigation .row {
+    float: right;
+}
+
+#action_bar .navitem select {
+    display: none;
+}
+
+.rui-title-container h2 {
+    display: none;
+}
+
+#enrolusersbutton-2 {
+    display: none;
+}
+
+.tertiary-navigation .navitem form input {
+    background: rgb(230, 8, 8);
+}
+
+.filter-group,
+.firstinitial,
+.lastinitial {
+    display: none;
+}
+
+.userlist .no-overflow {
+    overflow: initial;
+}
+
+.userlist p {
+    display: none;
+}
+
+#participants .commands {
+    display: none;
+}
+
+#fitem_id_cohortlist .col-md-3,
+#fitem_id_roletoassign .col-md-3 {
+    max-width: 20%;
+}
+
+#fitem_id_roletoassign .col-md-9 {
+    margin-left: calc(100% - 88%);
+}
+
+#fitem_id_userlist .col-md-9,
+#fitem_id_cohortlist .col-md-9 {
+    margin-left: calc(100% - 88%);
+}
+
+/* Comment edit status */
+#participants .rui-icon-container img {
+    display: none;
+}
+
+/* /CSS */
+
+@media only screen and (max-width: 526px) {
+    #fitem_id_overviewfiles_filemanager{
+        width: 35%;
+    }
+    #fitem_id_fullname,#fitem_id_category{
+        width: 75%;
+    }
+    #fitem_id_fullname .col-md-3,#fitem_id_category .col-md-3,#fitem_id_summary_editor .col-md-3,#fgroup_id_coursevisibility .col-md-3
+    ,#fitem_id_startdate .col-md-3, #fitem_id_maxbytes .col-md-3{
+        max-width: 100%;
+    }
+    #fitem_id_summary_editor{
+        margin-top: -110px;
+    }
+    #fitem_id_category .col-md-9{
+        display: flex;
+        max-width: 60%;
+    }
+     #fitem_id_category .col-md-9{
+         max-width: 60%;
+     }
+}
+@media only screen and (min-width: 527px){
+     #fitem_id_summary_editor{
+        margin-top: -7%;
+    }
+     #fitem_id_category .col-md-9{
+         max-width: 60%;
+     }
+}
+
 
 @media (max-width: 575.98px) {
     span[data-flexitour="container"] {
         margin-left: 10px;
     }
+
     span[data-flexitour="container"] .modal-content {
         overflow-y: initial;
     }
+
     span[data-flexitour="container"].orphan {
         margin-left: 5px;
         margin-right: 5px;

@@ -74,9 +74,9 @@ class enrol_manual_enrol_users_form extends moodleform {
         }
 
         // Build the list of options for the starting from dropdown.
-        $now = time();
-        $today = make_timestamp(date('Y', $now), date('m', $now), date('d', $now), 0, 0, 0);
-        $dateformat = get_string('strftimedatefullshort');
+        // $now = time();
+        // $today = make_timestamp(date('Y', $now), date('m', $now), date('d', $now), 0, 0, 0);
+        // $dateformat = get_string('strftimedatefullshort');
 
         // Enrolment start.
         $basemenu = array();

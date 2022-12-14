@@ -62,9 +62,6 @@
 <div data-fullname="{{fullname}}" data-coursename="{{coursename}}" data-enrolinstancename="{{enrolinstancename}}"
      data-status="{{status}}" data-timestart="{{timestart}}" data-timeend="{{timeend}}" data-timeenrolled="{{timeenrolled}}">
     <span class="badge {{#active}}badge-success{{/active}}{{#suspended}}badge-warning{{/suspended}}{{#notcurrent}}badge-secondary{{/notcurrent}}">{{status}}</span>
-    <a data-action="showdetails" href="#" role="button" tabindex="0">{{!
-        }}{{#pix}}docs, core, {{enrolinstancename}}{{/pix}}{{!
-    }}</a>
     {{#enrolactions}}
     <a href="{{url}}" role="button" {{#attributes}}{{name}}="{{value}}" {{/attributes}}>{{!
         }}{{{icon}}}{{!

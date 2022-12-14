@@ -1,3 +1,11 @@
+<style>
+    .wrapper-course .main-content .singlebutton{
+        float: right;
+    }
+    .wrapper-course .main-content form button{
+        background: blue;
+    }
+</style>
 <?php
 
     require_once('../config.php');
@@ -303,14 +311,15 @@
         $table = new html_table();
         $table->head = array ();
         $table->colclasses = array();
-        $table->head[] = $fullnamedisplay;
+        // $table->head[] = $fullnamedisplay;
+        $table->head[] = "Họ và tên";
         $table->attributes['class'] = 'admintable generaltable table-sm';
         foreach ($extracolumns as $field) {
             $table->head[] = ${$field};
         }
-        $table->head[] = $city;
+        // $table->head[] = $city;
         $table->head[] = $country;
-        $table->head[] = $lastaccess;
+        // $table->head[] = $lastaccess;
         $table->head[] = get_string('edit');
         $table->colclasses[] = 'centeralign';
         $table->head[] = "";
@@ -407,9 +416,9 @@
             foreach ($extracolumns as $field) {
                 $row[] = s($user->{$field});
             }
-            $row[] = $user->city;
+            // $row[] = $user->city;
             $row[] = $user->country;
-            $row[] = $strlastaccess;
+            // $row[] = $strlastaccess;
             if ($user->suspended) {
                 foreach ($row as $k=>$v) {
                     $row[$k] = html_writer::tag('span', $v, array('class'=>'usersuspended'));

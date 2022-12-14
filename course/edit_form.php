@@ -197,7 +197,7 @@ class course_edit_form extends moodleform
 
         // Thời gian hết hạn
 
-        $mform->addElement('date_selector', 'enddate', get_string('enddate'), array('optional' => true));
+        $mform->addElement('date_time_selector', 'enddate', get_string('enddate'), array('optional' => true));
         $mform->addHelpButton('enddate', 'enddate');
 
         // if (!empty($CFG->enablecourserelativedates)) {
