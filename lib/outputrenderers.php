@@ -2857,6 +2857,9 @@ EOD;
             if ($this->page->user_is_editing()) {
                 $temp->checked = true;
             }
+            var_dump($temp);
+        
+
             return $this->render_from_template('core/editswitch', $temp);
         }
     }
@@ -4869,7 +4872,7 @@ EOD;
                     // Creates an id like 'fitem_id_NAME'. E.g. fitem_id_mytextelement.
                     $elementcontext['wrapperid'] = 'fitem_' . $elementcontext['id'];
                 }
-
+                
                 $context = array(
                     'element' => $elementcontext,
                     'label' => $label,

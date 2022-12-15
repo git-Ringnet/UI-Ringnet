@@ -61,7 +61,6 @@ if ($returnto === 'url' && confirm_sesskey() && $returnurl) {
         }
     }
 }
-
 $PAGE->set_pagelayout('admin');
 if ($id) {
     $pageparams = array('id' => $id);
@@ -240,11 +239,52 @@ if (!empty($course->id)) {
     $PAGE->navbar->add($pagedesc);
 }
 
+    global $CFG, $COURSE, $DB;
+    $course = $DB->get_record('course', ['id' => $COURSE->id]);
+    $content = html_writer::start_div('course-teachers-box');
+    // var_dump($course);
+    $content = html_writer::start_div('course-navigation');
+    $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+    $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
+    $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
+    $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
+    $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+    $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
+    <div class='collapse navbar-collapse' id='navbarNav'>
+      <ul class='navbar-nav'>
+        <li class='nav-item active'>
+          <a class='nav-link' href='{$urledit}'>Thông tin <span class='sr-only'>(current)</span></a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
+        </li>
+        <li class='nav-item'>
+          <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
+        </li>
+        <li class='nav-item'>
+        <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
+      </li>
+      <li class='nav-item'>
+      <a class='nav-link' href='{$urlparticipant}'>Điều kiện</a>
+    </li>
+      </ul>
+    </div>
+  </nav>";
+    echo '<br/>';
+    $content .= html_writer::end_div(); // navigation-box
+
 $PAGE->set_title($title);
 $PAGE->add_body_class('limitedwidth');
 $PAGE->set_heading($fullname);
 
 echo $OUTPUT->header();
+
+//Thêm thanh navigate tại thông tin
+echo $content;
+
 echo $OUTPUT->heading($pagedesc);
 
 $editform->display();
