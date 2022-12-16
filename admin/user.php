@@ -1,11 +1,3 @@
-<style>
-    .wrapper-course .main-content .singlebutton{
-        float: right;
-    }
-    .wrapper-course .main-content form button{
-        background: blue;
-    }
-</style>
 <?php
 
     require_once('../config.php');
@@ -318,8 +310,9 @@
             $table->head[] = ${$field};
         }
         // $table->head[] = $city;
-        $table->head[] = $country;
+        // $table->head[] = $country;
         // $table->head[] = $lastaccess;
+        $table->head[] = get_string('roles');
         $table->head[] = get_string('edit');
         $table->colclasses[] = 'centeralign';
         $table->head[] = "";
@@ -416,9 +409,17 @@
             foreach ($extracolumns as $field) {
                 $row[] = s($user->{$field});
             }
-            // $row[] = $user->city;
-            $row[] = $user->country;
+            // $row[]=$user->city;
+            // $row[] = $user->country;
             // $row[] = $strlastaccess;
+       
+            $c = $user->id;
+            $context = context_user::instance($c);
+            $roles = get_user_roles($context,$user->id, true);
+            $role = key($roles);
+            $rolename = $roles[$role]->shortname;
+            $row[] = $rolename;
+            
             if ($user->suspended) {
                 foreach ($row as $k=>$v) {
                     $row[$k] = html_writer::tag('span', $v, array('class'=>'usersuspended'));
