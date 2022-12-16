@@ -134,6 +134,7 @@ class participants extends \table_sql implements dynamic_table {
                 'classes' => 'm-1',
                 'checked' => false,
             ]);
+            // Check box
             $headers[] = $OUTPUT->render($mastercheckbox);
             $columns[] = 'select';
         }
@@ -196,7 +197,7 @@ class participants extends \table_sql implements dynamic_table {
             $this->no_sorting('groups');
         }
 
-        $this->set_default_per_page(20);
+        $this->set_default_per_page(10);
 
         $this->set_attribute('id', 'participants');
 

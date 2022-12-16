@@ -12,7 +12,7 @@
     $sort         = optional_param('sort', 'name', PARAM_ALPHANUMEXT);
     $dir          = optional_param('dir', 'ASC', PARAM_ALPHA);
     $page         = optional_param('page', 0, PARAM_INT);
-    $perpage      = optional_param('perpage', 30, PARAM_INT);        // how many per page
+    $perpage      = optional_param('perpage', 10, PARAM_INT);        // how many per page
     $ru           = optional_param('ru', '2', PARAM_INT);            // show remote users
     $lu           = optional_param('lu', '2', PARAM_INT);            // show local users
     $acl          = optional_param('acl', '0', PARAM_INT);           // id of user to tweak mnet ACL (requires $access)
@@ -258,9 +258,9 @@
     }
 
     $strall = get_string('all');
-
-    $baseurl = new moodle_url('/admin/user.php', array('sort' => $sort, 'dir' => $dir, 'perpage' => $perpage));
-    echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
+    // Pagination on top
+    // $baseurl = new moodle_url('/admin/user.php', array('sort' => $sort, 'dir' => $dir, 'perpage' => $perpage));
+    // echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
 
     flush();
 
@@ -303,6 +303,16 @@
         $table = new html_table();
         $table->head = array ();
         $table->colclasses = array();
+        // add check box
+        // $mastercheckbox = new \core\output\checkbox_toggleall('participants-table', true, [
+        //     'id' => 'select-all-participants',
+        //     'name' => 'select-all-participants',
+        //     'label' => get_string('selectall'),
+        //     'labelclasses' => 'sr-only',
+        //     'classes' => 'm-1',
+        //     'checked' => false,
+        // ]);
+        // $table->head[] = $OUTPUT->render($mastercheckbox);
         // $table->head[] = $fullnamedisplay;
         $table->head[] = "Họ và tên";
         // add button
@@ -421,7 +431,7 @@
             // $row[]=$user->city;
             // $row[] = $user->country;
             // $row[] = $strlastaccess;
-       
+            // $row[] = 'select';
             $c = $user->id;
             $context = context_user::instance($c);
             $roles = get_user_roles($context,$user->id, true);
@@ -448,7 +458,7 @@
         echo html_writer::start_tag('div', array('class'=>'no-overflow'));
         echo html_writer::table($table);
         echo html_writer::end_tag('div');
-        echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
+        echo "<div>". $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl) ."</div>";
     }
  
 

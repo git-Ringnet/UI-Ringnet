@@ -208,7 +208,7 @@ $string['backuptakealook'] = 'Please take a look at your backup logs in:
   {$a}';
 $string['backupuserfileshelp'] = 'Choose whether user files (eg profile images) should be included in automated backups';
 $string['backupversion'] = 'Backup version';
-$string['badges'] = 'Badges';
+$string['badges'] = 'Chứng chỉ';
 $string['block'] = 'Block';
 $string['blockconfiga'] = 'Configuring a {$a} block';
 $string['blockconfigbad'] = 'This block has not been implemented correctly and thus cannot provide a configuration interface.';
@@ -962,7 +962,7 @@ This program is free software: you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 See the Moodle License information page for full details: https://docs.moodle.org/dev/License';
-$string['grades'] = 'Grades';
+$string['grades'] = 'Điểm số';
 $string['gradenoun'] = 'Grade';
 $string['gradeverb'] = 'Grade';
 $string['gravatarenabled'] = '<a href="https://www.gravatar.com/">Gravatar</a> has been enabled for this site. If you don\'t upload a profile picture Moodle will attempt to load a profile picture for you from Gravatar.';
