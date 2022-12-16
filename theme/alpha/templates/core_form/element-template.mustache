@@ -43,6 +43,19 @@ Example context (json):
 }
 }
 }}
+<style>
+    @media only screen and(min-width:526px) {
+         #participants{
+        width: 100% !important;
+    }
+    }
+     .no-overflow>.generaltable, .no-overflow>.rolecap{
+        width: 100%;
+    }
+    #id_main .moreless-actions .felement{
+        display: none;
+    }
+</style>
 {{!-- Edit add new course --}}
 <div id="{{element.wrapperid}}"
     class="form-group row px-0 {{#error}}has-danger{{/error}} fitem {{#element.emptylabel}}femptylabel col-12{{/element.emptylabel}} {{#advanced}}advanced{{/advanced}} {{{element.extraclasses}}}"

@@ -305,6 +305,15 @@
         $table->colclasses = array();
         // $table->head[] = $fullnamedisplay;
         $table->head[] = "Họ và tên";
+        // add button
+        if (has_capability('moodle/user:create', $sitecontext)) {
+            $url = new moodle_url('/user/editadvanced.php', array('id' => -1));
+            echo "<div class='btn-addNewsUsers'>".$OUTPUT->single_button($url, get_string('addnewuser'), 'get') ."</div>";
+            // button default
+            // echo $OUTPUT->single_button($url, get_string('addnewuser'), 'get');
+        }
+        // $url1 = "https://localhost/ringnet/admin/roles/manage.php";
+        // echo $OUTPUT->single_button($url1,'Quản lý roles');
         $table->attributes['class'] = 'admintable generaltable table-sm';
         foreach ($extracolumns as $field) {
             $table->head[] = ${$field};
@@ -432,8 +441,8 @@
     }
 
     // add filters
-    $ufiltering->display_add();
-    $ufiltering->display_active();
+    // $ufiltering->display_add();
+    // $ufiltering->display_active();
 
     if (!empty($table)) {
         echo html_writer::start_tag('div', array('class'=>'no-overflow'));
@@ -441,9 +450,6 @@
         echo html_writer::end_tag('div');
         echo $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl);
     }
-    if (has_capability('moodle/user:create', $sitecontext)) {
-        $url = new moodle_url('/user/editadvanced.php', array('id' => -1));
-        echo $OUTPUT->single_button($url, get_string('addnewuser'), 'get');
-    }
+ 
 
     echo $OUTPUT->footer();

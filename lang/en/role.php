@@ -23,7 +23,7 @@
  */
 
 $string['addinganewrole'] = 'Adding a new role';
-$string['addrole'] = 'Add a new role';
+$string['addrole'] = 'Thêm vai trò';
 $string['advancedoverride'] = 'Advanced role override';
 $string['allow'] = 'Allow';
 $string['allowassign'] = 'Allow role assignments';
@@ -51,7 +51,7 @@ $string['archetypeteacher'] = 'ARCHETYPE: Teacher (non-editing)';
 $string['archetypeuser'] = 'ARCHETYPE: Authenticated user';
 $string['assignanotherrole'] = 'Assign another role';
 $string['assignerror'] = 'Error while assigning the role {$a->role} to user {$a->user}.';
-$string['assignglobalroles'] = 'Assign system roles';
+$string['assignglobalroles'] = 'Quản lý vai trò người dùng';
 $string['assignedroles'] = 'Assigned roles';
 $string['assignmentcontext'] = 'Assignment context';
 $string['assignmentoptions'] = 'Assignment options';
@@ -284,7 +284,7 @@ $string['checkpermissions'] = 'Check permissions';
 $string['checkpermissionsin'] = 'Check permissions in {$a}';
 $string['checksystempermissionsfor'] = 'Check system permissions for {$a->fullname}';
 $string['checkuserspermissionshere'] = 'Check permissions for {$a->fullname} has in this {$a->contextlevel}';
-$string['chooseroletoassign'] = 'Please choose a role to assign';
+$string['chooseroletoassign'] = 'Quản lý vai trò người dùng';
 $string['inactiveformorethan'] = 'inactive for more than {$a->timeperiod}';
 $string['ingroup'] = 'in the group "{$a->group}"';
 $string['inherit'] = 'Inherit';
@@ -490,7 +490,7 @@ $string['usersfrommatching'] = 'Users from {$a->contextname} matching \'{$a->sea
 $string['usersinthisx'] = 'Users in this {$a}';
 $string['usersinthisxmatching'] = 'Users in this {$a->contexttype} matching \'{$a->search}\'';
 $string['userswithrole'] = 'All users with a role';
-$string['userswiththisrole'] = 'Users with role';
+$string['userswiththisrole'] = 'Thành viên';
 $string['useshowadvancedtochange'] = 'Use \'Show advanced\' to change';
 $string['viewingdefinitionofrolex'] = 'Viewing the definition of role \'{$a}\'';
 $string['viewrole'] = 'View role details';
