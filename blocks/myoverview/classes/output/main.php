@@ -421,6 +421,7 @@ class main implements renderable, templatable
      * @throws \coding_exception
      *
      */
+
     public function export_for_template(renderer_base $output)
     {
         global $CFG, $USER, $DB;

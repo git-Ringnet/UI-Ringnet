@@ -41,32 +41,32 @@ Example context (json):
 
 
 <ul class="list-group mt-2 mx-0">
-  
-        <table class="table table-striped projects">
-              <thead>
-                  <tr>
-                      <th style="width: 50%">
-                          Tên khóa học
-                      </th>
-                      <th style="width: 8%">
-                          Danh mục
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          Giảng viên
-                      </th>
-                      <th style="width: 8%" class="text-center">
-                          Học viên
-                      </th>
-                      <th style="width: 12%" class="text-center">
-                          Action
-                      </th>
-                  </tr>
-              </thead>
-            </table>
+
+    <table class="table table-striped projects">
+        <thead>
+            <tr>
+                <th style="width: 50%;font-size: 1rem;">
+                    {{#str}}coursename, grades{{/str}}
+                </th>
+                <th style="width: 15%;font-size: 1rem;" class="text-center">
+                    {{#str}}categories, moodle{{/str}}
+                </th>
+                <th style="width: 8%;font-size: 1rem;" class="text-center">
+                    {{#str}}defaultcourseteacher, moodle{{/str}}
+                </th>
+                <th style="width: 8%;font-size: 1rem;" class="text-center">
+                    {{#str}}student, grades{{/str}}
+                </th>
+                <th style="width: 12%;font-size: 1rem;" class="text-center">
+                    {{#str}}action, moodle{{/str}}
+                </th>
+            </tr>
+        </thead>
+    </table>
     {{#courses}}
-    <li class="list-group-item rui-course-listitem p-0 rui-progress-{{progress}} {{#showcoursecategory}}rui-course-listitem--cat{{/showcoursecategory}}"
+    <li class="border-bottom list-group-item p-0 rui-progress-{{progress}} {{#showcoursecategory}}rui-course-listitem--cat{{/showcoursecategory}}"
         data-region="course-content" data-course-id="{{{id}}}">
-        <table class="table table-striped" style="margin-bottom: 0 !important;">
+        <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
             <thead>
                 <tr>
                     <th style="width: 50%;border-bottom: 0 !important">
@@ -86,7 +86,7 @@ Example context (json):
                         <span class="sr-only">
                             {{#str}}aria:coursecategory, core_course{{/str}}
                         </span>
-                        <div class="badge badge-sm badge-dark">
+                        <div class="badge badge-sm">
                             {{{coursecategory}}}
                         </div>
                         {{/showcoursecategory}}

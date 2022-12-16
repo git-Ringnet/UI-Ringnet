@@ -34,14 +34,6 @@ body div[data-flexitour="step-background"] {
     background-image: none;
 }
 
-.course .title {
-    background: linear-gradient(90deg, #3f3dec 0%, #222192 95%);
-}
-
-.course .title h4 {
-    color: #fff;
-}
-
 div[data-flexitour="step-background-fader"],
 [data-flexitour="step-backdrop"]>td,
 [data-flexitour="step-backdrop"] {
@@ -322,34 +314,46 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 /* /CSS */
 
 @media only screen and (max-width: 526px) {
-    #fitem_id_overviewfiles_filemanager{
+    #fitem_id_overviewfiles_filemanager {
         width: 35%;
     }
-    #fitem_id_fullname,#fitem_id_category{
+
+    #fitem_id_fullname,
+    #fitem_id_category {
         width: 75%;
     }
-    #fitem_id_fullname .col-md-3,#fitem_id_category .col-md-3,#fitem_id_summary_editor .col-md-3,#fgroup_id_coursevisibility .col-md-3
-    ,#fitem_id_startdate .col-md-3, #fitem_id_maxbytes .col-md-3{
+
+    #fitem_id_fullname .col-md-3,
+    #fitem_id_category .col-md-3,
+    #fitem_id_summary_editor .col-md-3,
+    #fgroup_id_coursevisibility .col-md-3,
+    #fitem_id_startdate .col-md-3,
+    #fitem_id_maxbytes .col-md-3 {
         max-width: 100%;
     }
-    #fitem_id_summary_editor{
+
+    #fitem_id_summary_editor {
         margin-top: -110px;
     }
-    #fitem_id_category .col-md-9{
+
+    #fitem_id_category .col-md-9 {
         display: flex;
         max-width: 60%;
     }
-     #fitem_id_category .col-md-9{
-         max-width: 60%;
-     }
+
+    #fitem_id_category .col-md-9 {
+        max-width: 60%;
+    }
 }
-@media only screen and (min-width: 527px){
-     #fitem_id_summary_editor{
+
+@media only screen and (min-width: 527px) {
+    #fitem_id_summary_editor {
         margin-top: -7%;
     }
-     #fitem_id_category .col-md-9{
-         max-width: 60%;
-     }
+
+    #fitem_id_category .col-md-9 {
+        max-width: 60%;
+    }
 }
 
 
@@ -367,3 +371,163 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
         margin-right: 5px;
     }
 }
+
+/* side bar */
+div#nav-drawer {
+    background: #FCFCFC;
+}
+
+span.rui-sidebar-nav-icon {
+    color: #555555 !important;
+}
+
+
+.rui-sidebar-nav-item-link.active,
+.rui-sidebar-nav-item-link:hover {
+    background: #FEF6F6 !important;
+    color: #EC212D !important;
+    border-left: 0.5rem solid !important;
+}
+a.text-dark:hover{
+    color: #EC212D !important;
+}
+.theme-dark .rui-sidebar-nav-item-link.active,
+.theme-dark .rui-sidebar-nav-item-link:hover {
+    background: #FEF6F6 !important;
+    color: #EC212D !important;
+
+}
+
+.rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon,
+.rui-sidebar-nav-item-link:hover .rui-sidebar-nav-icon {
+    color: #EC212D !important;
+    fill: #EC212D !important;
+    opacity: 0.6;
+}
+
+.theme-dark .rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon,
+.theme-dark .rui-sidebar-nav-item-link:hover .rui-sidebar-nav-icon {
+    color: #EC212D !important;
+    fill: #EC212D !important;
+}
+
+.rui-sidebar-nav-item-link.active .rui-sidebar-nav-text,
+.rui-sidebar-nav-item-link:hover .rui-sidebar-nav-text {
+    color: #EC212D !important;
+
+    opacity: 0.6;
+}
+
+.theme-dark .rui-sidebar-nav-item-link.active .rui-sidebar-nav-text,
+.theme-dark .rui-sidebar-nav-item-link:hover .rui-sidebar-nav-text {
+    color: #EC212D !important;
+}
+.theme-dark .rui-sidebar-nav-item-link.active{
+    border-left: 1rem solid;
+}
+
+
+#nav-drawer .rui-drawer-footer {
+    background: #FCFCFC !important;
+}
+
+.rui-sidebar-nav-text {
+    color: black !important;
+}
+
+.rui-lang-btn,
+.create-course {
+    background: #EC212D !important;
+    color: FCFCFC !important;
+}
+
+/* Button red */
+.rui-lang-btn:hover,
+.create-course:hover {
+    background: #bf6166 !important;
+}
+
+.btn .btn-primary {
+    background: #bf6166 !important;
+}
+
+.course .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.course .before,
+.course .active {
+    background-image: linear-gradient(to right,
+            #0095F6,
+            #0095F6 50%,
+            #000 50%);
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.course .before:before,
+.course .active:before {
+    content: '';
+    background: #0095F6;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.course .before:hover {
+    background-position: 0;
+}
+
+.course .before:hover::before {
+    width: 100%;
+}
+
+.course .active {
+    background-position: 0;
+}
+
+.course .active::before {
+    width: 100%;
+}
+
+.table thead th,
+.generaltable thead th,
+.rolecap thead th,
+.userenrolment thead th,
+#categoryquestions thead th,
+.grading-report thead th,
+.gradereport-grader-table thead th,
+#completion-progress thead th {
+    color: #000000 !important;
+
+}
+
+.listcourse a.d-inline-flex.align-items-center,
+.listcourse .badge.badge-sm,
+.listcourse th.text-center {
+    font-weight: 400 !important;
+    font-size: 0.75rem !important;
+}
+
+body {
+    font-family: 'Inter' !important;
+    font-style: normal !important;
+}
+/* #page-header h2.rui-page-title.rui-page-title--context,h5#instance-5-header,.rui-breadcrumbs  {
+    display: none !important;
+} */
+.rui-navbar-nav--sep:before {
+    left: 52px !important;
+  }
