@@ -328,7 +328,9 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     background: #EC202D;
     color: white;
 }
-
+#id_descriptionhdr fieldset legend{
+    display: none;
+}
 /* #region-main-box .wrapper-course .main-content form button{
     background: blue;
 } */

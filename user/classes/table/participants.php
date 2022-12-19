@@ -489,4 +489,3 @@ class participants extends \table_sql implements dynamic_table {
         return $this->context;
     }
 }
-?>
