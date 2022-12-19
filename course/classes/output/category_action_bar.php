@@ -151,6 +151,8 @@ class category_action_bar extends manage_categories_action_bar {
         return [];
     }
 
+
+
     /**
      * Export the content to be displayed on the category page.
      *

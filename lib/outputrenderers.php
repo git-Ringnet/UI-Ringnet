@@ -2857,6 +2857,7 @@ EOD;
             if ($this->page->user_is_editing()) {
                 $temp->checked = true;
             }
+
             return $this->render_from_template('core/editswitch', $temp);
         }
     }
@@ -4869,7 +4870,7 @@ EOD;
                     // Creates an id like 'fitem_id_NAME'. E.g. fitem_id_mytextelement.
                     $elementcontext['wrapperid'] = 'fitem_' . $elementcontext['id'];
                 }
-
+                
                 $context = array(
                     'element' => $elementcontext,
                     'label' => $label,
@@ -5575,7 +5576,7 @@ class core_renderer_maintenance extends core_renderer {
         $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
         <div class='collapse navbar-collapse' id='navbarNav'>
           <ul class='navbar-nav'>
-            <li class='nav-item active'>
+            <li class='nav-item'>
               <a class='nav-link' href='{$urledit}'>Thông tin <span class='sr-only'>(current)</span></a>
             </li>
             <li class='nav-item'>

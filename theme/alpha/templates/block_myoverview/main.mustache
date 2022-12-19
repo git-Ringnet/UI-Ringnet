@@ -27,20 +27,20 @@ Example context (json):
 <div id="block-myoverview-{{uniqid}}" class="block-myoverview block-cards" data-region="myoverview" role="navigation">
     <div class="d-inline-flex justify-content-between flex-wrap w-100 py-2">
         <div class="course mb-1 mr-auto d-flex mt-auto">
-            <a class="title mr-2 pt-2 border rounded px-3" href="{{config.wwwroot}}/my/courses.php">
-                <h4>Khóa Học</h4>
+            <a class="title mr-2 pt-2 px-3 active" href="{{config.wwwroot}}/my/courses.php">
+                {{#str}}courses, moodle{{/str}}
             </a>
-            <a href="{{config.wwwroot}}/course/index.php" class="title pt-2 border rounded px-2">
-                <h4>Danh Mục</h4>
+            <a href="{{config.wwwroot}}/course/index.php" class="title pt-2 px-2 before">
+                {{#str}}categories, moodle{{/str}}
                 </a>
         </div>
             {{#status}}
-            <a href="{{config.wwwroot}}/course/edit.php?returnto=catmanage" class="btn btn-primary">
-        Tạo khóa học
+            <a href="{{config.wwwroot}}/course/edit.php?returnto=catmanage" class="create-course btn btn-primary">
+       {{#str}} createnewcourse, moodle{{/str}}
             </a>
             {{/status}}
-
     </div>
+    <hr/>
     <div data-region="filter" class="d-flex align-items-center"
         aria-label="{{#str}} aria:controls, block_myoverview {{/str}}">
         <div class="d-inline-flex justify-content-between flex-wrap w-100 mt-2">

@@ -255,6 +255,7 @@ class course_edit_form extends moodleform
         // Course format.
         // $mform->addElement('header', 'courseformathdr', get_string('type_format', 'plugin'));
 
+
         // $courseformats = get_sorted_course_formats(true);
         // $formcourseformats = array();
         // foreach ($courseformats as $courseformat) {
@@ -269,6 +270,20 @@ class course_edit_form extends moodleform
         //     }
         // }
 
+        $courseformats = get_sorted_course_formats(true);
+        $formcourseformats = array();
+        foreach ($courseformats as $courseformat) {
+            $formcourseformats[$courseformat] = get_string('pluginname', "format_$courseformat");
+        }
+        if (isset($course->format)) {
+            $course->format = course_get_format($course)->get_format(); // replace with default if not found
+            if (!in_array($course->format, $courseformats)) {
+                // this format is disabled. Still display it in the dropdown
+                $formcourseformats[$course->format] = get_string('withdisablednote', 'moodle',
+                        get_string('pluginname', 'format_'.$course->format));
+            }
+        }
+
         // $mform->addElement('select', 'format', get_string('format'), $formcourseformats, [
         //     'data-formatchooser-field' => 'selector',
         // ]);
@@ -276,11 +291,14 @@ class course_edit_form extends moodleform
         // $mform->setDefault('format', $courseconfig->format);
 
         // Button to update format-specific options on format change (will be hidden by JavaScript).
+        $mform->addHelpButton('format', 'format');
+        $mform->setDefault('format', $courseconfig->format);
+        //Button to update format-specific options on format change (will be hidden by JavaScript).
         $mform->registerNoSubmitButton('updatecourseformat');
-        $mform->addElement('submit', 'updatecourseformat', get_string('courseformatudpate'), [
-            'data-formatchooser-field' => 'updateButton',
-            'class' => 'd-none',
-        ]);
+        // $mform->addElement('submit', 'updatecourseformat', get_string('courseformatudpate'), [
+        //     'data-formatchooser-field' => 'updateButton',
+        //     'class' => 'd-none',
+        // ]);
 
         // Just a placeholder for the course format options.
         $mform->addElement('hidden', 'addcourseformatoptionshere');
@@ -550,6 +568,7 @@ class course_edit_form extends moodleform
         $errors = array_merge($errors, enrol_course_edit_validation($data, $this->context));
 
         $courseformat = course_get_format((object)array('format' => $data['format']));
+        $courseformat = course_get_format((object)array('format' => "flexsections"));
         $formaterrors = $courseformat->edit_form_validation($data, $files, $errors);
         if (!empty($formaterrors) && is_array($formaterrors)) {
             $errors = array_merge($errors, $formaterrors);

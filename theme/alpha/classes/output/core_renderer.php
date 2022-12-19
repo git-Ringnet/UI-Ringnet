@@ -1454,15 +1454,16 @@ class core_renderer extends \core_renderer
                         'headerlinksdata' => array(
                             array(
                                 'status' => !isguestuser(),
-                                'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
+                                'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
                                 'title' => get_string('sitehome', 'moodle'),
                                 'url' => new moodle_url('/'),
+                                'isactiveitem' => $this->isMenuActive('/'),
                                 'itemid' => 'itemHome',
                                 'visability' => true,
                             ),
                             array(
                                 'status' => !isguestuser(),
-                                'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
+                                'icon' => '<svg   width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
                                 id="Layer_1" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M464.73,377H446V115.4A30.11,30.11,0,0,0,415.9,85.33H96.1A30.1,30.1,0,0,0,66,115.4V377H47.28A10.39,10.39,0,0,0,36.9,387.41V392a34.72,34.72,0,0,0,34.68,34.69H440.43A34.72,34.72,0,0,0,475.1,392v-4.57A10.39,10.39,0,0,0,464.73,377ZM75.09,115.4a21,21,0,0,1,21-21H415.9a21,21,0,0,1,21,21V377H75.09ZM466,392a25.64,25.64,0,0,1-25.61,25.62H71.58A25.65,25.65,0,0,1,46,392v-4.57a1.32,1.32,0,0,1,1.32-1.31H464.73a1.31,1.31,0,0,1,1.31,1.31Z" />
@@ -1481,7 +1482,7 @@ class core_renderer extends \core_renderer
                             //Quản lí khóa học
                             array(
                                 'status' => !isguestuser(),
-                                'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 24 24"
+                                'icon' => '<svg   width="24px" height="24px" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M22 18h-.42a2.92 2.92 0 0 0 1.17-1.31 2.871 2.871 0 0 0 .05-2.21L18.71 3.84a2.909 2.909 0 0 0-3.74-1.66l-1.14.44a2.784 2.784 0 0 0-.83.5V3a3.009 3.009 0 0 0-3-3H9a3.009 3.009 0 0 0-3 3v.77A2.984 2.984 0 0 0 4 3H3a3.009 3.009 0 0 0-3 3v10a2.958 2.958 0 0 0 1.03 2.25A2 2 0 0 0 2 22v1a1 1 0 0 0 2 0v-1h16v1a1 1 0 0 0 2 0v-1a2 2 0 0 0 0-4zM8 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3zM2 6a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6zm10.23 12a2.984 2.984 0 0 0 .77-2V8.51l3.27 8.48a2.79 2.79 0 0 0 .67 1.01h-4.71zm8.69-2.12a.937.937 0 0 1-.49.47l-1.14.44a.9.9 0 0 1-1.15-.52l-4.1-10.63a.89.89 0 0 1 .02-.68.869.869 0 0 1 .49-.47l1.14-.44a.867.867 0 0 1 .32-.06.886.886 0 0 1 .83.57l4.1 10.64a.939.939 0 0 1-.02.68z" />
@@ -1495,7 +1496,7 @@ class core_renderer extends \core_renderer
                             // Quản lý người dùng
                             array(
                                 'status' => is_siteadmin(),
-                                'icon' => '<svg style="fill: aliceblue;" width="32px" height="32px" viewBox="0 0 32 32" id="icon"
+                                'icon' => '<svg   width="24px" height="24px" viewBox="0 0 32 32" id="icon"
                         xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <style>
@@ -1527,7 +1528,7 @@ class core_renderer extends \core_renderer
                             //Báo cáo
                             array(
                                 'status' => !isguestuser(),
-                                'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                                'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
                                 'title' => get_string('reports', 'moodle'),
                                 'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
                                 'isactiveitem' => $this->isMenuActive('/reportbuilder'),
@@ -1585,15 +1586,16 @@ class core_renderer extends \core_renderer
                     'headerlinksdata' => array(
                         array(
                             'status' => !isguestuser(),
-                            'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
+                            'icon' => '<svg width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" style="fill:#fff;" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
                             'title' => get_string('sitehome', 'moodle'),
                             'url' => new moodle_url('/'),
+                            'isactiveitem' => $this->isMenuActive('/'),
                             'itemid' => 'itemHome',
                             'visability' => true,
                         ),
                         array(
                             'status' => !isguestuser(),
-                            'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
+                            'icon' => '<svg  width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
                             id="Layer_1" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M464.73,377H446V115.4A30.11,30.11,0,0,0,415.9,85.33H96.1A30.1,30.1,0,0,0,66,115.4V377H47.28A10.39,10.39,0,0,0,36.9,387.41V392a34.72,34.72,0,0,0,34.68,34.69H440.43A34.72,34.72,0,0,0,475.1,392v-4.57A10.39,10.39,0,0,0,464.73,377ZM75.09,115.4a21,21,0,0,1,21-21H415.9a21,21,0,0,1,21,21V377H75.09ZM466,392a25.64,25.64,0,0,1-25.61,25.62H71.58A25.65,25.65,0,0,1,46,392v-4.57a1.32,1.32,0,0,1,1.32-1.31H464.73a1.31,1.31,0,0,1,1.31,1.31Z" />
@@ -1612,7 +1614,7 @@ class core_renderer extends \core_renderer
                         //Quản lí khóa học
                         array(
                             'status' => !isguestuser(),
-                            'icon' => '<svg style="fill: aliceblue;" width="24px" height="24px" viewBox="0 0 24 24"
+                            'icon' => '<svg   width="24px" height="24px" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                 d="M22 18h-.42a2.92 2.92 0 0 0 1.17-1.31 2.871 2.871 0 0 0 .05-2.21L18.71 3.84a2.909 2.909 0 0 0-3.74-1.66l-1.14.44a2.784 2.784 0 0 0-.83.5V3a3.009 3.009 0 0 0-3-3H9a3.009 3.009 0 0 0-3 3v.77A2.984 2.984 0 0 0 4 3H3a3.009 3.009 0 0 0-3 3v10a2.958 2.958 0 0 0 1.03 2.25A2 2 0 0 0 2 22v1a1 1 0 0 0 2 0v-1h16v1a1 1 0 0 0 2 0v-1a2 2 0 0 0 0-4zM8 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3zM2 6a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6zm10.23 12a2.984 2.984 0 0 0 .77-2V8.51l3.27 8.48a2.79 2.79 0 0 0 .67 1.01h-4.71zm8.69-2.12a.937.937 0 0 1-.49.47l-1.14.44a.9.9 0 0 1-1.15-.52l-4.1-10.63a.89.89 0 0 1 .02-.68.869.869 0 0 1 .49-.47l1.14-.44a.867.867 0 0 1 .32-.06.886.886 0 0 1 .83.57l4.1 10.64a.939.939 0 0 1-.02.68z" />
@@ -1626,7 +1628,7 @@ class core_renderer extends \core_renderer
                         // Quản lý người dùng
                         array(
                             'status' => is_siteadmin(),
-                            'icon' => '<svg style="fill: aliceblue;" width="32px" height="32px" viewBox="0 0 32 32" id="icon"
+                            'icon' => '<svg   width="24px" height="24px" viewBox="0 0 32 32" id="icon"
                     xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <style>
@@ -1658,7 +1660,7 @@ class core_renderer extends \core_renderer
                         //Báo cáo
                         array(
                             'status' => !isguestuser(),
-                            'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                            'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
                             'title' => get_string('reports', 'moodle'),
                             'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
                             'isactiveitem' => $this->isMenuActive('/reportbuilder'),

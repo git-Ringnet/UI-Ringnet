@@ -61,7 +61,7 @@ Example context (json):
     <div class="rui-topbar wrapper-page {{# output.custom_menu }}rui-topbar--custom-menu{{/ output.custom_menu }}">
         <div id="topbarLeft" class="d-inline-flex align-items-center">
 
-            <div class="d-inline-flex align-items-center">
+            <div class="d-none">
 
                 {{#topbarlogoareaonon}}
                 <a id="logo" href="{{{ config.wwwroot }}}"
@@ -73,14 +73,14 @@ Example context (json):
                             alt="{{sitename}}" />{{/customdmlogo}}
                     </span>
                     {{/customlogo}}
-
                     {{^customlogo}}
                     <span class="site-name d-none">
                         {{^ customlogotxt }}{{{ sitename }}}{{/ customlogotxt }}
                         {{{ customlogotxt }}}
                     </span>
-                    BEP
+
                     {{/customlogo}}
+                           
                 </a>
                 {{/topbarlogoareaonon}}
 
