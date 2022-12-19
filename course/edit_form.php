@@ -128,19 +128,30 @@ class course_edit_form extends moodleform
 
 
         // Chế độ
-        // $choices = array();
-        // Select visible old
-        // $choices['0'] =get_string('hide');
-        // $choices['1'] =get_string('show');
-        // $mform->addElement('select', 'visible', get_string('coursevisibility'), $f);
-        // $mform->addHelpButton('visible', 'coursevisibility');
 
-        // Change select visible to radio button visible
+        // Select visible old
         $choices = array();
-        $choices['0'] = $mform->createElement('radio', 'visible', '', get_string('hide'));
-        $choices['1'] = $mform->createElement('radio', 'visible', '', get_string('show'));
-        $mform->addGroup($choices, 'coursevisibility', get_string('coursevisibility'));
+        // $choices['0'] = get_string('hide');
+        // $choices['1'] = get_string('show');
+      
+        
+        // Change select visible to radio button visible
+        // $choices = array();
+        // $choices['0'] = $mform->createElement('radio', 'visible', '', get_string('hide'));
+        // $choices['1'] = $mform->createElement('radio', 'visible', '', get_string('show'));
+        // $mform->addGroup($choices, 'coursevisibility', get_string('coursevisibility'));
+        // $mform->addElement('select', 'visible', get_string('coursevisibility'), $choices);
+
+        // fix radio button
+        $radioarray = array();
+        $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('hide'), 0);
+        $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('show'), 1);
+        $mform->addGroup($radioarray, 'coursevisibility', get_string('coursevisibility'), array(' ', ' '), false);
+
+
+        $mform->addHelpButton('visible', 'coursevisibility');
         $mform->setDefault('visible', $courseconfig->visible);
+
 
         if (!empty($course->id)) {
             if (!has_capability('moodle/course:visibility', $coursecontext)) {
