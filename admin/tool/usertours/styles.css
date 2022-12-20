@@ -139,7 +139,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 .filemanager-container {
-    width: 85%;
+    width: 100%;
 }
 
 .filemanager-container .fp-content {
@@ -214,7 +214,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 
 #fitem_id_summary_editor {
     display: block;
-    margin-top: -70px;
+    margin-top: -40px;
     margin-left: calc(100% - 68%);
 }
 
@@ -351,9 +351,6 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     ,#fitem_id_startdate .col-md-3, #fitem_id_maxbytes .col-md-3{
         max-width: 100%;
     }
-    #fitem_id_summary_editor{
-        margin-top: -110px;
-    }
     #fitem_id_category .col-md-9{
         display: flex;
         max-width: 60%;
@@ -382,9 +379,6 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     }
     #fitem_id_overviewfiles_filemanager .col-md-9{
         max-width: 60%;
-    }
-    #fitem_id_overviewfiles_filemanager .col-md-9 .fp-navbar .filemanager-toolbar{
-        justify-content: start !important;
     }
     #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail{
         width: 125px !important;
@@ -587,4 +581,16 @@ body {
 } */
 .rui-navbar-nav--sep:before {
     left: 52px !important;
-  }
+}
+
+/* Course create & edit */
+.filemanager-container>.fm-content-wrapper{
+    justify-content: center;
+    display: flex;
+}
+.fm-nomkdir>.fp-navbar>.filemanager-toolbar.justify-content-between.w-100.d-flex {
+    display: none!important;
+}
+.fm-content-wrapper {
+    overflow-x: initial !important;
+}
