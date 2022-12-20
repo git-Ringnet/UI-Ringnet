@@ -316,7 +316,7 @@
         // $table->head[] = $fullnamedisplay;
         $table->head[] = "Họ và tên";
         // add button
-        $url1 = "https://localhost/ringnet/admin/roles/manage.php";
+        $url1 = $CFG->wwwroot."/admin/roles/manage.php";
         echo "<div id='hover_tag_a' style='display:flex; border-bottom:1px solid gray; padding:0 5px 0 5px;' class='action_bar_userManagement'>"."
         <a href='$url' style='color:#001' class='a_hover active '>Người dùng</a>
         <a href='$url1' style='margin-left:20px;color:#001;' class='a_hover'>Vai trò</a>

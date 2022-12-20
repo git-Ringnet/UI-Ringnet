@@ -383,7 +383,7 @@ class core_renderer extends \core_renderer
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
-        $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
+        $content .= "<nav class='navbar navbar-expand-lg navbar-light mb-3'>
         <div class='collapse navbar-collapse' id='navbarNav'>
           <ul class='navbar-nav'>
             <li class='nav-item active'>
@@ -406,10 +406,10 @@ class core_renderer extends \core_renderer
         </li>
           </ul>
         </div>
-      </nav>";
-        echo '<br/>';
+      </nav> <hr/>";
         $content .= html_writer::end_div(); // navigation-box
         return $content;
+        
     }
     /**
      * TODO:
