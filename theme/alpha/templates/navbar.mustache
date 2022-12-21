@@ -56,7 +56,6 @@ Example context (json):
 ]
 }
 }}
-
 <nav id="topBar" class="rui-topbar-wrapper moodle-has-zindex">
     <div class="rui-topbar wrapper-page {{# output.custom_menu }}rui-topbar--custom-menu{{/ output.custom_menu }}">
         <div id="topbarLeft" class="d-inline-flex align-items-center">
@@ -98,11 +97,10 @@ Example context (json):
                     </svg>
                 </button>
             </div>
-         
+            {{!-- BẢNG ĐIỀU KHIỂN --}}
             {{/hiddensidebar}}
-
         </div>
-
+            
         {{# output.custom_menu }}
         <nav class="moremenu navigation">
             <ul id="moremenu-topbar" role="{{#istablist}}tablist{{/istablist}}{{^istablist}}menubar{{/istablist}}"

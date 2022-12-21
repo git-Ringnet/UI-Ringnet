@@ -598,7 +598,7 @@ body {
     padding-bottom: 10px;
 }
 /* navbar-top*/
-/* .breadcrumb-item{
+.breadcrumb-item{
     display: none !important;
 }
 .breadcrumb-item:last-child{
@@ -606,7 +606,7 @@ body {
 }
 .breadcrumb-item+.breadcrumb-item::before{
     display: none !important;
-} */
+}
 /* Hover menu  */
 #itemMeeting:hover span svg g,
 #itemCourseManager:hover span svg g,

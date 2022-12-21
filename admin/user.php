@@ -304,15 +304,18 @@
         $table->head = array ();
         $table->colclasses = array();
         // add check box
-        // $mastercheckbox = new \core\output\checkbox_toggleall('participants-table', true, [
-        //     'id' => 'select-all-participants',
-        //     'name' => 'select-all-participants',
-        //     'label' => get_string('selectall'),
-        //     'labelclasses' => 'sr-only',
-        //     'classes' => 'm-1',
-        //     'checked' => false,
-        // ]);
-        // $table->head[] = $OUTPUT->render($mastercheckbox);
+        // $bulkoperations = has_capability('moodle/course:bulkmessaging', $this->context);
+        // if ($bulkoperations) {
+        //     $mastercheckbox = new \core\output\checkbox_toggleall('participants-table', true, [
+        //         'id' => 'select-all-participants',
+        //         'name' => 'select-all-participants',
+        //         'label' => get_string('selectall'),
+        //         'labelclasses' => 'sr-only',
+        //         'classes' => 'm-1',
+        //         'checked' => false,
+        //     ]);
+        //     $table->head[] = $OUTPUT->render($mastercheckbox);
+        // }
         // $table->head[] = $fullnamedisplay;
         $table->head[] = get_string('fullnametest');
         // add button
@@ -430,6 +433,7 @@
             $fullname = fullname($user, true);
 
             $row = array ();
+            // $row[] = "select";
             $row[] = "<a href=\"../user/view.php?id=$user->id&amp;course=$site->id\">$fullname</a>";
             foreach ($extracolumns as $field) {
                 $row[] = s($user->{$field});
@@ -437,14 +441,12 @@
             // $row[]=$user->city;
             // $row[] = $user->country;
             // $row[] = $strlastaccess;
-            // $row[] = 'select';
             $c = $user->id;
             $context = context_user::instance($c);
             $roles = get_user_roles($context,$user->id, true);
             $role = key($roles);
             $rolename = $roles[$role]->shortname;
             $row[] = $rolename;
-            
             if ($user->suspended) {
                 foreach ($row as $k=>$v) {
                     $row[$k] = html_writer::tag('span', $v, array('class'=>'usersuspended'));
@@ -468,8 +470,7 @@
     }
     echo $OUTPUT->footer();
 ?>
-
-<!-- <script>
+<script>
 var header = document.getElementById("hover_tag_a");
 var btns = header.getElementsByClassName("a_hover");
 for (var i = 0; i < btns.length; i++) {
@@ -479,7 +480,4 @@ for (var i = 0; i < btns.length; i++) {
   this.className += " active1";
   });
 }
-var topBar = document.getElementById('topbarLeft');
-var add = document.getElementById('vavbar_action_1');
-topBar.appendChild(add);
-</script> -->
+</script>
