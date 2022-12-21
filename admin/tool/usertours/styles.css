@@ -594,3 +594,8 @@ body {
 .fm-content-wrapper {
     overflow-x: initial !important;
 }
+#navbarNav>.navbar-nav>.nav-item.active{
+    color: #0095F6 !important;
+    border-bottom: 3px solid #0095F6;
+    padding-bottom: 10px;
+}
