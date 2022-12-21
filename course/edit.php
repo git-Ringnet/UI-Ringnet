@@ -78,7 +78,7 @@ $PAGE->set_url('/course/edit.php', $pageparams);
 // Basic access control checks.
 if ($id) {
     // Editing course.
-    if ($id == SITEID){
+    if ($id == SITEID) {
         // Don't allow editing of  'site course' using this from.
         print_error('cannoteditsiteform');
     }
@@ -88,19 +88,17 @@ if ($id) {
     require_login($course);
     $course = course_get_format($course)->get_course();
 
-    $category = $DB->get_record('course_categories', array('id'=>$course->category), '*', MUST_EXIST);
+    $category = $DB->get_record('course_categories', array('id' => $course->category), '*', MUST_EXIST);
     $coursecontext = context_course::instance($course->id);
     require_capability('moodle/course:update', $coursecontext);
-
 } else if ($categoryid) {
     // Creating new course in this category.
     $course = null;
     require_login();
-    $category = $DB->get_record('course_categories', array('id'=>$categoryid), '*', MUST_EXIST);
+    $category = $DB->get_record('course_categories', array('id' => $categoryid), '*', MUST_EXIST);
     $catcontext = context_coursecat::instance($category->id);
     require_capability('moodle/course:create', $catcontext);
     $PAGE->set_context($catcontext);
-
 } else {
     // Creating new course in default category.
     $course = null;
@@ -117,7 +115,7 @@ if (isset($catcontext)) {
 }
 
 // Prepare course and the editor.
-$editoroptions = array('maxfiles' => EDITOR_UNLIMITED_FILES, 'maxbytes'=>$CFG->maxbytes, 'trusttext'=>false, 'noclean'=>true);
+$editoroptions = array('maxfiles' => EDITOR_UNLIMITED_FILES, 'maxbytes' => $CFG->maxbytes, 'trusttext' => false, 'noclean' => true);
 $overviewfilesoptions = course_overviewfiles_options($course);
 if (!empty($course)) {
     // Add context for editor.
@@ -129,14 +127,13 @@ if (!empty($course)) {
     }
 
     // Inject current aliases.
-    $aliases = $DB->get_records('role_names', array('contextid'=>$coursecontext->id));
-    foreach($aliases as $alias) {
-        $course->{'role_'.$alias->roleid} = $alias->name;
+    $aliases = $DB->get_records('role_names', array('contextid' => $coursecontext->id));
+    foreach ($aliases as $alias) {
+        $course->{'role_' . $alias->roleid} = $alias->name;
     }
 
     // Populate course tags.
     $course->tags = core_tag_tag::get_item_tags_array('core', 'course', $course->id);
-
 } else {
     // Editor should respect category context if course context is not set.
     $editoroptions['context'] = $catcontext;
@@ -239,42 +236,44 @@ if (!empty($course->id)) {
     $PAGE->navbar->add($pagedesc);
 }
 
-    global $CFG, $COURSE, $DB;
-    $course = $DB->get_record('course', ['id' => $COURSE->id]);
-    $content = html_writer::start_div('course-teachers-box');
-    // var_dump($course);
-    $content = html_writer::start_div('course-navigation');
-    $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-    $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
-    $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
-    $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
-    $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
-    $content .= "<nav class='navbar navbar-expand-lg navbar-light mb-3'>
-    <div class='collapse navbar-collapse' id='navbarNav'>
-      <ul class='navbar-nav'>
-        <li class='nav-item active'>
-          <a class='nav-link' href='{$urledit}'>Thông tin <span class='sr-only'>(current)</span></a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
-        </li>
-        <li class='nav-item'>
-          <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
-        </li>
-        <li class='nav-item'>
-        <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
-      </li>
-      <li class='nav-item'>
-      <a class='nav-link' href='{$urlparticipant}'>Điều kiện</a>
-    </li>
-      </ul>
+
+global $CFG, $COURSE, $DB;
+$course = $DB->get_record('course', ['id' => $COURSE->id]);
+$content = html_writer::start_div('course-teachers-box');
+// var_dump($course);
+$content = html_writer::start_div('course-navigation');
+$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+$urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
+$urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
+$urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
+$urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+
+$pages = new stdClass();
+$pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
+$pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
+$pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+$pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+$pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+
+$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+$urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+$content .= "<nav class='navbar navbar-expand-lg navbar-light mb-3'>
+<div class='collapse navbar-collapse' id='navbarNav'>
+  <ul class='navbar-nav'>";
+foreach ($pages as $key => $value) {
+    $active = $urltest === $value['url'] ? 'active' : '';
+    $content .=
+        "<li class='nav-item {$active}'>
+        <a class='nav-link' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
+        </li>";
+}
+$content .= "</ul>
     </div>
   </nav> <hr/>";
-    echo '<br/>';
-    $content .= html_writer::end_div(); // navigation-box
+//     echo '<br/>';
+$content .= html_writer::end_div(); // navigation-box
 
 $PAGE->set_title($title);
 $PAGE->add_body_class('limitedwidth');

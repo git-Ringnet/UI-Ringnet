@@ -383,33 +383,34 @@ class core_renderer extends \core_renderer
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+
+        $pages = new stdClass();
+        $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
+        $pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
+        $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+        $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+        $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+
+        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+        $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
         $content .= "<nav class='navbar navbar-expand-lg navbar-light mb-3'>
-        <div class='collapse navbar-collapse' id='navbarNav'>
-          <ul class='navbar-nav'>
-            <li class='nav-item active'>
-              <a class='nav-link' href='{$urledit}'>Thông tin <span class='sr-only'>(current)</span></a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
-            </li>
-            <li class='nav-item'>
-            <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
-          </li>
-          <li class='nav-item'>
-          <a class='nav-link' href='{$urlparticipant}'>Điều kiện</a>
-        </li>
-          </ul>
-        </div>
-      </nav> <hr/>";
+<div class='collapse navbar-collapse' id='navbarNav'>
+  <ul class='navbar-nav'>";
+        foreach ($pages as $key => $value) {
+            $active = $urltest === $value['url'] ? 'active' : '';
+            $content .=
+                "<li class='nav-item {$active}'>
+        <a class='nav-link' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
+        </li>";
+        }
+        $content .= "</ul>
+    </div>
+  </nav> <hr/>";
+        //     echo '<br/>';
         $content .= html_writer::end_div(); // navigation-box
         return $content;
-        
     }
     /**
      * TODO:
@@ -1451,19 +1452,19 @@ class core_renderer extends \core_renderer
 
             if ($COURSE->id > 1) {
                 $headerlinks = [
-                        'headerlinksdata' => array(
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
-                                'title' => get_string('sitehome', 'moodle'),
-                                'url' => new moodle_url('/'),
-                                'isactiveitem' => $this->isMenuActive('/'),
-                                'itemid' => 'itemHome',
-                                'visability' => true,
-                            ),
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg   width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
+                    'headerlinksdata' => array(
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
+                            'title' => get_string('sitehome', 'moodle'),
+                            'url' => new moodle_url('/'),
+                            'isactiveitem' => $this->isMenuActive('/'),
+                            'itemid' => 'itemHome',
+                            'visability' => true,
+                        ),
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg   width="24px" height="24px" viewBox="0 0 512 512" data-name="Layer 1"
                                 id="Layer_1" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M464.73,377H446V115.4A30.11,30.11,0,0,0,415.9,85.33H96.1A30.1,30.1,0,0,0,66,115.4V377H47.28A10.39,10.39,0,0,0,36.9,387.41V392a34.72,34.72,0,0,0,34.68,34.69H440.43A34.72,34.72,0,0,0,475.1,392v-4.57A10.39,10.39,0,0,0,464.73,377ZM75.09,115.4a21,21,0,0,1,21-21H415.9a21,21,0,0,1,21,21V377H75.09ZM466,392a25.64,25.64,0,0,1-25.61,25.62H71.58A25.65,25.65,0,0,1,46,392v-4.57a1.32,1.32,0,0,1,1.32-1.31H464.73a1.31,1.31,0,0,1,1.31,1.31Z" />
@@ -1471,32 +1472,32 @@ class core_renderer extends \core_renderer
                                     d="M398.36,126.36H113.64a4.53,4.53,0,0,0-4.53,4.53V339.31a4.53,4.53,0,0,0,4.53,4.53H398.36a4.53,4.53,0,0,0,4.54-4.53V130.89A4.53,4.53,0,0,0,398.36,126.36Zm-4.53,104.82H362v-8.7a36.27,36.27,0,0,0-21.38-33,21.77,21.77,0,1,0-29.69,0,36.27,36.27,0,0,0-21.39,33v8.7H260.53V135.42h133.3Zm-95.18,0v-8.7a27.16,27.16,0,0,1,54.32,0v8.7Zm14.47-57.62a12.7,12.7,0,1,1,12.69,12.7A12.71,12.71,0,0,1,313.12,173.56Zm-61.65-38.14v95.76H222.42v-8.7a36.27,36.27,0,0,0-21.38-33,21.77,21.77,0,1,0-29.7,0,36.27,36.27,0,0,0-21.38,33v8.7H118.17V135.42ZM159,231.18v-8.7a27.16,27.16,0,1,1,54.32,0v8.7Zm14.46-57.62a12.7,12.7,0,1,1,12.7,12.7A12.72,12.72,0,0,1,173.49,173.56Zm-55.32,66.69h133.3v94.53H222.42v-8.7a36.26,36.26,0,0,0-21.38-33,21.77,21.77,0,1,0-29.7,0,36.26,36.26,0,0,0-21.38,33v8.7H118.17Zm55.32,36.9a12.7,12.7,0,1,1,12.7,12.7A12.72,12.72,0,0,1,173.49,277.15Zm39.86,57.63H159v-8.7a27.16,27.16,0,0,1,54.32,0Zm99.77-57.63a12.7,12.7,0,1,1,12.69,12.7A12.71,12.71,0,0,1,313.12,277.15ZM353,334.78H298.65v-8.7a27.16,27.16,0,0,1,54.32,0Zm9.07,0v-8.7a36.26,36.26,0,0,0-21.38-33,21.77,21.77,0,1,0-29.69,0,36.25,36.25,0,0,0-21.39,33v8.7H260.53V240.25h133.3v94.53Z" />
                                 <path d="M160.41,355.29H113.64a4.53,4.53,0,0,0,0,9.06h46.77a4.53,4.53,0,0,0,0-9.06Z" />
                             </svg>',
-                                'title' => get_string('meeting', 'moodle'),
-                                //Sửa meeting sidebar
-                                'url' => '',
-                                'isactiveitem' => $this->isMenuActive('/dasd'),
-                                'itemid' => 'itemMeeting',
-                                'visability' => true,
-                            ),
-    
-                            //Quản lí khóa học
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg   width="24px" height="24px" viewBox="0 0 24 24"
+                            'title' => get_string('meeting', 'moodle'),
+                            //Sửa meeting sidebar
+                            'url' => '',
+                            'isactiveitem' => $this->isMenuActive('/dasd'),
+                            'itemid' => 'itemMeeting',
+                            'visability' => true,
+                        ),
+
+                        //Quản lí khóa học
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg   width="24px" height="24px" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M22 18h-.42a2.92 2.92 0 0 0 1.17-1.31 2.871 2.871 0 0 0 .05-2.21L18.71 3.84a2.909 2.909 0 0 0-3.74-1.66l-1.14.44a2.784 2.784 0 0 0-.83.5V3a3.009 3.009 0 0 0-3-3H9a3.009 3.009 0 0 0-3 3v.77A2.984 2.984 0 0 0 4 3H3a3.009 3.009 0 0 0-3 3v10a2.958 2.958 0 0 0 1.03 2.25A2 2 0 0 0 2 22v1a1 1 0 0 0 2 0v-1h16v1a1 1 0 0 0 2 0v-1a2 2 0 0 0 0-4zM8 3a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V3zM2 6a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6zm10.23 12a2.984 2.984 0 0 0 .77-2V8.51l3.27 8.48a2.79 2.79 0 0 0 .67 1.01h-4.71zm8.69-2.12a.937.937 0 0 1-.49.47l-1.14.44a.9.9 0 0 1-1.15-.52l-4.1-10.63a.89.89 0 0 1 .02-.68.869.869 0 0 1 .49-.47l1.14-.44a.867.867 0 0 1 .32-.06.886.886 0 0 1 .83.57l4.1 10.64a.939.939 0 0 1-.02.68z" />
                             </svg>',
-                                'title' => get_string('coursemanager', 'moodle'),
-                                'url' => new moodle_url('/my/courses.php'),
-                                'isactiveitem' => $this->isMenuActive('/courses.php'),
-                                'itemid' => 'itemCourseManager',
-                                'visability' => true,
-                            ),
-                            // Quản lý người dùng
-                            array(
-                                'status' => is_siteadmin(),
-                                'icon' => '<svg   width="24px" height="24px" viewBox="0 0 32 32" id="icon"
+                            'title' => get_string('coursemanager', 'moodle'),
+                            'url' => new moodle_url('/my/courses.php'),
+                            'isactiveitem' => $this->isMenuActive('/courses.php'),
+                            'itemid' => 'itemCourseManager',
+                            'visability' => true,
+                        ),
+                        // Quản lý người dùng
+                        array(
+                            'status' => is_siteadmin(),
+                            'icon' => '<svg   width="24px" height="24px" viewBox="0 0 32 32" id="icon"
                         xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <style>
@@ -1519,22 +1520,22 @@ class core_renderer extends \core_renderer
                         <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1"
                             width="32" height="32" />
                     </svg>',
-                                'title' => get_string('usermanager', 'moodle'),
-                                'url' => new moodle_url('/admin/user.php'),
-                                'isactiveitem' => $this->isMenuActive('/admin/user.php'),
-                                'itemid' => 'itemCourseManager',
-                                'visability' => true,
-                            ),
-                            //Báo cáo
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
-                                'title' => get_string('reports', 'moodle'),
-                                'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
-                                'isactiveitem' => $this->isMenuActive('/reportbuilder'),
-                                'itemid' => 'itemReportBuilder',
-                                'visability' => true,
-                            ),
+                            'title' => get_string('usermanager', 'moodle'),
+                            'url' => new moodle_url('/admin/user.php'),
+                            'isactiveitem' => $this->isMenuActive('/admin/user.php'),
+                            'itemid' => 'itemCourseManager',
+                            'visability' => true,
+                        ),
+                        //Báo cáo
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.75 15.75L8.25 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.25 15.75L4.75 19.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11.75 19.25H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M8.75 8.75H15.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9.75 11.75H14.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M19.25 19.25V6.75C19.25 5.64543 18.3546 4.75 17.25 4.75H6.75C5.64543 4.75 4.75 5.64543 4.75 6.75V12.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+                            'title' => get_string('reports', 'moodle'),
+                            'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
+                            'isactiveitem' => $this->isMenuActive('/reportbuilder'),
+                            'itemid' => 'itemReportBuilder',
+                            'visability' => true,
+                        ),
                         //Thêm mục cho side bar
                         // 'status' => !isguestuser(),
                         // 'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 8.75V19"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8.25H19"></path></svg>',
