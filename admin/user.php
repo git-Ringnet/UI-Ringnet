@@ -12,7 +12,7 @@
     $sort         = optional_param('sort', 'name', PARAM_ALPHANUMEXT);
     $dir          = optional_param('dir', 'ASC', PARAM_ALPHA);
     $page         = optional_param('page', 0, PARAM_INT);
-    $perpage      = optional_param('perpage', 10, PARAM_INT);        // how many per page
+    $perpage      = optional_param('perpage', 20, PARAM_INT);        // how many per page
     $ru           = optional_param('ru', '2', PARAM_INT);            // show remote users
     $lu           = optional_param('lu', '2', PARAM_INT);            // show local users
     $acl          = optional_param('acl', '0', PARAM_INT);           // id of user to tweak mnet ACL (requires $access)
@@ -314,13 +314,13 @@
         // ]);
         // $table->head[] = $OUTPUT->render($mastercheckbox);
         // $table->head[] = $fullnamedisplay;
-        $table->head[] = "Họ và tên";
+        $table->head[] = get_string('fullnametest');
         // add button
-        $url1 = "https://localhost/ringnet/admin/roles/manage.php";
+        $url1 = $CFG->wwwroot."/admin/roles/manage.php";
         echo "<div id='hover_tag_a' style='display:flex; border-bottom:1px solid gray; padding:0 5px 0 5px;' class='action_bar_userManagement'>"."
-        <a href='$url' style='color:#001' class='a_hover active '>Người dùng</a>
-        <a href='$url1' style='margin-left:20px;color:#001;' class='a_hover'>Vai trò</a>
-        <a href='#' style='margin-left:20px;color:#001;' class='a_hover'>Nhóm</a>
+        <a href='$url' style='color:#001' class='a_hover active1'>".get_string('fullnametest')."</a>
+        <a href='$url1' style='margin-left:20px;color:#001;' class='a_hover'>".get_string('roles')."</a>
+        <a href='#' style='margin-left:20px;color:#001;' class='a_hover'>".get_string('group')."</a>
         "."</div>";
         if (has_capability('moodle/user:create', $sitecontext)) {
             $url = new moodle_url('/user/editadvanced.php', array('id' => -1));
@@ -466,28 +466,20 @@
         echo html_writer::end_tag('div');
         echo "<div>". $OUTPUT->paging_bar($usercount, $page, $perpage, $baseurl) ."</div>";
     }
- 
-
     echo $OUTPUT->footer();
 ?>
-<style>
-    .a_hover{
-        transform: translateY(2px);
-    }
-    .active{
-        color: #0095F6 !important;
-        border-bottom: 3px solid #0095F6;
-        padding-bottom: 10px;
-    }
-</style>
-<script>
+
+<!-- <script>
 var header = document.getElementById("hover_tag_a");
 var btns = header.getElementsByClassName("a_hover");
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("active");
-  current[0].className = current[0].className.replace("active", "");
-  this.className += " active";
+  var current = document.getElementsByClassName("active1");
+  current[0].className = current[0].className.replace("active1", "");
+  this.className += " active1";
   });
 }
-</script>
+var topBar = document.getElementById('topbarLeft');
+var add = document.getElementById('vavbar_action_1');
+topBar.appendChild(add);
+</script> -->

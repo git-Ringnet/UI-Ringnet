@@ -56,13 +56,11 @@ Example context (json):
 ]
 }
 }}
-<nav id="topBar" class="rui-topbar-wrapper moodle-has-zindex">
 
+<nav id="topBar" class="rui-topbar-wrapper moodle-has-zindex">
     <div class="rui-topbar wrapper-page {{# output.custom_menu }}rui-topbar--custom-menu{{/ output.custom_menu }}">
         <div id="topbarLeft" class="d-inline-flex align-items-center">
-
             <div class="d-none">
-
                 {{#topbarlogoareaonon}}
                 <a id="logo" href="{{{ config.wwwroot }}}"
                     class="d-inline-flex rui-navbar-brand {{#customlogo}}rui-navbar-brand--img{{/customlogo}} aabtn {{# output.should_display_navbar_logo }}has-logo{{/ output.should_display_navbar_logo }}">
@@ -80,7 +78,7 @@ Example context (json):
                     </span>
 
                     {{/customlogo}}
-                           
+
                 </a>
                 {{/topbarlogoareaonon}}
 
@@ -100,8 +98,9 @@ Example context (json):
                     </svg>
                 </button>
             </div>
-            BẢNG ĐIỀU KHIỂN
+         
             {{/hiddensidebar}}
+
         </div>
 
         {{# output.custom_menu }}
@@ -143,15 +142,10 @@ Example context (json):
         {{/topbarcustomhtml}}
 
         <ul class="rui-icon-menu rui-icon-menu--right {{^topbarcustomhtml}}ml-auto{{/topbarcustomhtml}}">
-            <li>
-                
-            </li>
             <li>{{{ output.navbar_plugin_output }}}</li>
             <li class="rui-icon-menu-user m-0">
                 {{{ output.user_menu }}}
             </li>
-
         </ul>
-
     </div>
 </nav>

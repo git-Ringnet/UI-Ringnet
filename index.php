@@ -99,7 +99,6 @@
 
 	<?php echo $OUTPUT->footer(); ?>
 
-
 </body>
 
 </html>
