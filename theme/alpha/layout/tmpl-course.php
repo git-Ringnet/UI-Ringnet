@@ -174,7 +174,7 @@ if ($PAGE->course->visible == '1') {
 
 $iscoursepage = true;
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-
+$get_title = $PAGE->title;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -189,6 +189,7 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'hiddensidebar' => $hiddensidebar,
     'navdraweropen' => $navdraweropen,
+    'get_title' =>$get_title,
     'draweropenright' => $draweropenright,
     'ctopbl' => $ctopbl,
     'cbottombl' => $cbottombl,
@@ -229,3 +230,4 @@ $templatecontext = array_merge($templatecontext, $themesettings->footer_settings
 
 $PAGE->requires->js_call_amd('theme_alpha/rui', 'init');
 echo $OUTPUT->render_from_template('theme_alpha/tmpl-course', $templatecontext);
+

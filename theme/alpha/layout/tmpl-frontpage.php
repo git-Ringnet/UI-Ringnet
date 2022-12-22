@@ -110,8 +110,6 @@ for ($i = 1; $i <= $total; $i++) {
 }
 asort($array);
 foreach($array as $key => $value) {
-
-
     $ruiscb .= $OUTPUT->theme_part('block'.$key);
     if($key== '1')
     {
@@ -134,8 +132,6 @@ $headercontent = $header->export_for_template($renderer);
 // Don't display new moodle 4.0 secondary menu if old settings region is available
 $secondarynavigation = false;
 $overflow = '';
-$has_action = true;
-// $get_title = get_title();
 
 if ($PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
@@ -165,6 +161,7 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$get_title = $PAGE->title;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -180,11 +177,7 @@ $templatecontext = [
     'ruiscb' => $ruiscb,
     'hiddensidebar' => $hiddensidebar,
     'navdraweropen' => $navdraweropen,
-    'get_items' => $get_items,
-    'has_action' => $has_action ?: true,
-    'is_hidden' => $is_hidden,
-    'is_last' => $is_last,
-    'get_title' => $get_title,
+    'get_title'=>$get_title,
     'draweropenright' => $draweropenright,
     'isnotloggedin' => $isnotloggedin,
     'isfrontpage' => $isfrontpage,
@@ -212,7 +205,5 @@ $templatecontext = array_merge($templatecontext, $themesettings->footer_settings
 $PAGE->requires->js_call_amd('theme_alpha/rui', 'init');
 
 echo $OUTPUT->render_from_template('theme_alpha/tmpl-frontpage', $templatecontext);
-?>
-<script>
-    alert('1111a');
-</script>
+
+
