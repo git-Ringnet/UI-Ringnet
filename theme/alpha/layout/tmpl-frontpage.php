@@ -213,6 +213,3 @@ $PAGE->requires->js_call_amd('theme_alpha/rui', 'init');
 
 echo $OUTPUT->render_from_template('theme_alpha/tmpl-frontpage', $templatecontext);
 ?>
-<script>
-    alert('1111a');
-</script>
