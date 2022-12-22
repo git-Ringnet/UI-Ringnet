@@ -139,7 +139,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 .filemanager-container {
-    width: 100%;
+    width: 85%;
 }
 
 .filemanager-container .fp-content {
@@ -214,7 +214,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 
 #fitem_id_summary_editor {
     display: block;
-    margin-top: -40px;
+    margin-top: -70px;
     margin-left: calc(100% - 68%);
 }
 
@@ -379,6 +379,9 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     }
     #fitem_id_overviewfiles_filemanager .col-md-9{
         max-width: 60%;
+    }
+    #fitem_id_overviewfiles_filemanager .col-md-9 .fp-navbar .filemanager-toolbar{
+        justify-content: start !important;
     }
     #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail{
         width: 125px !important;
@@ -581,21 +584,34 @@ body {
 } */
 .rui-navbar-nav--sep:before {
     left: 52px !important;
+  }
+/* Side bar users Management */
+.a_hover{
+    transform: translateY(2px);
 }
-
-/* Course create & edit */
-.filemanager-container>.fm-content-wrapper{
-    justify-content: center;
-    display: flex;
-}
-.fm-nomkdir>.fp-navbar>.filemanager-toolbar.justify-content-between.w-100.d-flex {
-    display: none!important;
-}
-.fm-content-wrapper {
-    overflow-x: initial !important;
-}
-#navbarNav>.navbar-nav>.nav-item.active{
+.active1{
     color: #0095F6 !important;
     border-bottom: 3px solid #0095F6;
     padding-bottom: 10px;
+}
+/* navbar-top*/
+.breadcrumb-item{
+    display: none !important;
+}
+.breadcrumb-item:last-child{
+    display: block !important;
+}
+.breadcrumb-item+.breadcrumb-item::before{
+    display: none !important;
+}
+/* Hover menu  */
+#itemMeeting:hover span svg g,
+#itemCourseManager:hover span svg g,
+#itemCourseManager:hover span svg g,
+#itemReportBuilder:hover span svg g
+{
+    fill: #EC212D !important;
+}
+.rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon svg g{
+    fill: #EC212D !important;
 }

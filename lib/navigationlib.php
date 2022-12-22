@@ -3684,6 +3684,7 @@ class navbar extends navigation_node {
      *
      * @return array
      */
+    // Navbar hear
     public function get_items() {
         global $CFG;
         $items = array();
