@@ -88,9 +88,12 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     display: block;
     padding: 1em;
 }
-.filepicker-filelist, .filemanager-container{
+
+.filepicker-filelist,
+.filemanager-container {
     min-height: 150px !important;
 }
+
 /* CSS */
 .pagination {
     float: right;
@@ -104,7 +107,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     display: none;
 }
 
-#id_main .moreless-actions .felement{
+#id_main .moreless-actions .felement {
     display: none;
 }
 
@@ -261,9 +264,10 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 /* CSS participants */
-#participants{
+#participants {
     width: 100% !important;
 }
+
 .tertiary-navigation .row {
     float: right;
 }
@@ -291,7 +295,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 .userlist .no-overflow {
-   width: 100%;
+    width: 100%;
 }
 
 .userlist p {
@@ -307,10 +311,14 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #fitem_id_roletoassign {
     width: 100%;
 }
-#fitem_id_userlist .col-md-3, #fitem_id_cohortlist .col-md-3,#fitem_id_roletoassign .col-md-3{
+
+#fitem_id_userlist .col-md-3,
+#fitem_id_cohortlist .col-md-3,
+#fitem_id_roletoassign .col-md-3 {
     width: 100% !important;
     text-align: left !important;
 }
+
 #fitem_id_roletoassign .col-md-9 {
     max-width: 80% !important;
     margin-left: 1% !important;
@@ -321,16 +329,21 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     max-width: 98% !important;
     margin-left: 1% !important;
 }
-.btn-addNewsUsers{
+
+.btn-addNewsUsers {
     text-align: right;
 }
-.btn-addNewsUsers .singlebutton button,.btn-addNewsRole .singlebutton button{
+
+.btn-addNewsUsers .singlebutton button,
+.btn-addNewsRole .singlebutton button {
     background: #EC202D;
     color: white;
 }
-#id_descriptionhdr fieldset legend{
+
+#id_descriptionhdr fieldset legend {
     display: none;
 }
+
 /* #region-main-box .wrapper-course .main-content form button{
     background: blue;
 } */
@@ -341,60 +354,84 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 @media only screen and (max-width: 526px) {
-    #fitem_id_overviewfiles_filemanager{
+    #fitem_id_overviewfiles_filemanager {
         width: 35%;
     }
-    #fitem_id_fullname,#fitem_id_category ,#fitem_id_summary_editor ,#fgroup_id_coursevisibility ,#fitem_id_startdate ,#fitem_id_enddate,#fitem_id_maxbytes{
+
+    #fitem_id_fullname,
+    #fitem_id_category,
+    #fitem_id_summary_editor,
+    #fgroup_id_coursevisibility,
+    #fitem_id_startdate,
+    #fitem_id_enddate,
+    #fitem_id_maxbytes {
         width: 65%;
     }
-    #fitem_id_fullname .col-md-3,#fitem_id_category .col-md-3,#fitem_id_summary_editor .col-md-3,#fgroup_id_coursevisibility .col-md-3
-    ,#fitem_id_startdate .col-md-3, #fitem_id_maxbytes .col-md-3{
+
+    #fitem_id_fullname .col-md-3,
+    #fitem_id_category .col-md-3,
+    #fitem_id_summary_editor .col-md-3,
+    #fgroup_id_coursevisibility .col-md-3,
+    #fitem_id_startdate .col-md-3,
+    #fitem_id_maxbytes .col-md-3 {
         max-width: 100%;
     }
-    #fitem_id_category .col-md-9{
+
+    #fitem_id_category .col-md-9 {
         display: flex;
         max-width: 60%;
     }
-     #fitem_id_category .col-md-9{
-         max-width: 60%;
-     }
-}
-@media only screen and (min-width: 527px) and (max-width:999px){
-     #fitem_id_summary_editor{
-        margin-top: -10%;
-    }
-     #fitem_id_category .col-md-9{
-         max-width: 60%;
-     }
-}
-@media only screen and (min-width: 1000px){
-     .tertiary-navigation .navitem .enrol_manual_plugin form input {
-    background: rgb(230, 8, 8);
-    }
-    #fitem_id_overviewfiles_filemanager{
-        width: 31%;
-    }
-    #fitem_id_overviewfiles_filemanager .col-md-3{
-        text-align: left !important;
-    }
-    #fitem_id_overviewfiles_filemanager .col-md-9{
+
+    #fitem_id_category .col-md-9 {
         max-width: 60%;
     }
-    #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail{
+}
+
+@media only screen and (min-width: 527px) and (max-width:999px) {
+    #fitem_id_summary_editor {
+        margin-top: -10%;
+    }
+
+    #fitem_id_category .col-md-9 {
+        max-width: 60%;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .tertiary-navigation .navitem .enrol_manual_plugin form input {
+        background: rgb(230, 8, 8);
+    }
+
+    #fitem_id_overviewfiles_filemanager {
+        width: 31%;
+    }
+
+    #fitem_id_overviewfiles_filemanager .col-md-3 {
+        text-align: left !important;
+    }
+
+    #fitem_id_overviewfiles_filemanager .col-md-9 {
+        max-width: 60%;
+    }
+
+    #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail {
         width: 125px !important;
         height: 110px !important;
     }
-    #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail img{
+
+    #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail img {
         width: 90% !important;
         height: auto !important;
         max-width: none !important;
         max-height: none !important;
     }
-     #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-filename-field .text-truncate{
+
+    #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-filename-field .text-truncate {
         width: 150px !important;
     }
 
 }
+
 /* /CSS */
 
 /* @media only screen and (min-width: 527px){
@@ -439,9 +476,11 @@ span.rui-sidebar-nav-icon {
     color: #EC212D !important;
     border-left: 0.5rem solid !important;
 }
-a.text-dark:hover{
+
+a.text-dark:hover {
     color: #EC212D !important;
 }
+
 .theme-dark .rui-sidebar-nav-item-link.active,
 .theme-dark .rui-sidebar-nav-item-link:hover {
     background: #FEF6F6 !important;
@@ -473,7 +512,8 @@ a.text-dark:hover{
 .theme-dark .rui-sidebar-nav-item-link:hover .rui-sidebar-nav-text {
     color: #EC212D !important;
 }
-.theme-dark .rui-sidebar-nav-item-link.active{
+
+.theme-dark .rui-sidebar-nav-item-link.active {
     border-left: 1rem solid;
 }
 
@@ -502,14 +542,17 @@ a.text-dark:hover{
     background: #bf6166 !important;
 }
 
-.course .title {
+.course .title,
+.navbar-nav .title {
     font-size: 16px;
     font-weight: 600;
     color: black;
 }
 
 .course .before,
-.course .active {
+.course .active,
+.navbar-nav .before,
+.navbar-nav .active {
     background-image: linear-gradient(to right,
             #0095F6,
             #0095F6 50%,
@@ -525,31 +568,37 @@ a.text-dark:hover{
 }
 
 .course .before:before,
-.course .active:before {
+.course .active:before,
+.navbar-nav .before:before,
+.navbar-nav .active:before {
     content: '';
     background: #0095F6;
     display: block;
     position: absolute;
-    bottom: -3px;
+    bottom: -5px;
     left: 0;
     width: 0;
     height: 3px;
     transition: all 0.3s ease-in-out;
 }
 
-.course .before:hover {
+.course .before:hover,
+.navbar-nav .before:hover {
     background-position: 0;
 }
 
-.course .before:hover::before {
+.course .before:hover::before,
+.navbar-nav .before:hover::before {
     width: 100%;
 }
 
-.course .active {
+.course .active,
+.navbar-nav .active {
     background-position: 0;
 }
 
-.course .active::before {
+.course .active::before,
+.navbar-nav .active::before {
     width: 100%;
 }
 
@@ -576,6 +625,7 @@ body {
     font-family: 'Inter' !important;
     font-style: normal !important;
 }
+
 /* #page-header h2.rui-page-title.rui-page-title--context,h5#instance-5-header,.rui-breadcrumbs  {
     display: none !important;
 } */
@@ -584,18 +634,30 @@ body {
 }
 
 /* Course create & edit */
-.filemanager-container>.fm-content-wrapper{
+.filemanager-container>.fm-content-wrapper {
     justify-content: center;
     display: flex;
 }
+
 .fm-nomkdir>.fp-navbar>.filemanager-toolbar.justify-content-between.w-100.d-flex {
-    display: none!important;
+    display: none !important;
 }
+
 .fm-content-wrapper {
     overflow-x: initial !important;
 }
-#navbarNav>.navbar-nav>.nav-item.active{
-    color: #0095F6 !important;
-    border-bottom: 3px solid #0095F6;
-    padding-bottom: 10px;
+
+.wrapper-course hr {
+    margin: 0 -40px;
+}
+
+.navbar-nav .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+
+.navbar {
+    padding: 0.25rem !important;
 }
