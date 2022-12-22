@@ -1497,7 +1497,7 @@ class core_renderer extends \core_renderer
                         //     'visability' => true,
                         //     ),
 
-                    ),
+                    
                 ];
             } else {
                 $headerlinks = [
