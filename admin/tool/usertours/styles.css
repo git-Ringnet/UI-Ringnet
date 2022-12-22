@@ -351,9 +351,6 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     ,#fitem_id_startdate .col-md-3, #fitem_id_maxbytes .col-md-3{
         max-width: 100%;
     }
-    #fitem_id_summary_editor{
-        margin-top: -110px;
-    }
     #fitem_id_category .col-md-9{
         display: flex;
         max-width: 60%;

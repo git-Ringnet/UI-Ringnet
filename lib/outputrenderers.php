@@ -5594,8 +5594,7 @@ class core_renderer_maintenance extends core_renderer {
             </li>
           </ul>
         </div>
-      </nav>";
-        echo '<br/>';
+      </nav> <hr/>";
         $content .= html_writer::end_div(); // navigation-box
         return $content;
     }
