@@ -23,7 +23,7 @@
  */
 
 $string['addinganewrole'] = 'Adding a new role';
-$string['addrole'] = 'Thêm vai trò';
+$string['addrole'] = 'Create a new role';
 $string['advancedoverride'] = 'Advanced role override';
 $string['allow'] = 'Allow';
 $string['allowassign'] = 'Allow role assignments';
@@ -51,7 +51,7 @@ $string['archetypeteacher'] = 'ARCHETYPE: Teacher (non-editing)';
 $string['archetypeuser'] = 'ARCHETYPE: Authenticated user';
 $string['assignanotherrole'] = 'Assign another role';
 $string['assignerror'] = 'Error while assigning the role {$a->role} to user {$a->user}.';
-$string['assignglobalroles'] = 'Quản lý vai trò người dùng';
+$string['assignglobalroles'] = 'Role Management';
 $string['assignedroles'] = 'Assigned roles';
 $string['assignmentcontext'] = 'Assignment context';
 $string['assignmentoptions'] = 'Assignment options';
@@ -490,7 +490,7 @@ $string['usersfrommatching'] = 'Users from {$a->contextname} matching \'{$a->sea
 $string['usersinthisx'] = 'Users in this {$a}';
 $string['usersinthisxmatching'] = 'Users in this {$a->contexttype} matching \'{$a->search}\'';
 $string['userswithrole'] = 'All users with a role';
-$string['userswiththisrole'] = 'Thành viên';
+$string['userswiththisrole'] = 'Participants';
 $string['useshowadvancedtochange'] = 'Use \'Show advanced\' to change';
 $string['viewingdefinitionofrolex'] = 'Viewing the definition of role \'{$a}\'';
 $string['viewrole'] = 'View role details';

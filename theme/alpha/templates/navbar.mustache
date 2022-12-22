@@ -57,12 +57,9 @@ Example context (json):
 }
 }}
 <nav id="topBar" class="rui-topbar-wrapper moodle-has-zindex">
-
     <div class="rui-topbar wrapper-page {{# output.custom_menu }}rui-topbar--custom-menu{{/ output.custom_menu }}">
         <div id="topbarLeft" class="d-inline-flex align-items-center">
-
             <div class="d-none">
-
                 {{#topbarlogoareaonon}}
                 <a id="logo" href="{{{ config.wwwroot }}}"
                     class="d-inline-flex rui-navbar-brand {{#customlogo}}rui-navbar-brand--img{{/customlogo}} aabtn {{# output.should_display_navbar_logo }}has-logo{{/ output.should_display_navbar_logo }}">
@@ -80,7 +77,7 @@ Example context (json):
                     </span>
 
                     {{/customlogo}}
-                           
+
                 </a>
                 {{/topbarlogoareaonon}}
 
@@ -100,7 +97,20 @@ Example context (json):
                     </svg>
                 </button>
             </div>
-            BẢNG ĐIỀU KHIỂN
+            {{!-- BẢNG ĐIỀU KHIỂN --}}
+            <ol class="breadcrumb">{{!
+                }}{{^get_items}}
+                {{^has_action}}
+                <li class="breadcrumb-item{{#is_hidden}} dimmed_text{{/is_hidden}}">
+                    <a href="{{{action}}}" {{#is_last}}aria-current="page" {{/is_last}}
+                        {{^get_title}}title="{{get_title}}" {{/get_title}}><span
+                            class="text-truncate">{{{get_content}}}</span></a>
+                </li>
+                {{/has_action}}
+                {{/get_items}}{{!
+                }}
+            </ol>
+
             {{/hiddensidebar}}
         </div>
 
@@ -143,15 +153,10 @@ Example context (json):
         {{/topbarcustomhtml}}
 
         <ul class="rui-icon-menu rui-icon-menu--right {{^topbarcustomhtml}}ml-auto{{/topbarcustomhtml}}">
-            <li>
-                
-            </li>
             <li>{{{ output.navbar_plugin_output }}}</li>
             <li class="rui-icon-menu-user m-0">
                 {{{ output.user_menu }}}
             </li>
-
         </ul>
-
     </div>
 </nav>

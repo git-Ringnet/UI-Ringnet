@@ -22,6 +22,8 @@
  * @license   Commercial https://themeforest.net/licenses
  */
 
+use tool_courserating\local\models\flag;
+
 defined('MOODLE_INTERNAL') || die();
 
 user_preference_allow_ajax_update('drawer-open-nav', PARAM_ALPHA);
@@ -110,7 +112,7 @@ $headercontent = $header->export_for_template($renderer);
 
 // Don't display new moodle 4.0 secondary menu if old settings region is available
 $secondarynavigation = false;
-$overflow = '';
+$overflow = ''; 
 
 if ($PAGE->has_secondary_navigation()) {
     $tablistnav = $PAGE->has_tablist_secondary_navigation();
@@ -153,6 +155,11 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'hiddensidebar' => $hiddensidebar,
     'navdraweropen' => $navdraweropen,
+    'get_items' => $get_items,
+    'has_action' => $has_action ?: false,
+    'is_hidden' => $is_hidden,
+    'is_last' => $is_last,
+    'get_title' => $get_title,
     'draweropenright' => $draweropenright,
     // Moodle 4.0
     'blockdraweropen' => $blockdraweropen,
@@ -177,3 +184,7 @@ $templatecontext = array_merge($templatecontext, $themesettings->footer_settings
 
 $PAGE->requires->js_call_amd('theme_alpha/rui', 'init');
 echo $OUTPUT->render_from_template('theme_alpha/tmpl-dashboard', $templatecontext);
+?>
+<script>
+    alert('1111');
+</script>
