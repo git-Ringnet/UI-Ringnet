@@ -128,8 +128,8 @@ $roles = [];
 foreach ($queryrole as $qrole) :
     //echo $qrole->roleid;
     $roles[] = $qrole->roleid;
-    echo $qrole->roleid;
-    echo $qrole->rolename;
+    // echo $qrole->roleid;
+    // echo $qrole->rolename;
 endforeach;
 
 // check role anywhere

@@ -375,7 +375,6 @@ class core_renderer extends \core_renderer
     {
         global $CFG, $COURSE, $DB;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
-        $content = html_writer::start_div('course-teachers-box');
         // var_dump($course);
         $content = html_writer::start_div('course-navigation');
         $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
@@ -383,30 +382,32 @@ class core_renderer extends \core_renderer
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
-        $content .= "<nav class='navbar navbar-expand-lg navbar-light mb-3'>
-        <div class='collapse navbar-collapse' id='navbarNav'>
-          <ul class='navbar-nav'>
-            <li class='nav-item active'>
-              <a class='nav-link' href='{$urledit}'>Thông tin <span class='sr-only'>(current)</span></a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
-            </li>
-            <li class='nav-item'>
-              <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
-            </li>
-            <li class='nav-item'>
-            <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
-          </li>
-          <li class='nav-item'>
-          <a class='nav-link' href='{$urlparticipant}'>Điều kiện</a>
-        </li>
-          </ul>
-        </div>
-      </nav> <hr/>";
+
+        $pages = new stdClass();
+        $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
+        $pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
+        $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+        $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+        $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+
+        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+        $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+        $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
+<div class='collapse navbar-collapse' id='navbarNav'>
+  <ul class='navbar-nav'>";
+        foreach ($pages as $key => $value) {
+            $active = $urltest === $value['url'] ? 'active' : 'before';
+            $content .=
+                "<li class='nav-item {$active}  mr-2'>
+        <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
+        </li>";
+        }
+        $content .= "</ul>
+    </div>
+  </nav> <hr/>";
+        //     echo '<br/>';
         $content .= html_writer::end_div(); // navigation-box
         return $content;
         
