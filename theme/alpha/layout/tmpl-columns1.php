@@ -161,6 +161,7 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 
 // End.
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$get_title = $PAGE->title;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -175,6 +176,7 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'hiddensidebar' => $hiddensidebar,
     'navdraweropen' => $navdraweropen,
+    'get_title' => $get_title,
     'draweropenright' => $draweropenright,
     'ctopbl' => $ctopbl,
     'cbottombl' => $cbottombl,
