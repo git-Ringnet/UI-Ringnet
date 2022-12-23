@@ -349,7 +349,7 @@ class core_renderer extends \core_renderer
         $instructors = $course->get_course_contacts();
 
         if (!empty($instructors)) {
-            $content = html_writer::start_div('course-teachers-box');
+            $content = html_writer::start_div('course-teachers-box mt-4');
 
             // $content .= html_writer::start_tag('h5', array('class'=>'course-contact-title'));
             // $content .= html_writer::end_tag('h5');

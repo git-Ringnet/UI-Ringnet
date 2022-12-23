@@ -72,9 +72,7 @@ if (!empty($add)) {
     $section     = required_param('section', PARAM_INT);
     $type        = optional_param('type', '', PARAM_ALPHA);
     $returntomod = optional_param('return', 0, PARAM_BOOL);
-    // Sửa section = 0 để tạo section luôn về đầu
-    $idtest = 0;
-    redirect("$CFG->wwwroot/course/modedit.php?add=$add&type=$type&course=$id&section=$idtest&return=$returntomod&sr=$sectionreturn");
+    redirect("$CFG->wwwroot/course/modedit.php?add=$add&type=$type&course=$id&section=$section&return=$returntomod&sr=$sectionreturn");
 
 } else if (!empty($update)) {
     $cm = get_coursemodule_from_id('', $update, 0, true, MUST_EXIST);
