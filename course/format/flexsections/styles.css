@@ -34,3 +34,7 @@
         display: none;
     }
 }
+/* Xóa section-0 Việt comments */
+.course-content ul.flexsections li#section-0 {
+    display: none;
+}

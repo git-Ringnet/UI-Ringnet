@@ -469,12 +469,19 @@ span.rui-sidebar-nav-icon {
     color: #555555 !important;
 }
 
-
+.rui-sidebar-nav-item.activee,
+.rui-sidebar-nav-item:hover{
+    background: #FEF6F6 !important;
+    color: #EC212D !important;
+    border-left: 4px solid !important;
+    transition: border-left 0.2s ease-in-out;
+}
 .rui-sidebar-nav-item-link.active,
 .rui-sidebar-nav-item-link:hover {
     background: #FEF6F6 !important;
-    color: #EC212D !important;
-    border-left: 0.5rem solid !important;
+}
+#nav-drawer .nav-drawer-container{
+    margin: 0 !important;
 }
 
 a.text-dark:hover {
