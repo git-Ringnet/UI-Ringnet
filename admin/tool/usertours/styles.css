@@ -470,17 +470,21 @@ span.rui-sidebar-nav-icon {
 }
 
 .rui-sidebar-nav-item.activee,
-.rui-sidebar-nav-item:hover{
+.rui-sidebar-nav-item:hover,
+ul.rui-flatnavigation.rui-flatnavigation-box.pt-0.pb-1.mt-0:hover {
     background: #FEF6F6 !important;
     color: #EC212D !important;
     border-left: 4px solid !important;
     transition: border-left 0.2s ease-in-out;
 }
+
 .rui-sidebar-nav-item-link.active,
 .rui-sidebar-nav-item-link:hover {
+    font-weight: 600 !important;
     background: #FEF6F6 !important;
 }
-#nav-drawer .nav-drawer-container{
+
+#nav-drawer .nav-drawer-container {
     margin: 0 !important;
 }
 
@@ -489,7 +493,8 @@ a.text-dark:hover {
 }
 
 .theme-dark .rui-sidebar-nav-item-link.active,
-.theme-dark .rui-sidebar-nav-item-link:hover {
+.theme-dark .rui-sidebar-nav-item-link:hover
+{
     background: #FEF6F6 !important;
     color: #EC212D !important;
 
@@ -591,6 +596,7 @@ a.text-dark:hover {
 
 .course .before:hover,
 .navbar-nav .before:hover {
+    
     background-position: 0;
 }
 
@@ -601,6 +607,7 @@ a.text-dark:hover {
 
 .course .active,
 .navbar-nav .active {
+    padding-bottom: 15px;
     background-position: 0;
 }
 
@@ -638,9 +645,10 @@ body {
 } */
 .rui-navbar-nav--sep:before {
     left: 52px !important;
-  }
+}
+
 /* Side bar users Management */
-.a_hover{
+.a_hover {
     transform: translateY(2px);
 }
 
@@ -671,29 +679,34 @@ body {
 .navbar {
     padding: 0.25rem !important;
 }
-.active1{
+
+.active1 {
     color: #0095F6 !important;
     border-bottom: 3px solid #0095F6;
     padding-bottom: 10px;
 }
+
 /* navbar-top*/
-.breadcrumb-item{
+.breadcrumb-item {
     display: none !important;
 }
-.breadcrumb-item:last-child{
+
+.breadcrumb-item:last-child {
     display: block !important;
 }
-.breadcrumb-item+.breadcrumb-item::before{
+
+.breadcrumb-item+.breadcrumb-item::before {
     display: none !important;
 }
+
 /* Hover menu  */
 #itemMeeting:hover span svg g,
 #itemCourseManager:hover span svg g,
 #itemCourseManager:hover span svg g,
-#itemReportBuilder:hover span svg g
-{
+#itemReportBuilder:hover span svg g {
     fill: #EC212D !important;
 }
-.rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon svg g{
+
+.rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon svg g {
     fill: #EC212D !important;
 }

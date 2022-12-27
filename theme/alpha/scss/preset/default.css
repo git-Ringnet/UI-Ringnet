@@ -43327,7 +43327,7 @@ body:not(.theme-dark) .hide-on-lightmode {
 .wrapper-course {
   width: 100%;
   margin-top: 16px;
-  padding: 40px;
+  padding:10px 40px;
   background-color: #fff;
   border-radius: 7px;
   transition: all 0.2s ease-in-out;
