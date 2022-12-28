@@ -395,7 +395,7 @@ class core_renderer extends \core_renderer
         $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
         $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
-<div class='collapse navbar-collapse' id='navbarNav'>
+<div id='navbarNav'>
   <ul class='navbar-nav'>";
         foreach ($pages as $key => $value) {
             $active = $urltest === $value['url'] ? 'active' : 'before';
@@ -410,7 +410,6 @@ class core_renderer extends \core_renderer
         //     echo '<br/>';
         $content .= html_writer::end_div(); // navigation-box
         return $content;
-        
     }
     /**
      * TODO:
@@ -1452,21 +1451,21 @@ class core_renderer extends \core_renderer
 
             if ($COURSE->id > 1) {
                 $headerlinks = [
-                        'headerlinksdata' => array(
-                            // Home
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg   width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
-                                'title' => get_string('sitehome', 'moodle'),
-                                'url' => new moodle_url('/'),
-                                'isactiveitem' => $this->isMenuActive('/'),
-                                'itemid' => 'itemHome',
-                                'visability' => true,
-                            ),
-                            // Meeting
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '
+                    'headerlinksdata' => array(
+                        // Home
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg  style="fill: none;"  width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
+                            'title' => get_string('sitehome', 'moodle'),
+                            'url' => new moodle_url('/'),
+                            'isactiveitem' => $this->isMenuActive('/'),
+                            'itemid' => 'itemHome',
+                            'visability' => true,
+                        ),
+                        // Meeting
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '
                                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                                 width="24px" height="24px" viewBox="0 0 512.000000 512.000000"
                                 preserveAspectRatio="xMidYMid meet">
@@ -1496,19 +1495,19 @@ class core_renderer extends \core_renderer
                                 137 192 93 467 -97 603 -108 77 -260 101 -387 60z"/>
                                 </g>
                                </svg>',
-                                'title' => get_string('meeting', 'moodle'),
-                                //Sửa meeting sidebar
-                                'url' => '',
-                                'isactiveitem' => $this->isMenuActive('/dasd'),
-                                'itemid' => 'itemMeeting',
-                                'visability' => true,
-                            ),
-    
-                            //Quản lí khóa học
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                width="24px" height="24px" viewBox="0 0 938.000000 980.000000"
+                            'title' => get_string('meeting', 'moodle'),
+                            //Sửa meeting sidebar
+                            'url' => '',
+                            'isactiveitem' => $this->isMenuActive('/dasd'),
+                            'itemid' => 'itemMeeting',
+                            'visability' => true,
+                        ),
+
+                        //Quản lí khóa học
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 938.000000 980.000000"
                                 preserveAspectRatio="xMidYMid meet">
                                <g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
                                fill="#000000" stroke="none">
@@ -1571,17 +1570,17 @@ class core_renderer extends \core_renderer
                                <path d="M2360 4200 l0 -170 760 0 760 0 0 170 0 170 -760 0 -760 0 0 -170z"/>
                                </g>
                                </svg>',
-                                'title' => get_string('coursemanager', 'moodle'),
-                                'url' => new moodle_url('/my/courses.php'),
-                                'isactiveitem' => $this->isMenuActive('/courses.php'),
-                                'itemid' => 'itemCourseManager',
-                                'visability' => true,
-                            ),
-                            // Quản lý người dùng
-                            array(
-                                'status' => is_siteadmin(),
-                                'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                width="24px" height="24px" viewBox="0 0 512.000000 512.000000"
+                            'title' => get_string('coursemanager', 'moodle'),
+                            'url' => new moodle_url('/my/courses.php'),
+                            'isactiveitem' => $this->isMenuActive('/courses.php') || $this->isMenuActive('/course/') || $this->isMenuActive('/user/') || $this->isMenuActive('/badges/') || $this->isMenuActive('/grade/'),
+                            'itemid' => 'itemCourseManager',
+                            'visability' => true,
+                        ),
+                        // Quản lý người dùng
+                        array(
+                            'status' => is_siteadmin(),
+                            'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 512.000000 512.000000"
                                 preserveAspectRatio="xMidYMid meet">
                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                                fill="#000000" stroke="none">
@@ -1628,17 +1627,17 @@ class core_renderer extends \core_renderer
                                -225 102 0 81 58 137 142 137 38 0 54 -6 82 -30z"/>
                                </g>
                                </svg>',
-                                'title' => get_string('usermanager', 'moodle'),
-                                'url' => new moodle_url('/admin/user.php'),
-                                'isactiveitem' => $this->isMenuActive('/admin/user.php'),
-                                'itemid' => 'itemCourseManager',
-                                'visability' => true,
-                            ),
-                            //Báo cáo
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                width="24px" height="24px" viewBox="0 0 820.000000 512.000000"
+                            'title' => get_string('usermanager', 'moodle'),
+                            'url' => new moodle_url('/admin/user.php'),
+                            'isactiveitem' => $this->isMenuActive('/admin/user.php'),
+                            'itemid' => 'itemCourseManager',
+                            'visability' => true,
+                        ),
+                        //Báo cáo
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                width="26px" height="26px" viewBox="0 0 820.000000 512.000000"
                                 preserveAspectRatio="xMidYMid meet">
                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                                fill="#000000" stroke="none">
@@ -1658,12 +1657,12 @@ class core_renderer extends \core_renderer
                                </g>
                                </svg>
                                ',
-                                'title' => get_string('reports', 'moodle'),
-                                'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
-                                'isactiveitem' => $this->isMenuActive('/reportbuilder'),
-                                'itemid' => 'itemReportBuilder',
-                                'visability' => true,
-                            ),
+                            'title' => get_string('reports', 'moodle'),
+                            'url' => new moodle_url('/reportbuilder/index.php', array('contextid' => 1)),
+                            'isactiveitem' => $this->isMenuActive('/reportbuilder'),
+                            'itemid' => 'itemReportBuilder',
+                            'visability' => true,
+                        ),
                         //Thêm mục cho side bar
                         // 'status' => !isguestuser(),
                         // 'icon' => '<svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.75 6.75C4.75 5.64543 5.64543 4.75 6.75 4.75H17.25C18.3546 4.75 19.25 5.64543 19.25 6.75V17.25C19.25 18.3546 18.3546 19.25 17.25 19.25H6.75C5.64543 19.25 4.75 18.3546 4.75 17.25V6.75Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 8.75V19"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 8.25H19"></path></svg>',
@@ -1715,7 +1714,7 @@ class core_renderer extends \core_renderer
                     'headerlinksdata' => array(
                         array(
                             'status' => !isguestuser(),
-                            'icon' => '<svg width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" style="fill:#fff;" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
+                            'icon' => '<svg style="fill: none;" width="24" height="24" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75024 19.2502H17.2502C18.3548 19.2502 19.2502 18.3548 19.2502 17.2502V9.75025L12.0002 4.75024L4.75024 9.75025V17.2502C4.75024 18.3548 5.64568 19.2502 6.75024 19.2502Z"></path><path stroke="currentColor" stroke-linecap="round" style="fill:#fff;" stroke-linejoin="round" stroke-width="1.5" d="M9.74963 15.7493C9.74963 14.6447 10.6451 13.7493 11.7496 13.7493H12.2496C13.3542 13.7493 14.2496 14.6447 14.2496 15.7493V19.2493H9.74963V15.7493Z"></path></svg>',
                             'title' => get_string('sitehome', 'moodle'),
                             'url' => new moodle_url('/'),
                             'isactiveitem' => $this->isMenuActive('/'),
@@ -1766,7 +1765,7 @@ class core_renderer extends \core_renderer
                         array(
                             'status' => !isguestuser(),
                             'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                            width="24px" height="24px" viewBox="0 0 938.000000 980.000000"
+                            width="20px" height="20px" viewBox="0 0 938.000000 980.000000"
                             preserveAspectRatio="xMidYMid meet">
                            <g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
                            fill="#000000" stroke="none">
@@ -1831,7 +1830,7 @@ class core_renderer extends \core_renderer
                            </svg>',
                             'title' => get_string('coursemanager', 'moodle'),
                             'url' => new moodle_url('/my/courses.php'),
-                            'isactiveitem' => $this->isMenuActive('/courses.php'),
+                            'isactiveitem' => $this->isMenuActive('/courses.php') || $this->isMenuActive('/course/') || $this->isMenuActive('/user/') || $this->isMenuActive('/badges/') || $this->isMenuActive('/grade/'),
                             'itemid' => 'itemCourseManager',
                             'visability' => true,
                         ),
@@ -1839,7 +1838,7 @@ class core_renderer extends \core_renderer
                         array(
                             'status' => is_siteadmin(),
                             'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                            width="24px" height="24px" viewBox="0 0 512.000000 512.000000"
+                            width="20px" height="20px" viewBox="0 0 512.000000 512.000000"
                             preserveAspectRatio="xMidYMid meet">
                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                            fill="#000000" stroke="none">
@@ -1896,7 +1895,7 @@ class core_renderer extends \core_renderer
                         array(
                             'status' => !isguestuser(),
                             'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                            width="24px" height="24px" viewBox="0 0 820.000000 512.000000"
+                            width="26px" height="26px" viewBox="0 0 820.000000 512.000000"
                             preserveAspectRatio="xMidYMid meet">
                            <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)"
                            fill="#000000" stroke="none">
