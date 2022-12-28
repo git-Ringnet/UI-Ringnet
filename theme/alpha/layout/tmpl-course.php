@@ -174,7 +174,12 @@ if ($PAGE->course->visible == '1') {
 
 $iscoursepage = true;
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$get_title = $PAGE->title;
+$re = $PAGE->title;
+$arr = explode(':',$re);
+$last = $arr[count($arr) - 1];
+$get_title = $last;
+$courseconfig = get_config('moodlecourse');
+$maxsections = $courseconfig->maxsections;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -187,9 +192,11 @@ $templatecontext = [
     'sidebarbottomblocks' => $blocksbottomsidebar,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
+    'showaddsection' => $showaddsection,
     'hiddensidebar' => $hiddensidebar,
     'navdraweropen' => $navdraweropen,
     'get_title' =>$get_title,
+    'maxsections' =>$maxsections,
     'draweropenright' => $draweropenright,
     'ctopbl' => $ctopbl,
     'cbottombl' => $cbottombl,
@@ -230,4 +237,3 @@ $templatecontext = array_merge($templatecontext, $themesettings->footer_settings
 
 $PAGE->requires->js_call_amd('theme_alpha/rui', 'init');
 echo $OUTPUT->render_from_template('theme_alpha/tmpl-course', $templatecontext);
-

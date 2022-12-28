@@ -633,9 +633,9 @@ body {
     left: 52px !important;
   }
 /* Side bar users Management */
-.a_hover{
+/* .a_hover{
     transform: translateY(2px);
-}
+} */
 
 /* Course create & edit */
 .filemanager-container>.fm-content-wrapper {
@@ -667,7 +667,6 @@ body {
 .active1{
     color: #0095F6 !important;
     border-bottom: 3px solid #0095F6;
-    padding-bottom: 10px;
 }
 /* navbar-top*/
 .breadcrumb-item{
@@ -689,4 +688,17 @@ body {
 }
 .rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon svg g{
     fill: #EC212D !important;
+}
+#btn_add_anActivity:hover button {
+    background: #D8121E !important;
+    color: black !important;
+}
+
+.button_edit button{
+    background: red;
+}
+
+.button_edit:hover button {
+    background: #D8121E !important;
+    color: black !important;
 }
