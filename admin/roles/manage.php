@@ -144,9 +144,32 @@ switch ($action) {
 
 // Print the page header and tabs.
 echo $OUTPUT->header();
+ //Việt comments navigation bar
+ $urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
+ $urluser = $CFG->wwwroot . '/admin/user.php';
+ $pages = new stdClass();
+ $pages->urluser = ['title' => get_string('fullnametest'), 'url' => $urluser];
+ $pages->urlroles = ['title' => get_string('roles'), 'url' => $urlroles];
+ echo "<nav class='navbar navbar-expand-lg navbar-light'>
+<div class='collapse navbar-collapse' id='navbarNav'>
+<ul class='navbar-nav'>";
+$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
-$currenttab = 'manage';
-require('managetabs.php');
+ $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+ foreach ($pages as $key => $value) {
+     $active = $urltest === $value['url'] ? 'active' : 'before';
+     echo"<li class='nav-item {$active}  mr-2'>
+ <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
+ </li>";
+ }
+echo "</ul>
+</div>
+</nav> <hr/>";
+
+// $currenttab = 'manage';
+// require('managetabs.php');
+
+
 
 // Initialise table.
 $table = new html_table();
@@ -155,8 +178,9 @@ $table->id = 'roles';
 $table->attributes['class'] = 'admintable generaltable';
 // button add new role
 echo $OUTPUT->container_start('buttons');
+
 echo 
-"<div class='btn-addNewsRole' style='float:right;'>".
+"<div class='btn-addNewsRole pt-2 float-right'>".
 $OUTPUT->single_button(new moodle_url($defineurl, array('action' => 'add')), get_string('addrole', 'core_role'), 'get')
 ."</div>";
 $table->head = array(
