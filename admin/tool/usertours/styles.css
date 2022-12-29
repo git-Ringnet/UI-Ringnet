@@ -756,3 +756,21 @@ body {
 #fitem_id_fullname .col-md-9 {
     padding: 12px 0 !important;
 }
+#users tbody tr,#users thead tr th,
+#roles tbody tr,#roles thead tr th{
+    box-shadow: inset 0px -1px 0px #f5f7fa;
+    border:none !important;
+}
+
+#users .leftalign,#roles .leftalign{
+    font-size: 14px !important;
+}
+#users .header,#roles .header{
+    font-size: 16px !important;
+}
+#users th.header.c0.centeralign {
+    width: 45%;
+}
+#roles th.header.c0.leftalign {
+    width: 30%;
+}
