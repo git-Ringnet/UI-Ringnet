@@ -56,25 +56,20 @@ Example context (json):
     #page-course-view-flexsections #form_submit .input-group .small {
         color: blue !important;
     }
-
     #page-course-view-flexsections #changenumsections {
         display: none !important;
     }
-
     #page-course-view-flexsections #edit_mode #form_submit {
         border: 1px solid blue;
     }
-
     #btn_add_anActivity,
     #page-course-view-flexsections #edit_mode #form_submit {
         margin-right: 20px;
     }
-
     .wrapper-course label.my-0.small {
         color: black !important;
     }
-
-    #page-course-view-flexsections #form_submit input {}
+    
 </style>
 
 <body {{{ bodyattributes }}}>
@@ -167,10 +162,9 @@ M.util.js_complete('theme_alpha/loader');
     var icon_Hidden = document.getElementById('icon_Hidden');
     var span_editMode = document.getElementById('span_editMode');
     if (url == "/ringnet/course/view.php") {
-        if (setmode.getAttribute('aria-checked') == 'false') {
+        if (setmode.getAttribute('aria-checked') == 'false'){
             setmode.checked = true;
             from.submit();
-            numb ++;
             icon_Hidden.setAttribute('style', 'display:block !important;');
             span_editMode.setAttribute('style', 'display:none !important;');
         } else {
