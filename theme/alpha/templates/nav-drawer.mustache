@@ -24,9 +24,6 @@ Example context (json): {}
         {{#output.mainsidebarmenu}}
         <ul class="rui-flatnavigation rui-flatnavigation-box {{^customsidebarlogo}}mt-2{{/customsidebarlogo}}">
             {{{output.mainsidebarmenu}}}
-            
-            {{! Này là cái admin }}
-        {{{output.adminheaderlink}}}
         </ul>
         {{/output.mainsidebarmenu}}
 
@@ -165,9 +162,9 @@ Example context (json): {}
     </div>
 
     <div class="rui-drawer-footer">
-          {{! Này là cái admin }}
-        {{! {{{output.adminheaderlink}}
-            
+
+        {{{output.adminheaderlink}}}
+
         <div class="d-inline-flex justify-content-between w-100">
             {{# output.render_lang_menu }}
             <div class="rui-navbar-nav--sep d-inline-flex m-0">

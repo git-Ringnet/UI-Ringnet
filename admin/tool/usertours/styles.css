@@ -261,9 +261,6 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     right: 23px !important;
     top: calc(100% - 78%) !important;
 }
-.editor_atto_toolbar, .editor_atto_content_wrap, .editor_atto+textarea{
-    border-radius: 8px !important;
-}
 
 /* CSS participants */
 #page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
@@ -538,18 +535,9 @@ span.rui-sidebar-nav-icon {
     color: #555555 !important;
 }
 
-.rui-sidebar-nav-item.activee,
-.rui-sidebar-nav-item:hover,
-ul.rui-flatnavigation.rui-flatnavigation-box.pt-0.pb-1.mt-0:hover {
-    background: #FEF6F6 !important;
-    color: #EC212D !important;
-    border-left: 4px solid !important;
-    transition: border-left 0.2s ease-in-out;
-}
 
 .rui-sidebar-nav-item-link.active,
 .rui-sidebar-nav-item-link:hover {
-    font-weight: 600 !important;
     background: #FEF6F6 !important;
     color: #EC212D !important;
     border-left: 0.5rem solid !important;
@@ -662,7 +650,6 @@ a.text-dark:hover {
 
 .course .before:hover,
 .navbar-nav .before:hover {
-
     background-position: 0;
 }
 
@@ -673,7 +660,6 @@ a.text-dark:hover {
 
 .course .active,
 .navbar-nav .active {
-    padding-bottom: 15px;
     background-position: 0;
 }
 
@@ -694,41 +680,11 @@ a.text-dark:hover {
 
 }
 
-.table th,
-.table td,
-.generaltable th,
-.rolecap th,
-.generaltable td,
-.rolecap td,
-.userenrolment th,
-.userenrolment td,
-#categoryquestions th,
-#categoryquestions td,
-.grading-report th,
-.grading-report td,
-.gradereport-grader-table th,
-.gradereport-grader-table td,
-#completion-progress th,
-#completion-progress td {
-    padding: 0.75rem 0 !important;
-}
-
 .listcourse a.d-inline-flex.align-items-center,
 .listcourse .badge.badge-sm,
 .listcourse th.text-center {
     font-weight: 400 !important;
     font-size: 14px !important;
-}
-
-.table,
-.generaltable,
-.rolecap,
-.userenrolment,
-#categoryquestions,
-.grading-report,
-.gradereport-grader-table,
-#completion-progress {
-    margin-bottom: 0 !important;
 }
 
 body {
@@ -778,7 +734,6 @@ body {
     color: #0095F6 !important;
     border-bottom: 3px solid #0095F6;
 }
-
 /* navbar-top*/
 .breadcrumb-item{
     display: none !important;
@@ -789,7 +744,6 @@ body {
 .breadcrumb-item+.breadcrumb-item::before{
     display: none !important;
 }
-
 /* Hover menu  */
 #itemMeeting:hover span svg g,
 #itemCourseManager:hover span svg g,

@@ -45,20 +45,20 @@ Example context (json):
     <table class="table table-striped projects">
         <thead>
             <tr>
-                <th style="width: 30%;font-size: 1rem;">
+                <th style="width: 50%;font-size: 1rem;">
                     {{#str}}coursename, grades{{/str}}
                 </th>
-                <th style="width: 15%;font-size: 1rem;">
+                <th style="width: 15%;font-size: 1rem;" class="text-center">
                     {{#str}}categories, moodle{{/str}}
                 </th>
-                <th style="width: 8%;font-size: 1rem;">
+                <th style="width: 8%;font-size: 1rem;" class="text-center">
                     {{#str}}defaultcourseteacher, moodle{{/str}}
                 </th>
-                <th style="width: 8%;font-size: 1rem;" class="text-right">
+                <th style="width: 8%;font-size: 1rem;" class="text-center">
                     {{#str}}student, grades{{/str}}
                 </th>
-                <th style="width: 8%;font-size: 1rem;" class="text-center">
-                   
+                <th style="width: 12%;font-size: 1rem;" class="text-center">
+                    {{#str}}action, moodle{{/str}}
                 </th>
             </tr>
         </thead>
@@ -69,7 +69,7 @@ Example context (json):
         <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
             <thead>
                 <tr>
-                    <th style="width: 30%;border-bottom: 0 !important">
+                    <th style="width: 50%;border-bottom: 0 !important">
                         <h4
                             class="d-block {{^showshortname}}mt-3{{/showshortname}} {{#visible}}mb-3{{/visible}}{{^visible}}mb-2{{/visible}}">
                             <a href="{{viewurl}}" class="d-inline-flex align-items-center">
@@ -81,7 +81,7 @@ Example context (json):
                             </a>
                         </h4>
                     </th>
-                    <th style="width: 15%;border-bottom: 0 !important">
+                    <th style="width: 8%;border-bottom: 0 !important">
                         {{#showcoursecategory}}
                         <span class="sr-only">
                             {{#str}}aria:coursecategory, core_course{{/str}}
@@ -91,13 +91,13 @@ Example context (json):
                         </div>
                         {{/showcoursecategory}}
                     </th>
-                    <th style="width: 8%;border-bottom: 0 !important" class="text">
+                    <th style="width: 8%;border-bottom: 0 !important" class="text-center">
                         {{{name}}}
                     </th>
-                    <th style="width: 8%;border-bottom: 0 !important" class="text text-right">
+                    <th style="width: 8%;border-bottom: 0 !important" class="text-center">
                         {{{student}}}
                     </th>
-                    <th style="width: 8%;border-bottom: 0 !important" class="text-center">
+                    <th style="width: 12%;border-bottom: 0 !important" class="text-center">
                         <div class="rui-myoverview-action-menu">
                             {{> block_myoverview/course-action-menu }}
                         </div>

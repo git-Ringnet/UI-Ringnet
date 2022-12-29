@@ -31,7 +31,7 @@ $id = required_param('id', PARAM_INT);    // course_sections.id
 $sectionreturn = optional_param('sr', 0, PARAM_INT);
 $deletesection = optional_param('delete', 0, PARAM_BOOL);
 
-$PAGE->set_url('/course/editsection.php', array('id' => $id, 'sr' => $sectionreturn));
+$PAGE->set_url('/course/editsection.php', array('id'=>$id, 'sr'=> $sectionreturn));
 
 $section = $DB->get_record('course_sections', array('id' => $id), '*', MUST_EXIST);
 $course = $DB->get_record('course', array('id' => $section->course), '*', MUST_EXIST);
@@ -49,10 +49,8 @@ if ($deletesection) {
     $cancelurl = course_get_url($course, $sectioninfo, array('sr' => $sectionreturn));
     if (course_can_delete_section($course, $sectioninfo)) {
         $confirm = optional_param('confirm', false, PARAM_BOOL) && confirm_sesskey();
-        if (
-            !$confirm && optional_param('sesskey', null, PARAM_RAW) !== null &&
-            empty($sectioninfo->summary) && empty($sectioninfo->sequence) && confirm_sesskey()
-        ) {
+        if (!$confirm && optional_param('sesskey', null, PARAM_RAW) !== null &&
+                empty($sectioninfo->summary) && empty($sectioninfo->sequence) && confirm_sesskey()) {
             // Do not ask for confirmation if section is empty and sesskey is already provided.
             $confirm = true;
         }
@@ -75,11 +73,8 @@ if ($deletesection) {
             $deleteurl = new moodle_url('/course/editsection.php', $optionsyes);
             $formcontinue = new single_button($deleteurl, get_string('delete'));
             $formcancel = new single_button($cancelurl, get_string('cancel'), 'get');
-            echo $OUTPUT->confirm(get_string(
-                'confirmdeletesection',
-                '',
-                get_section_name($course, $sectioninfo)
-            ), $formcontinue, $formcancel);
+            echo $OUTPUT->confirm(get_string('confirmdeletesection', '',
+                get_section_name($course, $sectioninfo)), $formcontinue, $formcancel);
             echo $OUTPUT->box_end();
             echo $OUTPUT->footer();
             exit;
@@ -87,7 +82,6 @@ if ($deletesection) {
     } else {
         notice(get_string('nopermissions', 'error', get_string('deletesection')), $cancelurl);
     }
- 
 }
 
 $editoroptions = array(
@@ -117,7 +111,7 @@ if (!empty($CFG->enableavailability)) {
 }
 $mform->set_data($initialdata);
 
-if ($mform->is_cancelled()) {
+if ($mform->is_cancelled()){
     // Form cancelled, return to course.
     redirect(course_get_url($course, $section, array('sr' => $sectionreturn)));
 } else if ($data = $mform->get_data()) {

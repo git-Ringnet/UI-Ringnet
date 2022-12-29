@@ -72,7 +72,7 @@
   align-items: center;
   flex-wrap: wrap;
 
-  padding: .3rem 0;
+  padding: .3rem .85rem;
   @include font-size($badge-font-size);
   font-weight: $badge-font-weight;
   vertical-align: baseline;

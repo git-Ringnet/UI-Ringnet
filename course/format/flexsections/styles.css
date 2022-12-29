@@ -34,16 +34,3 @@
         display: none;
     }
 }
-/* Xóa section-0 Việt comments */
-.course-content ul.flexsections li#section-0 {
-    display: none;
-}
-
-/* Nav drawer icon Việt Comments */
-.nav-drawer-btn[aria-expanded="true"], .nav-drawer-btn,
-.nav-drawer-btn[aria-expanded="true"], .nav-drawer-btn:hover{
-    background-color: #ffffff !important;
-}
-.nav-drawer-btn[aria-expanded="false"] svg path{
-    fill: black;
-}
