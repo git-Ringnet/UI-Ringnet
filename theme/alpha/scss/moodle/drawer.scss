@@ -206,7 +206,7 @@ $right-drawer-width: 400px;
         align-items: center;
     
         font-size: $font-size-sm;
-        font-weight: $font-weight-medium;
+        font-weight: 500px !important;
         color: $drawer-nav-btn-text;
         word-break: break-word;
 
@@ -256,6 +256,7 @@ $right-drawer-width: 400px;
     }
 
     .rui-drawer-course-nav {
+        display: none;
         margin-bottom: 10px;
         padding-top: 10px;
         padding-bottom: 10px;

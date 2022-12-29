@@ -1496,19 +1496,19 @@ class core_renderer extends \core_renderer
                                 137 192 93 467 -97 603 -108 77 -260 101 -387 60z"/>
                                 </g>
                                </svg>',
-                                'title' => get_string('meeting', 'moodle'),
-                                //Sửa meeting sidebar
-                                'url' => '',
-                                'isactiveitem' => $this->isMenuActive('/dasd'),
-                                'itemid' => 'itemMeeting',
-                                'visability' => true,
-                            ),
-    
-                            //Quản lí khóa học
-                            array(
-                                'status' => !isguestuser(),
-                                'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                width="24px" height="24px" viewBox="0 0 938.000000 980.000000"
+                            'title' => get_string('meeting', 'moodle'),
+                            //Sửa meeting sidebar
+                            'url' => '',
+                            'isactiveitem' => $this->isMenuActive('/dasd'),
+                            'itemid' => 'itemMeeting',
+                            'visability' => true,
+                        ),
+
+                        //Quản lí khóa học
+                        array(
+                            'status' => !isguestuser(),
+                            'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                width="20px" height="20px" viewBox="0 0 938.000000 980.000000"
                                 preserveAspectRatio="xMidYMid meet">
                                <g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
                                fill="#000000" stroke="none">

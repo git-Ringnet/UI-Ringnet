@@ -181,7 +181,8 @@ class controlmenu extends \core_courseformat\output\local\content\section\contro
         } else {
             // Override delete to use plugin action.
             unset($parentcontrols['delete']['attr']['data-action']);
-            $parentcontrols['delete']['attr']['data-action-flexsections'] = 'delete';
+            // Mở cái này là ajax Việt comments
+            // $parentcontrols['delete']['attr']['data-action-flexsections'] = 'delete';
         }
 
         // If the edit key exists, we are going to insert our controls after it.

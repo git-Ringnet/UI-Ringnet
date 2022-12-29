@@ -260,7 +260,7 @@ $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERV
 $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
-<div class='collapse navbar-collapse' id='navbarNav'>
+<div id='navbarNav'>
   <ul class='navbar-nav'>";
 foreach ($pages as $key => $value) {
     $active = $urltest === $value['url'] ? 'active' : 'before';
