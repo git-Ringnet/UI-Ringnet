@@ -155,7 +155,10 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$get_title = $PAGE->title;
+$re = $PAGE->title;
+$arr = explode(':',$re);
+$last = $arr[count($arr) - 1];
+$get_title = $last;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,

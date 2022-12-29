@@ -320,11 +320,12 @@
         $table->head[] = get_string('fullnametest');
         // add button
         $url1 = $CFG->wwwroot."/admin/roles/manage.php";
-        echo "<div id='hover_tag_a' style='display:flex; border-bottom:1px solid gray; padding:0 5px 0 5px;' class='action_bar_userManagement'>"."
+        echo "<div id='hover_tag_a' style='display:flex; padding:0 5px 0 5px;' class='action_bar_userManagement'>"."
         <a href='$url' style='color:#001' class='a_hover active1'>".get_string('fullnametest')."</a>
         <a href='$url1' style='margin-left:20px;color:#001;' class='a_hover'>".get_string('roles')."</a>
         <a href='#' style='margin-left:20px;color:#001;' class='a_hover'>".get_string('group')."</a>
         "."</div>";
+        echo "<hr>";
         if (has_capability('moodle/user:create', $sitecontext)) {
             $url = new moodle_url('/user/editadvanced.php', array('id' => -1));
             echo "<div class='btn-addNewsUsers' style='margin-top:10px;'>".$OUTPUT->single_button($url, get_string('addnewuser'), 'get') ."</div>";
@@ -471,6 +472,7 @@
     echo $OUTPUT->footer();
 ?>
 <script>
+// Hover navbar user management
 var header = document.getElementById("hover_tag_a");
 var btns = header.getElementsByClassName("a_hover");
 for (var i = 0; i < btns.length; i++) {
@@ -480,4 +482,5 @@ for (var i = 0; i < btns.length; i++) {
   this.className += " active1";
   });
 }
+
 </script>

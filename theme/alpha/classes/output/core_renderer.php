@@ -395,8 +395,8 @@ class core_renderer extends \core_renderer
         $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
         $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
-<div class='collapse navbar-collapse' id='navbarNav'>
-  <ul class='navbar-nav'>";
+        <div class='collapse navbar-collapse' id='navbarNav'>
+        <ul class='navbar-nav'>";
         foreach ($pages as $key => $value) {
             $active = $urltest === $value['url'] ? 'active' : 'before';
             $content .=
@@ -405,8 +405,8 @@ class core_renderer extends \core_renderer
         </li>";
         }
         $content .= "</ul>
-    </div>
-  </nav> <hr/>";
+        </div>
+        </nav> <hr/>";
         //     echo '<br/>';
         $content .= html_writer::end_div(); // navigation-box
         return $content;
