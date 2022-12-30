@@ -539,10 +539,8 @@ span.rui-sidebar-nav-icon {
 .rui-sidebar-nav-item-link.active,
 .rui-sidebar-nav-item-link:hover {
     background: #FEF6F6 !important;
-}
-
-#nav-drawer .nav-drawer-container {
-    margin: 0 !important;
+    color: #EC212D !important;
+    border-left: 0.5rem solid !important;
 }
 
 a.text-dark:hover {
@@ -603,13 +601,9 @@ a.text-dark:hover {
 /* Button red */
 .rui-lang-btn:hover,
 .create-course:hover {
-    background: #D8121E !important;
+    background: #bf6166 !important;
 }
 
-.rui-lang-btn:active,
-.create-course:active {
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25)
-}
 .btn .btn-primary {
     background: #bf6166 !important;
 }
@@ -688,8 +682,7 @@ a.text-dark:hover {
 
 .listcourse a.d-inline-flex.align-items-center,
 .listcourse .badge.badge-sm,
-.listcourse th.text-center,
-.text {
+.listcourse th.text-center {
     font-weight: 400 !important;
     font-size: 14px !important;
 }
@@ -902,21 +895,3 @@ body {
     display: none;
 }
 /* /Update Create New Course */
-#users tbody tr,#users thead tr th,
-#roles tbody tr,#roles thead tr th{
-    box-shadow: inset 0px -1px 0px #f5f7fa;
-    border:none !important;
-}
-
-#users .leftalign,#roles .leftalign{
-    font-size: 14px !important;
-}
-#users .header,#roles .header{
-    font-size: 16px !important;
-}
-#users th.header.c0.centeralign {
-    width: 45%;
-}
-#roles th.header.c0.leftalign {
-    width: 30%;
-}
