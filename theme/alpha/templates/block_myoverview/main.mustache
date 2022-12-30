@@ -25,22 +25,25 @@ Example context (json):
 }}
 
 <div id="block-myoverview-{{uniqid}}" class="block-myoverview block-cards" data-region="myoverview" role="navigation">
-    <div class="d-inline-flex justify-content-between flex-wrap w-100 py-2">
-        <div class="mb-1 mr-auto d-flex mt-auto">
-            <a class="mr-5" href="#">
-                <h3>Khóa Học</h3>
+    <div class="d-inline-flex justify-content-between flex-wrap w-100">
+        <div class="course mb-1 mr-auto d-flex mt-auto">
+            <a class="title mr-2 pt-2 px-3 active" href="{{config.wwwroot}}/my/courses.php">
+                {{#str}}courses, moodle{{/str}}
             </a>
-            <a href="#">
-                <h3>Danh Mục</h3>
+            <a href="{{config.wwwroot}}/course/index.php" class="title pt-2 px-2 before">
+                {{#str}}categories, moodle{{/str}}
+                </a>
         </div>
-           </a>
-              <a href="/ringnet/course/edit.php?returnto=catmanage" class="btn btn-primary">
-        Tạo khóa học
-    </a>
+            {{#status}}
+            <a href="{{config.wwwroot}}/course/edit.php?returnto=catmanage" class="create-course btn btn-primary">
+       {{#str}} createnewcourse, moodle{{/str}}
+            </a>
+            {{/status}}
     </div>
-    <div data-region="filter" class="d-flex align-items-center flex-wrap"
+    <hr/>
+    <div data-region="filter" class="d-flex align-items-center"
         aria-label="{{#str}} aria:controls, block_myoverview {{/str}}">
-        <div class="d-inline-flex justify-content-between flex-wrap w-100">
+        <div class="d-inline-flex justify-content-between flex-wrap w-100 mt-2">
             {{> block_myoverview/nav-grouping-selector }}
             {{> block_myoverview/nav-sort-selector }}
             <div class="d-none">

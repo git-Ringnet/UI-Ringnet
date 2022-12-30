@@ -161,6 +161,10 @@ $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settin
 
 // End.
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$re = $PAGE->title;
+$arr = explode(':',$re);
+$last = $arr[count($arr) - 1];
+$get_title = $last;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -175,6 +179,7 @@ $templatecontext = [
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'hiddensidebar' => $hiddensidebar,
     'navdraweropen' => $navdraweropen,
+    'get_title' => $get_title,
     'draweropenright' => $draweropenright,
     'ctopbl' => $ctopbl,
     'cbottombl' => $cbottombl,

@@ -113,3 +113,5 @@ $page = new admin_settingpage('theme_alpha_settingstopbar', get_string( 'setting
 
 // Must add the page after definiting all the settings!
 $settings->add($page);
+
+

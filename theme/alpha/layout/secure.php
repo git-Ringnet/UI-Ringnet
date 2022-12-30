@@ -52,12 +52,17 @@ $hasblocks = strpos($blockshtml, 'data-block=') !== false;
 $bodyattributes = $OUTPUT->body_attributes();
 $siteurl = $CFG->wwwroot;
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$re = $PAGE->title;
+$arr = explode(':',$re);
+$last = $arr[count($arr) - 1];
+$get_title = $last;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
     'sidepreblocks' => $blockshtml,
     'hasblocks' => $hasblocks,
     'bodyattributes' => $bodyattributes,
+    'get_title' => $get_title,
     'regionmainsettingsmenu' => $regionmainsettingsmenu,
     'hasregionmainsettingsmenu' => !empty($regionmainsettingsmenu),
     'darkmodeon' => !empty($darkmodeon),

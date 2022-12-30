@@ -151,6 +151,8 @@ class category_action_bar extends manage_categories_action_bar {
         return [];
     }
 
+
+
     /**
      * Export the content to be displayed on the category page.
      *
@@ -161,10 +163,15 @@ class category_action_bar extends manage_categories_action_bar {
      *              - additionaloptions Additional actions that can be performed in a category
      */
     public function export_for_template(\renderer_base $output): array {
+        global $USER, $DB;
+        $roleid = $DB->get_field('role', 'id', ['shortname' => 'coursemanagement']);
+        $isteacheranywhere = $DB->record_exists('role_assignments', ['userid' => $USER->id, 'roleid' => $roleid]);
         return [
             'categoryselect' => $this->get_category_select($output),
             'search' => $this->get_search_form(),
-            'additionaloptions' => $this->get_additional_category_options()
+            'additionaloptions' => $this->get_additional_category_options(),
+            //nếu là admin hoặc giáo viên tạo khóa học thì có nút tạo khóa học
+            'status' => is_siteadmin() || $isteacheranywhere===true,
         ];
     }
 

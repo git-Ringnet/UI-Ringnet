@@ -34,7 +34,6 @@
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->dirroot . '/' . $CFG->admin . '/roles/lib.php');
-
 $action = optional_param('action', '', PARAM_ALPHA);
 if ($action) {
     $roleid = required_param('roleid', PARAM_INT);
@@ -154,10 +153,18 @@ $table = new html_table();
 $table->colclasses = array('leftalign', 'leftalign', 'leftalign', 'leftalign');
 $table->id = 'roles';
 $table->attributes['class'] = 'admintable generaltable';
+// button add new role
+echo $OUTPUT->container_start('buttons');
+echo 
+"<div class='btn-addNewsRole' style='float:right;'>".
+$OUTPUT->single_button(new moodle_url($defineurl, array('action' => 'add')), get_string('addrole', 'core_role'), 'get')
+."</div>";
 $table->head = array(
-    get_string('role') . ' ' . $OUTPUT->help_icon('roles', 'core_role'),
+    get_string('role') ,
+    // . ' ' . $OUTPUT->help_icon('roles', 'core_role'),
     get_string('description'),
-    get_string('roleshortname', 'core_role'),
+    // roleshortname
+    // get_string('roleshortname', 'core_role'),
     get_string('edit')
 );
 
@@ -176,22 +183,22 @@ foreach ($roles as $role) {
     $row = array(
         '<a href="' . $defineurl . '?action=view&amp;roleid=' . $role->id . '">' . $role->localname . '</a>',
         role_get_description($role),
-        s($role->shortname),
-        '',
+        // s($role->shortname),
+        // '',
     );
 
     // Move up.
-    if ($role->sortorder != $firstrole->sortorder) {
-        $row[3] .= get_action_icon($baseurl . '?action=moveup&amp;roleid=' . $role->id . '&amp;sesskey=' . sesskey(), 'up', $strmoveup, $strmoveup);
-    } else {
-        $row[3] .= get_spacer();
-    }
-    // Move down.
-    if ($role->sortorder != $lastrole->sortorder) {
-        $row[3] .= get_action_icon($baseurl . '?action=movedown&amp;roleid=' . $role->id . '&amp;sesskey=' . sesskey(), 'down', $strmovedown, $strmovedown);
-    } else {
-        $row[3] .= get_spacer();
-    }
+    // if ($role->sortorder != $firstrole->sortorder) {
+    //     $row[3] .= get_action_icon($baseurl . '?action=moveup&amp;roleid=' . $role->id . '&amp;sesskey=' . sesskey(), 'up', $strmoveup, $strmoveup);
+    // } else {
+    //     $row[3] .= get_spacer();
+    // }
+    // // Move down.
+    // if ($role->sortorder != $lastrole->sortorder) {
+    //     $row[3] .= get_action_icon($baseurl . '?action=movedown&amp;roleid=' . $role->id . '&amp;sesskey=' . sesskey(), 'down', $strmovedown, $strmovedown);
+    // } else {
+    //     $row[3] .= get_spacer();
+    // }
     // Edit.
     $row[3] .= get_action_icon($defineurl . '?action=edit&amp;roleid=' . $role->id,
             'edit', $stredit, get_string('editxrole', 'core_role', $role->localname));
@@ -206,9 +213,6 @@ foreach ($roles as $role) {
     $table->data[] = $row;
 }
 echo html_writer::table($table);
-
-echo $OUTPUT->container_start('buttons');
-echo $OUTPUT->single_button(new moodle_url($defineurl, array('action' => 'add')), get_string('addrole', 'core_role'), 'get');
 echo $OUTPUT->container_end();
 
 echo $OUTPUT->footer();

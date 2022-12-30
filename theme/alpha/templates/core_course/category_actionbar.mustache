@@ -86,6 +86,22 @@
         }
     }
 }}
+ <div class="d-inline-flex justify-content-between flex-wrap w-100">
+        <div class="course mb-1 mr-auto d-flex mt-auto">
+            <a class="title mr-2 pt-2 px-3 before" href="{{config.wwwroot}}/my/courses.php">
+                {{#str}}courses, moodle{{/str}}
+            </a>
+            <a href="{{config.wwwroot}}/course/index.php" class="title pt-2 px-2 active ">
+                {{#str}}categories, moodle{{/str}}
+                </a>
+        </div>
+            {{#status}}
+            <a href="{{config.wwwroot}}/course/edit.php?returnto=catmanage" class="create-course btn btn-primary">
+       {{#str}} createnewcourse, moodle{{/str}}
+            </a>
+            {{/status}}
+    </div>
+    <hr/>
 <div class="container-fluid tertiary-navigation" id="action_bar">
     <div class="row">
         {{#categoryselect}}

@@ -125,9 +125,9 @@ class enrol_manual_enrol_users_form extends moodleform {
         $mform->addElement('checkbox', 'recovergrades', get_string('recovergrades', 'enrol'));
         $mform->setAdvanced('recovergrades');
         $mform->setDefault('recovergrades', $CFG->recovergradesdefault);
-        $mform->addElement('select', 'startdate', get_string('startingfrom'), $basemenu);
-        $mform->setDefault('startdate', $extendbase);
-        $mform->setAdvanced('startdate');
+        // $mform->addElement('select', 'startdate', get_string('startingfrom'), $basemenu);
+        // $mform->setDefault('startdate', $extendbase);
+        // $mform->setAdvanced('startdate');    
         $mform->addElement('select', 'duration', get_string('enrolperiod', 'enrol'), $periodmenu);
         $mform->setDefault('duration', $defaultperiod);
         $mform->setAdvanced('duration');
@@ -160,3 +160,4 @@ class enrol_manual_enrol_users_form extends moodleform {
         return $errors;
     }
 }
+

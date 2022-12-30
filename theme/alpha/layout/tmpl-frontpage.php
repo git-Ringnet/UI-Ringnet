@@ -110,8 +110,6 @@ for ($i = 1; $i <= $total; $i++) {
 }
 asort($array);
 foreach($array as $key => $value) {
-
-
     $ruiscb .= $OUTPUT->theme_part('block'.$key);
     if($key== '1')
     {
@@ -163,6 +161,10 @@ $buildregionmainsettings = !$PAGE->include_region_main_settings_in_header_action
 // If the settings menu will be included in the header then don't add it here.
 $regionmainsettingsmenu = $buildregionmainsettings ? $OUTPUT->region_main_settings_menu() : false;
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$re = $PAGE->title;
+$arr = explode(':',$re);
+$last = $arr[count($arr) - 1];
+$get_title = $last;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
@@ -178,6 +180,7 @@ $templatecontext = [
     'ruiscb' => $ruiscb,
     'hiddensidebar' => $hiddensidebar,
     'navdraweropen' => $navdraweropen,
+    'get_title'=>$get_title,
     'draweropenright' => $draweropenright,
     'isnotloggedin' => $isnotloggedin,
     'isfrontpage' => $isfrontpage,
@@ -205,3 +208,5 @@ $templatecontext = array_merge($templatecontext, $themesettings->footer_settings
 $PAGE->requires->js_call_amd('theme_alpha/rui', 'init');
 
 echo $OUTPUT->render_from_template('theme_alpha/tmpl-frontpage', $templatecontext);
+
+
