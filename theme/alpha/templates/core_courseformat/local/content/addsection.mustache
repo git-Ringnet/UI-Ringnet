@@ -54,14 +54,13 @@ Example context (json):
     {{/decrease}}
     {{#addsections}}
     {{!-- dropdown button --}}
-    {{!-- <div id="btn_add_anActivity"> --}}
+    <div id="btn_add_anActivity1">
         <button
-            class="btn btn-success text-light section-modchooser section-modchooser-link activity-add d-flex align-items-center p-3 mb-3"
+            class="btn btn-success text-light section-modchooser section-modchooser-link activity-add d-flex align-items-center"
             data-action="open-chooser" data-sectionid="{{maxsections}}" data-sectionreturnid="1">
-            <span class="activity-add-text">{{#str}}addresourceoractivity, core{{/str}}</span>
+            <span class="activity-add-text" style="color: #fff;">{{#str}}addresourceoractivity, core{{/str}}</span>
         </button>
-        {{!--
-    </div> --}}
+    </div>
     <div id="btn_add_section">
         {{!-- Add new action --}}
         <a href="{{{url}}}" class="add-sections mb-3 mx-2" data-add-sections="{{title}}"

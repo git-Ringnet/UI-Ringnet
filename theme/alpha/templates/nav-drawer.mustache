@@ -178,3 +178,15 @@ Example context (json): {}
         </div>
     </div>
 </div>
+<script>
+// edit mode
+var url = window.location.pathname;
+var setmode1 = document.getElementsByClassName('ios-switch-control-input')[0];
+var from1 = document.getElementById('form_submit');
+if(url != "/ringnet/course/view.php"){
+    if(setmode1.getAttribute('aria-checked') == "true"){
+    setmode1.checked = false;
+    from1.submit();
+    }
+}
+</script>

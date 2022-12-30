@@ -501,19 +501,6 @@ max-width: 644px !important;
 
 }
 
-/* /CSS */
-
-/* @media only screen and (min-width: 527px){
-     #fitem_id_summary_editor{
-        margin-top: -7%;
-    }
-     #fitem_id_category .col-md-9{
-         max-width: 60%;
-     }
-}  */
-
-
-
 @media (max-width: 575.98px) {
     span[data-flexitour="container"] {
         margin-left: 10px;
@@ -697,7 +684,6 @@ a.text-dark:hover {
 .gradereport-grader-table thead th,
 #completion-progress thead th {
     color: #000000 !important;
-
 }
 
 .table th,
@@ -743,16 +729,9 @@ body {
     font-style: normal !important;
 }
 
-/* #page-header h2.rui-page-title.rui-page-title--context,h5#instance-5-header,.rui-breadcrumbs  {
-    display: none !important;
-} */
 .rui-navbar-nav--sep:before {
     left: 52px !important;
-  }
-/* Side bar users Management */
-/* .a_hover{
-    transform: translateY(2px);
-} */
+}
 
 /* Course create & edit */
 .filemanager-container>.fm-content-wrapper {
@@ -845,8 +824,8 @@ body {
     margin-top: 2.5%;
 }
 #page-course-edit #fitem_id_summary_editor
- {
-    margin-top: -2.2%;
+{
+    margin-top: -2%;
 }
 #page-course-edit #fitem_id_enddate{
     margin-top: 2.2%;
@@ -876,7 +855,7 @@ body {
 {
     position: absolute;
     top: 0;
-    left: 15px;
+    left: 0;
     height: 18px;
 }
 #page-course-edit #fitem_id_fullname .col-md-9,
@@ -913,7 +892,7 @@ body {
     width: 100%;
 }
 #page-course-edit #fitem_id_category .col-md-9{
-    max-width: 41.3% !important;
+    max-width: 43.1% !important;
 }
 #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9{
     max-width: 61.38% !important;
@@ -947,13 +926,29 @@ body {
 #page-course-edit #fgroup_id_buttonar #id_saveandreturn{
     display: none;
 }
+#page-course-view-flexsections #form_submit .input-group .small {
+    color: blue !important;
+}
+#page-course-view-flexsections #edit_mode #form_submit {
+    border: 1px solid blue;
+}
+#btn_add_anActivity,
+#page-course-view-flexsections #edit_mode #form_submit {
+    margin-right: 24px;
+}
+.wrapper-course label.my-0.small {
+    color: black !important;
+}
+#btn_addSection{
+    background: white;
+    border: 1px solid blue;
+}
 /* /Update Create New Course */
 #users tbody tr,#users thead tr th,
 #roles tbody tr,#roles thead tr th{
     box-shadow: inset 0px -1px 0px #f5f7fa;
     border:none !important;
 }
-
 #users .leftalign,#roles .leftalign{
     font-size: 14px !important;
 }
@@ -965,4 +960,13 @@ body {
 }
 #roles th.header.c0.leftalign {
     width: 30%;
+}
+#page-course-edit #page-header,
+#page-course-view-participants #page-header,
+#page-badges-view #page-header,
+#page-grade-report-grader-index #page-header{
+    display: none !important;
+}
+#page-course-edit #fitem_id_overviewfiles_filemanager .fp-navbar{
+    display: none;
 }

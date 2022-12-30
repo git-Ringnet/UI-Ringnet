@@ -52,25 +52,6 @@ Example context (json):
 }}
 
 {{> theme_alpha/head }}
-<style>
-    #page-course-view-flexsections #form_submit .input-group .small {
-        color: blue !important;
-    }
-    #page-course-view-flexsections #changenumsections {
-        display: none !important;
-    }
-    #page-course-view-flexsections #edit_mode #form_submit {
-        border: 1px solid blue;
-    }
-    #btn_add_anActivity,
-    #page-course-view-flexsections #edit_mode #form_submit {
-        margin-right: 20px;
-    }
-    .wrapper-course label.my-0.small {
-        color: black !important;
-    }
-    
-</style>
 
 <body {{{ bodyattributes }}}>
     {{> core/local/toast/wrapper}}
@@ -99,20 +80,12 @@ Example context (json):
                                     {{{ output.full_header }}}
                                     {{! Thêm nút editmode }}
                                     <div class="button_edit d-flex justify-content-end" id="edit_mode"
-                                        style="margin-top:10px;">
-                                        <div id="btn_add_anActivity">
-                                            <button
-                                                class="btn btn-success text-light section-modchooser section-modchooser-link activity-add d-flex align-items-center"
-                                                data-action="open-chooser" data-sectionid="{{maxsections}}"
-                                                data-sectionreturnid="1"
-                                                style="background: #EC212D ;color:#fff !important;">
-                                                <span class="activity-add-text">{{#str}}addresourceoractivity,
-                                                    core{{/str}}</span>
-                                            </button>
+                                        style="margin-top:24px;">
+                                        <div id="btn_add_anActivity" style="display: none;">
                                         </div>
                                         {{{output.edit_switch }}}
                                         <div id="btn_addSection" class="btn btn-primary"
-                                            style="background: white; border:1px solid blue"></div>
+                                            style="display: none;"></div>
                                     </div>
                                     {{#courseimagefw}}
                                     <div class="rui-course-cover mt-4">{{{ output.course_hero }}}</div>
@@ -155,27 +128,35 @@ M.util.js_complete('theme_alpha/loader');
 <script>
     var btn_addSection = document.getElementById('btn_addSection');
     var btn_add_section = document.getElementById('btn_add_section');
+    var btn_add_anActivity = document.getElementById('btn_add_anActivity');
+    var btn_add_anActivity1 = document.getElementById('btn_add_anActivity1');
     var url = window.location.pathname;
     var setmode = document.getElementsByClassName('ios-switch-control-input')[0];
     var from = document.forms[0];
     var icon_Preview = document.getElementById('icon_Preview');
     var icon_Hidden = document.getElementById('icon_Hidden');
     var span_editMode = document.getElementById('span_editMode');
+
     if (url == "/ringnet/course/view.php") {
         if (setmode.getAttribute('aria-checked') == 'false'){
             setmode.checked = true;
             from.submit();
-            icon_Hidden.setAttribute('style', 'display:block !important;');
-            span_editMode.setAttribute('style', 'display:none !important;');
+            icon_Hidden.setAttribute('style', 'display:block;');
+            span_editMode.setAttribute('style', 'display:none;');
         } else {
-            icon_Preview.setAttribute('style', 'display:block !important;');
-            span_editMode.setAttribute('style', 'display:none !important;');
+            icon_Preview.setAttribute('style', 'display:block;');
+            span_editMode.setAttribute('style', 'display:none;');
             btn_addSection.appendChild(btn_add_section);
+            btn_add_anActivity.appendChild(btn_add_anActivity1);
         }
     }
-
+   
     if (setmode.getAttribute('aria-checked') == 'false') {
-        document.getElementById('btn_add_anActivity').setAttribute('style', 'display:none');
-        document.getElementById('btn_addSection').setAttribute('style', 'display:none');
+    document.getElementById('btn_add_anActivity').setAttribute('style', 'display:none');
+    document.getElementById('btn_addSection').setAttribute('style', 'display:none');
+    }
+    else{
+    document.getElementById('btn_add_anActivity').setAttribute('style', 'display:block');
+    document.getElementById('btn_addSection').setAttribute('style', 'display:block');
     }
 </script>
