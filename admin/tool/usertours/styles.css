@@ -261,63 +261,68 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     right: 23px !important;
     top: calc(100% - 78%) !important;
 }
-.editor_atto_toolbar, .editor_atto_content_wrap, .editor_atto+textarea{
+
+.editor_atto_toolbar,
+.editor_atto_content_wrap,
+.editor_atto+textarea {
     border-radius: 8px !important;
 }
 
 /* CSS participants */
 #page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
-#page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection
-{
-display: none !important;
+#page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection {
+    display: none !important;
 }
-#page-course-view-participants #fitem_id_userlist
-{
-width: 98% !important;
-margin-top: -0.6%;
-margin-left: 3.9%;
-margin-right: 3.9%;
+
+#page-course-view-participants #fitem_id_userlist {
+    width: 98% !important;
+    margin-top: -0.6%;
+    margin-left: 3.9%;
+    margin-right: 3.9%;
 }
+
 #page-course-view-participants #fitem_id_cohortlist,
-#page-course-view-participants #fitem_id_roletoassign
-{
-width: 98% !important;
-margin-left: 4%;
-margin-right: 4%;
-margin-top: 6.1%;
+#page-course-view-participants #fitem_id_roletoassign {
+    width: 98% !important;
+    margin-left: 4%;
+    margin-right: 4%;
+    margin-top: 6.1%;
 }
+
 #page-course-view-participants #fitem_id_userlist .col-md-3,
-#page-course-view-participants #fitem_id_cohortlist .col-md-3
-{
-height: 18px;
+#page-course-view-participants #fitem_id_cohortlist .col-md-3 {
+    height: 18px;
 }
+
 #page-course-view-participants #fitem_id_userlist .col-md-3 label,
-#page-course-view-participants #fitem_id_cohortlist .col-md-3 label
-{
-height: 18px;
-top: 0;
-left: 0;
-position: absolute;
+#page-course-view-participants #fitem_id_cohortlist .col-md-3 label {
+    height: 18px;
+    top: 0;
+    left: 0;
+    position: absolute;
 }
+
 #page-course-view-participants #fitem_id_userlist .col-md-9,
-#page-course-view-participants #fitem_id_cohortlist .col-md-9
-{
-margin-top: 1.3%;
-max-width: 97.055% !important;
-margin-left: 1px !important;
+#page-course-view-participants #fitem_id_cohortlist .col-md-9 {
+    margin-top: 1.3%;
+    max-width: 97.055% !important;
+    margin-left: 1px !important;
 }
+
 #page-course-view-participants #fitem_id_userlist .col-md-9 input,
-#page-course-view-participants #fitem_id_cohortlist .col-md-9 input
-{
-height: 48px !important;
+#page-course-view-participants #fitem_id_cohortlist .col-md-9 input {
+    height: 48px !important;
 }
-#page-course-view-participants #fitem_id_roletoassign .col-md-9 select{
-height: 48px;
-width: 42.594% !important;
+
+#page-course-view-participants #fitem_id_roletoassign .col-md-9 select {
+    height: 48px;
+    width: 42.594% !important;
 }
+
 #page-course-view-participants .modal-dialog {
-max-width: 644px !important;
+    max-width: 644px !important;
 }
+
 #participants {
     width: 100% !important;
 }
@@ -336,10 +341,6 @@ max-width: 644px !important;
 
 #enrolusersbutton-2 {
     display: none;
-}
-
-.tertiary-navigation .navitem .enrol_manual_plugin form input {
-    background: rgb(230, 8, 8);
 }
 
 .filter-group,
@@ -382,12 +383,6 @@ max-width: 644px !important;
     text-align: right;
 }
 
-.btn-addNewsUsers .singlebutton button,
-.btn-addNewsRole .singlebutton button {
-    background: #EC202D;
-    color: white;
-}
-
 #id_descriptionhdr fieldset legend {
     display: none;
 }
@@ -402,25 +397,28 @@ max-width: 644px !important;
 }
 
 @media only screen and (max-width: 526px) {
-    #fitem_id_category .col-md-9 .form-autocomplete-downarrow{
+    #fitem_id_category .col-md-9 .form-autocomplete-downarrow {
         right: 5px !important;
     }
-    #page-course-edit #fitem_id_overviewfiles_filemanager{
+
+    #page-course-edit #fitem_id_overviewfiles_filemanager {
         width: 30%;
     }
-    #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9{
+
+    #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 {
         max-width: 100% !important;
     }
+
     #page-course-edit #fitem_id_fullname,
     #page-course-edit #fitem_id_category,
     #page-course-edit #fitem_id_summary_editor,
     #page-course-edit #fgroup_id_coursevisibility,
     #page-course-edit #fitem_id_startdate,
     #page-course-edit #fitem_id_enddate,
-    #page-course-edit #fitem_id_maxbytes
-    {
+    #page-course-edit #fitem_id_maxbytes {
         margin-left: calc(100% - 60%);
     }
+
     #fitem_id_fullname,
     #fitem_id_category,
     #fitem_id_summary_editor,
@@ -430,6 +428,7 @@ max-width: 644px !important;
     #fitem_id_maxbytes {
         width: 65%;
     }
+
     #fitem_id_fullname .col-md-3,
     #fitem_id_category .col-md-3,
     #fitem_id_summary_editor .col-md-3,
@@ -441,22 +440,24 @@ max-width: 644px !important;
 }
 
 @media only screen and (min-width: 527px) and (max-width:999px) {
-    #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9{
+    #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 {
         max-width: 100% !important;
     }
-    #fitem_id_category .col-md-9 .form-autocomplete-downarrow{
+
+    #fitem_id_category .col-md-9 .form-autocomplete-downarrow {
         right: 10px !important;
     }
+
     #page-course-edit #fitem_id_fullname,
     #page-course-edit #fitem_id_category,
     #page-course-edit #fitem_id_summary_editor,
     #page-course-edit #fgroup_id_coursevisibility,
     #page-course-edit #fitem_id_startdate,
     #page-course-edit #fitem_id_enddate,
-    #page-course-edit #fitem_id_maxbytes
-    {
+    #page-course-edit #fitem_id_maxbytes {
         margin-left: calc(100% - 65%);
     }
+
     #fitem_id_summary_editor {
         margin-top: -10%;
     }
@@ -607,21 +608,31 @@ a.text-dark:hover {
 }
 
 .rui-lang-btn,
-.create-course {
+.create-course,
+.btn-addNewsUsers .singlebutton button,
+.btn-addNewsRole .singlebutton button,
+.tertiary-navigation .navitem .enrol_manual_plugin form input {
     background: #EC212D !important;
     color: FCFCFC !important;
 }
 
 /* Button red */
 .rui-lang-btn:hover,
-.create-course:hover {
+.create-course:hover,
+.btn-addNewsUsers .singlebutton button:hover,
+.btn-addNewsRole .singlebutton button:hover,
+.tertiary-navigation .navitem .enrol_manual_plugin form input:hover {
     background: #D8121E !important;
 }
 
 .rui-lang-btn:active,
-.create-course:active {
+.create-course:active,
+.btn-addNewsUsers .singlebutton button:active,
+.btn-addNewsRole .singlebutton button:active,
+.tertiary-navigation .navitem .enrol_manual_plugin form input:active {
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25)
 }
+
 .btn .btn-primary {
     background: #bf6166 !important;
 }
@@ -748,7 +759,8 @@ body {
 } */
 .rui-navbar-nav--sep:before {
     left: 52px !important;
-  }
+}
+
 /* Side bar users Management */
 /* .a_hover{
     transform: translateY(2px);
@@ -781,19 +793,22 @@ body {
 .navbar {
     padding: 0.25rem !important;
 }
-.active1{
+
+.active1 {
     color: #0095F6 !important;
     border-bottom: 3px solid #0095F6;
 }
 
 /* navbar-top*/
-.breadcrumb-item{
+.breadcrumb-item {
     display: none !important;
 }
-.breadcrumb-item:last-child{
+
+.breadcrumb-item:last-child {
     display: block !important;
 }
-.breadcrumb-item+.breadcrumb-item::before{
+
+.breadcrumb-item+.breadcrumb-item::before {
     display: none !important;
 }
 
@@ -801,19 +816,20 @@ body {
 #itemMeeting:hover span svg g,
 #itemCourseManager:hover span svg g,
 #itemCourseManager:hover span svg g,
-#itemReportBuilder:hover span svg g
-{
+#itemReportBuilder:hover span svg g {
     fill: #EC212D !important;
 }
-.rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon svg g{
+
+.rui-sidebar-nav-item-link.active .rui-sidebar-nav-icon svg g {
     fill: #EC212D !important;
 }
+
 #btn_add_anActivity:hover button {
     background: #D8121E !important;
     color: black !important;
 }
 
-.button_edit button{
+.button_edit button {
     background: red;
 }
 
@@ -821,178 +837,234 @@ body {
     background: #D8121E !important;
     color: black !important;
 }
+
 /* Update CSS Create New Course */
-.no-overflow>.generaltable, .no-overflow>.rolecap{
+.no-overflow>.generaltable,
+.no-overflow>.rolecap {
     width: 100%;
 }
+
 #page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection,
-#page-course-edit #id_general legend, #page-course-edit #id_descriptionhdr legend{
+#page-course-edit #id_general legend,
+#page-course-edit #id_descriptionhdr legend {
     display: none !important;
 }
+
 #page-course-edit #fitem_id_overviewfiles_filemanager,
-#page-course-edit #fitem_id_fullname
-{
+#page-course-edit #fitem_id_fullname {
     margin-top: -2%;
 }
-#page-course-edit #fgroup_id_coursevisibility{
+
+#page-course-edit #fgroup_id_coursevisibility {
     margin-top: 2.7%;
 }
-#page-course-edit #fitem_id_startdate{
+
+#page-course-edit #fitem_id_startdate {
     margin-top: 2.9%;
 }
-#page-course-edit #fitem_id_maxbytes
-{
+
+#page-course-edit #fitem_id_maxbytes {
     margin-top: 2.5%;
 }
-#page-course-edit #fitem_id_summary_editor
- {
+
+#page-course-edit #fitem_id_summary_editor {
     margin-top: -2.2%;
 }
-#page-course-edit #fitem_id_enddate{
+
+#page-course-edit #fitem_id_enddate {
     margin-top: 2.2%;
 }
-#page-course-edit #fitem_id_category
-{
+
+#page-course-edit #fitem_id_category {
     margin-top: 2.7%;
 }
+
 #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3,
 #page-course-edit #fitem_id_fullname .col-md-3,
 #page-course-edit #fitem_id_category .col-md-3,
 #page-course-edit #fitem_id_summary_editor .col-md-3,
 #page-course-edit #fgroup_id_coursevisibility .col-md-3,
 #page-course-edit #fitem_id_startdate .col-md-3,
-#page-course-edit #fitem_id_maxbytes .col-md-3
-{
+#page-course-edit #fitem_id_maxbytes .col-md-3 {
     position: relative;
     height: 18px;
 }
+
 #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3 label,
 #page-course-edit #fitem_id_fullname .col-md-3 label,
 #page-course-edit #fitem_id_category .col-md-3 label,
 #page-course-edit #fitem_id_summary_editor .col-md-3 label,
 #page-course-edit #fgroup_id_coursevisibility .col-md-3 label,
 #page-course-edit #fitem_id_startdate .col-md-3 label,
-#page-course-edit #fitem_id_maxbytes .col-md-3 label
-{
+#page-course-edit #fitem_id_maxbytes .col-md-3 label {
     position: absolute;
     top: 0;
     left: 15px;
     height: 18px;
 }
+
 #page-course-edit #fitem_id_fullname .col-md-9,
 #page-course-edit #fitem_id_fullname .col-md-9 input,
 #page-course-edit #fitem_id_category .col-md-9 input,
-#page-course-edit #fitem_id_maxbytes .col-md-9 select
-{
+#page-course-edit #fitem_id_maxbytes .col-md-9 select {
     height: 48px !important;
 }
-#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9
-{
-    margin-top:2.9%
+
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 {
+    margin-top: 2.9%
 }
+
 #page-course-edit #fitem_id_category .col-md-9,
-#page-course-edit #fitem_id_maxbytes .col-md-9
-{
+#page-course-edit #fitem_id_maxbytes .col-md-9 {
     margin-top: 1.25%;
 }
-#page-course-edit #fgroup_id_coursevisibility .col-md-9{
+
+#page-course-edit #fgroup_id_coursevisibility .col-md-9 {
     margin-top: 3.3%;
 }
+
 #page-course-edit #fitem_id_fullname .col-md-9,
-#page-course-edit #fitem_id_summary_editor .col-md-9
-{
+#page-course-edit #fitem_id_summary_editor .col-md-9 {
     margin-top: 1.3%;
 }
- #page-course-edit #fitem_id_startdate .col-md-9{
+
+#page-course-edit #fitem_id_startdate .col-md-9 {
     margin-top: 1.8%;
- }
+}
+
 #page-course-edit #fitem_id_fullname .col-md-9,
-#page-course-edit #fitem_id_summary_editor .col-md-9
-{
+#page-course-edit #fitem_id_summary_editor .col-md-9 {
     max-width: 90.028% !important;
     width: 100%;
 }
-#page-course-edit #fitem_id_category .col-md-9{
+
+#page-course-edit #fitem_id_category .col-md-9 {
     max-width: 41.3% !important;
 }
-#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9{
+
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 {
     max-width: 61.38% !important;
 }
+
 #page-course-edit #id_overviewfiles_filemanager_fieldset,
-#page-course-edit #id_overviewfiles_filemanager_fieldset .filemanager
-{
+#page-course-edit #id_overviewfiles_filemanager_fieldset .filemanager {
     height: 172px !important;
 }
-#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 .filemanager-container{
+
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 .filemanager-container {
     margin-top: 0;
     width: 100% !important;
     height: 172px;
 }
-#page-course-edit #fitem_id_maxbytes .col-md-9{
+
+#page-course-edit #fitem_id_maxbytes .col-md-9 {
     max-width: 43.1%;
 }
-#page-course-edit #fitem_id_maxbytes .col-md-9 select{
+
+#page-course-edit #fitem_id_maxbytes .col-md-9 select {
     width: 100%;
 }
-.d-flex.flex-wrap.align-items-center.rui-form-element-group{
+
+.d-flex.flex-wrap.align-items-center.rui-form-element-group {
     padding-left: 0 !important;
 }
-.editor_atto_content_wrap #id_summary_editoreditable
-{
+
+.editor_atto_content_wrap #id_summary_editoreditable {
     height: 125px !important;
 }
-.editor_atto_content.form-control{
-    min-height:125px !important;
-}
-#page-course-edit #fgroup_id_buttonar #id_saveandreturn{
-    display: none;
-}
-/* /Update Create New Course */
-#users tbody tr,#users thead tr th,
-#roles tbody tr,#roles thead tr th{
-    box-shadow: inset 0px -1px 0px #f5f7fa;
-    border:none !important;
+
+.editor_atto_content.form-control {
+    min-height: 125px !important;
 }
 
-#users .leftalign,#roles .leftalign{
+#page-course-edit #fgroup_id_buttonar #id_saveandreturn {
+    display: none;
+}
+
+/* /Update Create New Course */
+#users tbody tr,
+#users thead tr th,
+#roles tbody tr,
+#roles thead tr th {
+    box-shadow: inset 0px -1px 0px #f5f7fa;
+    border: none !important;
+}
+
+#users .leftalign,
+#roles .leftalign {
     font-size: 14px !important;
 }
-#users .header,#roles .header{
+
+#users .header,
+#roles .header {
     font-size: 16px !important;
 }
+
 #users th.header.c0.centeralign {
     width: 45%;
 }
+
 #roles th.header.c0.leftalign {
     width: 30%;
 }
+
 /* Nội dung khóa học commit by Việt Nguyễn*/
-.media-body.align-self-center>.rui-pluginname,.flex-fill.description-inner>.no-overflow,.rui-activity-dates.activity-dates.course-description-item,.activity-information{
+.media-body.align-self-center>.rui-pluginname,
+.flex-fill.description-inner>.no-overflow,
+.rui-activity-dates.activity-dates.course-description-item,
+.activity-information {
     display: none;
 }
-.activityiconcontainer.courseicon.align-self-start img{
+
+.activityiconcontainer.courseicon.align-self-start img {
     border-radius: 25px;
 }
-#nav-drawer .nav-drawer-container{
+
+#nav-drawer .nav-drawer-container {
     padding-right: 0 !important;
 }
-.course-section-header.d-flex.align-items-center.dropready{
+
+.course-section-header.d-flex.align-items-center.dropready {
     background: #ECECEC;
     padding: 5px;
     border-radius: 8px;
 }
-ul.rui-section.section.img-text.d-block{
-    border:none !important;
-    margin:0 !important;
+
+ul.rui-section.section.img-text.d-block {
+    border: none !important;
+    margin: 0 !important;
 }
+
 /* Ẩn icon pen chỉnh sửa trong nội dung khóa học */
-.jsenabled .visibleifjs{
+.jsenabled .visibleifjs,
+.page-header-content {
     display: none !important;
 }
+
 .menubar>.action-menu-trigger {
     /* width: 8.5rem; */
     width: auto !important;
 }
-.course-content ul.flexsections li.section .content>.rui-section{
-    border:none !important;
+
+.course-content ul.flexsections li.section .content>.rui-section {
+    border: none !important;
+}
+
+.course_category_tree.clearfix.category-browse>.wrapper-fw {
+    display: none;
+}
+
+th>a.rui-category-link {
+    font-weight: 400 !important;
+    font-size: 14px !important;
+}
+
+.wrapper-fw.info>.listcourse {
+    box-shadow: inset 0 -1px 0 #f5f7fa;
+}
+span.mx-3.badge.badge-info {
+    text-align: center;
+}
+.rui-course-card-deck.rui-course-card-deck--4.mt-2 {
+    margin-top: 1.5rem !important;
 }
