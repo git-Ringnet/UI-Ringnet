@@ -1734,7 +1734,7 @@ class flexible_table {
             }, array_keys($this->prefs['sortby']), array_values($this->prefs['sortby']));;
 
             return html_writer::start_tag('div', [
-                'class' => 'table-dynamic position-relative',
+                'class' => 'table-dynamic',
                 'data-region' => 'core_table/dynamic',
                 'data-table-handler' => $this->get_handler(),
                 'data-table-component' => $this->get_component(),
