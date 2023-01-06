@@ -926,14 +926,17 @@ body {
 #page-course-edit #fgroup_id_buttonar #id_saveandreturn{
     display: none;
 }
-#page-course-view-flexsections #form_submit .input-group .small {
+#page-course-view-flexsections #form_submit .input-group .small,
+#page-course-view-topics #form_submit .input-group .small{
     color: blue !important;
 }
-#page-course-view-flexsections #edit_mode #form_submit {
+#page-course-view-flexsections #edit_mode #form_submit ,
+#page-course-view-topics #edit_mode #form_submit{
     border: 1px solid blue;
 }
 #btn_add_anActivity,
-#page-course-view-flexsections #edit_mode #form_submit {
+#page-course-view-flexsections #edit_mode #form_submit,
+#page-course-view-topics #edit_mode #form_submit{
     margin-right: 24px;
 }
 .wrapper-course label.my-0.small {
@@ -969,4 +972,7 @@ body {
 }
 #page-course-edit #fitem_id_overviewfiles_filemanager .fp-navbar{
     display: none;
+}
+#page-course-show .wrapper-header{
+    display: none !important;
 }

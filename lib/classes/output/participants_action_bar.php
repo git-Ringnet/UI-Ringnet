@@ -29,7 +29,8 @@ use html_writer;
  * @copyright  2021 Peter Dias
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class participants_action_bar implements \renderable {
+class participants_action_bar implements \renderable
+{
     /** @var object $course The course we are dealing with. */
     private $course;
     /** @var moodle_page $page The current page. */
@@ -45,7 +46,8 @@ class participants_action_bar implements \renderable {
      * @param moodle_page $page The page object
      * @param string|null $renderedcontent Any additional rendered content/actions to be displayed in line with the nav
      */
-    public function __construct(object $course, moodle_page $page, ?string $renderedcontent) {
+    public function __construct(object $course, moodle_page $page, ?string $renderedcontent)
+    {
         $this->course = $course;
         $this->page = $page;
         $node = 'users';
@@ -65,7 +67,8 @@ class participants_action_bar implements \renderable {
      *
      * @return array
      */
-    protected function get_ordered_nodes(): array {
+    protected function get_ordered_nodes(): array
+    {
         return [
             'enrolments:enrol' => [
                 'review',
@@ -91,15 +94,18 @@ class participants_action_bar implements \renderable {
      *
      * @return array
      */
-    protected function get_content_for_select(): array {
+    protected function get_content_for_select(): array
+    {
         if (!$this->node) {
             return [];
         }
 
         $formattedcontent = [];
         $enrolmentsheading = get_string('enrolments', 'enrol');
-        if ($this->page->context->contextlevel != CONTEXT_MODULE &&
-                $this->page->context->contextlevel != CONTEXT_COURSECAT) {
+        if (
+            $this->page->context->contextlevel != CONTEXT_MODULE &&
+            $this->page->context->contextlevel != CONTEXT_COURSECAT
+        ) {
             // Pre-populate the formatted tertiary nav items with the "Enrolled users" node if user can view the participants page.
             $coursecontext = context_course::instance($this->course->id);
             $canviewparticipants = course_can_view_participants($coursecontext);
@@ -145,8 +151,10 @@ class participants_action_bar implements \renderable {
         }
 
         // If we are accessing a page from a module/category context additional nodes will not be visible.
-        if ($this->page->context->contextlevel != CONTEXT_MODULE &&
-                $this->page->context->contextlevel != CONTEXT_COURSECAT) {
+        if (
+            $this->page->context->contextlevel != CONTEXT_MODULE &&
+            $this->page->context->contextlevel != CONTEXT_COURSECAT
+        ) {
             // Need to do some funky code here to find out if we have added third party navigation nodes.
             $thirdpartynodearray = $this->get_thirdparty_node_array() ?: [];
             $formattedcontent = array_merge($formattedcontent, $thirdpartynodearray);
@@ -159,7 +167,8 @@ class participants_action_bar implements \renderable {
      *
      * @return array|null The thirdparty node array.
      */
-    protected function get_thirdparty_node_array(): ?array {
+    protected function get_thirdparty_node_array(): ?array
+    {
         $results = [];
 
         $flatnodes = array_merge(...(array_values($this->get_ordered_nodes())));
@@ -179,7 +188,8 @@ class participants_action_bar implements \renderable {
      * @param int $strictness Strictness for the compare criteria
      * @return string The matching active url
      */
-    protected function find_active_page(array $urlcontent, int $strictness = URL_MATCH_EXACT): string {
+    protected function find_active_page(array $urlcontent, int $strictness = URL_MATCH_EXACT): string
+    {
         foreach ($urlcontent as $key => $value) {
             if (is_array($value) && $activeitem = $this->find_active_page($value, $strictness)) {
                 return $activeitem;
@@ -197,7 +207,8 @@ class participants_action_bar implements \renderable {
      * @param \renderer_base $output
      * @return object|null The content required to render the url_select
      */
-    public function get_dropdown(\renderer_base $output): ?object {
+    public function get_dropdown(\renderer_base $output): ?object
+    {
         if ($urlselectcontent = $this->get_content_for_select()) {
             $activeurl = $this->find_active_page($urlselectcontent);
             $activeurl = $activeurl ?: $this->find_active_page($urlselectcontent, URL_MATCH_BASE);
@@ -210,12 +221,21 @@ class participants_action_bar implements \renderable {
     }
     public function course_navigate()
     {
-        global $CFG, $COURSE, $DB;
+        global $CFG, $COURSE, $DB, $USER;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
         $content = html_writer::start_div('course-teachers-box');
         // var_dump($course);
+        $context = context_course::instance($COURSE->id);
+        $roles = get_user_roles($context, $USER->id, true);
+        $role = key($roles);
+        $rolename = $roles[$role]->shortname;
+        if ($rolename == "student") {
+            $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
+        } else {
+            $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        }
         $content = html_writer::start_div('course-navigation');
-        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
         $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
@@ -256,7 +276,8 @@ class participants_action_bar implements \renderable {
      *              - urlselect A stdclass representing the standard navigation options to be fed into a urlselect
      *              - renderedcontent Rendered content to be displayed in line with the tertiary nav
      */
-    public function export_for_template(\renderer_base $output) {
+    public function export_for_template(\renderer_base $output)
+    {
         return [
             'urlselect' => $this->get_dropdown($output),
             'renderedcontent' => $this->renderedcontent,

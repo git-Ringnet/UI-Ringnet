@@ -168,6 +168,7 @@ $string['authenticationplugins'] = 'Authentication plugins';
 $string['autosubscribe'] = 'Forum auto-subscribe';
 $string['autosubscribeno'] = 'No: don\'t automatically subscribe me to forum discussions';
 $string['autosubscribeyes'] = 'Yes: when I post, subscribe me to that forum discussion';
+$string['discussion'] = 'Discussion';
 $string['availability'] = 'Availability';
 $string['availablecourses'] = 'Available courses';
 $string['back'] = 'Back';
@@ -208,7 +209,7 @@ $string['backuptakealook'] = 'Please take a look at your backup logs in:
   {$a}';
 $string['backupuserfileshelp'] = 'Choose whether user files (eg profile images) should be included in automated backups';
 $string['backupversion'] = 'Backup version';
-$string['badges'] = 'Chứng chỉ';
+$string['badges'] = 'Badges';
 $string['block'] = 'Block';
 $string['blockconfiga'] = 'Configuring a {$a} block';
 $string['blockconfigbad'] = 'This block has not been implemented correctly and thus cannot provide a configuration interface.';
@@ -416,7 +417,8 @@ $string['coursesearch_help'] = 'You can search for multiple words at once and ca
 * +word - only exact matching words will be found
 * -word - don\'t include results containing this word.';
 $string['coursestart'] = 'Course start';
-$string['coursesummary'] = 'Description';
+$string['coursesummary'] = 'Course Summary';
+$string['courdescription'] = 'No Description';
 $string['coursesummary_help'] = 'The course summary is displayed in the list of courses. A course search searches course summary text in addition to course names.';
 $string['coursetitle'] = 'Course: {$a->course}';
 $string['courseupdates'] = 'Course updates';

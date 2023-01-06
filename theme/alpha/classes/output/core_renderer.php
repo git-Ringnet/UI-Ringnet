@@ -373,11 +373,20 @@ class core_renderer extends \core_renderer
     }
     public function course_navigate()
     {
-        global $CFG, $COURSE, $DB;
+        global $CFG, $COURSE, $DB, $USER;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
         // var_dump($course);
+        $context = context_course::instance($COURSE->id);
+        $roles = get_user_roles($context, $USER->id, true);
+        $role = key($roles);
+        $rolename = $roles[$role]->shortname;
+        if ($rolename == "student") {
+            $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
+        } else {
+            $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        }
         $content = html_writer::start_div('course-navigation');
-        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
         $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;

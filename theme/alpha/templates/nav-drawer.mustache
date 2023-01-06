@@ -17,9 +17,6 @@ Example context (json): {}
                 class="rui-custom-dmlogo ml-2 img-fluid" />{{/customsidebardmlogo}}
         </div>
 
-
-
-
         {{/customsidebarlogo}}
         {{#output.mainsidebarmenu}}
         <ul class="rui-flatnavigation rui-flatnavigation-box {{^customsidebarlogo}}mt-2{{/customsidebarlogo}}">
@@ -103,8 +100,6 @@ Example context (json): {}
             <span class="rui-sidebar-nav-text">Báo cáo</span>
         </button> --}}
 
-
-
         {{!-- full khóa học --}}
         <div class="rui-sidebar-mycourses d-none">
             <button class="rui-sidebar-abtn rui-sidebar-nav-item-link py-2 collapsed" type="button"
@@ -133,11 +128,6 @@ Example context (json): {}
             </div> --}}
         </div>
 
-
-
-
-
-
         {{#iscoursepage}}
         <div class="rui-drawer-course-nav">
             {{#customstcontent}} <h4 class="rui-drawer-nav-title" style="font-size: 15px;">{{{customstcontent}}}</h4>
@@ -159,11 +149,7 @@ Example context (json): {}
             {{{customsfcontent}}}
         </div>
         {{/customsfcontent}}
-
-
-
     </div>
-
     <div class="rui-drawer-footer">
           {{! Này là cái admin }}
         {{! {{{output.adminheaderlink}}
