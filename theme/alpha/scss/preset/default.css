@@ -23479,7 +23479,7 @@ table.calendartable caption {
 .courses,
 .rui-category-browse {
   margin-bottom: 80px;
-  position: relative;
+  
 }
 .courses:after,
 .rui-category-browse:after {
@@ -26373,8 +26373,6 @@ body.editing .course-content ul.collapsibleweeks li.section .left.side .moodle-c
   max-height: calc(100vh - 133px);
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 5px;
-  padding-right: 5px;
   margin: 4px 4px 4px 10px;
   scrollbar-width: thin;
   scrollbar-color: #b4b2bc #04060a;

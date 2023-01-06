@@ -1688,7 +1688,7 @@ class core_course_renderer extends plugin_renderer_base {
 
         // Prepare parameters for courses and categories lists in the tree
         $chelper->set_show_courses(self::COURSECAT_SHOW_COURSES_AUTO)
-                ->set_attributes(array('class' => 'category-browse category-browse-'.$coursecat->id));
+                ->set_attributes(array('class' => 'pt-6 category-browse category-browse-'.$coursecat->id));
 
         $coursedisplayoptions = array();
         $catdisplayoptions = array();
