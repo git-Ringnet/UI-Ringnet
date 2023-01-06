@@ -34,6 +34,8 @@ use stdClass;
 use core_course_list_element;
 use single_select;
 use lang_string;
+use context_system;
+use curl;
 use cm_info;
 use core_text;
 use completion_info;
@@ -191,6 +193,41 @@ class course_renderer extends \core_course_renderer
         return $content;
     }
 
+    function delete_moodle_category($categoryid) {
+        global $CFG, $USER, $DB;
+     
+        // Xác thực người dùng có quyền để xóa category hay không
+        require_login();
+        $context = context_system::instance();
+        require_capability('moodle/category:manage', $context);
+     
+        // Lấy thông tin category cần xóa
+        $category = $DB->get_record('course_categories', array('id' => $categoryid), '*', MUST_EXIST);
+     
+        // Gọi Moodle web service function core_course_delete_categories để xóa category
+        $functionname = 'core_course_delete_categories';
+        $serverurl = $CFG->wwwroot . '/webservice/rest/server.php'. '?wstoken=' . $USER->token . '&wsfunction=' . $functionname;
+        $restformat = '&moodlewsrestformat=json';
+        $categories = array($categoryid);
+        $params = array('categories' => $categories);
+        $options = array(
+            'CURLOPT_POST' => 1,
+            'CURLOPT_POSTFIELDS' => http_build_query($params)
+        );
+        $curl = new curl;
+        $response = $curl->post($serverurl . $restformat, $params, $options);
+        $response = json_decode($response);
+        if (!empty($response->exception)) {
+            // Xảy ra lỗi khi gọi Moodle web service function
+            return $response->message;
+        } else {
+            // Xóa category thành công
+            return true;
+        }
+     }
+     
+  
+
     protected function coursecat_subcategories(coursecat_helper $chelper, $coursecat, $depth)
     {
         global $CFG;
@@ -262,7 +299,7 @@ class course_renderer extends \core_course_renderer
                    Khóa học
                 </th>
                 <th style="width: 50%;font-size: 1rem;" class="text-center">
-                   
+
                 </th>
             </tr>
         </thead>
@@ -465,6 +502,7 @@ class course_renderer extends \core_course_renderer
      */
     protected function coursecat_category(coursecat_helper $chelper, $coursecat, $depth)
     {
+        global $CFG;
         // open category tag
         $classes = array('category');
         if (empty($coursecat->visible)) {
@@ -530,7 +568,14 @@ class course_renderer extends \core_course_renderer
                 '.$coursescount.'
                 </th>
                 <th style="width: 50%;border-bottom: 0 !important" class="text-center">
-                   
+                <a href="'.$CFG->wwwroot.'/course/editcategory.php?id='.$coursecat->id.'" class="dropdown-item dropdown-item-wrapper action-edit menu-action" data-action="edit" role="menuitem" tabindex="-1">
+                                <span class="rui-icon-container"><img class="icon " alt="Edit" title="Edit" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/edit"></span>
+                                <span class="dropdown-item--text"></span>
+                        </a>
+                   <a href="'.$CFG->wwwroot.'/course/management.php?categoryid='.$coursecat->id.'&amp;sesskey='.sesskey().'&amp;action=deletecategory" class="dropdown-item dropdown-item-wrapper action-delete menu-action" data-action="delete" role="menuitem" tabindex="-1" aria-labelledby="actionmenuaction-8">
+                                <span class="rui-icon-container"><img class="icon " alt="Delete" title="Delete" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/delete"></span>
+                                <span class="dropdown-item--text"></span>
+                        </a>
                 </th>
             </tr>
         </thead>
