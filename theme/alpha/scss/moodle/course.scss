@@ -2536,7 +2536,7 @@ $rui-date-margin-left: 60px;
         }
 
         .rui--activity-is-manual {
-            padding-left: 60px;
+            // padding-left: 60px;
 
             @include media-breakpoint-between(xs,sm) {
             padding-left: 0;

@@ -1524,7 +1524,7 @@ table.surveytable {
             z-index: 3;
 
             background-color: rgba($white,.2);
-            backdrop-filter: blur(7px);
+            // backdrop-filter: blur(7px);
             -webkit-backdrop-filter: blur(7px);
         }
     }
