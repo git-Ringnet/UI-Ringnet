@@ -147,9 +147,11 @@ echo $OUTPUT->header();
  //Việt comments navigation bar
  $urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
  $urluser = $CFG->wwwroot . '/admin/user.php';
+ $urlgroup = $CFG->wwwroot . '/cohort/index.php';
  $pages = new stdClass();
  $pages->urluser = ['title' => get_string('fullnametest'), 'url' => $urluser];
  $pages->urlroles = ['title' => get_string('roles'), 'url' => $urlroles];
+ $pages->urlgroup = ['title' => get_string('group'), 'url' => $urlgroup];
  echo "<nav class='navbar navbar-expand-lg navbar-light'>
 <div class='collapse navbar-collapse' id='navbarNav'>
 <ul class='navbar-nav'>";
