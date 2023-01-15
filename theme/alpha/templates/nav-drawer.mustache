@@ -21,9 +21,9 @@ Example context (json): {}
         {{#output.mainsidebarmenu}}
         <ul class="rui-flatnavigation rui-flatnavigation-box {{^customsidebarlogo}}mt-2{{/customsidebarlogo}}">
             {{{output.mainsidebarmenu}}}
-            
+
             {{! Này là cái admin }}
-        {{{output.adminheaderlink}}}
+            {{{output.adminheaderlink}}}
         </ul>
         {{/output.mainsidebarmenu}}
 
@@ -151,9 +151,9 @@ Example context (json): {}
         {{/customsfcontent}}
     </div>
     <div class="rui-drawer-footer">
-          {{! Này là cái admin }}
+        {{! Này là cái admin }}
         {{! {{{output.adminheaderlink}}
-            
+
         <div class="d-inline-flex justify-content-between w-100">
             {{# output.render_lang_menu }}
             <div class="rui-navbar-nav--sep d-inline-flex m-0">
@@ -165,14 +165,14 @@ Example context (json): {}
     </div>
 </div>
 <script>
-// edit mode
-var url = window.location.pathname;
-var setmode1 = document.getElementsByClassName('ios-switch-control-input')[0];
-var from1 = document.getElementById('form_submit');
-if(url != "/ringnet/course/view.php"){
-    if(setmode1.getAttribute('aria-checked') == "true"){
-    setmode1.checked = false;
-    from1.submit();
+    // edit mode
+    var url = window.location.pathname;
+    var setmode1 = document.getElementsByClassName('ios-switch-control-input')[0];
+    var from1 = document.getElementById('form_submit');
+    if (url != "/ringnet/course/view.php") {
+        if (setmode1.getAttribute('aria-checked') == "true") {
+            //setmode1.checked = false;
+            //from1.submit();
+        }
     }
-}
 </script>

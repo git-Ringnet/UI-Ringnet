@@ -1,131 +1,282 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+This file is part of Moodle - http://moodle.org/
 
-    Moodle is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
 }}
 {{!
-    @template theme_alpha/columns2
+@template theme_alpha/columns2
 
-    Admin time setting template.
+Admin time setting template.
 
-    alpha 2 column layout template.
+alpha 2 column layout template.
 
-    Context variables required for this template:
-    * sitename - The name of the site
-    * output - The core renderer for the page
-    * bodyattributes - attributes for the body tag as a string of html attributes
-    * sidepreblocks - HTML for the blocks
-    * hasblocks - true if there are blocks on this page
-    * navdraweropen - true if the nav drawer should be open on page load
-    * regionmainsettingsmenu - HTML for the region main settings menu
-    * hasregionmainsettingsmenu - There is a region main settings menu on this page.
+Context variables required for this template:
+* sitename - The name of the site
+* output - The core renderer for the page
+* bodyattributes - attributes for the body tag as a string of html attributes
+* sidepreblocks - HTML for the blocks
+* hasblocks - true if there are blocks on this page
+* navdraweropen - true if the nav drawer should be open on page load
+* regionmainsettingsmenu - HTML for the region main settings menu
+* hasregionmainsettingsmenu - There is a region main settings menu on this page.
 
-    Example context (json):
-    {
-        "sitename": "Moodle",
-        "output": {
-            "doctype": "<!DOCTYPE html>",
-            "page_title": "Test page",
-            "favicon": "favicon.ico",
-            "main_content": "<h1>Headings make html validators happier</h1>"
-         },
-        "bodyattributes":"",
-        "sidepreblocks": "<h2>Blocks html goes here</h2>",
-        "hasblocks":true,
-        "navdraweropen":true,
-        "regionmainsettingsmenu": "",
-        "hasregionmainsettingsmenu": false
-    }
+Example context (json):
+{
+"sitename": "Moodle",
+"output": {
+"doctype": "
+<!DOCTYPE html>",
+"page_title": "Test page",
+"favicon": "favicon.ico",
+"main_content": "<h1>Headings make html validators happier</h1>"
+},
+"bodyattributes":"",
+"sidepreblocks": "<h2>Blocks html goes here</h2>",
+"hasblocks":true,
+"navdraweropen":true,
+"regionmainsettingsmenu": "",
+"hasregionmainsettingsmenu": false
+}
 }}
+<style>
+    #page-course-view-participants .main-content .row{
+        float: right;
+    }
+    #page-mod-forum-view .table-overflow{
+        width: 100%;
+    }
+    #page-course-view-participants #navbar_PNSection {
+        display: none !important;
+    }
+</style>
 {{> theme_alpha/head }}
 
 <body {{{ bodyattributes }}}>
-{{> core/local/toast/wrapper}}
+    {{> core/local/toast/wrapper}}
 
-<div id="page-wrapper" class="d-print-block {{#output.courseheadermenu}}rui--course-with-nav{{/output.courseheadermenu}} {{^output.courseheadermenu}}rui--course-witout-nav{{/output.courseheadermenu}}">
+    <div id="page-wrapper"
+        class="d-print-block {{#output.courseheadermenu}}rui--course-with-nav{{/output.courseheadermenu}} {{^output.courseheadermenu}}rui--course-witout-nav{{/output.courseheadermenu}}">
 
-    {{{ output.standard_top_of_body_html }}}
+        {{{ output.standard_top_of_body_html }}}
 
-    <div id="page" data-region="mainpage" data-usertour="scroller" class="container-fluid drawers {{#courseindexopen}}show-drawer-right{{/courseindexopen}} {{#blockdraweropen}}show-hidden-drawer{{/blockdraweropen}} drag-container">
-        {{> theme_alpha/navbar }}
-        <div id="topofscroll" class="main-inner">
-            <div id="page-content" class="page-content wrapper-page">
-                {{> theme_alpha/navbar-secondary }}
-                {{{ output.breadcrumbs }}}
-                {{{coursepageinformationbanners}}}
-                <div id="region-main-box" class="region-main-course-wrapper">
-                    <div class="wrapper-header">
-                        
-                        {{{ output.simple_header }}}
-                        {{#headeractions}}
-                        <div class="header-actions-container ml-1" data-region="header-actions-container">
-                            <div class="header-action">{{{.}}}</div>
+        <div id="page" data-region="mainpage" data-usertour="scroller"
+            class="container-fluid drawers {{#courseindexopen}}show-drawer-right{{/courseindexopen}} {{#blockdraweropen}}show-hidden-drawer{{/blockdraweropen}} drag-container">
+            {{> theme_alpha/navbar }}
+            <div id="topofscroll" class="main-inner">
+                <div id="page-content" class="page-content wrapper-page">
+                    {{> theme_alpha/navbar-secondary }}
+                    {{{ output.breadcrumbs }}}
+                    {{{coursepageinformationbanners}}}
+                    <div id="region-main-box" class="region-main-course-wrapper">
+                        <div class="wrapper-header">
+
+                            {{{ output.simple_header }}}
+                            {{#headeractions}}
+                            <div class="header-actions-container ml-1" data-region="header-actions-container">
+                                <div class="header-action">{{{.}}}</div>
+                            </div>
+                            {{/headeractions}}
+                            {{{pageheadingbutton}}}
+                            <div class="sticky-header-settings-menu">{{{ output.region_main_settings_menu }}}</div>
                         </div>
-                        {{/headeractions}}
-                        {{{pageheadingbutton}}}
-                        <div class="sticky-header-settings-menu">{{{ output.region_main_settings_menu }}}</div>
-                    </div>
-                
-                    <section id="region-main" class="region-main-content {{#hasblocks}}has-blocks{{/hasblocks}}" aria-label="{{#str}}content{{/str}}">
-                        <div class="rui-blocks-wrapper">
-                            <div class="wrapper-course">
-                              {{{ output.course_navigate }}}
-                                {{#hasregionmainsettingsmenu}}
+
+                        <section id="region-main" class="region-main-content {{#hasblocks}}has-blocks{{/hasblocks}}"
+                            aria-label="{{#str}}content{{/str}}">
+                            <div class="rui-blocks-wrapper">
+                                <div class="wrapper-course">
+                                    {{{ output.course_navigate }}}
+                                    {{#hasregionmainsettingsmenu}}
                                     <div class="region_main_settings_menu_proxy"></div>
-                                {{/hasregionmainsettingsmenu}}
-                                {{{ output.course_content_header }}}
-                                {{#headercontent}}
+                                    {{/hasregionmainsettingsmenu}}
+                                    {{{ output.course_content_header }}}
+                                    {{#headercontent}}
                                     {{> core/activity_header }}
-                                {{/headercontent}}
-                                {{#overflow}}
+                                    {{/headercontent}}
+                                    {{#overflow}}
                                     <div class="container-fluid tertiary-navigation">
                                         <div class="navitem">
                                             {{> core/url_select}}
                                         </div>
                                     </div>
-                                {{/overflow}}                        
-                                {{{ output.main_content }}}
+                                    {{/overflow}}
+                                    <div style="height: 35px; display:flex; margin-bottom:10px; margin-top:24px;"
+                                        id="navbar_PNSection">
+                                        <div id="btn_showListCourse"
+                                            style="margin-right:16px; border-radius:10px; border:1px solid gray;">
+                                            <button data-target="theme_alpha-drawers-courseindex" data-action="toggle"
+                                                data-toggler="drawers" id="click_showListCourse"
+                                                style="background:none;border:none; padding:5px 5px;">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path class="path1" d="M9 7H7V9H9V7Z" fill="currentColor"></path>
+                                                    <path class="path2" d="M7 13V11H9V13H7Z" fill="currentColor"></path>
+                                                    <path class="path3" d="M7 15V17H9V15H7Z" fill="currentColor"></path>
+                                                    <path class="path4" d="M11 15V17H17V15H11Z" fill="currentColor">
+                                                    </path>
+                                                    <path class="path5" d="M17 13V11H11V13H17Z" fill="currentColor">
+                                                    </path>
+                                                    <path class="path6" d="M17 7V9H11V7H17Z" fill="currentColor"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <a href="#" id="pre_section"
+                                            style="border: 1px solid gray;padding:8px 5px; border-radius:5px 5px 5px 5px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                viewBox="0 0 24 24" height="1em" width="1em"
+                                                xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
+                                                <polyline fill="none" stroke="#000" stroke-width="2"
+                                                    points="7 2 17 12 7 22"></polyline>
+                                            </svg>
+                                        </a>
+                                        <div id="title"
+                                            style="margin-left:5px; text-align:center; padding:5px 5px; width:25%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        </div>
+                                        <a href="#" id="next_section"
+                                            style="margin-left:5px; border: 1px solid gray;padding:8px 5px; border-radius:5px 5px 5px 5px;">
+                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                viewBox="0 0 24 24" height="1em" width="1em"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <polyline fill="none" stroke="#000" stroke-width="2"
+                                                    points="7 2 17 12 7 22"></polyline>
+                                            </svg>
+                                        </a>
+                                    </div>
+
+                                    {{{ output.main_content }}}
+                                </div>
+
+                                {{> theme_alpha/hasblocks-tmpl }}
+
                             </div>
-
-                            {{> theme_alpha/hasblocks-tmpl }}
-
-                        </div>
-                        {{{ output.activity_navigation }}}
-                        {{{ output.course_content_footer }}}
-                    </section>
+                            {{{ output.activity_navigation }}}
+                            {{{ output.course_content_footer }}}
+                        </section>
+                    </div>
                 </div>
             </div>
+            {{> theme_alpha/footer }}
         </div>
-        {{> theme_alpha/footer }}
-    </div>
-            
-    {{^hiddensidebar}}
+
+        {{^hiddensidebar}}
         {{> theme_alpha/nav-drawer }}
-    {{/hiddensidebar}}
-    {{> theme_alpha/courseindex-tmpl}}
+        {{/hiddensidebar}}
+        {{> theme_alpha/courseindex-tmpl}}
 
-
-    {{{ output.standard_after_main_region_html }}}
-    
-</div>
+        {{{ output.standard_after_main_region_html }}}
+    </div>
 
 </body>
+
 </html>
 {{#js}}
 M.util.js_pending('theme_alpha/loader');
 require(['theme_alpha/loader', 'theme_alpha/drawer'], function(Loader, Drawer) {
-    Drawer.init();
-    M.util.js_complete('theme_alpha/loader');
+Drawer.init();
+M.util.js_complete('theme_alpha/loader');
 });
 {{/js}}
+<script>
+    var list = document.getElementById('btn_showListCourse');
+    var num = 1;
+    var menuList = document.getElementById('theme_alpha-drawers-courseindex');
+    var close_menu = document.querySelector('.icon-no-margin');
+    close_menu.addEventListener('click', function () {
+        num = 1;
+        document.querySelector('.path1').setAttribute('fill', 'currentColor');
+        document.querySelector('.path2').setAttribute('fill', 'currentColor');
+        document.querySelector('.path3').setAttribute('fill', 'currentColor');
+        document.querySelector('.path4').setAttribute('fill', 'currentColor');
+        document.querySelector('.path5').setAttribute('fill', 'currentColor');
+        document.querySelector('.path6').setAttribute('fill', 'currentColor');
+        list.style.background = "white";
+    });
+    list.addEventListener('click', function () {
+        if (num == 1) {
+            document.querySelector('.path1').setAttribute('fill', 'white');
+            document.querySelector('.path2').setAttribute('fill', 'white');
+            document.querySelector('.path3').setAttribute('fill', 'white');
+            document.querySelector('.path4').setAttribute('fill', 'white');
+            document.querySelector('.path5').setAttribute('fill', 'white');
+            document.querySelector('.path6').setAttribute('fill', 'white');
+            list.style.background = "#555555";
+            num = 2;
+        } else {
+            document.querySelector('.path1').setAttribute('fill', 'currentColor');
+            document.querySelector('.path2').setAttribute('fill', 'currentColor');
+            document.querySelector('.path3').setAttribute('fill', 'currentColor');
+            document.querySelector('.path4').setAttribute('fill', 'currentColor');
+            document.querySelector('.path5').setAttribute('fill', 'currentColor');
+            document.querySelector('.path6').setAttribute('fill', 'currentColor');
+            list.style.background = "white";
+            num = 1;
+        }
+
+    });
+   window.onload = function () {
+        // JS button next-pre section in course
+        var url = window.location.href;
+        var liActive = document.querySelectorAll('.courseindex-link');
+        var newList = Array.from(liActive).filter(function (el) {
+            return el.getAttribute("data-action") !== "togglecourseindexsection";
+        });
+        var next = document.getElementById('next_section');
+        var pre = document.getElementById('pre_section');
+        var title = document.getElementById('title');
+        var parent;
+        if (url.search('&') == -1) {
+            url = window.location.href;
+        } else {
+            var slide = url.substring(url.search('&'), url.length);
+            url = url.replace(slide, "");
+        }
+        for (let i = 0; i < newList.length; i++) {
+            if (i == 0) {
+                next.setAttribute('href', newList[1].getAttribute('href'));
+                pre.setAttribute('href', newList[newList.length - 1].getAttribute('href'));
+                title.innerHTML = newList[i].innerHTML;
+            }
+            if (newList[i].getAttribute('href') == url) {
+                title.innerHTML = newList[i].innerHTML;
+                if (i > 0 && i < newList.length - 1) {
+                    next.setAttribute('href', newList[i + 1].getAttribute('href'));
+                    pre.setAttribute('href', newList[i - 1].getAttribute('href'));
+                } else {
+                    next.setAttribute('href', newList[0].getAttribute('href'));
+                    pre.setAttribute('href', newList[i - 1].getAttribute('href'));
+                }
+            }
+        }
+        // JS button show menu
+        if (menuList.getAttribute('aria-hidden') == 'true') {
+            num = 1;
+            document.querySelector('.path1').setAttribute('fill', 'currentColor');
+            document.querySelector('.path2').setAttribute('fill', 'currentColor');
+            document.querySelector('.path3').setAttribute('fill', 'currentColor');
+            document.querySelector('.path4').setAttribute('fill', 'currentColor');
+            document.querySelector('.path5').setAttribute('fill', 'currentColor');
+            document.querySelector('.path6').setAttribute('fill', 'currentColor');
+            list.style.background = "white";
+        } else {
+            num = 2;
+            document.querySelector('.path1').setAttribute('fill', 'white');
+            document.querySelector('.path2').setAttribute('fill', 'white');
+            document.querySelector('.path3').setAttribute('fill', 'white');
+            document.querySelector('.path4').setAttribute('fill', 'white');
+            document.querySelector('.path5').setAttribute('fill', 'white');
+            document.querySelector('.path6').setAttribute('fill', 'white');
+            list.style.background = "#555555";
+        }
+    }
+</script>

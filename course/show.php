@@ -12,7 +12,8 @@ $returnurl = optional_param('returnurl', '', PARAM_LOCALURL); // A return URL. r
 $course = get_course($id);
 require_login($course);
 
-
+$streditcoursesettings = get_string("editcoursesettings");
+$title = $streditcoursesettings;
 $course = course_get_format($course)->get_course();
 $category = $DB->get_record('course_categories', array('id' => $course->category), '*', MUST_EXIST);
 
@@ -53,7 +54,7 @@ $output = "
             </div>
             <div id='stu_id_summary_editor w-100' style='margin-top:24px;'>
                 <label>". get_string('coursesummary', 'moodle')."</label>
-                <div class='w-100' style='padding:5px 20px; border-radius:5px; border:1px solid white; height:125px; background:#eeedef'>"
+                <div class='w-100' style='padding:5px 20px; border-radius:5px; border:1px solid white; height:150px; background:#eeedef; display:inline-block; overflow: hidden; overflow-y: scroll;'>"
                 .$msg."
                 </div>
             </div>
@@ -85,7 +86,6 @@ $button = "
 
 $course = $DB->get_record('course', ['id' => $COURSE->id]);
 $content = html_writer::start_div('course-teachers-box');
-// var_dump($course);
 $context = context_course::instance($COURSE->id);
 $roles = get_user_roles($context, $USER->id, true);
 $role = key($roles);

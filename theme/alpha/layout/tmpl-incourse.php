@@ -116,9 +116,9 @@ if ($PAGE->course->visible == '1') {
 
 $forceblockdraweropen = $OUTPUT->firstview_fakeblocks();
 
-
 // Moodle 4.0
 $courseindex = core_course_drawer();
+// var_dump(core_course_drawer1());
 if (!$courseindex) {
     $courseindexopen = false;
 }

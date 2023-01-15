@@ -23,12 +23,12 @@
  */
 
 require_once('../config.php');
-require_once($CFG->dirroot.'/user/lib.php');
-require_once($CFG->dirroot.'/course/lib.php');
-require_once($CFG->dirroot.'/notes/lib.php');
-require_once($CFG->libdir.'/tablelib.php');
-require_once($CFG->libdir.'/filelib.php');
-require_once($CFG->dirroot.'/enrol/locallib.php');
+require_once($CFG->dirroot . '/user/lib.php');
+require_once($CFG->dirroot . '/course/lib.php');
+require_once($CFG->dirroot . '/notes/lib.php');
+require_once($CFG->libdir . '/tablelib.php');
+require_once($CFG->libdir . '/filelib.php');
+require_once($CFG->dirroot . '/enrol/locallib.php');
 
 use core_table\local\filter\filter;
 use core_table\local\filter\integer_filter;
@@ -46,11 +46,12 @@ $roleid       = optional_param('roleid', 0, PARAM_INT);
 $urlgroupid   = optional_param('group', 0, PARAM_INT);
 
 $PAGE->set_url('/user/index.php', array(
-        'page' => $page,
-        'perpage' => $perpage,
-        'contextid' => $contextid,
-        'id' => $courseid,
-        'newcourse' => $newcourse));
+    'page' => $page,
+    'perpage' => $perpage,
+    'contextid' => $contextid,
+    'id' => $courseid,
+    'newcourse' => $newcourse
+));
 
 if ($contextid) {
     $context = context::instance_by_id($contextid, MUST_EXIST);
@@ -86,7 +87,7 @@ user_list_view($course, $context);
 
 $bulkoperations = has_capability('moodle/course:bulkmessaging', $context);
 
-$PAGE->set_title("$course->shortname: ".get_string('participants'));
+$PAGE->set_title("$course->shortname: " . get_string('participants'));
 $PAGE->set_heading($course->fullname);
 $PAGE->set_pagetype('course-view-participants');
 $PAGE->set_docs_path('enrol/users');
@@ -192,40 +193,26 @@ echo html_writer::start_tag('form', [
     'data-table-unique-id' => $participanttable->uniqueid,
 ]);
 echo '<div>';
-echo '<input type="hidden" name="sesskey" value="'.sesskey().'" />';
-echo '<input type="hidden" name="returnto" value="'.s($PAGE->url->out(false)).'" />';
-
-echo html_writer::tag(
-    'p',
-    get_string('countparticipantsfound', 'core_user', $participanttable->totalrows),
-    [
-        'data-region' => 'participant-count',
-    ]
-);
-
-echo $participanttablehtml;
-
-$bulkoptions = (object) [
-    'uniqueid' => $participanttable->uniqueid,
-];
-
+echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+echo '<input type="hidden" name="returnto" value="' . s($PAGE->url->out(false)) . '" />';
 if ($bulkoperations) {
-    echo '<br /><div class="buttons"><div class="form-inline">';
+    echo '<div class="buttons"><div class="form-inline float-right mr-4">';
+    // START Selected All user
 
-    echo html_writer::start_tag('div', array('class' => 'btn-group'));
-
-    if ($participanttable->get_page_size() < $participanttable->totalrows) {
-        // Select all users, refresh table showing all users and mark them all selected.
-        $label = get_string('selectalluserswithcount', 'moodle', $participanttable->totalrows);
-        echo html_writer::empty_tag('input', [
-            'type' => 'button',
-            'id' => 'checkall',
-            'class' => 'btn btn-secondary',
-            'value' => $label,
-            'data-target-page-size' => TABLE_SHOW_ALL_PAGE_SIZE,
-        ]);
-    }
-    echo html_writer::end_tag('div');
+    // echo html_writer::start_tag('div', array('class' => 'btn-group'));
+    // if ($participanttable->get_page_size() < $participanttable->totalrows) {
+    //     // Select all users, refresh table showing all users and mark them all selected.
+    //     $label = get_string('selectalluserswithcount', 'moodle', $participanttable->totalrows);
+    //     echo html_writer::empty_tag('input', [
+    //         'type' => 'button',
+    //         'id' => 'checkall',
+    //         'class' => 'btn btn-secondary',
+    //         'value' => $label,
+    //         'data-target-page-size' => TABLE_SHOW_ALL_PAGE_SIZE,
+    //     ]);
+    // }
+    // echo html_writer::end_tag('div');
+    // END Selected All user
     $displaylist = array();
     if (!empty($CFG->messaging) && has_all_capabilities(['moodle/site:sendmessage', 'moodle/course:bulkmessaging'], $context)) {
         $displaylist['#messageselect'] = get_string('messageselectadd');
@@ -282,8 +269,11 @@ if ($bulkoperations) {
         'data-toggle' => 'action',
         'disabled' => 'disabled'
     );
-    $label = html_writer::tag('label', get_string("withselectedusers"),
-            ['for' => 'formactionid', 'class' => 'col-form-label d-inline']);
+    $label = html_writer::tag(
+        'label',
+        get_string("withselectedusers"),
+        ['for' => 'formactionid', 'class' => 'col-form-label d-inline']
+    );
     $select = html_writer::select($displaylist, 'formaction', '', ['' => 'choosedots'], $selectactionparams);
     echo html_writer::tag('div', $label . $select);
 
@@ -293,6 +283,104 @@ if ($bulkoperations) {
 
     $bulkoptions->noteStateNames = note_get_state_names();
 }
+echo html_writer::tag(
+    'p',
+    get_string('countparticipantsfound', 'core_user', $participanttable->totalrows),
+    [
+        'data-region' => 'participant-count',
+    ]
+);
+
+echo $participanttablehtml;
+
+$bulkoptions = (object) [
+    'uniqueid' => $participanttable->uniqueid,
+];
+
+// if ($bulkoperations) {
+//     echo '<br /><div class="buttons"><div class="form-inline">';
+
+//     echo html_writer::start_tag('div', array('class' => 'btn-group'));
+
+//     if ($participanttable->get_page_size() < $participanttable->totalrows) {
+//         // Select all users, refresh table showing all users and mark them all selected.
+//         $label = get_string('selectalluserswithcount', 'moodle', $participanttable->totalrows);
+//         echo html_writer::empty_tag('input', [
+//             'type' => 'button',
+//             'id' => 'checkall',
+//             'class' => 'btn btn-secondary',
+//             'value' => $label,
+//             'data-target-page-size' => TABLE_SHOW_ALL_PAGE_SIZE,
+//         ]);
+//     }
+//     echo html_writer::end_tag('div');
+//     $displaylist = array();
+//     if (!empty($CFG->messaging) && has_all_capabilities(['moodle/site:sendmessage', 'moodle/course:bulkmessaging'], $context)) {
+//         $displaylist['#messageselect'] = get_string('messageselectadd');
+//     }
+//     if (!empty($CFG->enablenotes) && has_capability('moodle/notes:manage', $context) && $context->id != $frontpagectx->id) {
+//         $displaylist['#addgroupnote'] = get_string('addnewnote', 'notes');
+//     }
+
+//     $params = ['operation' => 'download_participants'];
+
+//     $downloadoptions = [];
+//     $formats = core_plugin_manager::instance()->get_plugins_of_type('dataformat');
+//     foreach ($formats as $format) {
+//         if ($format->is_enabled()) {
+//             $params = ['operation' => 'download_participants', 'dataformat' => $format->name];
+//             $url = new moodle_url('bulkchange.php', $params);
+//             $downloadoptions[$url->out(false)] = get_string('dataformat', $format->component);
+//         }
+//     }
+
+//     if (!empty($downloadoptions)) {
+//         $displaylist[] = [get_string('downloadas', 'table') => $downloadoptions];
+//     }
+
+//     if ($context->id != $frontpagectx->id) {
+//         $instances = $manager->get_enrolment_instances();
+//         $plugins = $manager->get_enrolment_plugins(false);
+//         foreach ($instances as $key => $instance) {
+//             if (!isset($plugins[$instance->enrol])) {
+//                 // Weird, some broken stuff in plugin.
+//                 continue;
+//             }
+//             $plugin = $plugins[$instance->enrol];
+//             $bulkoperations = $plugin->get_bulk_operations($manager);
+
+//             $pluginoptions = [];
+//             foreach ($bulkoperations as $key => $bulkoperation) {
+//                 $params = ['plugin' => $plugin->get_name(), 'operation' => $key];
+//                 $url = new moodle_url('bulkchange.php', $params);
+//                 $pluginoptions[$url->out(false)] = $bulkoperation->get_title();
+//             }
+//             if (!empty($pluginoptions)) {
+//                 $name = get_string('pluginname', 'enrol_' . $plugin->get_name());
+//                 $displaylist[] = [$name => $pluginoptions];
+//             }
+//         }
+//     }
+
+//     $selectactionparams = array(
+//         'id' => 'formactionid',
+//         'class' => 'ml-2',
+//         'data-action' => 'toggle',
+//         'data-togglegroup' => 'participants-table',
+//         'data-toggle' => 'action',
+//         'disabled' => 'disabled'
+//     );
+//     $label = html_writer::tag('label', get_string("withselectedusers"),
+//             ['for' => 'formactionid', 'class' => 'col-form-label d-inline']);
+//     $select = html_writer::select($displaylist, 'formaction', '', ['' => 'choosedots'], $selectactionparams);
+//     echo html_writer::tag('div', $label . $select);
+
+//     echo '<input type="hidden" name="id" value="' . $course->id . '" />';
+//     echo '<div class="d-none" data-region="state-help-icon">' . $OUTPUT->help_icon('publishstate', 'notes') . '</div>';
+//     echo '</div></div></div>';
+
+//     $bulkoptions->noteStateNames = note_get_state_names();
+// }
 echo '</form>';
 
 $PAGE->requires->js_call_amd('core_user/participants', 'init', [$bulkoptions]);
@@ -311,3 +399,41 @@ echo html_writer::div($enrolbuttonsout, 'd-flex justify-content-end', [
 ]);
 
 echo $OUTPUT->footer();
+?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    var checkAll = document.getElementById('select-all-participants');
+    var divButton = document.querySelector('.buttons');
+    var listChecked = document.querySelectorAll('.usercheckbox');
+    var num = 1;
+    var allChecked = false;
+
+    $(document).delegate('#select-all-participants', 'click', function() {
+        if (allChecked) {
+            $(this).prop('checked', false);
+            $(listChecked).prop('checked', false);
+            divButton.style.display = 'none';
+            allChecked = false;
+        } else {
+            $(this).prop('checked', true);
+            $(listChecked).prop('checked', true);
+            divButton.style.display = 'block';
+            allChecked = true;
+        }
+    });
+
+    $(document).delegate('.usercheckbox', 'click', function() {
+        var isChecked = $(this).prop('checked');
+        if(!isChecked){
+            $(this).attr('checked', false);
+        }else{
+            $(this).attr('checked', true)
+        }
+        var numChecked = $('.usercheckbox:checked').length;
+        if (numChecked > 0) {
+        document.querySelector('.buttons').style.display = 'block';
+    } else {
+        document.querySelector('.buttons').style.display = 'none';
+    }
+    });
+</script>

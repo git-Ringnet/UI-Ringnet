@@ -269,10 +269,10 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 /* CSS participants */
-#page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
+/* #page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
 #page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection {
     display: none !important;
-}
+} */
 
 #page-course-view-participants #fitem_id_userlist {
     width: 98% !important;
@@ -327,9 +327,9 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     width: 100% !important;
 }
 
-.tertiary-navigation .row {
+/* .tertiary-navigation .row {
     float: right;
-}
+} */
 
 #action_bar .navitem select {
     display: none;
@@ -1092,3 +1092,14 @@ span.mx-3.badge.badge-info {
 .rui-course-card-deck.rui-course-card-deck--4.mt-2 {
     margin-top: 1.5rem !important;
 }
+/* CSS mới */
+#page-course-view-participants .rui-title-container {
+    display: none !important;
+}
+#page-course-view-participants .buttons {
+    display: none;
+}
+form nav:first-of-type{
+    display: none;
+}
+/* /CSS mới */

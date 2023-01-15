@@ -240,6 +240,7 @@ class participants_action_bar implements \renderable
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+        
         $content .= "<nav class='navbar navbar-expand-lg navbar-light border rounded mb-3'>
         <div class='collapse navbar-collapse' id='navbarNav'>
           <ul class='navbar-nav'>
@@ -248,12 +249,12 @@ class participants_action_bar implements \renderable
             </li>
             <li class='nav-item'>
               <a class='nav-link' href='{$urlcontent}'>Nội dung</a>
-            </li>
+            </li>   
             <li class='nav-item'>
               <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
+              <a class='nav-link' href='{$urlbades}'>Chứng chỉ 1</a>
             </li>
             <li class='nav-item'>
             <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
