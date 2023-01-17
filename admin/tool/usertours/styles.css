@@ -1108,3 +1108,25 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 #cohorts>thead>tr>th.header.c1.leftalign.id{
     display: none;
 }
+/* CSS mới */
+#page-course-view-participants .rui-title-container {
+    display: none !important;
+}
+#page-course-view-participants .buttons {
+    display: none;
+}
+form nav:first-of-type{
+    display: none;
+}
+#page-course-view-participants .main-content .row {
+    float: right;
+}
+
+#page-mod-forum-view .table-overflow {
+    width: 100%;
+}
+
+#page-course-view-participants #navbar_PNSection {
+    display: none !important;
+}
+/* /CSS mới */
