@@ -21,6 +21,7 @@ use moodle_page;
 use navigation_node;
 use moodle_url;
 use html_writer;
+use tool_usertours\local\filter\role;
 
 /**
  * Class responsible for generating the action bar (tertiary nav) elements in the participants page and related pages.
@@ -224,15 +225,16 @@ class participants_action_bar implements \renderable
         global $CFG, $COURSE, $DB, $USER;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
         $content = html_writer::start_div('course-teachers-box');
-        // var_dump($course);
-        $context = context_course::instance($COURSE->id);
-        $roles = get_user_roles($context, $USER->id, true);
-        $role = key($roles);
-        $rolename = $roles[$role]->shortname;
-        if ($rolename == "student") {
-            $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
-        } else {
+        if(is_siteadmin()){
             $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        }else if(is_teacher()){
+            if(is_course_creator($COURSE->id)){
+                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+            }else{
+                $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
+            }
+        }else{
+            $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
         }
         $content = html_writer::start_div('course-navigation');
         //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
@@ -254,7 +256,7 @@ class participants_action_bar implements \renderable
               <a class='nav-link' href='{$urlparticipant}'>Thành viên</a>
             </li>
             <li class='nav-item'>
-              <a class='nav-link' href='{$urlbades}'>Chứng chỉ 1</a>
+              <a class='nav-link' href='{$urlbades}'>Chứng chỉ</a>
             </li>
             <li class='nav-item'>
             <a class='nav-link' href='{$urlgrades}'>Điểm số</a>
@@ -287,3 +289,14 @@ class participants_action_bar implements \renderable
         ];
     }
 }
+?>
+<style>
+    #page-course-view-participants .no-overflow table tbody .c3 a{
+        margin-left: 0 !important;
+    }
+    /* #page-course-view-participants .no-overflow table thead .c1,
+    #page-course-view-participants .no-overflow table tbody .c1
+    {
+        width: 40%;
+    } */
+</style>

@@ -4,7 +4,7 @@ require_once('lib.php');
 require_once('edit_form.php');
 
 require_login();
-global $CFG, $COURSE, $DB,$PAGE;
+global $CFG, $COURSE, $DB, $PAGE;
 $id = optional_param('id', 0, PARAM_INT); // Course id.
 $categoryid = optional_param('category', 0, PARAM_INT); // Course category - can be changed in edit form.
 $returnto = optional_param('returnto', 0, PARAM_ALPHANUM); // Generic navigation return page switch.
@@ -20,9 +20,9 @@ $category = $DB->get_record('course_categories', array('id' => $course->category
 
 $img = \core_course\external\course_summary_exporter::get_course_image($course);
 
-if($course->summary == ""){
-    $msg = get_string('courdescription','moodle');
-}else{
+if ($course->summary == "") {
+    $msg = get_string('courdescription', 'moodle');
+} else {
     $msg = $course->summary;
 }
 $output = "
@@ -30,18 +30,18 @@ $output = "
     <div class='row'>
         <div class='col-md-4'>  
             <div id='stu_id_overviewfiles_filemanager w-100'>
-                <label>". get_string('courseoverviewfiles', 'moodle')."</label>
+                <label>" . get_string('courseoverviewfiles', 'moodle') . "</label>
                 <img src='$img' style='width:70%;'>
             </div>
         </div>
         <div class='col-md-8'>
             <div id='stu_id_fullname w-100'>
-                <label>". get_string('fullnamecourse', 'moodle')."</label>
+                <label>" . get_string('fullnamecourse', 'moodle') . "</label>
                 <input class='form-control ' size='50' maxlength='254'
                 value='$course->fullname' readonly>
             </div>
             <div id='stu_id_category w-100' style='margin-top:24px;'>
-                <label>". get_string('coursecategory', 'moodle')."</label>
+                <label>" . get_string('coursecategory', 'moodle') . "</label>
                 <div style='width:50%; position: relative;'>
                 <input class='form-control '
                 value='$category->name' readonly>
@@ -53,9 +53,9 @@ $output = "
                 </div>
             </div>
             <div id='stu_id_summary_editor w-100' style='margin-top:24px;'>
-                <label>". get_string('coursesummary', 'moodle')."</label>
+                <label>" . get_string('coursesummary', 'moodle') . "</label>
                 <div class='w-100' style='padding:5px 20px; border-radius:5px; border:1px solid white; height:150px; background:#eeedef; display:inline-block; overflow: hidden; overflow-y: scroll;'>"
-                .$msg."
+    . $msg . "
                 </div>
             </div>
         </div>
@@ -86,38 +86,32 @@ $button = "
 
 $course = $DB->get_record('course', ['id' => $COURSE->id]);
 $content = html_writer::start_div('course-teachers-box');
-$context = context_course::instance($COURSE->id);
-$roles = get_user_roles($context, $USER->id, true);
-$role = key($roles);
-$rolename = $roles[$role]->shortname;
 $pages = new stdClass();
 $content = html_writer::start_div('course-navigation');
-
-if ($rolename == "student") {
-    $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
-    $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
-    $urldiscussion = $CFG->wwwroot . '/course/discussion.php?id=' . $course->id;
-    $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
-    $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
-    
-    $pages->urledit = ['title' => get_string('info', 'moodle'), 'url' => $urledit];
-    $pages->urlcontent = ['title' => get_string('content', 'moodle'), 'url' => $urlcontent];
-    $pages->urldiscussion = ['title'=>  get_string('discussion', 'moodle'), 'url' => $urldiscussion];
-    $pages->urlparticipant = ['title' => get_string('participants', 'moodle'), 'url' => $urlparticipant];
-    $pages->urlbades = ['title' => get_string('badges', 'moodle'), 'url' => $urlbades];
-} else {
+if(is_siteadmin()){
     $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-    $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
-    $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
-    $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
-    $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
-
-    $pages->urledit = ['title' => get_string('info', 'moodle'), 'url' => $urledit];
-    $pages->urlcontent = ['title' => get_string('content', 'moodle'), 'url' => $urlcontent];
-    $pages->urlparticipant = ['title' => get_string('participants', 'moodle'), 'url' => $urlparticipant];
-    $pages->urlbades = ['title' => get_string('badges', 'moodle'), 'url' => $urlbades];
-    $pages->urlgrades = ['title' => get_string('grades', 'moodle'), 'url' => $urlgrades];
+}else if(is_teacher()){
+    if(is_course_creator($COURSE->id)){
+        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+    }else{
+        $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
+    }
+}else{
+    $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
 }
+$content = html_writer::start_div('course-navigation');
+//$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+$urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
+$urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
+$urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
+$urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+
+$pages = new stdClass();
+$pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
+$pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
+$pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+$pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+$pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
 $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
 $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

@@ -50,17 +50,6 @@ Example context (json):
 "hasregionmainsettingsmenu": false
 }
 }}
-<style>
-    #page-course-view-participants .main-content .row{
-        float: right;
-    }
-    #page-mod-forum-view .table-overflow{
-        width: 100%;
-    }
-    #page-course-view-participants #navbar_PNSection {
-        display: none !important;
-    }
-</style>
 {{> theme_alpha/head }}
 
 <body {{{ bodyattributes }}}>
@@ -111,28 +100,25 @@ Example context (json):
                                         </div>
                                     </div>
                                     {{/overflow}}
-                                    <div style="height: 35px; display:flex; margin-bottom:10px; margin-top:24px;"
+                                    <div style="height: 32px; display:flex; margin-bottom:10px; margin-top:24px;"
                                         id="navbar_PNSection">
                                         <div id="btn_showListCourse"
-                                            style="margin-right:16px; border-radius:10px; border:1px solid gray;">
+                                            style="margin-right:16px; border-radius:8px; border:1px solid gray; width:32px; background:#D6D6D6;">
                                             <button data-target="theme_alpha-drawers-courseindex" data-action="toggle"
                                                 data-toggler="drawers" id="click_showListCourse"
-                                                style="background:none;border:none; padding:5px 5px;">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                style="background:none;border:none; padding:2px 7px;">
+                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
+                                                    version="1.1" viewBox="0 0 17 17" height="1em" width="1em"
                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <path class="path1" d="M9 7H7V9H9V7Z" fill="currentColor"></path>
-                                                    <path class="path2" d="M7 13V11H9V13H7Z" fill="currentColor"></path>
-                                                    <path class="path3" d="M7 15V17H9V15H7Z" fill="currentColor"></path>
-                                                    <path class="path4" d="M11 15V17H17V15H11Z" fill="currentColor">
+                                                    <g></g>
+                                                    <path id="btn_showListCourse_path" style="fill: #000000;"
+                                                        d="M16 2v2h-11v-2h11zM5 9h11v-2h-11v2zM5 14h11v-2h-11v2zM2 2c-0.552 0-1 0.447-1 1s0.448 1 1 1 1-0.447 1-1-0.448-1-1-1zM2 7c-0.552 0-1 0.447-1 1s0.448 1 1 1 1-0.447 1-1-0.448-1-1-1zM2 12c-0.552 0-1 0.447-1 1s0.448 1 1 1 1-0.447 1-1-0.448-1-1-1z">
                                                     </path>
-                                                    <path class="path5" d="M17 13V11H11V13H17Z" fill="currentColor">
-                                                    </path>
-                                                    <path class="path6" d="M17 7V9H11V7H17Z" fill="currentColor"></path>
                                                 </svg>
                                             </button>
                                         </div>
                                         <a href="#" id="pre_section"
-                                            style="border: 1px solid gray;padding:8px 5px; border-radius:5px 5px 5px 5px;">
+                                            style="border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
                                             <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                                 viewBox="0 0 24 24" height="1em" width="1em"
                                                 xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
@@ -144,7 +130,7 @@ Example context (json):
                                             style="margin-left:5px; text-align:center; padding:5px 5px; width:25%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                         </div>
                                         <a href="#" id="next_section"
-                                            style="margin-left:5px; border: 1px solid gray;padding:8px 5px; border-radius:5px 5px 5px 5px;">
+                                            style="margin-left:5px; border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
                                             <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                                 viewBox="0 0 24 24" height="1em" width="1em"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +162,6 @@ Example context (json):
 
         {{{ output.standard_after_main_region_html }}}
     </div>
-
 </body>
 
 </html>
@@ -187,54 +172,57 @@ Drawer.init();
 M.util.js_complete('theme_alpha/loader');
 });
 {{/js}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     var list = document.getElementById('btn_showListCourse');
     var num = 1;
-    var menuList = document.getElementById('theme_alpha-drawers-courseindex');
+    var menu_list = document.getElementById('theme_alpha-drawers-courseindex');
     var close_menu = document.querySelector('.icon-no-margin');
-    close_menu.addEventListener('click', function () {
-        num = 1;
-        document.querySelector('.path1').setAttribute('fill', 'currentColor');
-        document.querySelector('.path2').setAttribute('fill', 'currentColor');
-        document.querySelector('.path3').setAttribute('fill', 'currentColor');
-        document.querySelector('.path4').setAttribute('fill', 'currentColor');
-        document.querySelector('.path5').setAttribute('fill', 'currentColor');
-        document.querySelector('.path6').setAttribute('fill', 'currentColor');
-        list.style.background = "white";
-    });
     list.addEventListener('click', function () {
         if (num == 1) {
-            document.querySelector('.path1').setAttribute('fill', 'white');
-            document.querySelector('.path2').setAttribute('fill', 'white');
-            document.querySelector('.path3').setAttribute('fill', 'white');
-            document.querySelector('.path4').setAttribute('fill', 'white');
-            document.querySelector('.path5').setAttribute('fill', 'white');
-            document.querySelector('.path6').setAttribute('fill', 'white');
             list.style.background = "#555555";
+            document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
             num = 2;
         } else {
-            document.querySelector('.path1').setAttribute('fill', 'currentColor');
-            document.querySelector('.path2').setAttribute('fill', 'currentColor');
-            document.querySelector('.path3').setAttribute('fill', 'currentColor');
-            document.querySelector('.path4').setAttribute('fill', 'currentColor');
-            document.querySelector('.path5').setAttribute('fill', 'currentColor');
-            document.querySelector('.path6').setAttribute('fill', 'currentColor');
-            list.style.background = "white";
+            list.style.background = "#D6D6D6";
+            document.getElementById('btn_showListCourse_path').style.fill = "#000000";
             num = 1;
         }
 
     });
-   window.onload = function () {
+    close_menu.addEventListener('click', function () {
+        num = 1;
+        list.style.background = "#D6D6D6";
+        document.getElementById('btn_showListCourse_path').style.fill = "#000000";
+    });
+    window.onload = function () {
         // JS button next-pre section in course
         var url = window.location.href;
-        var liActive = document.querySelectorAll('.courseindex-link');
-        var newList = Array.from(liActive).filter(function (el) {
-            return el.getAttribute("data-action") !== "togglecourseindexsection";
-        });
         var next = document.getElementById('next_section');
         var pre = document.getElementById('pre_section');
         var title = document.getElementById('title');
-        var parent;
+        var checkEditmode = document.getElementById('form_submit');
+        // Kiểm tra form_submit có tồn tại hay không
+        if (checkEditmode) {
+            //Kiểm tra button edit mode có bật hay không
+            if (setmode1.getAttribute('aria-checked') == "true") {
+                var liActive = document.querySelectorAll('.courseindex-link');
+                var newList = Array.from(liActive).filter(function (el) {
+                    return el.getAttribute("data-action") !== "togglecourseindexsection";
+                });
+            } else {
+                var liActive = document.querySelectorAll('.courseindex-link');
+                var newList = Array.from(liActive).filter(function (el) {
+                    return el.getAttribute("data-action") !== "togglecourseindexsection";
+                });
+            }
+        } else {
+            var liActive = document.querySelectorAll('.courseindex-link');
+            var newList = Array.from(liActive).filter(function (el) {
+                return el.getAttribute("data-action") !== "togglecourseindexsection";
+            });
+        }
+        //Kiểm tra đường dẫn
         if (url.search('&') == -1) {
             url = window.location.href;
         } else {
@@ -259,24 +247,14 @@ M.util.js_complete('theme_alpha/loader');
             }
         }
         // JS button show menu
-        if (menuList.getAttribute('aria-hidden') == 'true') {
+        if (menu_list.getAttribute('aria-hidden') == 'true') {
             num = 1;
-            document.querySelector('.path1').setAttribute('fill', 'currentColor');
-            document.querySelector('.path2').setAttribute('fill', 'currentColor');
-            document.querySelector('.path3').setAttribute('fill', 'currentColor');
-            document.querySelector('.path4').setAttribute('fill', 'currentColor');
-            document.querySelector('.path5').setAttribute('fill', 'currentColor');
-            document.querySelector('.path6').setAttribute('fill', 'currentColor');
-            list.style.background = "white";
+           list.style.background = "#D6D6D6";
+           document.getElementById('btn_showListCourse_path').style.fill = "#000000";
         } else {
             num = 2;
-            document.querySelector('.path1').setAttribute('fill', 'white');
-            document.querySelector('.path2').setAttribute('fill', 'white');
-            document.querySelector('.path3').setAttribute('fill', 'white');
-            document.querySelector('.path4').setAttribute('fill', 'white');
-            document.querySelector('.path5').setAttribute('fill', 'white');
-            document.querySelector('.path6').setAttribute('fill', 'white');
-            list.style.background = "#555555";
+           list.style.background = "#555555";
+           document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
         }
     }
 </script>

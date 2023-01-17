@@ -726,7 +726,24 @@ function is_siteadmin($user_or_id = null) {
     $knownresult = in_array($userid, $siteadmins);
     return $knownresult;
 }
-
+// Fuction check user is a teacher
+function is_teacher() {
+    global $USER;
+    $context = context_system::instance();
+    return has_capability('moodle/course:update', $context, $USER->id);
+}
+// Fuction check user is a student
+function is_student() {
+    global $USER;
+    $context = context_system::instance();
+    return has_capability('moodle/course:view', $context, $USER->id);
+}
+// Check user create course
+function is_course_creator($courseid) {
+    global $USER;
+    $context = context_course::instance($courseid);
+    return has_capability('moodle/course:create', $context, $USER->id);
+}
 /**
  * Returns true if user has at least one role assign
  * of 'coursecontact' role (is potentially listed in some course descriptions).
