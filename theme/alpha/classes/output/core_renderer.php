@@ -375,15 +375,19 @@ class core_renderer extends \core_renderer
     {
         global $CFG, $COURSE, $DB, $USER;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
-        // var_dump($course);
-        $context = context_course::instance($COURSE->id);
-        $roles = get_user_roles($context, $USER->id, true);
-        $role = key($roles);
-        $rolename = $roles[$role]->shortname;
-        if ($rolename == "student") {
-            $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
-        } else {
+        // Kiểm tra role có phải là admin hay không
+        // Kiểm tra role có phải là teacher hay không
+        // sau đó kiểm tra có phải là người tạo khóa học hay không
+        if(is_siteadmin()){
             $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        }else if(is_teacher()){
+            if(is_course_creator($COURSE->id)){
+                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+            }else{
+                $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
+            }
+        }else{
+            $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
         }
         $content = html_writer::start_div('course-navigation');
         //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';

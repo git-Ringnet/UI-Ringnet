@@ -3732,6 +3732,19 @@ function core_course_drawer(): string {
     return '';
 }
 
+function core_course_drawer1(): string {
+    global $PAGE;
+    
+    $format = course_get_format($PAGE->course);
+    $renderer = $format->get_renderer($PAGE);
+
+    // if (method_exists($renderer, 'course_index_drawer')) {
+    //     return $renderer->course_index_drawer($format);
+    // }
+
+    return $renderer->course_index_drawer($format);
+}
+
 /**
  * Returns course modules tagged with a specified tag ready for output on tag/index.php page
  *
