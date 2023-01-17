@@ -36,6 +36,7 @@ use single_select;
 use lang_string;
 use context_system;
 use curl;
+use single_button;
 use cm_info;
 use core_text;
 use completion_info;
@@ -193,20 +194,21 @@ class course_renderer extends \core_course_renderer
         return $content;
     }
 
-    function delete_moodle_category($categoryid) {
+    function delete_moodle_category($categoryid)
+    {
         global $CFG, $USER, $DB;
-     
+
         // Xác thực người dùng có quyền để xóa category hay không
         require_login();
         $context = context_system::instance();
         require_capability('moodle/category:manage', $context);
-     
+
         // Lấy thông tin category cần xóa
         $category = $DB->get_record('course_categories', array('id' => $categoryid), '*', MUST_EXIST);
-     
+
         // Gọi Moodle web service function core_course_delete_categories để xóa category
         $functionname = 'core_course_delete_categories';
-        $serverurl = $CFG->wwwroot . '/webservice/rest/server.php'. '?wstoken=' . $USER->token . '&wsfunction=' . $functionname;
+        $serverurl = $CFG->wwwroot . '/webservice/rest/server.php' . '?wstoken=' . $USER->token . '&wsfunction=' . $functionname;
         $restformat = '&moodlewsrestformat=json';
         $categories = array($categoryid);
         $params = array('categories' => $categories);
@@ -224,9 +226,9 @@ class course_renderer extends \core_course_renderer
             // Xóa category thành công
             return true;
         }
-     }
-     
-  
+    }
+
+
 
     protected function coursecat_subcategories(coursecat_helper $chelper, $coursecat, $depth)
     {
@@ -289,9 +291,13 @@ class course_renderer extends \core_course_renderer
         if (!empty($pagingbar)) {
             $content .= $pagingbar;
         }
+        $content .= "<form method='POST' action='$CFG->wwwroot/course/index.php'>";
         $content .= ' <table class="table table-striped projects">
         <thead>
             <tr>
+                <th style="width: 10%;font-size: 1rem;">
+                <input type="checkbox" id="checkall" onclick="checkAll()">
+                </th>
                 <th style="width: 30%;font-size: 1rem;">
                     Danh mục
                 </th>
@@ -307,6 +313,14 @@ class course_renderer extends \core_course_renderer
         foreach ($subcategories as $subcategory) {
             $content .= $this->coursecat_category($chelper, $subcategory, $depth);
         }
+        $url = new moodle_url('/your/delete_script.php', array('sesskey' => sesskey()));
+        $button = new single_button($url, get_string('delete'), 'post');
+        $button->add_confirm_action(get_string('confirmdelete', 'your_plugin'));
+        global $OUTPUT;
+        $content .= html_writer::div(html_writer::div($OUTPUT->render($button), 'singlebutton'), 'buttons');
+        $content .= "</form>";
+
+
 
         if (!empty($pagingbar)) {
             $content .= $pagingbar;
@@ -561,18 +575,23 @@ class course_renderer extends \core_course_renderer
         $content .= ' <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
         <thead>
             <tr>
+            <th style="width: 10%;border-bottom: 0 !important;">';
+        $attributes = array('class' => 'checkbox', 'onchange' => 'uncheckAll()');
+        $content .= html_writer::checkbox('selected_categories[]', $coursecat->id, false, '', $attributes);
+        $content .= '
+            </th>
                 <th style="width: 30%;border-bottom: 0 !important;">
-                '.$categoryname.'
+                ' . $categoryname . '
                 </th>
                 <th style="width: 8%;border-bottom: 0 !important" class="text text-right">
-                '.$coursescount.'
+                ' . $coursescount . '
                 </th>
                 <th style="width: 50%;border-bottom: 0 !important" class="text-center">
-                <a href="'.$CFG->wwwroot.'/course/editcategory.php?id='.$coursecat->id.'" class="dropdown-item dropdown-item-wrapper action-edit menu-action" data-action="edit" role="menuitem" tabindex="-1">
+                <a href="' . $CFG->wwwroot . '/course/editcategory.php?id=' . $coursecat->id . '" class="dropdown-item dropdown-item-wrapper action-edit menu-action" data-action="edit" role="menuitem" tabindex="-1">
                                 <span class="rui-icon-container"><img class="icon " alt="Edit" title="Edit" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/edit"></span>
                                 <span class="dropdown-item--text"></span>
                         </a>
-                   <a href="'.$CFG->wwwroot.'/course/management.php?categoryid='.$coursecat->id.'&amp;sesskey='.sesskey().'&amp;action=deletecategory" class="dropdown-item dropdown-item-wrapper action-delete menu-action" data-action="delete" role="menuitem" tabindex="-1" aria-labelledby="actionmenuaction-8">
+                   <a href="' . $CFG->wwwroot . '/course/management.php?categoryid=' . $coursecat->id . '&amp;sesskey=' . sesskey() . '&amp;action=deletecategory" class="dropdown-item dropdown-item-wrapper action-delete menu-action" data-action="delete" role="menuitem" tabindex="-1" aria-labelledby="actionmenuaction-8">
                                 <span class="rui-icon-container"><img class="icon " alt="Delete" title="Delete" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/delete"></span>
                                 <span class="dropdown-item--text"></span>
                         </a>
@@ -869,3 +888,17 @@ class course_renderer extends \core_course_renderer
         return $content;
     }
 }
+?>
+<script>
+    function checkAll() {
+        var checkboxes = document.getElementsByClassName("checkbox");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = document.getElementById("checkall").checked;
+        }
+    }
+
+    function uncheckAll() {
+        var checkall = document.querySelector('#checkall');
+        checkall.checked = false;
+    }
+</script>

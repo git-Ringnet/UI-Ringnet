@@ -327,7 +327,7 @@ if (!$users) {
     //     $table->head[] = $OUTPUT->render($mastercheckbox);
     // }
     // $table->head[] = $fullnamedisplay;
-    $table->head[] = get_string('fullnametest');
+    $table->head[] = '<input type="checkbox" id="checkall" onclick="checkAll()">';
 
     $table->head[] = get_string('fullnametest');
     // add button
@@ -469,7 +469,8 @@ if (!$users) {
         $fullname = fullname($user, true);
 
         $row = array();
-        $row[] = html_writer::checkbox('selected_users[]', $user->id, false);
+        $attributes = array('class' => 'checkbox', 'onchange' => 'uncheckAll()');
+        $row[] = html_writer::checkbox('selected_users[]', $user->id, false, '', $attributes);
         // $row[] ="<input type='checkbox' name='userid[]' value='$user->id'/>";
 
         // $row[] = "select";
@@ -609,4 +610,14 @@ echo $OUTPUT->footer();
     //         this.className += " active1";
     //     });
     // }
+    function checkAll() {
+        var checkboxes = document.getElementsByClassName("checkbox");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = document.getElementById("checkall").checked;
+        }
+    }
+    function uncheckAll() {
+        var checkall = document.querySelector('#checkall');
+        checkall.checked = false;
+    }
 </script>

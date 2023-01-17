@@ -1108,6 +1108,7 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 #cohorts>thead>tr>th.header.c1.leftalign.id{
     display: none;
 }
+
 /* CSS mới */
 #page-course-view-participants .rui-title-container {
     display: none !important;
@@ -1129,4 +1130,30 @@ form nav:first-of-type{
 #page-course-view-participants #navbar_PNSection {
     display: none !important;
 }
-/* /CSS mới */
+
+ul.flexsections-level-1 {
+    background: none !important;
+}
+.modal-footer>.w-100>.btn.btn-primary{
+    background: #0095F6 !important;
+}
+.modal-footer>.justify-content-between {
+    justify-content: end !important;
+}
+.modal-footer>.w-100>.btn.btn-secondary{
+    background: none !important;
+    border: 1px solid #555555;
+}
+.modal-footer>.w-100>.btn.btn-primary:hover{
+    background: #007FD1 !important;
+}
+.modal-footer>.w-100>.btn.btn-primary:active{
+    background: #007FD1 !important;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.modal-dialog-scrollable>.modal-content{
+    border-radius: 16px !important;
+}
+.rui-course-header{
+    display: none;
+}
