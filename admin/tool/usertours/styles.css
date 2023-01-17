@@ -269,10 +269,10 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 /* CSS participants */
-/* #page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
+#page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
 #page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection {
     display: none !important;
-} */
+}
 
 #page-course-view-participants #fitem_id_userlist {
     width: 98% !important;
@@ -327,9 +327,9 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     width: 100% !important;
 }
 
-/* .tertiary-navigation .row {
+.tertiary-navigation .row {
     float: right;
-} */
+}
 
 #action_bar .navitem select {
     display: none;
@@ -980,23 +980,28 @@ body {
 #page-course-edit #fgroup_id_buttonar #id_saveandreturn {
     display: none;
 }
+
 #page-course-view-flexsections #form_submit .input-group .small,
-#page-course-view-topics #form_submit .input-group .small{
+#page-course-view-topics #form_submit .input-group .small {
     color: blue !important;
 }
-#page-course-view-flexsections #edit_mode #form_submit ,
-#page-course-view-topics #edit_mode #form_submit{
+
+#page-course-view-flexsections #edit_mode #form_submit,
+#page-course-view-topics #edit_mode #form_submit {
     border: 1px solid blue;
 }
+
 #btn_add_anActivity,
 #page-course-view-flexsections #edit_mode #form_submit,
-#page-course-view-topics #edit_mode #form_submit{
+#page-course-view-topics #edit_mode #form_submit {
     margin-right: 24px;
 }
+
 .wrapper-course label.my-0.small {
     color: black !important;
 }
-#btn_addSection{
+
+#btn_addSection {
     background: white;
     border: 1px solid blue;
 }
@@ -1086,11 +1091,22 @@ th>a.rui-category-link {
 .wrapper-fw.info>.listcourse {
     box-shadow: inset 0 -1px 0 #f5f7fa;
 }
+
 span.mx-3.badge.badge-info {
     text-align: center;
 }
+
 .rui-course-card-deck.rui-course-card-deck--4.mt-2 {
     margin-top: 1.5rem !important;
+}
+
+body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-content>div#region-main-box>section#region-main>.rui-blocks-wrapper>.wrapper-course>.course-navigation {
+    display: none !important;
+}
+
+#cohorts>tbody>tr>td.leftalign.id,
+#cohorts>thead>tr>th.header.c1.leftalign.id{
+    display: none;
 }
 /* CSS mới */
 #page-course-view-participants .rui-title-container {

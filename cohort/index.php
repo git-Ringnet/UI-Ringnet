@@ -23,8 +23,8 @@
  */
 
 require('../config.php');
-require_once($CFG->dirroot.'/cohort/lib.php');
-require_once($CFG->libdir.'/adminlib.php');
+require_once($CFG->dirroot . '/cohort/lib.php');
+require_once($CFG->libdir . '/adminlib.php');
 
 $contextid = optional_param('contextid', 0, PARAM_INT);
 $page = optional_param('page', 0, PARAM_INT);
@@ -45,7 +45,7 @@ if ($context->contextlevel != CONTEXT_COURSECAT and $context->contextlevel != CO
 
 $category = null;
 if ($context->contextlevel == CONTEXT_COURSECAT) {
-    $category = $DB->get_record('course_categories', array('id'=>$context->instanceid), '*', MUST_EXIST);
+    $category = $DB->get_record('course_categories', array('id' => $context->instanceid), '*', MUST_EXIST);
 }
 
 $manager = has_capability('moodle/cohort:manage', $context);
@@ -59,7 +59,7 @@ $strcohorts = get_string('cohorts', 'cohort');
 if ($category) {
     $PAGE->set_pagelayout('admin');
     $PAGE->set_context($context);
-    $PAGE->set_url('/cohort/index.php', array('contextid'=>$context->id));
+    $PAGE->set_url('/cohort/index.php', array('contextid' => $context->id));
 
     core_course_category::page_setup();
     // Set the cohorts node active in the settings navigation block.
@@ -70,7 +70,7 @@ if ($category) {
     $PAGE->set_title($strcohorts);
     $showall = false;
 } else {
-    admin_externalpage_setup('cohorts', '', null, '', array('pagelayout'=>'report'));
+    admin_externalpage_setup('cohorts', '', null, '', array('pagelayout' => 'report'));
     $PAGE->set_primary_active_tab('siteadminnode');
     if ($showall == 1) {
         $PAGE->navbar->add(get_string('allcohorts', 'cohort'), $PAGE->url);
@@ -79,8 +79,31 @@ if ($category) {
     }
 }
 
-echo $OUTPUT->header();
 
+echo $OUTPUT->header();
+//Việt comments navigation bar
+$urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
+$urluser = $CFG->wwwroot . '/admin/user.php';
+$urlgroup = $CFG->wwwroot . '/cohort/index.php';
+$pages = new stdClass();
+$pages->urluser = ['title' => get_string('fullnametest'), 'url' => $urluser];
+$pages->urlroles = ['title' => get_string('roles'), 'url' => $urlroles];
+$pages->urlgroup = ['title' => get_string('group'), 'url' => $urlgroup];
+echo "<nav class='navbar navbar-expand-lg navbar-light'>
+<div class='collapse navbar-collapse' id='navbarNav'>
+<ul class='navbar-nav'>";
+$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+$urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+foreach ($pages as $key => $value) {
+    $active = $urltest === $value['url'] ? 'active' : 'before';
+    echo "<li class='nav-item {$active}  mr-2'>
+ <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
+ </li>";
+}
+echo "</ul>
+</div>
+</nav> <hr/>";
 if ($showall) {
     $cohorts = cohort_get_all_cohorts($page, 25, $searchquery);
 } else {
@@ -90,13 +113,13 @@ if ($showall) {
 $count = '';
 if ($cohorts['allcohorts'] > 0) {
     if ($searchquery === '') {
-        $count = ' ('.$cohorts['allcohorts'].')';
+        $count = ' (' . $cohorts['allcohorts'] . ')';
     } else {
-        $count = ' ('.$cohorts['totalcohorts'].'/'.$cohorts['allcohorts'].')';
+        $count = ' (' . $cohorts['totalcohorts'] . '/' . $cohorts['allcohorts'] . ')';
     }
 }
 
-echo $OUTPUT->heading(get_string('cohortsin', 'cohort', $context->get_context_name()).$count);
+echo $OUTPUT->heading(get_string('cohortsin', 'cohort', $context->get_context_name()) . $count);
 
 $params = array('page' => $page);
 if ($contextid) {
@@ -136,15 +159,23 @@ echo $OUTPUT->paging_bar($cohorts['totalcohorts'], $page, 25, $baseurl);
 
 $data = array();
 $editcolumnisempty = true;
-foreach($cohorts['cohorts'] as $cohort) {
+foreach ($cohorts['cohorts'] as $cohort) {
     $line = array();
     $cohortcontext = context::instance_by_id($cohort->contextid);
-    $cohort->description = file_rewrite_pluginfile_urls($cohort->description, 'pluginfile.php', $cohortcontext->id,
-            'cohort', 'description', $cohort->id);
+    $cohort->description = file_rewrite_pluginfile_urls(
+        $cohort->description,
+        'pluginfile.php',
+        $cohortcontext->id,
+        'cohort',
+        'description',
+        $cohort->id
+    );
     if ($showall) {
         if ($cohortcontext->contextlevel == CONTEXT_COURSECAT) {
-            $line[] = html_writer::link(new moodle_url('/cohort/index.php' ,
-                    array('contextid' => $cohort->contextid)), $cohortcontext->get_context_name(false));
+            $line[] = html_writer::link(new moodle_url(
+                '/cohort/index.php',
+                array('contextid' => $cohort->contextid)
+            ), $cohortcontext->get_context_name(false));
         } else {
             $line[] = $cohortcontext->get_context_name(false);
         }
@@ -155,13 +186,20 @@ foreach($cohorts['cohorts'] as $cohort) {
     $line[] = $OUTPUT->render_from_template('core/inplace_editable', $tmpl->export_for_template($OUTPUT));
     $line[] = format_text($cohort->description, $cohort->descriptionformat);
 
-    $line[] = $DB->count_records('cohort_members', array('cohortid'=>$cohort->id));
+    //Thêm người tạo nhóm Việt
 
-    if (empty($cohort->component)) {
-        $line[] = get_string('nocomponent', 'cohort');
-    } else {
-        $line[] = get_string('pluginname', $cohort->component);
-    }
+    $line[]='dald';
+
+
+    $line[] = $DB->count_records('cohort_members', array('cohortid' => $cohort->id));
+
+
+
+    // if (empty($cohort->component)) {
+    //     $line[] = get_string('nocomponent', 'cohort');
+    // } else {
+    //     $line[] = get_string('pluginname', $cohort->component);
+    // }
 
     $buttons = array();
     if (empty($cohort->component)) {
@@ -180,18 +218,24 @@ foreach($cohorts['cohorts'] as $cohort) {
                 $visibleimg = $OUTPUT->pix_icon('t/show', get_string('show'));
                 $buttons[] = html_writer::link($showhideurl, $visibleimg, array('title' => get_string('show')));
             }
-            $buttons[] = html_writer::link(new moodle_url('/cohort/edit.php', $urlparams + array('delete' => 1)),
+            $buttons[] = html_writer::link(
+                new moodle_url('/cohort/edit.php', $urlparams + array('delete' => 1)),
                 $OUTPUT->pix_icon('t/delete', get_string('delete')),
-                array('title' => get_string('delete')));
-            $buttons[] = html_writer::link(new moodle_url('/cohort/edit.php', $urlparams),
+                array('title' => get_string('delete'))
+            );
+            $buttons[] = html_writer::link(
+                new moodle_url('/cohort/edit.php', $urlparams),
                 $OUTPUT->pix_icon('t/edit', get_string('edit')),
-                array('title' => get_string('edit')));
+                array('title' => get_string('edit'))
+            );
             $editcolumnisempty = false;
         }
         if ($cohortcanassign) {
-            $buttons[] = html_writer::link(new moodle_url('/cohort/assign.php', $urlparams),
+            $buttons[] = html_writer::link(
+                new moodle_url('/cohort/assign.php', $urlparams),
                 $OUTPUT->pix_icon('i/users', get_string('assign', 'core_cohort')),
-                array('title' => get_string('assign', 'core_cohort')));
+                array('title' => get_string('assign', 'core_cohort'))
+            );
             $editcolumnisempty = false;
         }
     }
@@ -203,9 +247,10 @@ foreach($cohorts['cohorts'] as $cohort) {
     }
 }
 $table = new html_table();
-$table->head  = array(get_string('name', 'cohort'), get_string('idnumber', 'cohort'), get_string('description', 'cohort'),
-                      get_string('memberscount', 'cohort'), get_string('component', 'cohort'));
-$table->colclasses = array('leftalign name', 'leftalign id', 'leftalign description', 'leftalign size','centeralign source');
+$table->head  = array(
+    get_string('name', 'cohort'), get_string('idnumber', 'cohort'), get_string('description', 'cohort'), get_string('component', 'cohort'), get_string('memberscount', 'cohort')
+);
+$table->colclasses = array('leftalign name', 'leftalign id', 'leftalign description', 'leftalign size', 'centeralign source');
 if ($showall) {
     array_unshift($table->head, get_string('category'));
     array_unshift($table->colclasses, 'leftalign category');

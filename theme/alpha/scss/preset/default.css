@@ -25659,7 +25659,7 @@ ul[aria-labelledby=category-listing-title] li {
 }
 
 .rui--activity-is-manual {
-  padding-left: 60px;
+  /* padding-left: 60px; */
 }
 @media (max-width: 767.98px) {
   .rui--activity-is-manual {

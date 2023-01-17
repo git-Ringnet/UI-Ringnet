@@ -37,9 +37,9 @@ define('COHORT_WITH_NOTENROLLED_MEMBERS_ONLY', 23);
  * @param  stdClass $cohort
  * @return int new cohort id
  */
-function cohort_add_cohort($cohort) {
+function cohort_add_cohort($cohort)
+{
     global $DB, $CFG;
-
     if (!isset($cohort->name)) {
         throw new coding_exception('Missing cohort name in cohort_add_cohort().');
     }
@@ -71,6 +71,7 @@ function cohort_add_cohort($cohort) {
         $cohort->timemodified = $cohort->timecreated;
     }
 
+
     $cohort->id = $DB->insert_record('cohort', $cohort);
 
     $event = \core\event\cohort_created::create(array(
@@ -88,7 +89,8 @@ function cohort_add_cohort($cohort) {
  * @param  stdClass $cohort
  * @return void
  */
-function cohort_update_cohort($cohort) {
+function cohort_update_cohort($cohort)
+{
     global $DB, $CFG;
     if (property_exists($cohort, 'component') and empty($cohort->component)) {
         // prevent NULLs
@@ -113,15 +115,16 @@ function cohort_update_cohort($cohort) {
  * @param  stdClass $cohort
  * @return void
  */
-function cohort_delete_cohort($cohort) {
+function cohort_delete_cohort($cohort)
+{
     global $DB;
 
     if ($cohort->component) {
         // TODO: add component delete callback
     }
 
-    $DB->delete_records('cohort_members', array('cohortid'=>$cohort->id));
-    $DB->delete_records('cohort', array('id'=>$cohort->id));
+    $DB->delete_records('cohort_members', array('cohortid' => $cohort->id));
+    $DB->delete_records('cohort', array('id' => $cohort->id));
 
     // Notify the competency subsystem.
     \core_competency\api::hook_cohort_deleted($cohort);
@@ -141,20 +144,21 @@ function cohort_delete_cohort($cohort) {
  * @param  stdClass|core_course_category $category
  * @return void
  */
-function cohort_delete_category($category) {
+function cohort_delete_category($category)
+{
     global $DB;
     // TODO: make sure that cohorts are really, really not used anywhere and delete, for now just move to parent or system context
 
     $oldcontext = context_coursecat::instance($category->id);
 
-    if ($category->parent and $parent = $DB->get_record('course_categories', array('id'=>$category->parent))) {
+    if ($category->parent and $parent = $DB->get_record('course_categories', array('id' => $category->parent))) {
         $parentcontext = context_coursecat::instance($parent->id);
         $sql = "UPDATE {cohort} SET contextid = :newcontext WHERE contextid = :oldcontext";
-        $params = array('oldcontext'=>$oldcontext->id, 'newcontext'=>$parentcontext->id);
+        $params = array('oldcontext' => $oldcontext->id, 'newcontext' => $parentcontext->id);
     } else {
         $syscontext = context_system::instance();
         $sql = "UPDATE {cohort} SET contextid = :newcontext WHERE contextid = :oldcontext";
-        $params = array('oldcontext'=>$oldcontext->id, 'newcontext'=>$syscontext->id);
+        $params = array('oldcontext' => $oldcontext->id, 'newcontext' => $syscontext->id);
     }
 
     $DB->execute($sql, $params);
@@ -166,9 +170,10 @@ function cohort_delete_category($category) {
  * @param  int $userid
  * @return void
  */
-function cohort_add_member($cohortid, $userid) {
+function cohort_add_member($cohortid, $userid)
+{
     global $DB;
-    if ($DB->record_exists('cohort_members', array('cohortid'=>$cohortid, 'userid'=>$userid))) {
+    if ($DB->record_exists('cohort_members', array('cohortid' => $cohortid, 'userid' => $userid))) {
         // No duplicates!
         return;
     }
@@ -195,9 +200,10 @@ function cohort_add_member($cohortid, $userid) {
  * @param  int $userid
  * @return void
  */
-function cohort_remove_member($cohortid, $userid) {
+function cohort_remove_member($cohortid, $userid)
+{
     global $DB;
-    $DB->delete_records('cohort_members', array('cohortid'=>$cohortid, 'userid'=>$userid));
+    $DB->delete_records('cohort_members', array('cohortid' => $cohortid, 'userid' => $userid));
 
     $cohort = $DB->get_record('cohort', array('id' => $cohortid), '*', MUST_EXIST);
 
@@ -216,10 +222,11 @@ function cohort_remove_member($cohortid, $userid) {
  * @param int $userid
  * @return bool
  */
-function cohort_is_member($cohortid, $userid) {
+function cohort_is_member($cohortid, $userid)
+{
     global $DB;
 
-    return $DB->record_exists('cohort_members', array('cohortid'=>$cohortid, 'userid'=>$userid));
+    return $DB->record_exists('cohort_members', array('cohortid' => $cohortid, 'userid' => $userid));
 }
 
 /**
@@ -236,17 +243,20 @@ function cohort_is_member($cohortid, $userid) {
  * @param string $search
  * @return array
  */
-function cohort_get_available_cohorts($currentcontext, $withmembers = 0, $offset = 0, $limit = 25, $search = '') {
+function cohort_get_available_cohorts($currentcontext, $withmembers = 0, $offset = 0, $limit = 25, $search = '')
+{
     global $DB;
 
     $params = array();
 
     // Build context subquery. Find the list of parent context where user is able to see any or visible-only cohorts.
     // Since this method is normally called for the current course all parent contexts are already preloaded.
-    $contextsany = array_filter($currentcontext->get_parent_context_ids(),
-        function($a) {
+    $contextsany = array_filter(
+        $currentcontext->get_parent_context_ids(),
+        function ($a) {
             return has_capability("moodle/cohort:view", context::instance_by_id($a));
-        });
+        }
+    );
     $contextsvisible = array_diff($currentcontext->get_parent_context_ids(), $contextsany);
     if (empty($contextsany) && empty($contextsvisible)) {
         // User does not have any permissions to view cohorts.
@@ -260,7 +270,7 @@ function cohort_get_available_cohorts($currentcontext, $withmembers = 0, $offset
     }
     if (!empty($contextsvisible)) {
         list($parentsql, $params1) = $DB->get_in_or_equal($contextsvisible, SQL_PARAMS_NAMED, 'ctxv');
-        $subqueries[] = '(c.visible = 1 AND c.contextid ' . $parentsql. ')';
+        $subqueries[] = '(c.visible = 1 AND c.contextid ' . $parentsql . ')';
         $params = array_merge($params, $params1);
     }
     $wheresql = '(' . implode(' OR ', $subqueries) . ')';
@@ -275,8 +285,10 @@ function cohort_get_available_cohorts($currentcontext, $withmembers = 0, $offset
         $subfields = "c.id, COUNT(DISTINCT cm.userid) AS memberscnt";
         $groupbysql = " GROUP BY c.id";
         $fromsql = " LEFT JOIN {cohort_members} cm ON cm.cohortid = c.id ";
-        if (in_array($withmembers,
-                array(COHORT_COUNT_ENROLLED_MEMBERS, COHORT_WITH_ENROLLED_MEMBERS_ONLY, COHORT_WITH_NOTENROLLED_MEMBERS_ONLY))) {
+        if (in_array(
+            $withmembers,
+            array(COHORT_COUNT_ENROLLED_MEMBERS, COHORT_WITH_ENROLLED_MEMBERS_ONLY, COHORT_WITH_NOTENROLLED_MEMBERS_ONLY)
+        )) {
             list($esql, $params2) = get_enrolled_sql($currentcontext);
             $fromsql .= " LEFT JOIN ($esql) u ON u.id = cm.userid ";
             $params = array_merge($params2, $params);
@@ -322,7 +334,8 @@ function cohort_get_available_cohorts($currentcontext, $withmembers = 0, $offset
  * @param context $currentcontext current context (course) where visibility is checked
  * @return boolean
  */
-function cohort_can_view_cohort($cohortorid, $currentcontext) {
+function cohort_can_view_cohort($cohortorid, $currentcontext)
+{
     global $DB;
     if (is_numeric($cohortorid)) {
         $cohort = $DB->get_record('cohort', array('id' => $cohortorid), 'id, contextid, visible');
@@ -349,10 +362,11 @@ function cohort_can_view_cohort($cohortorid, $currentcontext) {
  * @param context $currentcontext current context (course) where visibility is checked
  * @return stdClass|boolean
  */
-function cohort_get_cohort($cohortorid, $currentcontext) {
+function cohort_get_cohort($cohortorid, $currentcontext)
+{
     global $DB;
     if (is_numeric($cohortorid)) {
-        $cohort = $DB->get_record('cohort', array('id' => $cohortorid), 'id, contextid, visible');
+        $cohort = $DB->get_record('cohort', array('id' => $cohortorid), 'id, contextid, visible,creatorid');
     } else {
         $cohort = $cohortorid;
     }
@@ -380,7 +394,8 @@ function cohort_get_cohort($cohortorid, $currentcontext) {
  * @param string $tablealias alias of cohort table in the SQL query (highly recommended if other tables are used in query)
  * @return array of two elements - SQL condition and array of named parameters
  */
-function cohort_get_search_query($search, $tablealias = '') {
+function cohort_get_search_query($search, $tablealias = '')
+{
     global $DB;
     $params = array();
     if (empty($search)) {
@@ -415,7 +430,8 @@ function cohort_get_search_query($search, $tablealias = '') {
  * @param string $search search string
  * @return array    Array(totalcohorts => int, cohorts => array, allcohorts => int)
  */
-function cohort_get_cohorts($contextid, $page = 0, $perpage = 25, $search = '') {
+function cohort_get_cohorts($contextid, $page = 0, $perpage = 25, $search = '')
+{
     global $DB;
 
     $fields = "SELECT *";
@@ -435,7 +451,7 @@ function cohort_get_cohorts($contextid, $page = 0, $perpage = 25, $search = '') 
     if (!empty($search)) {
         $totalcohorts = $DB->count_records_sql($countfields . $sql, $params);
     }
-    $cohorts = $DB->get_records_sql($fields . $sql . $order, $params, $page*$perpage, $perpage);
+    $cohorts = $DB->get_records_sql($fields . $sql . $order, $params, $page * $perpage, $perpage);
 
     return array('totalcohorts' => $totalcohorts, 'cohorts' => $cohorts, 'allcohorts' => $allcohorts);
 }
@@ -452,10 +468,11 @@ function cohort_get_cohorts($contextid, $page = 0, $perpage = 25, $search = '') 
  * @param string $search search string
  * @return array    Array(totalcohorts => int, cohorts => array, allcohorts => int)
  */
-function cohort_get_all_cohorts($page = 0, $perpage = 25, $search = '') {
+function cohort_get_all_cohorts($page = 0, $perpage = 25, $search = '')
+{
     global $DB;
 
-    $fields = "SELECT c.*, ".context_helper::get_preload_record_columns_sql('ctx');
+    $fields = "SELECT c.*, " . context_helper::get_preload_record_columns_sql('ctx');
     $countfields = "SELECT COUNT(*)";
     $sql = " FROM {cohort} c
              JOIN {context} ctx ON ctx.id = c.contextid ";
@@ -464,7 +481,7 @@ function cohort_get_all_cohorts($page = 0, $perpage = 25, $search = '') {
 
     if ($excludedcontexts = cohort_get_invisible_contexts()) {
         list($excludedsql, $excludedparams) = $DB->get_in_or_equal($excludedcontexts, SQL_PARAMS_NAMED, 'excl', false);
-        $wheresql = ' WHERE c.contextid '.$excludedsql;
+        $wheresql = ' WHERE c.contextid ' . $excludedsql;
         $params = array_merge($params, $excludedparams);
     }
 
@@ -478,7 +495,7 @@ function cohort_get_all_cohorts($page = 0, $perpage = 25, $search = '') {
     }
 
     $order = " ORDER BY c.name ASC, c.idnumber ASC";
-    $cohorts = $DB->get_records_sql($fields . $sql . $wheresql . $order, $params, $page*$perpage, $perpage);
+    $cohorts = $DB->get_records_sql($fields . $sql . $wheresql . $order, $params, $page * $perpage, $perpage);
 
     // Preload used contexts, they will be used to check view/manage/assign capabilities and display categories names.
     foreach (array_keys($cohorts) as $key) {
@@ -494,7 +511,8 @@ function cohort_get_all_cohorts($page = 0, $perpage = 25, $search = '') {
  * @param int $userid
  * @return array Array
  */
-function cohort_get_user_cohorts($userid) {
+function cohort_get_user_cohorts($userid)
+{
     global $DB;
 
     $sql = 'SELECT c.*
@@ -514,7 +532,8 @@ function cohort_get_user_cohorts($userid) {
  * @param int $userid
  * @return string|null
  */
-function cohort_get_user_cohort_theme($userid) {
+function cohort_get_user_cohort_theme($userid)
+{
     $cohorts = cohort_get_user_cohorts($userid);
     $theme = null;
     foreach ($cohorts as $cohort) {
@@ -540,13 +559,14 @@ function cohort_get_user_cohort_theme($userid) {
  *
  * @return array array of context ids
  */
-function cohort_get_invisible_contexts() {
+function cohort_get_invisible_contexts()
+{
     global $DB;
     if (is_siteadmin()) {
         // Shortcut, admin can do anything and can not be prohibited from any context.
         return array();
     }
-    $records = $DB->get_recordset_sql("SELECT DISTINCT ctx.id, ".context_helper::get_preload_record_columns_sql('ctx')." ".
+    $records = $DB->get_recordset_sql("SELECT DISTINCT ctx.id, " . context_helper::get_preload_record_columns_sql('ctx') . " " .
         "FROM {context} ctx JOIN {cohort} c ON ctx.id = c.contextid ");
     $excludedcontexts = array();
     foreach ($records as $ctx) {
@@ -569,7 +589,8 @@ function cohort_get_invisible_contexts() {
  * @param moodle_url $currenturl
  * @return null|renderable
  */
-function cohort_edit_controls(context $context, moodle_url $currenturl) {
+function cohort_edit_controls(context $context, moodle_url $currenturl)
+{
     $tabs = array();
     $currenttab = 'view';
     $viewurl = new moodle_url('/cohort/index.php', array('contextid' => $context->id));
@@ -612,7 +633,8 @@ function cohort_edit_controls(context $context, moodle_url $currenturl) {
  * @param mixed $newvalue
  * @return \core\output\inplace_editable
  */
-function core_cohort_inplace_editable($itemtype, $itemid, $newvalue) {
+function core_cohort_inplace_editable($itemtype, $itemid, $newvalue)
+{
     if ($itemtype === 'cohortname') {
         return \core_cohort\output\cohortname::update($itemid, $newvalue);
     } else if ($itemtype === 'cohortidnumber') {
@@ -625,12 +647,13 @@ function core_cohort_inplace_editable($itemtype, $itemid, $newvalue) {
  *
  * @return array as (string)themename => (string)get_string_theme
  */
-function cohort_get_list_of_themes() {
+function cohort_get_list_of_themes()
+{
     $themes = array();
     $allthemes = get_list_of_themes();
     foreach ($allthemes as $key => $theme) {
         if (empty($theme->hidefromselector)) {
-            $themes[$key] = get_string('pluginname', 'theme_'.$theme->name);
+            $themes[$key] = get_string('pluginname', 'theme_' . $theme->name);
         }
     }
     return $themes;

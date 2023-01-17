@@ -10,8 +10,16 @@ $confirm = optional_param('confirm', 0, PARAM_BOOL);
 
 admin_externalpage_setup('userbulk');
 require_capability('moodle/user:delete', context_system::instance());
+$return = '';
+echo $_SERVER['HTTP_REFERER'];
+if ($_SERVER['HTTP_REFERER']===$CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk.php'){
+    $return = $CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk.php';
+}else {
+    $return = $CFG->wwwroot.'/'.$CFG->admin.'/user.php';
+}
 
-$return = $CFG->wwwroot.'/'.$CFG->admin.'/user/user_bulk.php';
+
+
 
 if (empty($SESSION->bulk_users)) {
     redirect($return);

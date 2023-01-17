@@ -34,7 +34,6 @@ $show      = optional_param('show', 0, PARAM_BOOL);
 $hide      = optional_param('hide', 0, PARAM_BOOL);
 $confirm   = optional_param('confirm', 0, PARAM_BOOL);
 $returnurl = optional_param('returnurl', '', PARAM_LOCALURL);
-
 require_login();
 
 $category = null;
@@ -51,8 +50,13 @@ if ($id) {
     $cohort->contextid   = $context->id;
     $cohort->name        = '';
     $cohort->description = '';
+  
 }
+$a = $USER->id;
+    var_dump($a);
 
+$cohort->userid= $a;
+var_dump($cohort);
 require_capability('moodle/cohort:manage', $context);
 
 if ($returnurl) {
