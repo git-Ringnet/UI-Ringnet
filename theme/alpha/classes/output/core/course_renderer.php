@@ -888,17 +888,3 @@ class course_renderer extends \core_course_renderer
         return $content;
     }
 }
-?>
-<script>
-    function checkAll() {
-        var checkboxes = document.getElementsByClassName("checkbox");
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = document.getElementById("checkall").checked;
-        }
-    }
-
-    function uncheckAll() {
-        var checkall = document.querySelector('#checkall');
-        checkall.checked = false;
-    }
-</script>

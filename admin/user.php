@@ -14,7 +14,7 @@ $confirmuser  = optional_param('confirmuser', 0, PARAM_INT);
 $sort         = optional_param('sort', 'name', PARAM_ALPHANUMEXT);
 $dir          = optional_param('dir', 'ASC', PARAM_ALPHA);
 $page         = optional_param('page', 0, PARAM_INT);
-$perpage      = optional_param('perpage', 20, PARAM_INT);        // how many per page
+$perpage      = optional_param('perpage', 5, PARAM_INT);        // how many per page
 $ru           = optional_param('ru', '2', PARAM_INT);            // show remote users
 $lu           = optional_param('lu', '2', PARAM_INT);            // show local users
 $acl          = optional_param('acl', '0', PARAM_INT);           // id of user to tweak mnet ACL (requires $access)
@@ -621,3 +621,4 @@ echo $OUTPUT->footer();
         checkall.checked = false;
     }
 </script>
+<?php
