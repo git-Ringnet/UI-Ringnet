@@ -744,6 +744,7 @@ function is_course_creator($courseid) {
     $context = context_course::instance($courseid);
     return has_capability('moodle/course:create', $context, $USER->id);
 }
+
 /**
  * Returns true if user has at least one role assign
  * of 'coursecontact' role (is potentially listed in some course descriptions).

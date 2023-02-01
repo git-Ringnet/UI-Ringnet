@@ -14,7 +14,7 @@ $confirmuser  = optional_param('confirmuser', 0, PARAM_INT);
 $sort         = optional_param('sort', 'name', PARAM_ALPHANUMEXT);
 $dir          = optional_param('dir', 'ASC', PARAM_ALPHA);
 $page         = optional_param('page', 0, PARAM_INT);
-$perpage      = optional_param('perpage', 20, PARAM_INT);        // how many per page
+$perpage      = optional_param('perpage', 10, PARAM_INT);        // how many per page
 $ru           = optional_param('ru', '2', PARAM_INT);            // show remote users
 $lu           = optional_param('lu', '2', PARAM_INT);            // show local users
 $acl          = optional_param('acl', '0', PARAM_INT);           // id of user to tweak mnet ACL (requires $access)
@@ -313,30 +313,10 @@ if (!$users) {
     $table = new html_table();
     $table->head = array();
     $table->colclasses = array();
-    // add check box
-    // $bulkoperations = has_capability('moodle/course:bulkmessaging', $this->context);
-    // if ($bulkoperations) {
-    //     $mastercheckbox = new \core\output\checkbox_toggleall('participants-table', true, [
-    //         'id' => 'select-all-participants',
-    //         'name' => 'select-all-participants',
-    //         'label' => get_string('selectall'),
-    //         'labelclasses' => 'sr-only',
-    //         'classes' => 'm-1',
-    //         'checked' => false,
-    //     ]);
-    //     $table->head[] = $OUTPUT->render($mastercheckbox);
-    // }
-    // $table->head[] = $fullnamedisplay;
+    
     $table->head[] = get_string('fullnametest');
 
     $table->head[] = get_string('fullnametest');
-    // add button
-    // $url1 = $CFG->wwwroot."/admin/roles/manage.php";
-    // echo "<div id='hover_tag_a' style='display:flex; border-bottom:1px solid gray; padding:0 5px 0 5px;' class='action_bar_userManagement'>"."
-    // <a href='$url' style='color:#001' class='a_hover active1'>".get_string('fullnametest')."</a>
-    // <a href='$url1' style='margin-left:20px;color:#001;' class='a_hover'>".get_string('roles')."</a>
-    // <a href='#' style='margin-left:20px;color:#001;' class='a_hover'>".get_string('group')."</a>
-    // "."</div>";
 
     //Việt comments navigation bar
     $urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
@@ -598,15 +578,3 @@ echo '
 
 
 echo $OUTPUT->footer();
-?>
-<script>
-    // var header = document.getElementById("hover_tag_a");
-    // var btns = header.getElementsByClassName("a_hover");
-    // for (var i = 0; i < btns.length; i++) {
-    //     btns[i].addEventListener("click", function() {
-    //         var current = document.getElementsByClassName("active1");
-    //         current[0].className = current[0].className.replace("active1", "");
-    //         this.className += " active1";
-    //     });
-    // }
-</script>

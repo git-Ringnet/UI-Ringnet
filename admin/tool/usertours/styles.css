@@ -1006,10 +1006,6 @@ body {
     border: 1px solid blue;
 }
 
-
-
-
-
 /* /Update Create New Course */
 #users tbody tr,
 #users thead tr th,
@@ -1115,18 +1111,34 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 #page-course-view-participants .buttons {
     display: none;
 }
-form nav:first-of-type{
+#page-course-view-participants form nav:first-of-type{
     display: none;
 }
 #page-course-view-participants .main-content .row {
     float: right;
 }
-
 #page-mod-forum-view .table-overflow {
     width: 100%;
 }
-
 #page-course-view-participants #navbar_PNSection {
     display: none !important;
+}
+#page-badges-view #navbar_PNSection{
+    display: none !important;
+}
+#page-admin-user #users th.header.c0.centeralign{
+    width: 4% !important;
+}
+#page-admin-user #users th.header.c1.centeralign{
+    width: 34% !important;
+}
+#page-admin-user #users th.header.c2.centeralign{
+    width: 27% !important;
+}
+#page-admin-user #users th.header.c3.centeralign{
+    width: 27% !important;
+}
+#page-admin-user form p{
+    margin: 2rem 0;
 }
 /* /CSS mới */

@@ -165,14 +165,63 @@ Example context (json): {}
     </div>
 </div>
 <script>
-    // edit mode
     var url = window.location.pathname;
+    var location_url = window.location.pathname.split('/');
+    var urlCheckRoles = location_url[location_url.length - 3] + "/" + location_url[location_url.length - 2] + "/" + location_url[location_url.length - 1];
+    var urlCheckGroup = location_url[location_url.length - 2] + "/" + location_url[location_url.length - 1];
+    var active_menu = document.querySelectorAll('.rui-sidebar-nav-item');
+    var linkActive_menu = document.querySelectorAll('.rui-sidebar-nav-item-link');
     var setmode1 = document.getElementsByClassName('ios-switch-control-input')[0];
     var from1 = document.getElementById('form_submit');
-    if (url != "/ringnet/course/view.php") {
+    var liActive_menu = document.querySelectorAll('.nav-item');
+    var url3option = location_url[location_url.length - 3] + "/" + location_url[location_url.length - 2] + "/" + location_url[location_url.length - 1];
+    var allActiveLink = [
+        "mod/assign/view.php",
+        "mod/chat/manage.php",
+        "mod/lti/view.php",
+        "mod/folder/view.php",
+        "mod/googlemeet/view.php",
+        "mod/ivs/view.php",
+        "mod/lesson/view.php",
+        "mod/quiz/view.php",
+        "mod/url/view.php",
+        "mod/workshop/view.php",
+        "mod/attendance/manage.php",
+        "mod/choice/view.php",
+        "mod/feedback/view.php",
+        "mod/forum/view.php",
+        "mod/imscp/view.php",
+        "mod/jitsi/view.php",
+        "mod/lightboxgallery/view.php",
+        "mod/scorm/view.php",
+        "mod/videotime/view.php",
+        "mod/plugnmeet/view.php",
+        "mod/book/view.php",
+        "mod/data/view.php",
+        "mod/resource/view.php",
+        "mod/glossary/view.php",
+        "mod/hvp/view.php",
+        "mod/label/view.php",
+        "mod/page/view.php",
+        "mod/survey/view.php",
+        "mod/wiki/view.php"
+    ];
+    // Check edit mode
+    if (url != "/ringnet/course/view.php" && from1 != null) {
         if (setmode1.getAttribute('aria-checked') == "true") {
             //setmode1.checked = false;
             //from1.submit();
         }
+    }
+    // Active link course management
+    if (allActiveLink.includes(url3option)) {
+        active_menu[2].classList.add('activee');
+        linkActive_menu[2].classList.add('active');
+        liActive_menu[1].classList.add('active');
+    }
+    // Active link users management
+    if (urlCheckRoles == "admin/roles/manage.php" || urlCheckGroup == "cohort/index.php") {
+        active_menu[3].classList.add('activee');
+        linkActive_menu[3].classList.add('active');
     }
 </script>

@@ -61,3 +61,4 @@ echo $renderer->render($widget);
 
 // Include course format js module.
 $PAGE->requires->js('/course/format/topics/format.js');
+
