@@ -306,7 +306,7 @@ class course_renderer extends \core_course_renderer
                 </th>
                 <th style="width: 50%;font-size: 1rem;" class="text-center">
 
-                </th>
+                </th>   
             </tr>
         </thead>
     </table>';
@@ -316,8 +316,34 @@ class course_renderer extends \core_course_renderer
         $url = new moodle_url('/your/delete_script.php', array('sesskey' => sesskey()));
         $button = new single_button($url, get_string('delete'), 'post');
         $button->add_confirm_action(get_string('confirmdelete', 'your_plugin'));
-        global $OUTPUT;
-        $content .= html_writer::div(html_writer::div($OUTPUT->render($button), 'singlebutton'), 'buttons');
+        global $SESSION;
+        // Lấy danh sách các người dùng được chọn
+        $selected_categories = optional_param_array('selected_categories', array(), PARAM_INT);
+        // Lấy thao tác hàng loạt được chọn
+        $bulk_action = optional_param('bulk_action', '', PARAM_ALPHA);
+     
+            // Nếu có người dùng được chọn và thao tác hàng loạt được chọn, thực hiện thao tác
+            switch ($bulk_action) {
+                case 'delete':
+                    unset($SESSION->bulk_category);
+                    // Xóa các người dùng được chọn
+                    foreach ($selected_categories as $category) {
+                        $SESSION->bulk_category[$category] = $category;
+                    }
+                    redirect($CFG->wwwroot . '/course/bulkdelete_categories.php');
+                    break;
+            }
+            // var_dump($SESSION->bulk_category);
+        
+        $content .= "<p>
+        <label for='bulk_action'>Bulk action:</label>
+        <select name='bulk_action' id='bulk_action'>
+          <option value=''>-- Choose an action --</option>
+          <option value='delete'>Delete</option>
+          <option value='sendessage'>Send Message</option>
+        </select>
+        <input type='submit' value='Go'/>
+        </p>";
         $content .= "</form>";
 
 
@@ -332,7 +358,6 @@ class course_renderer extends \core_course_renderer
         $content .= html_writer::end_tag('div');
         return $content;
     }
-
 
 
 
