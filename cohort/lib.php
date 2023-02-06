@@ -39,7 +39,7 @@ define('COHORT_WITH_NOTENROLLED_MEMBERS_ONLY', 23);
  */
 function cohort_add_cohort($cohort)
 {
-    global $DB, $CFG;
+    global $DB, $CFG,$USER;
     if (!isset($cohort->name)) {
         throw new coding_exception('Missing cohort name in cohort_add_cohort().');
     }
@@ -70,7 +70,7 @@ function cohort_add_cohort($cohort)
     if (!isset($cohort->timemodified)) {
         $cohort->timemodified = $cohort->timecreated;
     }
-
+    $cohort->iduser = intval($USER->id);
 
     $cohort->id = $DB->insert_record('cohort', $cohort);
 

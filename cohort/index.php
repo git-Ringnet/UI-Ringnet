@@ -171,14 +171,14 @@ foreach ($cohorts['cohorts'] as $cohort) {
         $cohort->id
     );
     if ($showall) {
-        if ($cohortcontext->contextlevel == CONTEXT_COURSECAT) {
-            $line[] = html_writer::link(new moodle_url(
-                '/cohort/index.php',
-                array('contextid' => $cohort->contextid)
-            ), $cohortcontext->get_context_name(false));
-        } else {
-            $line[] = $cohortcontext->get_context_name(false);
-        }
+        // if ($cohortcontext->contextlevel == CONTEXT_COURSECAT) {
+        //     $line[] = html_writer::link(new moodle_url(
+        //         '/cohort/index.php',
+        //         array('contextid' => $cohort->contextid)
+        //     ), $cohortcontext->get_context_name(false));
+        // } else {
+        //     $line[] = $cohortcontext->get_context_name(false);
+        // }
     }
     $tmpl = new \core_cohort\output\cohortname($cohort);
     $line[] = $OUTPUT->render_from_template('core/inplace_editable', $tmpl->export_for_template($OUTPUT));
@@ -187,8 +187,9 @@ foreach ($cohorts['cohorts'] as $cohort) {
     $line[] = format_text($cohort->description, $cohort->descriptionformat);
 
     //Thêm người tạo nhóm Việt
-
-    $line[]='dald';
+    $user = $DB->get_record('user', array('id' => $cohort->iduser));
+    $username = fullname($user);
+    $line[] = $username;
 
 
     $line[] = $DB->count_records('cohort_members', array('cohortid' => $cohort->id));
@@ -252,8 +253,8 @@ $table->head  = array(
 );
 $table->colclasses = array('leftalign name', 'leftalign id', 'leftalign description', 'leftalign size', 'centeralign source');
 if ($showall) {
-    array_unshift($table->head, get_string('category'));
-    array_unshift($table->colclasses, 'leftalign category');
+    // array_unshift($table->head, get_string('category'));
+    // array_unshift($table->colclasses, 'leftalign category');
 }
 if (!$editcolumnisempty) {
     $table->head[] = get_string('edit');
