@@ -84,7 +84,7 @@ echo $OUTPUT->header();
 //Việt comments navigation bar
 $urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
 $urluser = $CFG->wwwroot . '/admin/user.php';
-$urlgroup = $CFG->wwwroot . '/cohort/index.php';
+$urlgroup = $CFG->wwwroot . '/cohort/index.php?contextid=1&showall=1';
 $pages = new stdClass();
 $pages->urluser = ['title' => get_string('fullnametest'), 'url' => $urluser];
 $pages->urlroles = ['title' => get_string('roles'), 'url' => $urlroles];
@@ -249,7 +249,7 @@ foreach ($cohorts['cohorts'] as $cohort) {
 }
 $table = new html_table();
 $table->head  = array(
-    get_string('name', 'cohort'), get_string('idnumber', 'cohort'), get_string('description', 'cohort'), get_string('component', 'cohort'), get_string('memberscount', 'cohort')
+    get_string('name', 'cohort'), get_string('idnumber', 'cohort'), get_string('description', 'cohort'), get_string('creater', 'cohort'), get_string('memberscount', 'cohort')
 );
 $table->colclasses = array('leftalign name', 'leftalign id', 'leftalign description', 'leftalign size', 'centeralign source');
 if ($showall) {

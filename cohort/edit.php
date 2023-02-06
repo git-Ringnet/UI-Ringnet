@@ -131,6 +131,7 @@ if ($cohort->id) {
     $strheading = get_string('editcohort', 'cohort');
 } else {
     // Add new.
+    $cohort->iduser=intval($USER->id);
     $cohort = file_prepare_standard_editor(
         $cohort,
         'description',
