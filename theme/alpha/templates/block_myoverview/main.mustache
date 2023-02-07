@@ -32,29 +32,35 @@ Example context (json):
             </a>
             <a href="{{config.wwwroot}}/course/index.php" class="title pt-2 px-2 before">
                 {{#str}}categories, moodle{{/str}}
-                </a>
+            </a>
         </div>
-                <div style="padding-bottom: 10px;">
+        <div style="padding-bottom: 10px;">
             {{#status}}
             <a href="{{config.wwwroot}}/course/edit.php?returnto=catmanage" class="create-course btn btn-primary">
-       {{#str}} createnewcourse, moodle{{/str}}
+                {{#str}} createnewcourse, moodle{{/str}}
             </a>
             {{/status}}
-                </div>
-    </div>
-    <hr/>
-    <div data-region="filter" class="d-flex align-items-center"
-        aria-label="{{#str}} aria:controls, block_myoverview {{/str}}">
-        <div class="d-inline-flex justify-content-between flex-wrap w-100 mt-2">
-            {{> block_myoverview/nav-grouping-selector }}
-            {{> block_myoverview/nav-sort-selector }}
-            <div class="d-none">
-            {{#displaydropdown}}
-            {{> block_myoverview/nav-display-selector }}
-            {{/displaydropdown}}
-            </div>
         </div>
-        <div class="mt-2 w-100">
+    </div>
+    <hr>
+    <div data-region="filter" class="d-flex align-items-center"
+        aria-label="{{#str}} aria:controls, block_myoverview {{/str}}" style="margin-top:24px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-filter"
+            viewBox="0 0 16 16">
+            <path
+                d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+        </svg>
+        <select name="selectedOption" id="selectedOption"
+            style="border:none; outline:none; height:24px; margin-left:8px; font-size:14px; appearance:none; font-weight: 400;line-height:24px;">
+            <option value="" name="fillter_option" id="fillter">Bộ lọc</option>
+            {{!-- <option value="keyword" name="fillter_option" id="fillter">Từ Khóa</option> --}}
+            <option value="course_name" name="fillter_option" id="fillter">Tên Khóa Học</option>
+            <option value="course_categories" name="fillter_option">Tên Danh Mục</option>
+            <option value="course_teacher" name="fillter_option">Giáo Viên</option>
+        </select>
+        <input placeholder="Nhập từ khóa cần tìm kiếm" type="text" id="filter-keyword"
+            style="display:none; margin-left:8px; outline:none; padding:5px 5px;">
+        <div class="w-100" style="display:none;" id="search_all">
             {{> block_myoverview/nav-search-widget }}
         </div>
     </div>
@@ -76,3 +82,31 @@ var root = $('#block-myoverview-{{uniqid}}');
 Main.init(root);
 });
 {{/js}}
+<style>
+
+</style>
+<script>
+    document.getElementById("selectedOption").addEventListener("change", function () {
+        var selectedOption = this.value,
+            input = document.getElementById("filter-keyword");
+        //document.getElementById('search_all').style.display = selectedOption === "keyword" ? "block" : "none";
+        document.getElementById('filter-keyword').style.display = ["course_name", "course_categories", "course_teacher"].includes(selectedOption) ? "block" : "none";
+
+        if (selectedOption !== "keyword") {
+            input.value = "";
+        }
+        input.addEventListener('keyup', function () {
+            var filter = input.value.toUpperCase(),
+                table = document.querySelector(".list-group"),
+                tr = table.getElementsByTagName("tr"),
+                td, txtValue;
+            for (var i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("th")[selectedOption === "course_name" ? 0 : (selectedOption === "course_categories" ? 1 : 2)];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    tr[i].style.display = txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+                }
+            }
+        });
+    });
+</script>

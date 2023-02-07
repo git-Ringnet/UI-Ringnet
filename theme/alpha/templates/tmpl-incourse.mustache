@@ -127,7 +127,7 @@ Example context (json):
                                             </svg>
                                         </a>
                                         <div id="title"
-                                            style="margin-left:5px; text-align:center; padding:5px 5px; width:25%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            style="margin-left:5px; text-align:center; padding:5px 5px; width:17.81%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size:14px;font-weight:400; line-height:24px;">
                                             {{title}}
                                         </div>
                                         <a href="{{btnUrlNext}}" id="next_section"
@@ -176,36 +176,44 @@ M.util.js_complete('theme_alpha/loader');
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     var list = document.getElementById('btn_showListCourse');
+    var mainNav = document.getElementById('mainNav');
     var num = 1;
     var menu_list = document.getElementById('theme_alpha-drawers-courseindex');
     var close_menu = document.querySelector('.icon-no-margin');
-    list.addEventListener('click', function () {
-        if (num == 1) {
-            list.style.background = "#555555";
-            document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
-            num = 2;
-        } else {
-            list.style.background = "#D6D6D6";
-            document.getElementById('btn_showListCourse_path').style.fill = "#000000";
-            num = 1;
-        }
-
-    });
-    close_menu.addEventListener('click', function () {
-        num = 1;
-        list.style.background = "#D6D6D6";
-        document.getElementById('btn_showListCourse_path').style.fill = "#000000";
-    });
+    var body = document.getElementsByTagName('body')[0];
     window.onload = function () {
         // JS button show menu
         if (menu_list.getAttribute('aria-hidden') == 'true') {
             num = 1;
-           list.style.background = "#D6D6D6";
-           document.getElementById('btn_showListCourse_path').style.fill = "#000000";
+            list.style.background = "#D6D6D6";
+            document.getElementById('btn_showListCourse_path').style.fill = "#000000";
         } else {
             num = 2;
-           list.style.background = "#555555";
-           document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
+            list.style.background = "#555555";
+            document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
+            body.style.marginLeft = "290px";
         }
     }
+    mainNav.addEventListener('click', function () {
+        body.style.marginLeft = (mainNav.getAttribute('aria-expanded') == 'true') ? "0px" : "290px";
+    });
+
+    list.addEventListener('click', function () {
+        list.style.background = num == 1 ? "#555555" : "#D6D6D6";
+        document.getElementById('btn_showListCourse_path').style.fill = num == 1 ? "#FFFFFF" : "#000000";
+        num = num == 1 ? 2 : 1;
+        body.style.marginLeft = mainNav.getAttribute('aria-expanded') == 'false' ? (num == 1 ? "0px" : "290px") : "290px";
+    });
+
+    close_menu.addEventListener('click', function () {
+        num = 1;
+        list.style.background = "#D6D6D6";
+        document.getElementById('btn_showListCourse_path').style.fill = "#000000";
+        if (document.getElementById('mainNav').getAttribute('aria-expanded') == 'true') {
+            body.style.marginLeft = "290px";
+        } else {
+            body.style.marginLeft = "0px";
+        }
+
+    });
 </script>

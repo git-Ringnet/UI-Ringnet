@@ -30,6 +30,7 @@ use renderer_base;
 use moodle_url;
 use core_course_list_element;
 use context_course;
+use core\check\check;
 
 /**
  * Class for exporting a course summary from an stdClass.
@@ -57,7 +58,7 @@ class course_summary_exporter extends \core\external\exporter
     protected static function define_related()
     {
         // We cache the context so it does not need to be retrieved from the course.
-        return array('context' => '\\context', 'isfavourite' => 'bool?');
+        return array('context' => '\\context', 'isfavourite' => 'bool?' , 'checkRole' => 'bool?');
     }
 
     protected function get_other_values(renderer_base $output)
@@ -86,7 +87,7 @@ class course_summary_exporter extends \core\external\exporter
         $rolestudent = $DB->get_record('role', array('shortname' => 'student'));
         $student = get_role_users($rolestudent->id, $context);
         $count = count($student);
-
+        $checkRole = checkRole();
 
 
         return array(
@@ -95,6 +96,7 @@ class course_summary_exporter extends \core\external\exporter
             'courseimage' => $courseimage,
             'progress' => $progress,
             'hasprogress' => $hasprogress,
+            'checkRole' => $checkRole,
             'isfavourite' => $this->related['isfavourite'],
             'hidden' => boolval(get_user_preferences('block_myoverview_hidden_course_' . $this->data->id, 0)),
             'showshortname' => $CFG->courselistshortnames ? true : false,
@@ -178,6 +180,9 @@ class course_summary_exporter extends \core\external\exporter
                 'type' => PARAM_BOOL
             ),
             'isfavourite' => array(
+                'type' => PARAM_BOOL
+            ),
+            'checkRole' => array(
                 'type' => PARAM_BOOL
             ),
             'hidden' => array(
