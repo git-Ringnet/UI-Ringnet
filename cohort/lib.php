@@ -620,7 +620,7 @@ function cohort_edit_controls(context $context, moodle_url $currenturl)
         //     $currenttab = 'uploadcohorts';
         // }
     }
-    if (count($tabs) > 1) {
+    if (count($tabs) > 0) {
         return new tabtree($tabs, $currenttab);
     }
     return null;
