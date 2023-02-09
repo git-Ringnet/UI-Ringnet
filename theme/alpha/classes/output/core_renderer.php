@@ -378,15 +378,15 @@ class core_renderer extends \core_renderer
         // Kiểm tra role có phải là admin hay không
         // Kiểm tra role có phải là teacher hay không
         // sau đó kiểm tra có phải là người tạo khóa học hay không
-        if(is_siteadmin()){
+        if (is_siteadmin()) {
             $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-        }else if(is_teacher()){
-            if(is_course_creator($COURSE->id)){
+        } else if (is_teacher()) {
+            if (is_course_creator($COURSE->id)) {
                 $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-            }else{
+            } else {
                 $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
             }
-        }else{
+        } else {
             $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
         }
         $content = html_writer::start_div('course-navigation');
@@ -395,13 +395,17 @@ class core_renderer extends \core_renderer
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+        $urlforum = '#';
 
         $pages = new stdClass();
         $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
-        $pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
-        $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-        $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
-        $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+        $pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
+        $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
+        if (is_siteadmin() || is_teacher()) {
+            $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+            $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+            $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+        }
 
         $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 

@@ -30,7 +30,9 @@ $output = "
     <div class='row'>
         <div class='col-md-4'>  
             <div id='stu_id_overviewfiles_filemanager w-100'>
-                <label>" . get_string('courseoverviewfiles', 'moodle') . "</label>
+                <label style='
+                width: -webkit-fill-available;
+            '>" . get_string('courseoverviewfiles', 'moodle') . "</label>
                 <img src='$img' style='width:70%;'>
             </div>
         </div>
@@ -55,7 +57,7 @@ $output = "
             
             <div id='stu_id_summary_editor w-100' style='margin-top:24px;'>
                 <label>" . get_string('coursesummary', 'moodle') . "</label>
-                <div  class='w-100' style='padding:5px 20px; border-radius:5px; border: 1px solid #d3d2d8; background:#fff; display:inline-block;'>
+                <div  class='w-100' style='padding:5px 20px; border-radius:5px; border: 1px solid #D6D6D6; background:#fff; display:inline-block;'>
                 <div id='summary'>";
 if (strlen($course->summary) < 1) {
     $output .= get_string('courdescription', 'moodle');
@@ -114,13 +116,17 @@ $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
 $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
 $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
 $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+$urlforum = '#';
 
 $pages = new stdClass();
 $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
-$pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
-$pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-$pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
-$pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+$pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
+$pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
+if(is_siteadmin() || is_teacher()){
+    $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+    $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+    $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+    }
 $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
 $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
