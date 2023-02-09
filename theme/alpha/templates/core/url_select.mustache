@@ -37,7 +37,7 @@
         "title": "Some cool title"
     }
 }}
-<div>
+<div class="d-none">
     <form method="post" action="{{action}}" class="form-inline" id="{{formid}}">
         <input type="hidden" name="sesskey" value="{{sesskey}}">
         {{#label}}
@@ -72,7 +72,6 @@
             </noscript>
         {{/showbutton}}
     </form>
-</div>
 {{^showbutton}}
     {{#js}}
         require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
@@ -86,3 +85,4 @@
         });
     {{/js}}
 {{/showbutton}}
+</div>

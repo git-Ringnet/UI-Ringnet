@@ -28,12 +28,19 @@ Example context (json):
 {{#checkRole}}
 <div class="ml-auto dropdown rui-coursemenu-wrapper" style="top: 30px;">
     <button class="rui-coursemenu-btn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-    style="windth:24px; height:24px;">
-       <svg stroke="currentColor" fill="currentColor" 
-       stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-       <path d="M255.8 218c-21 0-38 17-38 38s17 38 38 38 38-17 38-38-17-38-38-38zM102 218c-21 0-38 17-38 38s17 38 38 38 38-17 38-38-17-38-38-38zM410 218c-21 0-38 17-38 38s17 38 38 38 38-17 38-38-17-38-38-38z">
-       </path>
-       </svg>
+        style="width:24px; height:24px; background:none !important;">
+        <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M15.2577 2.005C15.2577 1.31453 14.698 0.754791 14.0075 0.754791C13.3171 0.754791 12.7573 1.31453 12.7573 2.005C12.7573 2.69547 13.3171 3.25521 14.0075 3.25521C14.698 3.25521 15.2577 2.69547 15.2577 2.005Z"
+                fill="black" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M9.2553 2.005C9.2553 1.31453 8.69556 0.754791 8.00509 0.754791C7.31462 0.754791 6.75488 1.31453 6.75488 2.005C6.75488 2.69547 7.31462 3.25521 8.00509 3.25521C8.69556 3.25521 9.2553 2.69547 9.2553 2.005Z"
+                fill="black" />
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M3.25286 2.005C3.25286 1.31453 2.69312 0.754791 2.00265 0.754791C1.31218 0.754791 0.752441 1.31453 0.752441 2.005C0.752441 2.69547 1.31218 3.25521 2.00265 3.25521C2.69312 3.25521 3.25286 2.69547 3.25286 2.005Z"
+                fill="black" />
+        </svg>
+
         <span class="sr-only">
             {{#str}} aria:courseactions, block_myoverview {{/str}} {{{fullname}}}
         </span>
@@ -102,24 +109,24 @@ Example context (json):
 </div>
 {{/checkRole}}
 {{^checkRole}}
-        <a class="dropdown-item {{#isfavourite}}hidden{{/isfavourite}}" href="#" data-action="add-favourite"
-            data-course-id="{{id}}" aria-controls="favorite-icon-{{ id }}-{{ uniqid }}">
-            <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 4.75L13.75 10.25H19.25L14.75 13.75L16.25 19.25L12 15.75L7.75 19.25L9.25 13.75L4.75 10.25H10.25L12 4.75Z">
-                </path>
-            </svg>
-        </a>
-        <a class="dropdown-item {{^isfavourite}}hidden{{/isfavourite}}" href="#" data-action="remove-favourite"
-            data-course-id="{{id}}" aria-controls="favorite-icon-{{ id }}-{{ uniqid }}">
-            <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4.75 12C4.75 7.99594 7.99594 4.75 12 4.75V4.75C16.0041 4.75 19.25 7.99594 19.25 12V12C19.25 16.0041 16.0041 19.25 12 19.25V19.25C7.99594 19.25 4.75 16.0041 4.75 12V12Z">
-                </path>
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9.75 9.75L14.25 14.25"></path>
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M14.25 9.75L9.75 14.25"></path>
-            </svg>
-        </a>
+<a class="dropdown-item {{#isfavourite}}hidden{{/isfavourite}}" href="#" data-action="add-favourite"
+    data-course-id="{{id}}" aria-controls="favorite-icon-{{ id }}-{{ uniqid }}">
+    <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 4.75L13.75 10.25H19.25L14.75 13.75L16.25 19.25L12 15.75L7.75 19.25L9.25 13.75L4.75 10.25H10.25L12 4.75Z">
+        </path>
+    </svg>
+</a>
+<a class="dropdown-item {{^isfavourite}}hidden{{/isfavourite}}" href="#" data-action="remove-favourite"
+    data-course-id="{{id}}" aria-controls="favorite-icon-{{ id }}-{{ uniqid }}">
+    <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4.75 12C4.75 7.99594 7.99594 4.75 12 4.75V4.75C16.0041 4.75 19.25 7.99594 19.25 12V12C19.25 16.0041 16.0041 19.25 12 19.25V19.25C7.99594 19.25 4.75 16.0041 4.75 12V12Z">
+        </path>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9.75 9.75L14.25 14.25"></path>
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M14.25 9.75L9.75 14.25"></path>
+    </svg>
+</a>
 {{/checkRole}}

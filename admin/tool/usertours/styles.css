@@ -1081,6 +1081,7 @@ ul.rui-section.section.img-text.d-block {
 th>a.rui-category-link {
     font-weight: 400 !important;
     font-size: 14px !important;
+    line-height: 24px;;
 }
 
 .wrapper-fw.info>.listcourse {
@@ -1174,5 +1175,7 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 {
     display: none;
 }
-
+.dropdown-toggle::after{
+    display: none !important;
+}
 /* /CSS mới */
