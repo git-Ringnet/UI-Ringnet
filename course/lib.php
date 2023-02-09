@@ -3732,18 +3732,15 @@ function core_course_drawer(): string {
     return '';
 }
 
-function core_course_drawer1(): string {
-    global $PAGE;
-    
-    $format = course_get_format($PAGE->course);
-    $renderer = $format->get_renderer($PAGE);
+function course_content_navigation($courseid) {
+    global $cm;
+    $chapterid = $cm->section;
+    $modinfo = get_fast_modinfo($courseid);
+    $sections = $modinfo->get_section_info_all();
 
-    // if (method_exists($renderer, 'course_index_drawer')) {
-    //     return $renderer->course_index_drawer($format);
-    // }
-
-    return $renderer->course_index_drawer($format);
+    return $sections[1]->parent;
 }
+
 
 /**
  * Returns course modules tagged with a specified tag ready for output on tag/index.php page

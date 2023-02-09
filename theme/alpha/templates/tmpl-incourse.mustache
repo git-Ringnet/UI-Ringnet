@@ -117,7 +117,7 @@ Example context (json):
                                                 </svg>
                                             </button>
                                         </div>
-                                        <a href="#" id="pre_section"
+                                        <a href="{{btnUrlPre}}" id="pre_section"
                                             style="border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
                                             <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                                 viewBox="0 0 24 24" height="1em" width="1em"
@@ -127,9 +127,10 @@ Example context (json):
                                             </svg>
                                         </a>
                                         <div id="title"
-                                            style="margin-left:5px; text-align:center; padding:5px 5px; width:25%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            style="margin-left:5px; text-align:center; padding:5px 5px; width:17.81%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size:14px;font-weight:400; line-height:24px;">
+                                            {{title}}
                                         </div>
-                                        <a href="#" id="next_section"
+                                        <a href="{{btnUrlNext}}" id="next_section"
                                             style="margin-left:5px; border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
                                             <svg stroke="currentColor" fill="currentColor" stroke-width="0"
                                                 viewBox="0 0 24 24" height="1em" width="1em"
@@ -175,86 +176,44 @@ M.util.js_complete('theme_alpha/loader');
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     var list = document.getElementById('btn_showListCourse');
+    var mainNav = document.getElementById('mainNav');
     var num = 1;
     var menu_list = document.getElementById('theme_alpha-drawers-courseindex');
     var close_menu = document.querySelector('.icon-no-margin');
-    list.addEventListener('click', function () {
-        if (num == 1) {
-            list.style.background = "#555555";
-            document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
-            num = 2;
-        } else {
+    var body = document.getElementsByTagName('body')[0];
+    window.onload = function () {
+        // JS button show menu
+        if (menu_list.getAttribute('aria-hidden') == 'true') {
+            num = 1;
             list.style.background = "#D6D6D6";
             document.getElementById('btn_showListCourse_path').style.fill = "#000000";
-            num = 1;
+        } else {
+            num = 2;
+            list.style.background = "#555555";
+            document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
+            body.style.marginLeft = "290px";
         }
-
+    }
+    mainNav.addEventListener('click', function () {
+        body.style.marginLeft = (mainNav.getAttribute('aria-expanded') == 'true') ? "0px" : "290px";
     });
+
+    list.addEventListener('click', function () {
+        list.style.background = num == 1 ? "#555555" : "#D6D6D6";
+        document.getElementById('btn_showListCourse_path').style.fill = num == 1 ? "#FFFFFF" : "#000000";
+        num = num == 1 ? 2 : 1;
+        body.style.marginLeft = mainNav.getAttribute('aria-expanded') == 'false' ? (num == 1 ? "0px" : "290px") : "290px";
+    });
+
     close_menu.addEventListener('click', function () {
         num = 1;
         list.style.background = "#D6D6D6";
         document.getElementById('btn_showListCourse_path').style.fill = "#000000";
+        if (document.getElementById('mainNav').getAttribute('aria-expanded') == 'true') {
+            body.style.marginLeft = "290px";
+        } else {
+            body.style.marginLeft = "0px";
+        }
+
     });
-    window.onload = function () {
-        // JS button next-pre section in course
-        var url = window.location.href;
-        var next = document.getElementById('next_section');
-        var pre = document.getElementById('pre_section');
-        var title = document.getElementById('title');
-        var checkEditmode = document.getElementById('form_submit');
-        // Kiểm tra form_submit có tồn tại hay không
-        if (checkEditmode) {
-            //Kiểm tra button edit mode có bật hay không
-            if (setmode1.getAttribute('aria-checked') == "true") {
-                var liActive = document.querySelectorAll('.courseindex-link');
-                var newList = Array.from(liActive).filter(function (el) {
-                    return el.getAttribute("data-action") !== "togglecourseindexsection";
-                });
-            } else {
-                var liActive = document.querySelectorAll('.courseindex-link');
-                var newList = Array.from(liActive).filter(function (el) {
-                    return el.getAttribute("data-action") !== "togglecourseindexsection";
-                });
-            }
-        } else {
-            var liActive = document.querySelectorAll('.courseindex-link');
-            var newList = Array.from(liActive).filter(function (el) {
-                return el.getAttribute("data-action") !== "togglecourseindexsection";
-            });
-        }
-        //Kiểm tra đường dẫn
-        if (url.search('&') == -1) {
-            url = window.location.href;
-        } else {
-            var slide = url.substring(url.search('&'), url.length);
-            url = url.replace(slide, "");
-        }
-        for (let i = 0; i < newList.length; i++) {
-            if (i == 0) {
-                next.setAttribute('href', newList[1].getAttribute('href'));
-                pre.setAttribute('href', newList[newList.length - 1].getAttribute('href'));
-                title.innerHTML = newList[i].innerHTML;
-            }
-            if (newList[i].getAttribute('href') == url) {
-                title.innerHTML = newList[i].innerHTML;
-                if (i > 0 && i < newList.length - 1) {
-                    next.setAttribute('href', newList[i + 1].getAttribute('href'));
-                    pre.setAttribute('href', newList[i - 1].getAttribute('href'));
-                } else {
-                    next.setAttribute('href', newList[0].getAttribute('href'));
-                    pre.setAttribute('href', newList[i - 1].getAttribute('href'));
-                }
-            }
-        }
-        // JS button show menu
-        if (menu_list.getAttribute('aria-hidden') == 'true') {
-            num = 1;
-           list.style.background = "#D6D6D6";
-           document.getElementById('btn_showListCourse_path').style.fill = "#000000";
-        } else {
-            num = 2;
-           list.style.background = "#555555";
-           document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
-        }
-    }
 </script>
