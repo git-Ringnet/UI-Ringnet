@@ -1113,27 +1113,77 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 #page-course-view-participants .rui-title-container {
     display: none !important;
 }
-
 #page-course-view-participants .buttons {
     display: none;
 }
-
-form nav:first-of-type {
+#page-course-view-participants form nav:first-of-type{
     display: none;
 }
-
 #page-course-view-participants .main-content .row {
     float: right;
 }
-
 #page-mod-forum-view .table-overflow {
     width: 100%;
 }
-
 #page-course-view-participants #navbar_PNSection {
     display: none !important;
 }
-
+#page-badges-view #navbar_PNSection{
+    display: none !important;
+}
+#page-admin-user #users th.header.c0.centeralign{
+    width: 4% !important;
+}
+#page-admin-user #users th.header.c1.centeralign{
+    width: 34% !important;
+}
+#page-admin-user #users th.header.c2.centeralign{
+    width: 27% !important;
+}
+#page-admin-user #users th.header.c3.centeralign{
+    width: 27% !important;
+}
+#page-admin-user form p{
+    margin: 2rem 0;
+}
+#page-course-view-flexsections #btnCourseIndex,
+#page-course-view-flexsections #sidepreopen-control,
+#page-mod-assign-view #btnCourseIndex,#page-mod-assign-view #sidepreopen-control,
+#page-mod-chat-manage #btnCourseIndex,#page-mod-chat-manage #sidepreopen-control,
+#page-mod-lti-view #btnCourseIndex,#page-mod-lti-view #sidepreopen-control,
+#page-mod-folder-view #btnCourseIndex,#page-mod-folder-view #sidepreopen-control,
+#page-mod-googlemeet-view #btnCourseIndex,#page-mod-googlemeet-view #sidepreopen-control,
+#page-mod-ivs-view #btnCourseIndex,#page-mod-ivs-view #sidepreopen-control,
+#page-mod-lesson-view #btnCourseIndex,#page-mod-lesson-view #sidepreopen-control,
+#page-mod-quiz-view #btnCourseIndex,#page-mod-quiz-view #sidepreopen-control,
+#page-mod-url-view #btnCourseIndex,#page-mod-url-view #sidepreopen-control,
+#page-mod-workshop-view #btnCourseIndex,#page-mod-workshop-view #sidepreopen-control,
+#page-mod-attendance-manage #btnCourseIndex,#page-mod-attendance-manage #sidepreopen-control,
+#page-mod-choice-view #btnCourseIndex,#page-mod-choice-view #sidepreopen-control,
+#page-mod-feedback-view #btnCourseIndex,#page-mod-feedback-view #sidepreopen-control,
+#page-mod-forum-view #btnCourseIndex,#page-mod-forum-view #sidepreopen-control,
+#page-mod-imscp-view #btnCourseIndex,#page-mod-imscp-view #sidepreopen-control,
+#page-mod-jitsi-view #btnCourseIndex,#page-mod-jitsi-view #sidepreopen-control,
+#page-mod-lightboxgallery-view #btnCourseIndex,#page-mod-lightboxgallery-view #sidepreopen-control,
+#page-mod-scorm-view #btnCourseIndex,#page-mod-scorm-view #sidepreopen-control,
+#page-mod-videotime-view #btnCourseIndex,#page-mod-videotime-view #sidepreopen-control,
+#page-mod-plugnmeet-view #btnCourseIndex,#page-mod-plugnmeet-view #sidepreopen-control,
+#page-mod-book-view #btnCourseIndex,#page-mod-book-view #sidepreopen-control,
+#page-mod-data-view #btnCourseIndex,#page-mod-data-view #sidepreopen-control,
+#page-mod-resource-view #btnCourseIndex,#page-mod-resource-view #sidepreopen-control,
+#page-mod-glossary-view #btnCourseIndex,#page-mod-glossary-view #sidepreopen-control,
+#page-mod-hvp-view #btnCourseIndex,#page-mod-hvp-view #sidepreopen-control,
+#page-mod-label-view #btnCourseIndex,#page-mod-label-view #sidepreopen-control,
+#page-mod-page-view #btnCourseIndex,#page-mod-page-view #sidepreopen-control,
+#page-mod-survey-view #btnCourseIndex,#page-mod-survey-view #sidepreopen-control,
+#page-mod-wiki-view #btnCourseIndex,#page-mod-wiki-view #sidepreopen-control
+{
+    display: none;
+}
+.dropdown-toggle::after{
+    display: none !important;
+}
+/* /CSS mới */
 ul.flexsections-level-1 {
     background: none !important;
 }
