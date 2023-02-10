@@ -77,5 +77,17 @@ echo $content;
 $eventparams = array('context' => $PAGE->context, 'objectid' => $categoryid);
 $event = \core\event\course_category_viewed::create($eventparams);
 $event->trigger();
-
 echo $OUTPUT->footer();
+?>
+<script>
+    function checkAll() {
+        var checkboxes = document.getElementsByClassName("checkbox");
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = document.getElementById("checkall").checked;
+        }
+    }
+    function uncheckAll() {
+        var checkall = document.querySelector('#checkall');
+        checkall.checked = false;
+    }
+</script>

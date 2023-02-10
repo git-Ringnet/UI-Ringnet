@@ -52,11 +52,20 @@ $output = "
                 </span>
                 </div>
             </div>
+            
             <div id='stu_id_summary_editor w-100' style='margin-top:24px;'>
                 <label>" . get_string('coursesummary', 'moodle') . "</label>
-                <div class='w-100' style='padding:5px 20px; border-radius:5px; border:1px solid white; height:150px; background:#eeedef; display:inline-block; overflow: hidden; overflow-y: scroll;'>"
-    . $msg . "
-                </div>
+                <div  class='w-100' style='padding:5px 20px; border-radius:5px; border: 1px solid #d3d2d8; background:#fff; display:inline-block;'>
+                <div id='summary'>";
+if (strlen($course->summary) < 1) {
+    $output .= get_string('courdescription', 'moodle');
+} else $output .= substr($course->summary, 0, 500);
+$output .= "
+                </div>";
+if (strlen($course->summary) > 500) {
+    $output .= "<button id='show-more'>Hiện thêm</button>";
+}
+$output .= "     
             </div>
         </div>
     </div>
@@ -64,7 +73,7 @@ $output = "
 ";
 $button = "
 <div id='btn_sty' style='text-align:center; margin-top:24px;'>
-    <div id='share' class='btn btn-primary'>
+    <div id='share' class='btn btn-share'>
     <svg stroke='currentColor' fill='currentColor' stroke-width='0' 
     viewBox='0 0 1024 1024' height='1em' width='1em' 
     xmlns='http://www.w3.org/2000/svg' style='font-size:20px;'>
@@ -72,31 +81,31 @@ $button = "
     style='margin-right:5px;'>
     </path>
     </svg>
-    Share</div>
-    <div id='save_course' class='btn btn-primary'>
-    <svg stroke='currentColor' fill='currentColor' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' 
-    xmlns='http://www.w3.org/2000/svg' style='font-size:20px; margin-right:5px;'>
-    <g id='Mail'><path d='M19.435,4.065H4.565a2.5,2.5,0,0,0-2.5,2.5v10.87a2.5,2.5,0,0,0,2.5,2.5h14.87a2.5,2.5,0,0,0,2.5-2.5V6.565A2.5,2.5,0,0,0,19.435,4.065Zm-14.87,1h14.87a1.489,1.489,0,0,1,1.49,1.39c-2.47,1.32-4.95,2.63-7.43,3.95a6.172,6.172,0,0,1-1.06.53,2.083,2.083,0,0,1-1.67-.39c-1.42-.75-2.84-1.51-4.25-2.26-1.14-.6-2.3-1.21-3.44-1.82A1.491,1.491,0,0,1,4.565,5.065Zm16.37,12.37a1.5,1.5,0,0,1-1.5,1.5H4.565a1.5,1.5,0,0,1-1.5-1.5V7.6c2.36,1.24,4.71,2.5,7.07,3.75a5.622,5.622,0,0,0,1.35.6,2.872,2.872,0,0,0,2-.41c1.45-.76,2.89-1.53,4.34-2.29,1.04-.56,2.07-1.1,3.11-1.65Z'>
-    </path>
-    </g>
-    </svg>
+    Chia sẻ</div>
+    <div id='save_course' class='btn btn-save'>
+    <svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
+    <path fill-rule='evenodd' clip-rule='evenodd' d='M16.5801 9.21967C16.873 9.51256 16.873 9.98744 16.5801 10.2803L11.5801 15.2803C11.2872 15.5732 10.8124 15.5732 10.5195 15.2803L7.51947 12.2803C7.22658 11.9874 7.22658 11.5126 7.51947 11.2197C7.81237 10.9268 8.28724 10.9268 8.58013 11.2197L11.0498 13.6893L15.5195 9.21967C15.8124 8.92678 16.2872 8.92678 16.5801 9.21967Z' fill='#0095F6'/>
+    <path fill-rule='evenodd' clip-rule='evenodd' d='M6.25641 5.23077C5.68961 5.23077 5.23077 5.68961 5.23077 6.25641V17.7436C5.23077 18.3104 5.68961 18.7692 6.25641 18.7692H17.7436C18.3104 18.7692 18.7692 18.3104 18.7692 17.7436V6.25641C18.7692 5.68961 18.3104 5.23077 17.7436 5.23077H6.25641ZM4 6.25641C4 5.00988 5.00988 4 6.25641 4H17.7436C18.9901 4 20 5.00988 20 6.25641V17.7436C20 18.9901 18.9901 20 17.7436 20H6.25641C5.00988 20 4 18.9901 4 17.7436V6.25641Z' fill='#0095F6'/>
+    </svg>    
     Đánh dấu</div>
 </div>
 ";
+
+// echo substr($course->summary, 0, 500);
 
 $course = $DB->get_record('course', ['id' => $COURSE->id]);
 $content = html_writer::start_div('course-teachers-box');
 $pages = new stdClass();
 $content = html_writer::start_div('course-navigation');
-if(is_siteadmin()){
+if (is_siteadmin()) {
     $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-}else if(is_teacher()){
-    if(is_course_creator($COURSE->id)){
+} else if (is_teacher()) {
+    if (is_course_creator($COURSE->id)) {
         $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-    }else{
+    } else {
         $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
     }
-}else{
+} else {
     $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
 }
 $content = html_writer::start_div('course-navigation');
@@ -142,6 +151,21 @@ echo $OUTPUT->header();
 echo $content;
 //Thêm thông tin khóa học
 echo $output;
+?>
+<script>
+    const html = document.getElementById("summary");
+    const x = document.getElementById("show-more");
+    x.addEventListener("click", function() {
+        if (html.innerHTML === '<?php echo $msg ?>') {
+            html.innerHTML = '<?php echo substr($msg, 0, 500) ?>';
+            x.innerHTML = 'Hiện thêm';
+        } else {
+            html.innerHTML = '<?php echo $msg ?>';
+            x.innerHTML = 'Ẩn bớt';
+        }
+    })
+</script>
+<?php
 //Thêm button
 echo $button;
 //echo $OUTPUT->heading($pagedesc);

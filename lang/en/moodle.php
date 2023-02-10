@@ -522,6 +522,7 @@ $string['deletechecktype'] = 'Are you sure that you want to delete this {$a->typ
 $string['deletechecktypename'] = 'Are you sure that you want to delete the {$a->type} "{$a->name}"?';
 $string['deletecheckfiles'] = 'Are you absolutely sure you want to delete these files?';
 $string['deletecheckfull'] = 'Bạn có chắc chắn muốn xóa người dùng "{$a}" ra khỏi hệ thống ?';
+$string['deletecheckfullcate'] = 'Bạn có chắc chắn muốn xóa danh mục "{$a}" ra khỏi hệ thống ?';
 $string['deletecheckwarning'] = 'You are about to delete these files';
 $string['deletepicture'] = 'Delete picture';
 $string['deletesection'] = 'Delete section';

@@ -39,7 +39,7 @@ define('COHORT_WITH_NOTENROLLED_MEMBERS_ONLY', 23);
  */
 function cohort_add_cohort($cohort)
 {
-    global $DB, $CFG;
+    global $DB, $CFG,$USER;
     if (!isset($cohort->name)) {
         throw new coding_exception('Missing cohort name in cohort_add_cohort().');
     }
@@ -70,7 +70,7 @@ function cohort_add_cohort($cohort)
     if (!isset($cohort->timemodified)) {
         $cohort->timemodified = $cohort->timecreated;
     }
-
+    $cohort->iduser = intval($USER->id);
 
     $cohort->id = $DB->insert_record('cohort', $cohort);
 
@@ -597,15 +597,16 @@ function cohort_edit_controls(context $context, moodle_url $currenturl)
     if (($searchquery = $currenturl->get_param('search'))) {
         $viewurl->param('search', $searchquery);
     }
-    if ($context->contextlevel == CONTEXT_SYSTEM) {
-        $tabs[] = new tabobject('view', new moodle_url($viewurl, array('showall' => 0)), get_string('systemcohorts', 'cohort'));
-        $tabs[] = new tabobject('viewall', new moodle_url($viewurl, array('showall' => 1)), get_string('allcohorts', 'cohort'));
-        if ($currenturl->get_param('showall')) {
-            $currenttab = 'viewall';
-        }
-    } else {
-        $tabs[] = new tabobject('view', $viewurl, get_string('cohorts', 'cohort'));
-    }
+    //Việt comments thanh navbar của cohort control
+    // if ($context->contextlevel == CONTEXT_SYSTEM) {
+    //     $tabs[] = new tabobject('view', new moodle_url($viewurl, array('showall' => 0)), get_string('systemcohorts', 'cohort'));
+    //     $tabs[] = new tabobject('viewall', new moodle_url($viewurl, array('showall' => 1)), get_string('allcohorts', 'cohort'));
+    //     if ($currenturl->get_param('showall')) {
+    //         $currenttab = 'viewall';
+    //     }
+    // } else {
+    //     $tabs[] = new tabobject('view', $viewurl, get_string('cohorts', 'cohort'));
+    // }
     if (has_capability('moodle/cohort:manage', $context)) {
         $addurl = new moodle_url('/cohort/edit.php', array('contextid' => $context->id));
         $tabs[] = new tabobject('addcohort', $addurl, get_string('addcohort', 'cohort'));
@@ -613,13 +614,13 @@ function cohort_edit_controls(context $context, moodle_url $currenturl)
             $currenttab = 'addcohort';
         }
 
-        $uploadurl = new moodle_url('/cohort/upload.php', array('contextid' => $context->id));
-        $tabs[] = new tabobject('uploadcohorts', $uploadurl, get_string('uploadcohorts', 'cohort'));
-        if ($currenturl->get_path() === $uploadurl->get_path()) {
-            $currenttab = 'uploadcohorts';
-        }
+        // $uploadurl = new moodle_url('/cohort/upload.php', array('contextid' => $context->id));
+        // $tabs[] = new tabobject('uploadcohorts', $uploadurl, get_string('uploadcohorts', 'cohort'));
+        // if ($currenturl->get_path() === $uploadurl->get_path()) {
+        //     $currenttab = 'uploadcohorts';
+        // }
     }
-    if (count($tabs) > 1) {
+    if (count($tabs) > 0) {
         return new tabtree($tabs, $currenttab);
     }
     return null;

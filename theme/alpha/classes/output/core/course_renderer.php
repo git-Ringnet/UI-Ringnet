@@ -36,6 +36,7 @@ use single_select;
 use lang_string;
 use context_system;
 use curl;
+use single_button;
 use cm_info;
 use core_text;
 use completion_info;
@@ -193,7 +194,8 @@ class course_renderer extends \core_course_renderer
         return $content;
     }
 
-    function delete_moodle_category($categoryid) {
+    function delete_moodle_category($categoryid)
+    {
         global $CFG, $USER, $DB;
 
         // Xác thực người dùng có quyền để xóa category hay không
@@ -206,7 +208,7 @@ class course_renderer extends \core_course_renderer
 
         // Gọi Moodle web service function core_course_delete_categories để xóa category
         $functionname = 'core_course_delete_categories';
-        $serverurl = $CFG->wwwroot . '/webservice/rest/server.php'. '?wstoken=' . $USER->token . '&wsfunction=' . $functionname;
+        $serverurl = $CFG->wwwroot . '/webservice/rest/server.php' . '?wstoken=' . $USER->token . '&wsfunction=' . $functionname;
         $restformat = '&moodlewsrestformat=json';
         $categories = array($categoryid);
         $params = array('categories' => $categories);
@@ -313,6 +315,40 @@ class course_renderer extends \core_course_renderer
         foreach ($subcategories as $subcategory) {
             $content .= $this->coursecat_category($chelper, $subcategory, $depth);
         }
+        $url = new moodle_url('/your/delete_script.php', array('sesskey' => sesskey()));
+        $button = new single_button($url, get_string('delete'), 'post');
+        $button->add_confirm_action(get_string('confirmdelete', 'your_plugin'));
+        global $SESSION;
+        // Lấy danh sách các người dùng được chọn
+        $selected_categories = optional_param_array('selected_categories', array(), PARAM_INT);
+        // Lấy thao tác hàng loạt được chọn
+        $bulk_action = optional_param('bulk_action', '', PARAM_ALPHA);
+     
+            // Nếu có người dùng được chọn và thao tác hàng loạt được chọn, thực hiện thao tác
+            switch ($bulk_action) {
+                case 'delete':
+                    unset($SESSION->bulk_category);
+                    // Xóa các người dùng được chọn
+                    foreach ($selected_categories as $category) {
+                        $SESSION->bulk_category[$category] = $category;
+                    }
+                    redirect($CFG->wwwroot . '/course/bulkdelete_categories.php');
+                    break;
+            }
+            // var_dump($SESSION->bulk_category);
+        
+        $content .= "<p>
+        <label for='bulk_action'>Bulk action:</label>
+        <select name='bulk_action' id='bulk_action'>
+          <option value=''>-- Choose an action --</option>
+          <option value='delete'>Delete</option>
+          <option value='sendessage'>Send Message</option>
+        </select>
+        <input type='submit' value='Go'/>
+        </p>";
+        $content .= "</form>";
+
+
 
         if (!empty($pagingbar)) {
             $content .= $pagingbar;
@@ -324,7 +360,6 @@ class course_renderer extends \core_course_renderer
         $content .= html_writer::end_tag('div');
         return $content;
     }
-
 
 
 

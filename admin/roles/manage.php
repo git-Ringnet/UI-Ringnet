@@ -147,7 +147,7 @@ echo $OUTPUT->header();
  //Việt comments navigation bar
  $urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
  $urluser = $CFG->wwwroot . '/admin/user.php';
- $urlgroup = $CFG->wwwroot . '/cohort/index.php';
+ $urlgroup = $CFG->wwwroot . '/cohort/index.php?contextid=1&showall=1';
  $pages = new stdClass();
  $pages->urluser = ['title' => get_string('fullnametest'), 'url' => $urluser];
  $pages->urlroles = ['title' => get_string('roles'), 'url' => $urlroles];
