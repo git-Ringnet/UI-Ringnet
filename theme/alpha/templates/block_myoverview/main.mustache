@@ -58,6 +58,7 @@ Example context (json):
                 {{> block_myoverview/nav-search-widget }}
             </div>
         </div>
+
         <div>
             {{#status}}
             <a href="{{config.wwwroot}}/course/edit.php?returnto=catmanage" style="height: 40px;"
@@ -67,6 +68,7 @@ Example context (json):
             {{/status}}
         </div>
     </div>
+
     <div class="container-fluid p-0">
         {{> block_myoverview/courses-view }}
     </div>
@@ -133,16 +135,5 @@ Main.init(root);
                 }
             });
         });
-    });
-    $.ajax({
-        url: "https://localhost/ringnet/my/courses.php/page2.php",
-        type: "GET",
-        data: { param1: "value1", param2: "value2" },
-        success: function (response) {
-            console.log(response)
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.error("Error: " + textStatus + " " + errorThrown);
-        }
     });
 </script>

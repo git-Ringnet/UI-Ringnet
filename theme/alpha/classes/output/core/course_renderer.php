@@ -291,51 +291,27 @@ class course_renderer extends \core_course_renderer
         if (!empty($pagingbar)) {
             $content .= $pagingbar;
         }
-        $content .= "<form method='POST' action='$CFG->wwwroot/course/index.php'>";
-        if(checkRole() == true){
-            $content .= ' <table class="table table-striped projects">
-            <thead>
-                <tr>
-                    <th style="width: 2%;font-size: 1rem;">
-                        <input type="checkbox" id="checkall" onclick="checkAll()">
-                    </th>
-                    <th style="width: 30%;font-size: 1rem;">
-                        Danh mục
-                    </th>
-                    <th style="width: 15%;font-size: 1rem;">
-                       Khóa học
-                    </th>
-                    <th style="width: 8%;font-size: 1rem;">
-                    </th>
-                    <th style="width: 8%;font-size: 1rem;">
-                    </th>
-                    <th style="width: 8%;font-size: 1rem;" class="text-center">
+        $content .= ' <table class="table table-striped projects">
+        <thead>
+            <tr>
+                <th style="width: 30%;font-size: 1rem;">
+                    Danh mục
+                </th>
+                <th style="width: 15%;font-size: 1rem;">
+                   Khóa học
+                </th>
+                <th style="width: 8%;font-size: 1rem;">
 
-                    </th>   
-                </tr>
-            </thead>
-        </table>';
-        }else{
-            $content .= ' <table class="table table-striped projects">
-            <thead>
-                <tr>
-                    <th style="width: 30%;font-size: 1rem;">
-                        Danh mục
-                    </th>
-                    <th style="width: 15%;font-size: 1rem;">
-                       Khóa học
-                    </th>
-                    <th style="width: 8%;font-size: 1rem;">
-                    </th>
-                    <th style="width: 8%;font-size: 1rem;">
-                    </th>      
-                    <th style="width: 8%;font-size: 1rem;" class="text-center">
-                    </th>   
-                </tr>
-            </thead>
-        </table>';
-        }
-       
+                </th>
+                <th style="width: 8%;font-size: 1rem;">
+                
+                </th>
+                <th style="width: 8%;font-size: 1rem;" class="text-center">
+
+                </th>
+            </tr>
+        </thead>
+    </table>';
         foreach ($subcategories as $subcategory) {
             $content .= $this->coursecat_category($chelper, $subcategory, $depth);
         }
@@ -347,32 +323,30 @@ class course_renderer extends \core_course_renderer
         $selected_categories = optional_param_array('selected_categories', array(), PARAM_INT);
         // Lấy thao tác hàng loạt được chọn
         $bulk_action = optional_param('bulk_action', '', PARAM_ALPHA);
-
-        // Nếu có người dùng được chọn và thao tác hàng loạt được chọn, thực hiện thao tác
-        switch ($bulk_action) {
-            case 'delete':
-                unset($SESSION->bulk_category);
-                // Xóa các người dùng được chọn
-                foreach ($selected_categories as $category) {
-                    $SESSION->bulk_category[$category] = $category;
-                }
-                redirect($CFG->wwwroot . '/course/bulkdelete_categories.php');
-                break;
-        }
-        // var_dump($SESSION->bulk_category);
-        if(checkRole() == true){
-            $content .= "<p class='mt-3'>
-            <label for='bulk_action'>Bulk action:</label>
-            <select name='bulk_action' id='bulk_action'>
-              <option value=''>-- Choose an action --</option>
-              <option value='delete'>Delete</option>
-              <option value='sendessage'>Send Message</option>
-            </select>
-            <input type='submit' value='Go'/>
-            </p>";
-            $content .= "</form>";
-        }
-       
+     
+            // Nếu có người dùng được chọn và thao tác hàng loạt được chọn, thực hiện thao tác
+            switch ($bulk_action) {
+                case 'delete':
+                    unset($SESSION->bulk_category);
+                    // Xóa các người dùng được chọn
+                    foreach ($selected_categories as $category) {
+                        $SESSION->bulk_category[$category] = $category;
+                    }
+                    redirect($CFG->wwwroot . '/course/bulkdelete_categories.php');
+                    break;
+            }
+            // var_dump($SESSION->bulk_category);
+        
+        $content .= "<p>
+        <label for='bulk_action'>Bulk action:</label>
+        <select name='bulk_action' id='bulk_action'>
+          <option value=''>-- Choose an action --</option>
+          <option value='delete'>Delete</option>
+          <option value='sendessage'>Send Message</option>
+        </select>
+        <input type='submit' value='Go'/>
+        </p>";
+        $content .= "</form>";
 
 
 
@@ -625,51 +599,43 @@ class course_renderer extends \core_course_renderer
         $coursescount = $coursecat->get_courses_count();
 
         $content .= html_writer::start_tag('div', array('class' => 'wrapper-fw info'));
-      
-
         if (checkRole() == true) {
-            $content .= html_writer::start_tag('div', array('class' => 'wrapper-fw info'));
             $content .= ' <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
             <thead>
                 <tr>
-                <th style="width: 2%;border-bottom: 0 !important;">';
-            $attributes = array('class' => 'checkbox', 'onchange' => 'uncheckAll()');
-            $content .= html_writer::checkbox('selected_categories[]', $coursecat->id, false, '', $attributes);
-            $content .= '
-            </th>
-            <th style="width: 30%;border-bottom: 0 !important;">
-                ' . $categoryname . '
-            </th>
-            <th style="width: 15%;border-bottom: 0 !important ;font-weight:400;" class="text">
-                ' . $coursescount . '
-            </th>
-            <th style="width: 8%;border-bottom: 0 !important" class="text">
-            </th>
-            <th style="width: 8%;border-bottom: 0 !important" class="text">
-            </th>
-            <th style="width: 8%;border-bottom: 0 !important" class="text-center">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle bg-none" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
-                style="background:none;width:24px;height:24px;padding:0;">
-                    <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2577 2.005C15.2577 1.31453 14.698 0.754791 14.0075 0.754791C13.3171 0.754791 12.7573 1.31453 12.7573 2.005C12.7573 2.69547 13.3171 3.25521 14.0075 3.25521C14.698 3.25521 15.2577 2.69547 15.2577 2.005Z" fill="black"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.2553 2.005C9.2553 1.31453 8.69556 0.754791 8.00509 0.754791C7.31462 0.754791 6.75488 1.31453 6.75488 2.005C6.75488 2.69547 7.31462 3.25521 8.00509 3.25521C8.69556 3.25521 9.2553 2.69547 9.2553 2.005Z" fill="black"></path>
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.25286 2.005C3.25286 1.31453 2.69312 0.754791 2.00265 0.754791C1.31218 0.754791 0.752441 1.31453 0.752441 2.005C0.752441 2.69547 1.31218 3.25521 2.00265 3.25521C2.69312 3.25521 3.25286 2.69547 3.25286 2.005Z" fill="black"></path>
-                    </svg>
-                </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="max-width:65px; min-width:0;overflow-x:hidden;">
-                <a href="' . $CFG->wwwroot . '/course/editcategory.php?id=' . $coursecat->id . '" class="dropdown-item dropdown-item-wrapper action-edit menu-action" data-action="edit" role="menuitem" tabindex="-1">
-                    <span class="rui-icon-container"><img class="icon " alt="Edit" title="Edit" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/edit"></span>
-                    <span class="dropdown-item--text"></span>
-                </a>
-                <a href="' . $CFG->wwwroot . '/course/management.php?categoryid=' . $coursecat->id . '&amp;sesskey=' . sesskey() . '&amp;action=deletecategory" class="dropdown-item dropdown-item-wrapper action-delete menu-action" data-action="delete" role="menuitem" tabindex="-1" aria-labelledby="actionmenuaction-8">
-                    <span class="rui-icon-container"><img class="icon " alt="Delete" title="Delete" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/delete"></span>
-                    <span class="dropdown-item--text"></span>
-                </a>
-            </div>
-            </div>
-            </th>
-            </tr>
+                    <th style="width: 30%;border-bottom: 0 !important;">
+                    ' . $categoryname . '
+                    </th>
+                    <th style="width: 15%;border-bottom: 0 !important; line-height:24px; font-weight:400;">
+                    ' . $coursescount . '
+                    </th>
+                    <th style="width: 8%;border-bottom: 0 !important">
+                    </th>
+                    <th style="width: 8%;border-bottom: 0 !important">
+                    </th>
+                    <th style="width: 8%;border-bottom: 0 !important" class="text-center">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle bg-none" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+                            style="background:none;width:24px;height:24px;padding:0;">
+                            <svg width="16" height="4" viewBox="0 0 16 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2577 2.005C15.2577 1.31453 14.698 0.754791 14.0075 0.754791C13.3171 0.754791 12.7573 1.31453 12.7573 2.005C12.7573 2.69547 13.3171 3.25521 14.0075 3.25521C14.698 3.25521 15.2577 2.69547 15.2577 2.005Z" fill="black"></path>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.2553 2.005C9.2553 1.31453 8.69556 0.754791 8.00509 0.754791C7.31462 0.754791 6.75488 1.31453 6.75488 2.005C6.75488 2.69547 7.31462 3.25521 8.00509 3.25521C8.69556 3.25521 9.2553 2.69547 9.2553 2.005Z" fill="black"></path>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.25286 2.005C3.25286 1.31453 2.69312 0.754791 2.00265 0.754791C1.31218 0.754791 0.752441 1.31453 0.752441 2.005C0.752441 2.69547 1.31218 3.25521 2.00265 3.25521C2.69312 3.25521 3.25286 2.69547 3.25286 2.005Z" fill="black"></path>
+                                    </svg>
+                            </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="max-width:65px; min-width:0;overflow-x:hidden;">
+                            <a href="' . $CFG->wwwroot . '/course/editcategory.php?id=' . $coursecat->id . '" class="dropdown-item dropdown-item-wrapper action-edit menu-action" data-action="edit" role="menuitem" tabindex="-1">
+                                <span class="rui-icon-container"><img class="icon " alt="Edit" title="Edit" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/edit"></span>
+                                <span class="dropdown-item--text"></span>
+                            </a>
+                            <a href="' . $CFG->wwwroot . '/course/management.php?categoryid=' . $coursecat->id . '&amp;sesskey=' . sesskey() . '&amp;action=deletecategory" class="dropdown-item dropdown-item-wrapper action-delete menu-action" data-action="delete" role="menuitem" tabindex="-1" aria-labelledby="actionmenuaction-8">
+                                <span class="rui-icon-container"><img class="icon " alt="Delete" title="Delete" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/delete"></span>
+                                <span class="dropdown-item--text"></span>
+                            </a>
+                        </div>
+                        </div>
+                    </th>
+                </tr>
             </thead>
         </table>';
         } else {
@@ -679,7 +645,7 @@ class course_renderer extends \core_course_renderer
                     <th style="width: 30%;border-bottom: 0 !important;">
                     ' . $categoryname . '
                     </th>
-                    <th style="width: 15%;border-bottom: 0 !important;font-weight:400;">
+                    <th style="width: 15%;border-bottom: 0 !important">
                     ' . $coursescount . '
                     </th>
                     <th style="width: 8%;border-bottom: 0 !important">
@@ -692,6 +658,7 @@ class course_renderer extends \core_course_renderer
             </thead>
         </table>';
         }
+
         //     $content .= html_writer::start_tag('h5', array('class' => 'categoryname aabtn'));
         //         $content .= $categoryname;
         //         $acontent = '';
