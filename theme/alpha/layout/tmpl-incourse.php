@@ -166,13 +166,16 @@ $arr = explode(':', $re);
 $last = $arr[count($arr) - 1];
 $get_title = $last;
 
+//Bug to đùng Việt Comments
 global $DB;
+if($COURSE->id){
 $sql = $DB->get_records_sql("SELECT mdl_course_modules.id as module_id
 FROM mdl_course_sections
 INNER JOIN mdl_course_modules ON mdl_course_modules.section = mdl_course_sections.id
 INNER JOIN mdl_modules ON mdl_modules.id = mdl_course_modules.module
 WHERE mdl_course_sections.course = $COURSE->id AND mdl_course_modules.deletioninprogress = 0
 ORDER BY mdl_course_sections.section, mdl_course_modules.id");
+}
 $new_array = array();
 foreach ($sql as $key => $value) {
     $new_array[] = $value->module_id;
