@@ -1267,3 +1267,7 @@ a.rui-instancename.aalink.stretched-link{
     height: 18px !important;
     margin-right: 10px!important;
 }
+div#id_descriptionhdrcontainer>div#fitem_id_format,
+div#id_descriptionhdrcontainer>div#fitem_id_numsections{
+    display: none !important;
+}
