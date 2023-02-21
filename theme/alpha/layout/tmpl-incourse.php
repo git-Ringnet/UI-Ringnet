@@ -200,11 +200,12 @@ $urlPre = $DB->get_records_sql("SELECT m.name
 FROM mdl_course_modules cm
 JOIN mdl_modules m ON cm.module = m.id
 WHERE cm.id = $pre");
+if($total>2){
 $urlNext = $DB->get_records_sql("SELECT m.name
 FROM mdl_course_modules cm
 JOIN mdl_modules m ON cm.module = m.id
 WHERE cm.id = $next");
-
+}
 $namePre = reset($urlPre)->name;
 $nameNext = reset($urlNext)->name;
 
