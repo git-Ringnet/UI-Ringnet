@@ -229,36 +229,38 @@ if (!empty($course->id)) {
     navigation_node::override_active_url(new moodle_url('/course/index.php', ['categoryid' => $category->id]), true);
     $PAGE->set_primary_active_tab('home');
     $PAGE->navbar->add(get_string('coursemgmt', 'admin'), $managementurl);
-
-    
 }
 global $CFG, $COURSE, $DB;
 $course = $DB->get_record('course', ['id' => $COURSE->id]);
 $content = html_writer::start_div('course-teachers-box');
-if(is_siteadmin()){
+if (is_siteadmin()) {
     $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-}else if(is_teacher()){
-    if(is_course_creator($COURSE->id)){
+} else if (is_teacher()) {
+    if (is_course_creator($COURSE->id)) {
         $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-    }else{
+    } else {
         $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
     }
-}else{
+} else {
     $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
 }
+
 $content = html_writer::start_div('course-navigation');
 //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
 $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
 $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
 $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
 $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
-
+$urlforum = '#';
 $pages = new stdClass();
 $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
-$pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
-$pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-$pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
-$pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+$pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
+$pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
+if (is_siteadmin() || is_teacher()) {
+    $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+    $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+    $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+}
 
 $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 

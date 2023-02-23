@@ -25490,9 +25490,9 @@ ul[aria-labelledby=category-listing-title] li {
 }
 
 .rui-activityicon {
-  width: 40px;
-  height: 40px;
-  margin-right: 20px;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
 }
 .theme-dark .rui-activityicon {
   filter: invert(0.9);

@@ -5869,13 +5869,17 @@ class core_renderer_maintenance extends core_renderer
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+        $urlforum = '#';
 
         $pages = new stdClass();
         $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
-        $pages->urlcontent = ['title' => 'Nội dung', 'url' => $urlcontent];
+        $pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
+        $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
+        if(is_siteadmin() || is_teacher()){
         $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
         $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
         $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+        }
 
         $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 

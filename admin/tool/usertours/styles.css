@@ -1029,8 +1029,15 @@ body {
     font-size: 16px !important;
 }
 
-#users th.header.c0.centeralign {
+#users th.header.c1.centeralign {
     width: 45%;
+}
+#users th.header.c2,#users th.header.c3
+{
+    width: 20%;
+}
+#users th.header.c4 {
+    width: 10%;
 }
 
 #roles th.header.c0.leftalign {
@@ -1053,7 +1060,7 @@ body {
     padding-right: 0 !important;
 }
 
-.course-section-header.d-flex.align-items-center.dropready {
+.course-section-header.d-flex.align-items-center{
     background: #ECECEC;
     padding: 5px;
     border-radius: 8px;
@@ -1266,7 +1273,6 @@ u>button#show-more {
 #btn_sty>.btn-save{
     border: 1px solid #0095F6;
     color: #0095F6;
-  
 }
 #btn_sty>.btn {
     line-height: 24px !important;
@@ -1274,4 +1280,15 @@ u>button#show-more {
     padding: 8px 16px;
     gap: 8px;
     border-radius: 8px;
+}
+a.quickeditlink.aalink.mx-2{
+    font-size: 1rem;
+}
+a.rui-instancename.aalink.stretched-link{
+    font-size: 14px;
+}
+.rui-activityicon {
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 10px!important;
 }
