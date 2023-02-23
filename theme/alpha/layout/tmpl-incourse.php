@@ -179,34 +179,36 @@ foreach ($sql as $key => $value) {
 }
 $total = count($new_array);
 $current = array_search($id, $new_array);
-if($current == 0){
+if ($current == 0) {
     $pre = 0;
-    $next = 1 ;
-}else if($current > 0 && $current < $total - 1){
+    $next = 1;
+} else if ($current > 0 && $current < $total - 1) {
     $pre = $current - 1;
     $next = $current + 1;
-}else{
+} else {
     $pre = $current - 1;
-    $next = $total - 1 ;
+    $next = $total - 1;
 }
 
 $pre = $new_array[$pre];
 $next = $new_array[$next];
-
 $urlPre = $DB->get_records_sql("SELECT m.name
 FROM mdl_course_modules cm
 JOIN mdl_modules m ON cm.module = m.id
 WHERE cm.id = $pre");
-$urlNext = $DB->get_records_sql("SELECT m.name
+if ($total > 2) {
+    $urlNext = $DB->get_records_sql("SELECT m.name
 FROM mdl_course_modules cm
 JOIN mdl_modules m ON cm.module = m.id
 WHERE cm.id = $next");
+}
+
 
 $namePre = reset($urlPre)->name;
 $nameNext = reset($urlNext)->name;
 
-$btnUrlPre =  $CFG->wwwroot . "/mod/".$namePre."/view.php?id=".$pre;
-$btnUrlNext =  $CFG->wwwroot . "/mod/".$nameNext."/view.php?id=".$next;
+$btnUrlPre =  $CFG->wwwroot . "/mod/" . $namePre . "/view.php?id=" . $pre;
+$btnUrlNext =  $CFG->wwwroot . "/mod/" . $nameNext . "/view.php?id=" . $next;
 
 $title = $PAGE->title;
 $templatecontext = [

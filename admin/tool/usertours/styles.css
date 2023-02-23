@@ -1132,16 +1132,22 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
     display: none !important;
 }
 #page-admin-user #users th.header.c0.centeralign{
-    width: 4% !important;
+    width: 2% !important;
 }
 #page-admin-user #users th.header.c1.centeralign{
-    width: 34% !important;
+    width: 23% !important;
 }
-#page-admin-user #users th.header.c2.centeralign{
-    width: 27% !important;
+#page-admin-user #users th.header.c2{
+    width: 40% !important;
 }
-#page-admin-user #users th.header.c3.centeralign{
-    width: 27% !important;
+#page-admin-user #users th.header.c3{
+    width: 20% !important;
+}
+#page-admin-user #users th.header.c4{
+    width: 10% !important;
+}
+#page-admin-user #users th.header.c5{
+    width: 5% !important;
 }
 #page-admin-user form p{
     margin: 2rem 0;
@@ -1182,6 +1188,25 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 }
 .dropdown-toggle::after{
     display: none !important;
+}
+/* new */
+#roles .c0{
+    width: 2% !important;
+}
+#roles .c1{
+    width: 23% !important;
+}
+#roles .c2{
+    width: 40% !important;
+}
+#roles .c3{
+    width: 20% !important;
+}
+#roles .c4{
+    width: 10% !important;
+}
+#roles .c5{
+    width: 5% !important;
 }
 /* /CSS mới */
 ul.flexsections-level-1 {

@@ -498,4 +498,5 @@ class main implements renderable, templatable
         ];
         return array_merge($defaultvariables, $preferences);
     }
+  
 }

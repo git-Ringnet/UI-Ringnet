@@ -607,7 +607,23 @@ function get_course($courseid, $clone = true) {
         return $DB->get_record('course', array('id' => $courseid), '*', MUST_EXIST);
     }
 }
-
+function get_courses_by_search($search_term) {
+    // Lấy tất cả các khóa học từ cơ sở dữ liệu
+    $all_courses = enrol_get_my_courses();
+    
+    // Tạo mảng chứa kết quả tìm kiếm
+    $search_results = array();
+    
+    // Duyệt qua từng khóa học và kiểm tra xem tên đầy đủ của nó có chứa chuỗi tìm kiếm không
+    foreach ($all_courses as $course) {
+        if (strpos(strtolower($course['fullname']), strtolower($search_term)) !== false) {
+            $search_results[] = $course;
+        }
+    }
+    
+    // Trả về mảng chứa kết quả tìm kiếm
+    return $search_results;
+}
 /**
  * Returns list of courses, for whole site, or category
  *
