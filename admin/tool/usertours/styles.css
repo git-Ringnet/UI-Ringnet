@@ -1347,3 +1347,17 @@ ul.rui-nav-tabs.nav.nav-tabs.float-right>li>a:active {
 .rui-login-container.row.no-gutters{
     width: 50% !important;
 }
+#formactionid:focus-visible{
+    outline: none !important;
+}
+
+.custom.ml-2 {
+  padding: 8px 16px !important;
+  background: #555555!important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  color: #FFFFFF !important;
+  height: auto !important;
+  max-width: 170px !important;
+}

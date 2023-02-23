@@ -263,18 +263,18 @@ if ($bulkoperations) {
 
     $selectactionparams = array(
         'id' => 'formactionid',
-        'class' => 'ml-2',
+        'class' => 'custom ml-2',
         'data-action' => 'toggle',
         'data-togglegroup' => 'participants-table',
         'data-toggle' => 'action',
         'disabled' => 'disabled'
     );
-    $label = html_writer::tag(
-        'label',
-        get_string("withselectedusers"),
-        ['for' => 'formactionid', 'class' => 'col-form-label d-inline']
-    );
-    $select = html_writer::select($displaylist, 'formaction', '', ['' => 'choosedots'], $selectactionparams);
+    // $label = html_writer::tag(
+    //     'label',
+    //     get_string("withselectedusers"),
+    //     ['for' => 'formactionid', 'class' => 'col-form-label d-inline']
+    // );
+    $select = html_writer::select($displaylist, 'formaction', '', ['' => 'Chỉnh sửa hàng loạt'], $selectactionparams);
     echo html_writer::tag('div', $label . $select);
 
     echo '<input type="hidden" name="id" value="' . $course->id . '" />';

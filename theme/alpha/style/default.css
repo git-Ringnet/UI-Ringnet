@@ -271,8 +271,7 @@ button:focus:not(:focus-visible) {
 }
 
 :focus-visible {
-  outline: 2px solid rgba(64, 108, 210, 0.9);
-  outline-offset: 2px;
+
 }
 
 input,
@@ -6025,15 +6024,7 @@ select.quickgrade {
   width: 100%;
   max-width: 260px !important;
   height: calc(1.5em + 1.5rem + 2px);
-  padding: 0.75rem 2.25rem 0.75rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #434343;
   vertical-align: middle;
-  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23434343' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 10px center/8px 10px no-repeat;
-  border: 1px solid #D8D8D8;
-  border-radius: 5px;
   appearance: none;
 }
 .theme-dark .custom-select,

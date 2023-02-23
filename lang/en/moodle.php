@@ -1059,6 +1059,7 @@ $string['childcourses'] = 'Child courses';
 $string['choose'] = 'Choose';
 $string['choosecourse'] = 'Choose a course';
 $string['choosedots'] = 'Choose...';
+$string['choosedots1'] = 'Chỉnh sửa hàng loạt';
 $string['chooselivelogs'] = 'Or watch current activity';
 $string['chooselogs'] = 'Choose which logs you want to see';
 $string['choosereportfilter'] = 'Choose a filter for the report';
