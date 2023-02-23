@@ -6349,11 +6349,6 @@ select.quickgrade:-moz-focusring {
 }
 
 .nav-tabs {
-  padding: 5px;
-  margin: 0;
-  background-color: #F5F5F5;
-  border-radius: 5px;
-  font-size: 0.813rem;
 }
 .theme-dark .nav-tabs {
   background-color: #0b0d0f;
@@ -6388,18 +6383,15 @@ select.quickgrade:-moz-focusring {
   bottom: 0;
   left: 0;
   right: 0;
-  border: 2px solid #4d7aff;
   border-radius: 5px;
   transition: all 0.2s ease-in-out;
   opacity: 0;
 }
 .nav-tabs .nav-link:hover {
-  background-color: #F5F5F5;
   color: #002db3;
   text-decoration: none;
 }
 .theme-dark .nav-tabs .nav-link:hover {
-  background-color: #0b0d0f;
   color: #4d7aff;
 }
 .nav-tabs .nav-link:hover:before {
@@ -33600,7 +33592,7 @@ a[id*=_calendar] .icon {
 }
 @media (min-width: 320px) and (max-width: 1088.98px) {
   .rui-login-layout-simple .rui-login-container {
-    width: 90%;
+    width: 50%;
   }
 }
 .rui-login-layout--2 .rui-login-container {

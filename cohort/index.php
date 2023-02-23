@@ -85,10 +85,11 @@ echo $OUTPUT->header();
 $urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
 $urluser = $CFG->wwwroot . '/admin/user.php';
 $urlgroup = $CFG->wwwroot . '/cohort/index.php?contextid=1&showall=1';
+$urlgroup1 = $CFG->wwwroot . '/cohort/index.php?contextid=1';
 $pages = new stdClass();
 $pages->urluser = ['title' => get_string('fullnametest'), 'url' => $urluser];
 $pages->urlroles = ['title' => get_string('roles'), 'url' => $urlroles];
-$pages->urlgroup = ['title' => get_string('group'), 'url' => $urlgroup];
+$pages->urlgroup = ['title' => get_string('group'), 'url' => $urlgroup, 'url1' => $urlgroup1];
 echo "<nav class='navbar navbar-expand-lg navbar-light'>
 <div class='collapse navbar-collapse' id='navbarNav'>
 <ul class='navbar-nav'>";
@@ -96,7 +97,7 @@ $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERV
 
 $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 foreach ($pages as $key => $value) {
-    $active = $urltest === $value['url'] ? 'active' : 'before';
+    $active = $urltest === $value['url'] ||  $value['url1'] ? 'active' : 'before';
     echo "<li class='nav-item {$active}  mr-2'>
  <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
  </li>";
