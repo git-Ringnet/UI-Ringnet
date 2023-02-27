@@ -291,7 +291,7 @@ class course_renderer extends \core_course_renderer
         if (!empty($pagingbar)) {
             $content .= $pagingbar;
         }
-        $content .= "<form method='POST' action='$CFG->wwwroot/course/index.php'>";
+        $content .= "<form id='myform' method='POST' action='$CFG->wwwroot/course/index.php'>";
         if(checkRole() == true){
             $content .= ' <table class="table table-striped projects">
             <thead>
@@ -362,13 +362,10 @@ class course_renderer extends \core_course_renderer
         // var_dump($SESSION->bulk_category);
         if(checkRole() == true){
             $content .= "<p class='mt-3'>
-            <label for='bulk_action'>Bulk action:</label>
-            <select name='bulk_action' id='bulk_action'>
-              <option value=''>-- Choose an action --</option>
+            <select class'custom selectcheckbox ml-2' name='bulk_action' id='bulk_action'>
+              <option value=''>Thao tác hàng loạt</option>
               <option value='delete'>Delete</option>
-              <option value='sendessage'>Send Message</option>
             </select>
-            <input type='submit' value='Go'/>
             </p>";
             $content .= "</form>";
         }

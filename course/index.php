@@ -24,7 +24,7 @@
  */
 
 require_once("../config.php");
-require_once($CFG->dirroot. '/course/lib.php');
+require_once($CFG->dirroot . '/course/lib.php');
 
 $categoryid = optional_param('categoryid', 0, PARAM_INT); // Category id
 $site = get_site();
@@ -80,12 +80,22 @@ $event->trigger();
 echo $OUTPUT->footer();
 ?>
 <script>
+    const select = document.getElementById('bulk_action');
+    const form = document.getElementById('myform');
+
+    // Gắn sự kiện "change" cho select
+    select.addEventListener('change', function() {
+        // Submit form bằng JavaScript
+        form.submit();
+    });
+
     function checkAll() {
         var checkboxes = document.getElementsByClassName("checkbox");
         for (var i = 0; i < checkboxes.length; i++) {
             checkboxes[i].checked = document.getElementById("checkall").checked;
         }
     }
+
     function uncheckAll() {
         var checkall = document.querySelector('#checkall');
         checkall.checked = false;

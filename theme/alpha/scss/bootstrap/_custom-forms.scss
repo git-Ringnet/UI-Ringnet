@@ -226,11 +226,17 @@
 select.quickgrade {
   display: inline-block;
   width: 100%;
-  max-width: 260px;
+  max-width: 260px!important;
   height: $custom-select-height;
+  padding: $custom-select-padding-y ($custom-select-padding-x + $custom-select-indicator-padding) $custom-select-padding-y $custom-select-padding-x;
   font-family: $custom-select-font-family;
   @include font-size($custom-select-font-size);
+  font-weight: $custom-select-font-weight;
+  line-height: $custom-select-line-height;
+  color: $custom-select-color;
   vertical-align: middle;
+  background: $custom-select-bg $custom-select-background;
+  border: $custom-select-border-width solid $custom-select-border-color;
   @include border-radius($custom-select-border-radius, 0);
   @include box-shadow($custom-select-box-shadow);
   appearance: none;

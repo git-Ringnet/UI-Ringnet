@@ -369,7 +369,7 @@ if (!$users) {
     }
     // $url1 = "https://localhost/ringnet/admin/roles/manage.php";
     // echo $OUTPUT->single_button($url1,'Quản lý roles');
-    echo "<form method='POST' action='$CFG->wwwroot/admin/user.php'>";
+    echo "<form id='myform' method='POST' action='$CFG->wwwroot/admin/user.php'>";
     $table->attributes['class'] = 'admintable generaltable table-sm';
     foreach ($extracolumns as $field) {
         $table->head[] = ${$field};
@@ -555,14 +555,12 @@ if (!empty($selected_users) && !empty($bulk_action)) {
 }
 echo '
 <p>
-<label for="bulk_action">Bulk action:</label>
-<select name="bulk_action" id="bulk_action">
-  <option value="">-- Choose an action --</option>
+<select class"custom selectcheckbox ml-2" name="bulk_action" id="bulk_action">
+  <option value="">Chỉnh sửa hàng loạt</option>
   <option value="delete">Delete</option>
   <option value="sendessage">Send Message</option>
-  <option value="unsuspend">Unsuspend</option>
+  <option value="unsuspend">Download</option>
 </select>
-<input type="submit" value="Go"/>
 </p>
 </form>';
 
@@ -600,6 +598,18 @@ echo '
 
 echo $OUTPUT->footer();
 ?>
+</script>
+<script>
+  // Lấy ra element select và form
+  const select = document.getElementById('bulk_action');
+  const form = document.getElementById('myform');
+
+  // Gắn sự kiện "change" cho select
+  select.addEventListener('change', function() {
+    // Submit form bằng JavaScript
+    form.submit();
+  });
+</script>
 <script>
     // var header = document.getElementById("hover_tag_a");
     // var btns = header.getElementsByClassName("a_hover");
@@ -610,6 +620,7 @@ echo $OUTPUT->footer();
     //         this.className += " active1";
     //     });
     // }
+    
     function checkAll() {
         var checkboxes = document.getElementsByClassName("checkbox");
         for (var i = 0; i < checkboxes.length; i++) {
@@ -621,4 +632,5 @@ echo $OUTPUT->footer();
         checkall.checked = false;
     }
 </script>
+
 <?php

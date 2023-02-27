@@ -275,7 +275,7 @@ if ($bulkoperations) {
     //     ['for' => 'formactionid', 'class' => 'col-form-label d-inline']
     // );
     $select = html_writer::select($displaylist, 'formaction', '', ['' => 'Chỉnh sửa hàng loạt'], $selectactionparams);
-    echo html_writer::tag('div', $label . $select);
+    echo html_writer::tag('div',  $select);
 
     echo '<input type="hidden" name="id" value="' . $course->id . '" />';
     echo '<div class="d-none" data-region="state-help-icon">' . $OUTPUT->help_icon('publishstate', 'notes') . '</div>';
