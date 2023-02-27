@@ -1197,23 +1197,26 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
     display: none !important;
 }
 /* new */
-#roles .c0{
+#roles .c0, #cohorts .c0{
     width: 2% !important;
 }
-#roles .c1{
+#roles .c1, #cohorts .c1{
     width: 23% !important;
 }
-#roles .c2{
+#roles .c2, #cohorts .c2{
     width: 40% !important;
 }
-#roles .c3{
+#roles .c3, #cohorts .c3{
     width: 20% !important;
 }
-#roles .c4{
+#roles .c4, #cohorts .c4{
     width: 10% !important;
 }
-#roles .c5{
+#roles .c5, #cohorts .c5{
     width: 5% !important;
+}
+#cohorts .c0{
+    border-bottom: 2px solid #e1e0e4;
 }
 /* /CSS mới */
 ul.flexsections-level-1 {

@@ -376,7 +376,6 @@ if (!$users) {
             <option value=''>Bộ lọc</option>
             <option value='user_name'>Tên Người dùng</option>
             <option value='user_email'>Địa chỉ email</option>
-            <option value='v'>Vai trò hệ thống</option>
         </select>
         <input placeholder='Nhập từ khóa cần tìm kiếm' type='text' id='filter-keyword'
             style='display:none; margin-left:8px; outline:none; padding:5px 5px;''>
@@ -646,6 +645,7 @@ echo '
 
 echo $OUTPUT->footer();
 ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     // var header = document.getElementById("hover_tag_a");
     // var btns = header.getElementsByClassName("a_hover");
@@ -666,5 +666,29 @@ echo $OUTPUT->footer();
         var checkall = document.querySelector('#checkall');
         checkall.checked = false;
     }
+    $("#selectedOption").on("change", function () {
+        var selectedOption = this.value,
+            input = $("#filter-keyword");
+        $('#filter-keyword').css("display", $.inArray(selectedOption, ["user_name", "user_email"]) !== -1 ? "block" : "none");
+          if (selectedOption !== "keyword") {
+            input.val("");
+        }
+        input.trigger("keyup");
+        input.on("keyup", function () {
+            var filter = input.val().toUpperCase(),
+                table = $("#users"),    
+                tr = table.find("tr"),
+                td, txtValue;
+            tr.each(function (i, el) {
+                if (i !== 0) {
+                    td = $(el).find("td").eq(selectedOption === "user_name" ? 1 : (selectedOption === "user_email" ? 2 : 3));
+                    if (td.length) {
+                        txtValue = td.text();
+                        $(el).closest('tr').css("display", txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none");
+                    }
+                }
+            });
+        });
+    });
 </script>
 <?php
