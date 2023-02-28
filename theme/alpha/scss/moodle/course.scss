@@ -555,10 +555,10 @@
 
         //UI for Course Card - Finished
         .rui-progress-100 {
-            border-color: $green-200;
+            // border-color: $green-200;
 
-            background: $green-100;
-            background: linear-gradient(165deg, rgba($white,0) 29%, rgba($green-100,1) 100%);
+            // background: $green-100;
+            // background: linear-gradient(165deg, rgba($white,0) 29%, rgba($green-100,1) 100%);
 
             .theme-dark & {
                 border-color: $green-800;

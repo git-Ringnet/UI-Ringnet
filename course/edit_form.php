@@ -281,7 +281,7 @@ class course_edit_form extends moodleform
         //     }
         // }
 
-        $courseformats = get_sorted_course_formats(true);
+        $courseformats = array('flexsections');
         $formcourseformats = array();
         foreach ($courseformats as $courseformat) {
             $formcourseformats[$courseformat] = get_string('pluginname', "format_$courseformat");
@@ -294,16 +294,17 @@ class course_edit_form extends moodleform
                         get_string('pluginname', 'format_'.$course->format));
             }
         }
-
-        // $mform->addElement('select', 'format', get_string('format'), $formcourseformats, [
-        //     'data-formatchooser-field' => 'selector',
-        // ]);
-        // $mform->addHelpButton('format', 'format');
-        // $mform->setDefault('format', $courseconfig->format);
+        
+        $mform->addElement('select', 'format', get_string('format'), $formcourseformats, [
+            'data-formatchooser-field' => 'selector',
+        ]);
+        $mform->addHelpButton('format', 'format');
+        $mform->setDefault('format', $courseconfig->format);
+        $mform->setDefault('numsections', 3);
 
         // Button to update format-specific options on format change (will be hidden by JavaScript).
         $mform->addHelpButton('format', 'format');
-        $mform->setDefault('format', $courseconfig->format);
+        $mform->setDefault('format', 'flexsections');
         //Button to update format-specific options on format change (will be hidden by JavaScript).
         $mform->registerNoSubmitButton('updatecourseformat');
         // $mform->addElement('submit', 'updatecourseformat', get_string('courseformatudpate'), [

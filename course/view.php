@@ -19,6 +19,9 @@
     $switchrole  = optional_param('switchrole',-1, PARAM_INT); // Deprecated, use course/switchrole.php instead.
     $return      = optional_param('return', 0, PARAM_LOCALURL);
 
+
+ 
+
     $params = array();
     if (!empty($name)) {
         $params = array('shortname' => $name);
@@ -41,6 +44,13 @@
     if ($section) {
         $urlparams['section'] = $section;
     }
+
+    // $name = 'a';
+    // $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
+    // $context = context_course::instance($course->id);
+    // $teachers = get_role_users($role->id, $context);
+    // $a = count($teachers);
+    // var_dump($a);
 
     $PAGE->set_url('/course/view.php', $urlparams); // Defined here to avoid notices on errors etc
 
