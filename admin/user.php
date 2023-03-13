@@ -339,7 +339,7 @@ if (!$users) {
     // "."</div>";
 
     //Việt comments navigation bar
-    $urlroles = $CFG->wwwroot . '/admin/roles/assign.php?contextid=1';
+    $urlroles = $CFG->wwwroot . '/admin/roles/manage.php';
     $urluser = $CFG->wwwroot . '/admin/user.php';
     $urlgroup = $CFG->wwwroot . '/cohort/index.php?contextid=1&showall=1';
     $pages = new stdClass();
