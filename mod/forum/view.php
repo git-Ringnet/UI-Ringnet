@@ -1,3 +1,4 @@
+
 <?php
 // This file is part of Moodle - http://moodle.org/
 //
@@ -23,7 +24,6 @@
  */
 
 use mod_forum\grades\forum_gradeitem;
-
 require_once('../../config.php');
 
 $managerfactory = mod_forum\local\container::get_manager_factory();
@@ -43,7 +43,6 @@ $search = optional_param('search', '', PARAM_CLEAN);
 $pageno = optional_param('p', $pageno, PARAM_INT);
 $pagesize = optional_param('s', 0, PARAM_INT);
 $sortorder = optional_param('o', null, PARAM_INT);
-
 if (!$cmid && !$forumid) {
     print_error('missingparameter');
 }
@@ -65,6 +64,7 @@ if (!empty($showall)) {
     $pageno = 0;
     $pagesize = 0;
 }
+
 
 $urlfactory = mod_forum\local\container::get_url_factory();
 $capabilitymanager = $managerfactory->get_capability_manager($forum);
@@ -168,17 +168,15 @@ if ($istypesingle || empty($forum->get_intro())) {
 $activityheader->set_attrs($pageheader);
 
 echo $OUTPUT->header();
-
+echo '<div class="forum-course">';
 $rendererfactory = mod_forum\local\container::get_renderer_factory();
 // The elements for view action are rendered and added to the page.
 echo forum_activity_actionbar($forum, $groupid, $course, $search);
-
 if ($sortorder) {
     set_user_preference('forum_discussionlistsortorder', $sortorder);
 }
 
 $sortorder = get_user_preferences('forum_discussionlistsortorder', $discussionlistvault::SORTORDER_LASTPOST_DESC);
-
 switch ($forum->get_type()) {
     case 'single':
         $forumgradeitem = forum_gradeitem::load_from_forum_entity($forum);
@@ -217,6 +215,7 @@ switch ($forum->get_type()) {
                 echo $OUTPUT->render_from_template('mod_forum/grades/view_grade_button', $gradeobj);
             }
         }
+
         $discussion = $discussionvault->get_last_discussion_in_forum($forum);
         $discussioncount = $discussionvault->get_count_discussions_in_forum($forum);
         $hasmultiplediscussions = $discussioncount > 1;
@@ -258,4 +257,18 @@ switch ($forum->get_type()) {
         echo $discussionsrenderer->render($USER, $cm, $groupid, $sortorder, $pageno, $pagesize, $displaymode, false);
 }
 
+// $id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
+// $sql = sprintf("
+//     SELECT f.id
+//     FROM mdl_forum f
+//     INNER JOIN mdl_course_modules cm ON f.id = cm.instance
+//     WHERE cm.module = (SELECT id FROM mdl_modules WHERE name = 'forum')
+//     AND cm.course = %d",
+//     $id_khoa_hoc
+// );
+// $idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
+
+// hiển thị giá trị của biến $idforum
+// echo "idforum của khóa học $id_khoa_hoc là: " . $idforum;
+echo '</div>';
 echo $OUTPUT->footer();
