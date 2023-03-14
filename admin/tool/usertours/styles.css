@@ -269,10 +269,10 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 /* CSS participants */
-#page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
+/* #page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
 #page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection {
     display: none !important;
-}
+} */
 
 #page-course-view-participants #fitem_id_userlist {
     width: 98% !important;
@@ -844,7 +844,7 @@ body {
     width: 100%;
 }
 
-#page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection,
+/* #page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection, */
 #page-course-edit #id_general legend,
 #page-course-edit #id_descriptionhdr legend {
     display: none !important;
@@ -1005,10 +1005,6 @@ body {
     background: white;
     border: 1px solid blue;
 }
-
-
-
-
 
 /* /Update Create New Course */
 #users tbody tr,
@@ -1218,6 +1214,14 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 #cohorts .c0{
     border-bottom: 2px solid #e1e0e4;
 }
+
+
+#page-grade-report-user-index #graded_users_selector
+#page-grade-report-user-index .view_users_selector{
+    display: none !important;
+}
+
+
 /* /CSS mới */
 ul.flexsections-level-1 {
     background: none !important;

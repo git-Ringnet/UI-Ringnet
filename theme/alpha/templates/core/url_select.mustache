@@ -37,7 +37,7 @@
         "title": "Some cool title"
     }
 }}
-<div class="d-none">
+
     <form method="post" action="{{action}}" class="form-inline" id="{{formid}}">
         <input type="hidden" name="sesskey" value="{{sesskey}}">
         {{#label}}
@@ -76,7 +76,7 @@
     {{#js}}
         require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
             CustomEvents.define('#{{id}}', [CustomEvents.events.accessibleChange]);
-            $('#{{id}}').on(CustomEvents.events.accessibleChange, function() {
+$('#{{id}}').on(CustomEvents.events.accessibleChange, function() {
                 if (!$(this).val()) {
                     return false;
                 }
@@ -85,4 +85,3 @@
         });
     {{/js}}
 {{/showbutton}}
-</div>

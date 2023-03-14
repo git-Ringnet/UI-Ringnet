@@ -233,6 +233,7 @@ $string['calltofeedback_remind'] = 'Remind me later';
 $string['cancel'] = 'Cancel';
 $string['cancelled'] = 'Cancelled';
 $string['categories'] = 'Course categories';
+$string['route'] = 'Route';
 $string['categoriesandcourses'] = 'Course categories and courses';
 $string['category'] = 'Category';
 $string['categoryadded'] = 'The category \'{$a}\' was added';
