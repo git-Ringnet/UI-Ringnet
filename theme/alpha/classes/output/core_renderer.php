@@ -1644,9 +1644,9 @@ class core_renderer extends \core_renderer
                                -225 102 0 81 58 137 142 137 38 0 54 -6 82 -30z"/>
                                </g>
                                </svg>',
-                            'title' => get_string('usermanager', 'moodle'),
-                            'url' => new moodle_url('/admin/user.php'),
-                            'isactiveitem' => $this->isMenuActive('/admin/user.php'),
+                            'title' =>  is_siteadmin() ? get_string('usermanager', 'moodle') : get_string('groupsmanager','moodle'),
+                            'url' => is_siteadmin() ? new moodle_url('/admin/user.php') : new moodle_url('/cohort/index.php?contextid=1'),
+                            'isactiveitem' => is_siteadmin() ? $this->isMenuActive('/admin/user.php') : $this->isMenuActive('/cohort/index.php?contextid=1'),
                             'itemid' => 'itemCourseManager',
                             'visability' => true,
                         ),
@@ -1853,7 +1853,7 @@ class core_renderer extends \core_renderer
                         ),
                         // Quản lý người dùng
                         array(
-                            'status' => is_siteadmin(),
+                            'status' => is_siteadmin() || is_teacher(),
                             'icon' => '<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                             width="20px" height="20px" viewBox="0 0 512.000000 512.000000"
                             preserveAspectRatio="xMidYMid meet">
@@ -1902,9 +1902,9 @@ class core_renderer extends \core_renderer
                            -225 102 0 81 58 137 142 137 38 0 54 -6 82 -30z"/>
                            </g>
                            </svg>',
-                            'title' => get_string('usermanager', 'moodle'),
-                            'url' => new moodle_url('/admin/user.php'),
-                            'isactiveitem' => $this->isMenuActive('/admin/user.php'),
+                            'title' => is_siteadmin() ? get_string('usermanager', 'moodle') : get_string('groupsmanager','moodle'),
+                            'url' => is_siteadmin() ? new moodle_url('/admin/user.php') : new moodle_url('/cohort/index.php?contextid=1'),
+                            'isactiveitem' => is_siteadmin() ? $this->isMenuActive('/admin/user.php') : $this->isMenuActive('/cohort/index.php?contextid=1'),
                             'itemid' => 'itemCourseManager',
                             'visability' => true,
                         ),

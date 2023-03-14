@@ -1399,6 +1399,7 @@ $string['myhome'] = 'Dashboard';
 $string['meeting'] = 'Meeting';
 $string['coursemanager'] = 'Course Managements';
 $string['usermanager'] = 'Users Management';
+$string['groupsmanager'] = 'Groups Management';
 $string['mymoodledashboard'] = 'My Moodle dashboard';
 $string['myprofile'] = 'My profile';
 $string['name'] = 'Name';
