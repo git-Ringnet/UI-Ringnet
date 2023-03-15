@@ -86,7 +86,7 @@ Main.init(root);
 {{/js}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-    $("#selectedOption").on("change", function () {
+   $("#selectedOption").on("change", function () {
         var selectedOption = this.value,
             input = $("#filter-keyword");
         $('#filter-keyword').css("display", $.inArray(selectedOption, ["course_name", "course_categories"]) !== -1 ? "block" : "none");
@@ -124,7 +124,6 @@ Main.init(root);
             tr.each(function (i, el) {
                 if (i !== 0) {
                     td = $(el).find("th").eq(selectedOption === "course_name" ? 1 : (selectedOption === "course_categories" ? 2 : 3));
-                    console.log(td);
                     if (td.length) {
                         txtValue = td.text();
                         $(el).closest('li').css("display", txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none");

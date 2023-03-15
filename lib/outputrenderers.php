@@ -5869,7 +5869,21 @@ class core_renderer_maintenance extends core_renderer
         $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
-        $urlforum = '#';
+
+        
+        //Thảo luận
+$id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
+$sql = sprintf("
+    SELECT f.id
+    FROM mdl_forum f
+    INNER JOIN mdl_course_modules cm ON f.id = cm.instance
+    WHERE cm.module = (SELECT id FROM mdl_modules WHERE name = 'forum')
+    AND cm.course = %d",
+    $id_khoa_hoc
+);
+$idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
+$urlforum = $CFG->wwwroot . '/mod/forum/view.php?f='.$idforum;
+
 
         $pages = new stdClass();
         $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];

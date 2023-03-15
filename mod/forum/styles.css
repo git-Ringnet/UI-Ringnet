@@ -369,3 +369,23 @@ span.unread {
 .hr-sect::after {
     margin-left: 15px;
 }
+/* div#navbar_PNSection,.btn-link .rui-icon-container{
+    display: none !important;
+} */
+.navitem>.btn.btn-primary{
+    background: #EC212D !important;
+    color: FCFCFC !important;
+    padding: 8px 16px !important;
+}
+.navitem>.btn.btn-primary:hover{
+    background: #D8121E !important;
+}
+.navitem>.btn.btn-primary:active{
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25)
+}
+/* .tertiary-navigation .navitem:not(:last-child){
+    margin: 0 !important;
+} */
+.forum-course{
+    margin-top: -10px;
+}

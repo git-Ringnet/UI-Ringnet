@@ -214,6 +214,29 @@ if ($backurl) {
 
 // Print heading.
 echo $OUTPUT->heading_with_help($title, 'assignroles', 'core_role');
+//Việt comments navigation bar
+$urlroles = $CFG->wwwroot . '/admin/roles/assign.php?contextid=1';
+$urluser = $CFG->wwwroot . '/admin/user.php';
+$urlgroup = $CFG->wwwroot . '/cohort/index.php?contextid=1&showall=1';
+$pages = new stdClass();
+$pages->urluser = ['title' => get_string('fullnametest'), 'url' => $urluser];
+$pages->urlroles = ['title' => get_string('roles'), 'url' => $urlroles];
+$pages->urlgroup = ['title' => get_string('group'), 'url' => $urlgroup];
+echo "<nav class='navbar navbar-expand-lg navbar-light'>
+<div class='collapse navbar-collapse' id='navbarNav'>
+<ul class='navbar-nav'>";
+$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+$urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+foreach ($pages as $key => $value) {
+    $active = $urltest === $value['url'] ? 'active' : 'before';
+    echo"<li class='nav-item {$active}  mr-2'>
+<a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
+</li>";
+}
+echo "</ul>
+</div>
+</nav> <hr/>";
 
 if ($roleid) {
     // Show UI for assigning a particular role to users.
