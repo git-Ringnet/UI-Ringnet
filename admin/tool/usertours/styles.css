@@ -269,10 +269,10 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 }
 
 /* CSS participants */
-#page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
+/* #page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
 #page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection {
     display: none !important;
-}
+} */
 
 #page-course-view-participants #fitem_id_userlist {
     width: 98% !important;
