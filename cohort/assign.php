@@ -105,7 +105,7 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
 ?>
 <form id="assignform" method="post" action="<?php echo $PAGE->url ?>"><div>
   <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
-  <input type="hidden" name="returnurl" value="<?php echo $returnurl->out_as_local_url() ?>" />
+  <input type="hidden" name="returnurl" value="<?php echo is_siteadmin() ? $returnurl->out_as_local_url(): "/cohort/index.php?contextid=1" ?>" />
 
   <table summary="" class="generaltable generalbox boxaligncenter" cellspacing="0">
     <tr>

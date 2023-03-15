@@ -110,6 +110,7 @@ foreach ($pages as $key => $value) {
 echo "</ul>
 </div>
 </nav> <hr/> <br>";
+
 if ($showall) {
     $cohorts = cohort_get_all_cohorts($page, 25, $searchquery);
 } else {
@@ -183,6 +184,7 @@ echo $OUTPUT->render_from_template('core/search_input', $data);
 
 $data = array();
 $editcolumnisempty = true;
+
 foreach ($cohorts['cohorts'] as $cohort) {
     $line = array();
     $cohortcontext = context::instance_by_id($cohort->contextid);
