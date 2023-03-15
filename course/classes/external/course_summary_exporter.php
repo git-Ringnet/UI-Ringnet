@@ -88,7 +88,7 @@ class course_summary_exporter extends \core\external\exporter
         $student = get_role_users($rolestudent->id, $context);
         $count = count($student);
         $checkRole = checkRole();
-
+        $test = "123";
 
         return array(
             'fullnamedisplay' => get_course_display_name_for_list($this->data),
@@ -103,6 +103,7 @@ class course_summary_exporter extends \core\external\exporter
             'coursecategory' => $coursecategory->name,
             'name' =>  $name,
             'student' =>  $count,
+            'test' => $test
         );
     }
 

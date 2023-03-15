@@ -479,7 +479,7 @@ class main implements renderable, templatable
             'layouts' => $availablelayouts,
             'displaycategories' => $this->displaycategories,
             //nếu là admin hoặc giáo viên tạo khóa học thì có nút tạo khóa học
-            'status' => is_siteadmin() || $isteacheranywhere===true,
+            'status' => is_siteadmin() || is_teacher(),
             'displaydropdown' => (count($availablelayouts) > 1) ? true : false,
             'displaygroupingallincludinghidden' => $this->displaygroupingallincludinghidden,
             'displaygroupingall' => $this->displaygroupingall,
@@ -498,4 +498,5 @@ class main implements renderable, templatable
         ];
         return array_merge($defaultvariables, $preferences);
     }
+  
 }

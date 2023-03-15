@@ -319,6 +319,7 @@ class course_renderer extends \core_course_renderer
             $content .= ' <table class="table table-striped projects">
             <thead>
                 <tr>
+                    <th style="width:0%;"></th>
                     <th style="width: 30%;font-size: 1rem;">
                         Danh mục
                     </th>
@@ -673,6 +674,7 @@ class course_renderer extends \core_course_renderer
             $content .= ' <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
             <thead>
                 <tr>
+                    <th style="width:0%; border-bottom: 0 !important;"></th>
                     <th style="width: 30%;border-bottom: 0 !important;">
                     ' . $categoryname . '
                     </th>

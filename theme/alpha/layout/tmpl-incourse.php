@@ -32,7 +32,7 @@ user_preference_allow_ajax_update('drawer-open-index', PARAM_BOOL);
 user_preference_allow_ajax_update('drawer-open-block', PARAM_BOOL);
 require_once($CFG->libdir . '/behat/lib.php');
 require_once($CFG->dirroot . '/course/lib.php');
-$id = optional_param('id',0, PARAM_INT);
+$id = optional_param('id', 0, PARAM_INT);
 $draweropenright = false;
 $extraclasses = [];
 
@@ -182,20 +182,19 @@ foreach ($sql as $key => $value) {
 }
 $total = count($new_array);
 $current = array_search($id, $new_array);
-if($current == 0){
+if ($current == 0) {
     $pre = 0;
-    $next = 1 ;
-}else if($current > 0 && $current < $total - 1){
+    $next = 1;
+} else if ($current > 0 && $current < $total - 1) {
     $pre = $current - 1;
     $next = $current + 1;
-}else{
+} else {
     $pre = $current - 1;
-    $next = $total - 1 ;
+    $next = $total - 1;
 }
 
 $pre = $new_array[$pre];
 $next = $new_array[$next];
-
 $urlPre = $DB->get_records_sql("SELECT m.name
 FROM mdl_course_modules cm
 JOIN mdl_modules m ON cm.module = m.id
