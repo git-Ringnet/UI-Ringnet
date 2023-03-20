@@ -1,0 +1,173 @@
+{{!
+This file is part of Moodle - http://moodle.org/
+
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
+}}
+{{!
+@template block_myoverview/nav-course
+
+This template renders the main content area for the myoverview block.
+
+Example context (json):
+{}
+}}
+<div id="block-myoverview-{{uniqid}}" class="block-myoverview block-cards" data-region="myoverview" role="navigation">
+    <div class="d-inline-flex justify-content-between flex-wrap w-100 align-items-center mb-4">
+        <div class="course mb-1 mr-auto d-flex mt-auto">
+            <a class="title mr-2 pt-2 px-1 {{#active}}active{{/active}} {{#test}}active{{/test}} {{#activefavourites}}active{{/activefavourites}} before"
+                href="{{config.wwwroot}}/my/courses.php">
+                Khóa học
+            </a>
+            <a href="{{config.wwwroot}}/course/index.php"
+                class="title mr-2 pt-2 px-1 {{#check}}active{{/check}} before">
+                Danh Mục
+            </a>
+            <a href="#" class="title pt-2 px-1 before">
+                Lộ Trình
+            </a>
+        </div>
+    </div>
+    <div class="d-inline-flex justify-content-between flex-wrap w-100 align-items-center">
+        <div class="course-child mb-1 mr-auto d-flex mt-auto">
+            <a class="title-child mr-2 pt-2 px-1 {{#test}}active{{/test}} before"
+                href="{{config.wwwroot}}/my/courses.php">
+                Của tôi
+            </a>
+            <a href="{{config.wwwroot}}/my/coursesall.php"
+                class="title-child mr-2 pt-2 px-1 {{#active}}active{{/active}}{{#check}}active{{/check}} before">
+                Tất cả
+            </a>
+            <a href="{{config.wwwroot}}/my/favouritecourses.php"
+                class="{{#activefavourites}}active{{/activefavourites}} title-child pt-2 px-1 before">
+                Yêu thích
+            </a>
+        </div>
+        <div class="">
+            {{#creator}}
+            {{#status}}
+            <a href="{{config.wwwroot}}/course/edit.php?returnto=catmanage" class="create-course btn btn-primary">
+                {{#str}} createnewcourse, moodle{{/str}}
+            </a>
+            {{/status}}
+            {{/creator}}
+            {{#check}}
+            {{#status}}
+            <a href="{{config.wwwroot}}/course/editcategory.php?parent=0" class="create-course btn btn-primary">
+                {{#str}} addnewcategory, moodle{{/str}}
+            </a>
+            {{/status}}
+            {{/check}}
+        </div>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-1">
+        {{!-- Filter --}}
+        <div data-region="filter" class="d-flex align-items-center"
+            aria-label="{{#str}} aria:controls, block_myoverview {{/str}}" style="margin-top:24px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
+                <path
+                    d="M6.66667 13C6.66667 12.7348 6.75446 12.4804 6.91074 12.2929C7.06702 12.1054 7.27899 12 7.5 12H12.5C12.721 12 12.933 12.1054 13.0893 12.2929C13.2455 12.4804 13.3333 12.7348 13.3333 13C13.3333 13.2652 13.2455 13.5196 13.0893 13.7071C12.933 13.8946 12.721 14 12.5 14H7.5C7.27899 14 7.06702 13.8946 6.91074 13.7071C6.75446 13.5196 6.66667 13.2652 6.66667 13ZM3.33333 7C3.33333 6.73478 3.42113 6.48043 3.57741 6.29289C3.73369 6.10536 3.94565 6 4.16667 6H15.8333C16.0543 6 16.2663 6.10536 16.4226 6.29289C16.5789 6.48043 16.6667 6.73478 16.6667 7C16.6667 7.26522 16.5789 7.51957 16.4226 7.70711C16.2663 7.89464 16.0543 8 15.8333 8H4.16667C3.94565 8 3.73369 7.89464 3.57741 7.70711C3.42113 7.51957 3.33333 7.26522 3.33333 7ZM0 1C0 0.734784 0.0877975 0.48043 0.244078 0.292893C0.400358 0.105357 0.61232 0 0.833333 0H19.1667C19.3877 0 19.5996 0.105357 19.7559 0.292893C19.9122 0.48043 20 0.734784 20 1C20 1.26522 19.9122 1.51957 19.7559 1.70711C19.5996 1.89464 19.3877 2 19.1667 2H0.833333C0.61232 2 0.400358 1.89464 0.244078 1.70711C0.0877975 1.51957 0 1.26522 0 1Z"
+                    fill="#555555">
+            </svg>
+            <select name="selectedOption" id="selectedOption" style="border:none; outline:none; height:24px;
+                 margin-left:8px; font-size:14px; appearance:none; font-weight: 400;line-height:24px;">
+                <option value="0">Bộ lọc</option>
+                {{!-- <option value="keyword" name="fillter_option" id="fillter">Từ Khóa</option> --}}
+                {{#test}}
+                <option value="1">Tên Khóa Học</option>
+                <option value="2">Tên Danh Mục</option>
+                <option value="3">Đã đánh sao</option>
+                {{/test}}
+                {{^test}}
+                <option value="2">Tên Danh Mục</option>
+                {{/test}}
+            </select>
+            <input placeholder="Nhập từ khóa cần tìm kiếm" type="text" id="filter-keyword"
+                style="opacity:0; margin-left:8px; outline:none;font-size: 15px;">
+            <div class="w-100" style="display:none;" id="search_all">
+                {{#test}}
+                {{> block_myoverview/nav-search-widget }}
+                {{/test}}
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid p-0 paged-content-page-container">
+        {{#js}}
+        require(
+        [
+        'jquery',
+        'block_myoverview/main',
+        ],
+        function(
+        $,
+        Main
+        ) {
+        var root = $('#block-myoverview-{{uniqid}}');
+        Main.init(root);
+        });
+        {{/js}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script>
+            $("#selectedOption").on("change", function () {
+                var selectedOption = this.value,
+                    input = $("#filter-keyword");
+                console.log(this.value);
+                $('#filter-keyword').css("opacity", $.inArray(selectedOption, ["1", "2"]) !== -1 ? 1 : 0);
+                if (selectedOption !== "keyword") {
+                    input.val("");
+                }
+                input.trigger("keyup");
+                if (selectedOption == "3") {
+                    var table = $(".list-group.mt-2.mx-0"),
+                        tr = table.find("tr"),
+                        td, txtValue;
+                    tr.each(function (i, el) {
+                        if (i !== 0) {
+                            td = $(el).find("th").eq(1);
+                            if (td.length) {
+                                td.find("span").each(function (j, span) {
+                                    if ($(span).attr('aria-hidden') == 'true') {
+                                        var divParent = $(span).closest('li');
+                                        if (divParent.length) {
+                                            divParent.css("display", "none");
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    });
+                } else {
+                    $('.list-group-item').css("display", "");
+                }
+                input.on("keyup", function () {
+                    var filter = input.val().toUpperCase(),
+                        table = $(".paged-content-page-container"),
+                        tr = table.find("tr"),
+                        td, txtValue;
+                    tr.each(function (i, el) {
+                        if (i !== 0) {
+                            td = $(el).find("th").eq(selectedOption === "1" ? 0 : (selectedOption === "2" ? 1 : 2));
+                            if (td.length) {
+                                txtValue = td.text();
+                                console.log(txtValue);
+                                $(el).closest('tr').css("display", txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none");
+                            }
+
+                        }
+                    });
+                });
+            });
+        </script>

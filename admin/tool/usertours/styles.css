@@ -645,10 +645,23 @@ a.text-dark:hover {
     color: black;
 }
 
+.course-child .title-child,
+.navbar-nav .title-child {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: black;
+}
+li{
+    list-style: none;
+}
+
 .course .before,
 .course .active,
 .navbar-nav .before,
-.navbar-nav .active {
+.navbar-nav .active,
+.course-child .before,
+.course-child .active {
     background-image: linear-gradient(to right,
             #0095F6,
             #0095F6 50%,
@@ -663,10 +676,18 @@ a.text-dark:hover {
     transition: all 0.3s ease-in-out;
 }
 
+.course-child .before,
+.course-child .active {
+    background-image: linear-gradient(to right, #000, #2a2e31 50%, #000 50%);
+    color: #3333;
+}
+
 .course .before:before,
 .course .active:before,
 .navbar-nav .before:before,
-.navbar-nav .active:before {
+.navbar-nav .active:before,
+.course-child .before:before,
+.course-child .active:before {
     content: '';
     background: #0095F6;
     display: block;
@@ -678,25 +699,33 @@ a.text-dark:hover {
     transition: all 0.3s ease-in-out;
 }
 
-.course .before:hover,
-.navbar-nav .before:hover {
+.course-child .before:before,
+.course-child .active:before {
+    background-color: #333333;
+}
 
+.course .before:hover,
+.navbar-nav .before:hover,
+.course-child .before:hover {
     background-position: 0;
 }
 
 .course .before:hover::before,
-.navbar-nav .before:hover::before {
+.navbar-nav .before:hover::before,
+.course-child .before:hover::before {
     width: 100%;
 }
 
 .course .active,
-.navbar-nav .active {
+.navbar-nav .active,
+.course-child .active {
     padding-bottom: 15px;
     background-position: 0;
 }
 
 .course .active::before,
-.navbar-nav .active::before {
+.navbar-nav .active::before,
+.course-child .active::before {
     width: 100%;
 }
 
@@ -782,7 +811,7 @@ body {
 }
 
 .wrapper-course hr {
-    margin: 0 -40px;
+    margin: -1px 0px;
 }
 
 .navbar-nav .title {
@@ -1341,24 +1370,31 @@ ul.rui-nav-tabs.nav.nav-tabs.float-right>li>a:active {
     background: #D8121E;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.nav-tabs .nav-link:before{
+
+.nav-tabs .nav-link:before {
     border: none !important;
 }
-.rui-login-container.row.no-gutters{
+
+.rui-login-container.row.no-gutters {
     width: 50% !important;
 }
-#formactionid:focus-visible{
+
+#formactionid:focus-visible {
     outline: none !important;
 }
 
-.custom.ml-2
-,select#bulk_action {
-  padding: 8px 16px !important;
-  background: #555555!important;
-  border-radius: 8px !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  color: #FFFFFF !important;
-  height: 37px !important;
-  max-width: 190px !important;
+.custom.ml-2,
+select#bulk_action {
+    padding: 8px 16px !important;
+    background: #555555 !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    color: #FFFFFF !important;
+    height: 37px !important;
+    max-width: 190px !important;
+}
+.modal-backdrop.in.show,.modal.moodle-has-zindex.show{
+    z-index: unset !important;
+    display: none !important;
 }
