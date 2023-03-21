@@ -26,8 +26,8 @@ if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.');    //  It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot.'/lib/formslib.php');
-require_once($CFG->dirroot.'/user/lib.php');
+require_once($CFG->dirroot . '/lib/formslib.php');
+require_once($CFG->dirroot . '/user/lib.php');
 
 /**
  * Class user_editadvanced_form.
@@ -35,12 +35,14 @@ require_once($CFG->dirroot.'/user/lib.php');
  * @copyright 1999 Martin Dougiamas  http://dougiamas.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class user_editadvanced_form extends moodleform {
+class user_editadvanced_form extends moodleform
+{
 
     /**
      * Define the form.
      */
-    public function definition() {
+    public function definition()
+    {
         global $USER, $CFG, $COURSE;
 
         $mform = $this->_form;
@@ -166,7 +168,8 @@ class user_editadvanced_form extends moodleform {
     /**
      * Extend the form definition after data has been parsed.
      */
-    public function definition_after_data() {
+    public function definition_after_data()
+    {
         global $USER, $CFG, $DB, $OUTPUT;
 
         $mform = $this->_form;
@@ -248,7 +251,8 @@ class user_editadvanced_form extends moodleform {
      * @param array $files
      * @return array|bool
      */
-    public function validation($usernew, $files) {
+    public function validation($usernew, $files)
+    {
         global $CFG, $DB;
 
         $usernew = (object)$usernew;
@@ -323,5 +327,3 @@ class user_editadvanced_form extends moodleform {
         }
     }
 }
-
-
