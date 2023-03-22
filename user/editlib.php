@@ -29,7 +29,8 @@ require_once($CFG->dirroot . '/user/lib.php');
  *
  * @param int $userid
  */
-function cancel_email_update($userid) {
+function cancel_email_update($userid)
+{
     unset_user_preference('newemail', $userid);
     unset_user_preference('newemailkey', $userid);
     unset_user_preference('newemailattemptsleft', $userid);
@@ -43,7 +44,8 @@ function cancel_email_update($userid) {
  * @param int $courseid The optional course id if we came from a course context.
  * @return array containing the user and course records.
  */
-function useredit_setup_preference_page($userid, $courseid) {
+function useredit_setup_preference_page($userid, $courseid)
+{
     global $PAGE, $SESSION, $DB, $CFG, $OUTPUT, $USER;
 
     // Guest can not edit.
@@ -59,7 +61,7 @@ function useredit_setup_preference_page($userid, $courseid) {
         require_login($course);
     } else if (!isloggedin()) {
         if (empty($SESSION->wantsurl)) {
-            $SESSION->wantsurl = $CFG->wwwroot.'/user/preferences.php';
+            $SESSION->wantsurl = $CFG->wwwroot . '/user/preferences.php';
         }
         redirect(get_login_url());
     } else {
@@ -94,7 +96,6 @@ function useredit_setup_preference_page($userid, $courseid) {
         if (!has_capability('moodle/user:editownprofile', $systemcontext)) {
             print_error('cannotedityourprofile');
         }
-
     } else {
         // Teachers, parents, etc.
         require_capability('moodle/user:editprofile', $personalcontext);
@@ -132,7 +133,8 @@ function useredit_setup_preference_page($userid, $courseid) {
  * @param stdClass $user The user object, modified by reference.
  * @param bool $reload
  */
-function useredit_load_preferences(&$user, $reload=true) {
+function useredit_load_preferences(&$user, $reload = true)
+{
     global $USER;
 
     if (!empty($user->id)) {
@@ -143,7 +145,7 @@ function useredit_load_preferences(&$user, $reload=true) {
 
         if ($preferences = get_user_preferences(null, null, $user->id)) {
             foreach ($preferences as $name => $value) {
-                $user->{'preference_'.$name} = $value;
+                $user->{'preference_' . $name} = $value;
             }
         }
     }
@@ -161,7 +163,8 @@ function useredit_load_preferences(&$user, $reload=true) {
  *
  * @param stdClass|array $usernew object or array that has user preferences as attributes with keys starting with preference_
  */
-function useredit_update_user_preference($usernew) {
+function useredit_update_user_preference($usernew)
+{
     global $USER;
     $ua = (array)$usernew;
     if (is_object($usernew) && isset($usernew->id) && isset($usernew->deleted) && isset($usernew->confirmed)) {
@@ -190,7 +193,8 @@ function useredit_update_user_preference($usernew) {
  * @deprecated since Moodle 3.2
  * @see core_user::update_picture()
  */
-function useredit_update_picture() {
+function useredit_update_picture()
+{
     throw new coding_exception('useredit_update_picture() can not be used anymore. Please use ' .
         'core_user::update_picture() instead.');
 }
@@ -201,7 +205,8 @@ function useredit_update_picture() {
  * @param stdClass $user The current user object.
  * @param stdClass $usernew The updated user object.
  */
-function useredit_update_bounces($user, $usernew) {
+function useredit_update_bounces($user, $usernew)
+{
     if (!isset($usernew->email)) {
         // Locked field.
         return;
@@ -218,14 +223,15 @@ function useredit_update_bounces($user, $usernew) {
  * @param stdClass $user The original user object.
  * @param stdClass $usernew The updated user object.
  */
-function useredit_update_trackforums($user, $usernew) {
+function useredit_update_trackforums($user, $usernew)
+{
     global $CFG;
     if (!isset($usernew->trackforums)) {
         // Locked field.
         return;
     }
     if ((!isset($user->trackforums) || ($usernew->trackforums != $user->trackforums)) and !$usernew->trackforums) {
-        require_once($CFG->dirroot.'/mod/forum/lib.php');
+        require_once($CFG->dirroot . '/mod/forum/lib.php');
         forum_tp_delete_read_records($usernew->id);
     }
 }
@@ -236,9 +242,15 @@ function useredit_update_trackforums($user, $usernew) {
  * @param stdClass $user
  * @param array $interests
  */
-function useredit_update_interests($user, $interests) {
-    core_tag_tag::set_item_tags('core', 'user', $user->id,
-            context_user::instance($user->id), $interests);
+function useredit_update_interests($user, $interests)
+{
+    core_tag_tag::set_item_tags(
+        'core',
+        'user',
+        $user->id,
+        context_user::instance($user->id),
+        $interests
+    );
 }
 
 /**
@@ -249,22 +261,43 @@ function useredit_update_interests($user, $interests) {
  * @param array $filemanageroptions
  * @param stdClass $user
  */
-function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions, $user) {
+function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions, $user)
+{
     global $CFG, $USER, $DB;
 
     if ($user->id > 0) {
         useredit_load_preferences($user, false);
     }
+    $mform->addElement('html', '<div id="menu_editadvanced"');
+        $mform->addElement('html','<span>');
+        $mform->addElement("html","<div id='ttcn' style='margin-top:13%; height:36px; padding:6px 0;'> <span></span><a href='$CFG->wwwroot/user/editadvanced.php?id=$user->id'>Thông tin cá nhân</a></div>");
+        $mform->addElement("html","<div id='tb' style='margin-top:16%; height:36px; padding:6px 0;'> <span></span> <a href='$CFG->wwwroot/message/notificationpreferences.php?userid=$user->id'>Thông báo</a> </div>");
+    $mform->addElement('html', '</div>');
+    // Ảnh đại diện
+    if (empty($USER->newadminuser)) {
+        $mform->addElement('html', '<div id="edit_profile_user_left">');
+
+        if (!empty($CFG->enablegravatar)) {
+            $mform->addElement('html', html_writer::tag('p', get_string('gravatarenabled')));
+        }
+
+        $mform->addElement('static', 'currentpicture', get_string('currentpicture'));
+        $mform->addElement('filemanager', 'imagefile', get_string('newpicture'), '', $filemanageroptions);
+        $mform->addHelpButton('imagefile', 'newpicture');
+        $mform->addElement('html', '</div>');
+
+    }
 
     $strrequired = get_string('required');
     $stringman = get_string_manager();
-
+    $mform->addElement('html', '<div id="edit_profile_user_right">');
     // Add the necessary names.
+    // Tên
     foreach (useredit_get_required_name_fields() as $fullname) {
         $purpose = user_edit_map_field_purpose($user->id, $fullname);
         $mform->addElement('text', $fullname,  get_string($fullname),  'maxlength="100" size="30"' . $purpose);
-        if ($stringman->string_exists('missing'.$fullname, 'core')) {
-            $strmissingfield = get_string('missing'.$fullname, 'core');
+        if ($stringman->string_exists('missing' . $fullname, 'core')) {
+            $strmissingfield = get_string('missing' . $fullname, 'core');
         } else {
             $strmissingfield = $strrequired;
         }
@@ -272,19 +305,29 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
         $mform->setType($fullname, PARAM_NOTAGS);
     }
 
-    $enabledusernamefields = useredit_get_enabled_name_fields();
     // Add the enabled additional name fields.
+    // Họ
     foreach ($enabledusernamefields as $addname) {
         $purpose = user_edit_map_field_purpose($user->id, $addname);
         $mform->addElement('text', $addname,  get_string($addname), 'maxlength="100" size="30"' . $purpose);
         $mform->setType($addname, PARAM_NOTAGS);
     }
 
+    // Chọn email
+    // $choices = array();
+    // $choices['0'] = get_string('emaildisplayno');
+    // $choices['1'] = get_string('emaildisplayyes');
+    // $choices['2'] = get_string('emaildisplaycourse');
+    // $mform->addElement('select', 'maildisplay', get_string('emaildisplay'), $choices);
+    // $mform->setDefault('maildisplay', core_user::get_property_default('maildisplay'));
+    // $mform->addHelpButton('maildisplay', 'emaildisplay');
+
     // Do not show email field if change confirmation is pending.
+    // Hiển thị email
     if ($user->id > 0 and !empty($CFG->emailchangeconfirmation) and !empty($user->preference_newemail)) {
         $notice = get_string('emailchangepending', 'auth', $user);
-        $notice .= '<br /><a href="edit.php?cancelemailchange=1&amp;id='.$user->id.'">'
-                . get_string('emailchangecancel', 'auth') . '</a>';
+        $notice .= '<br /><a href="edit.php?cancelemailchange=1&amp;id=' . $user->id . '">'
+            . get_string('emailchangecancel', 'auth') . '</a>';
         $mform->addElement('static', 'emailpending', get_string('email'), $notice);
     } else {
         $purpose = user_edit_map_field_purpose($user->id, 'email');
@@ -293,51 +336,66 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
         $mform->setType('email', PARAM_RAW_TRIMMED);
     }
 
-    $choices = array();
-    $choices['0'] = get_string('emaildisplayno');
-    $choices['1'] = get_string('emaildisplayyes');
-    $choices['2'] = get_string('emaildisplaycourse');
-    $mform->addElement('select', 'maildisplay', get_string('emaildisplay'), $choices);
-    $mform->setDefault('maildisplay', core_user::get_property_default('maildisplay'));
-    $mform->addHelpButton('maildisplay', 'emaildisplay');
+    // Tên người dùng 
+    $mform->addElement('text', 'username', get_string('username'), 'size="20"' . $purpose);
+    // $mform->addHelpButton('username', 'username', 'auth');
+    $mform->setType('username', PARAM_RAW);
 
+    // $mform->addElement('checkbox', 'createpassword', get_string('createpassword', 'auth'));
+    // $mform->disabledIf('createpassword', 'auth', 'in', $cannotchangepass);
+
+    // Mật khẩu
+    $purpose = user_edit_map_field_purpose($userid, 'password');
+    $mform->addElement('passwordunmask', 'newpassword', get_string('newpassword'), 'size="20"' . $purpose);
+    // $mform->addHelpButton('newpassword', 'newpassword');
+    $mform->setType('newpassword', core_user::get_property_type('password'));
+    $mform->disabledIf('newpassword', 'createpassword', 'checked');
+
+    $mform->disabledIf('newpassword', 'auth', 'in', $cannotchangepass);
+
+    $enabledusernamefields = useredit_get_enabled_name_fields();
+
+    // ID hồ sơ moodle
     if (get_config('tool_moodlenet', 'enablemoodlenet')) {
-        $mform->addElement('text', 'moodlenetprofile', get_string('moodlenetprofile', 'user'), 'maxlength="255" size="30"');
-        $mform->setType('moodlenetprofile', PARAM_NOTAGS);
-        $mform->addHelpButton('moodlenetprofile', 'moodlenetprofile', 'user');
+        // $mform->addElement('text', 'moodlenetprofile', get_string('moodlenetprofile', 'user'), 'maxlength="255" size="30"');
+        // $mform->setType('moodlenetprofile', PARAM_NOTAGS);
+        // $mform->addHelpButton('moodlenetprofile', 'moodlenetprofile', 'user');
     }
 
-    $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="21"');
-    $mform->setType('city', PARAM_TEXT);
-    if (!empty($CFG->defaultcity)) {
-        $mform->setDefault('city', $CFG->defaultcity);
-    }
+    // Thành phố
+    // $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="21"');
+    // $mform->setType('city', PARAM_TEXT);
+    // if (!empty($CFG->defaultcity)) {
+    //     $mform->setDefault('city', $CFG->defaultcity);
+    // }
 
-    $purpose = user_edit_map_field_purpose($user->id, 'country');
-    $choices = get_string_manager()->get_list_of_countries();
-    $choices = array('' => get_string('selectacountry') . '...') + $choices;
-    $mform->addElement('select', 'country', get_string('selectacountry'), $choices, $purpose);
-    if (!empty($CFG->country)) {
-        $mform->setDefault('country', core_user::get_property_default('country'));
-    }
+    // $purpose = user_edit_map_field_purpose($user->id, 'country');
+    // $choices = get_string_manager()->get_list_of_countries();
+    // $choices = array('' => get_string('selectacountry') . '...') + $choices;
+    // $mform->addElement('select', 'country', get_string('selectacountry'), $choices, $purpose);
+    // if (!empty($CFG->country)) {
+    //     $mform->setDefault('country', core_user::get_property_default('country'));
+    // }
 
-    if (isset($CFG->forcetimezone) and $CFG->forcetimezone != 99) {
-        $choices = core_date::get_list_of_timezones($CFG->forcetimezone);
-        $mform->addElement('static', 'forcedtimezone', get_string('timezone'), $choices[$CFG->forcetimezone]);
-        $mform->addElement('hidden', 'timezone');
-        $mform->setType('timezone', core_user::get_property_type('timezone'));
-    } else {
-        $choices = core_date::get_list_of_timezones($user->timezone, true);
-        $mform->addElement('select', 'timezone', get_string('timezone'), $choices);
-    }
+    // Thời gian
+    // if (isset($CFG->forcetimezone) and $CFG->forcetimezone != 99) {
+    //     $choices = core_date::get_list_of_timezones($CFG->forcetimezone);
+    //     $mform->addElement('static', 'forcedtimezone', get_string('timezone'), $choices[$CFG->forcetimezone]);
+    //     $mform->addElement('hidden', 'timezone');
+    //     $mform->setType('timezone', core_user::get_property_type('timezone'));
+    // } else {
+    //     $choices = core_date::get_list_of_timezones($user->timezone, true);
+    //     $mform->addElement('select', 'timezone', get_string('timezone'), $choices);
+    // }
 
-    if ($user->id < 0) {
-        $purpose = user_edit_map_field_purpose($user->id, 'lang');
-        $translations = get_string_manager()->get_list_of_translations();
-        $mform->addElement('select', 'lang', get_string('preferredlanguage'), $translations, $purpose);
-        $lang = empty($user->lang) ? $CFG->lang : $user->lang;
-        $mform->setDefault('lang', $lang);
-    }
+    // Ngôn ngữ
+    // if ($user->id < 0) {
+    //     $purpose = user_edit_map_field_purpose($user->id, 'lang');
+    //     $translations = get_string_manager()->get_list_of_translations();
+    //     $mform->addElement('select', 'lang', get_string('preferredlanguage'), $translations, $purpose);
+    //     $lang = empty($user->lang) ? $CFG->lang : $user->lang;
+    //     $mform->setDefault('lang', $lang);
+    // }
 
     if (!empty($CFG->allowuserthemes)) {
         $choices = array();
@@ -345,77 +403,83 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
         $themes = get_list_of_themes();
         foreach ($themes as $key => $theme) {
             if (empty($theme->hidefromselector)) {
-                $choices[$key] = get_string('pluginname', 'theme_'.$theme->name);
+                $choices[$key] = get_string('pluginname', 'theme_' . $theme->name);
             }
         }
         $mform->addElement('select', 'theme', get_string('preferredtheme'), $choices);
     }
 
+    // Mô tả
     $mform->addElement('editor', 'description_editor', get_string('userdescription'), null, $editoroptions);
     $mform->setType('description_editor', PARAM_RAW);
     $mform->addHelpButton('description_editor', 'userdescription');
 
-    if (empty($USER->newadminuser)) {
-        $mform->addElement('header', 'moodle_picture', get_string('pictureofuser'));
-        $mform->setExpanded('moodle_picture', true);
+    // if (empty($USER->newadminuser)) {
+    //     $mform->addElement('header', 'moodle_picture', get_string('pictureofuser'));
+    //     $mform->setExpanded('moodle_picture', true);
 
-        if (!empty($CFG->enablegravatar)) {
-            $mform->addElement('html', html_writer::tag('p', get_string('gravatarenabled')));
-        }
+    //     if (!empty($CFG->enablegravatar)) {
+    //         $mform->addElement('html', html_writer::tag('p', get_string('gravatarenabled')));
+    //     }
 
-        $mform->addElement('static', 'currentpicture', get_string('currentpicture'));
+    //     $mform->addElement('static', 'currentpicture', get_string('currentpicture'));
 
-        $mform->addElement('checkbox', 'deletepicture', get_string('deletepicture'));
-        $mform->setDefault('deletepicture', 0);
+    //     $mform->addElement('checkbox', 'deletepicture', get_string('deletepicture'));
+    //     $mform->setDefault('deletepicture', 0);
 
-        $mform->addElement('filemanager', 'imagefile', get_string('newpicture'), '', $filemanageroptions);
-        $mform->addHelpButton('imagefile', 'newpicture');
+    //     $mform->addElement('filemanager', 'imagefile', get_string('newpicture'), '', $filemanageroptions);
+    //     $mform->addHelpButton('imagefile', 'newpicture');
 
-        $mform->addElement('text', 'imagealt', get_string('imagealt'), 'maxlength="100" size="30"');
-        $mform->setType('imagealt', PARAM_TEXT);
+    //     $mform->addElement('text', 'imagealt', get_string('imagealt'), 'maxlength="100" size="30"');
+    //     $mform->setType('imagealt', PARAM_TEXT);
 
-    }
+    // }
 
     // Display user name fields that are not currenlty enabled here if there are any.
-    $disabledusernamefields = useredit_get_disabled_name_fields($enabledusernamefields);
-    if (count($disabledusernamefields) > 0) {
-        $mform->addElement('header', 'moodle_additional_names', get_string('additionalnames'));
-        foreach ($disabledusernamefields as $allname) {
-            $purpose = user_edit_map_field_purpose($user->id, $allname);
-            $mform->addElement('text', $allname, get_string($allname), 'maxlength="100" size="30"' . $purpose);
-            $mform->setType($allname, PARAM_NOTAGS);
-        }
-    }
+    // $disabledusernamefields = useredit_get_disabled_name_fields($enabledusernamefields);
+    // if (count($disabledusernamefields) > 0) {
+    //     $mform->addElement('header', 'moodle_additional_names', get_string('additionalnames'));
+    //     foreach ($disabledusernamefields as $allname) {
+    //         $purpose = user_edit_map_field_purpose($user->id, $allname);
+    //         $mform->addElement('text', $allname, get_string($allname), 'maxlength="100" size="30"' . $purpose);
+    //         $mform->setType($allname, PARAM_NOTAGS);
+    //     }
+    // }
 
-    if (core_tag_tag::is_enabled('core', 'user') and empty($USER->newadminuser)) {
-        $mform->addElement('header', 'moodle_interests', get_string('interests'));
-        $mform->addElement('tags', 'interests', get_string('interestslist'),
-            array('itemtype' => 'user', 'component' => 'core'));
-        $mform->addHelpButton('interests', 'interestslist');
-    }
+    // if (core_tag_tag::is_enabled('core', 'user') and empty($USER->newadminuser)) {
+    //     $mform->addElement('header', 'moodle_interests', get_string('interests'));
+    //     $mform->addElement('tags', 'interests', get_string('interestslist'),
+    //         array('itemtype' => 'user', 'component' => 'core'));
+    //     $mform->addHelpButton('interests', 'interestslist');
+    // }
 
     // Moodle optional fields.
-    $mform->addElement('header', 'moodle_optional', get_string('optional', 'form'));
+    // $mform->addElement('header', 'moodle_optional', get_string('optional', 'form'));
 
-    $mform->addElement('text', 'idnumber', get_string('idnumber'), 'maxlength="255" size="25"');
-    $mform->setType('idnumber', core_user::get_property_type('idnumber'));
+    // $mform->addElement('text', 'idnumber', get_string('idnumber'), 'maxlength="255" size="25"');
+    // $mform->setType('idnumber', core_user::get_property_type('idnumber'));
 
-    $mform->addElement('text', 'institution', get_string('institution'), 'maxlength="255" size="25"');
-    $mform->setType('institution', core_user::get_property_type('institution'));
+    // $mform->addElement('text', 'institution', get_string('institution'), 'maxlength="255" size="25"');
+    // $mform->setType('institution', core_user::get_property_type('institution'));
 
-    $mform->addElement('text', 'department', get_string('department'), 'maxlength="255" size="25"');
-    $mform->setType('department', core_user::get_property_type('department'));
+    // $mform->addElement('text', 'department', get_string('department'), 'maxlength="255" size="25"');
+    // $mform->setType('department', core_user::get_property_type('department'));
 
-    $mform->addElement('text', 'phone1', get_string('phone1'), 'maxlength="20" size="25"');
-    $mform->setType('phone1', core_user::get_property_type('phone1'));
-    $mform->setForceLtr('phone1');
+    // $mform->addElement('text', 'phone1', get_string('phone1'), 'maxlength="20" size="25"');
+    // $mform->setType('phone1', core_user::get_property_type('phone1'));
+    // $mform->setForceLtr('phone1');
 
-    $mform->addElement('text', 'phone2', get_string('phone2'), 'maxlength="20" size="25"');
-    $mform->setType('phone2', core_user::get_property_type('phone2'));
-    $mform->setForceLtr('phone2');
+    // $mform->addElement('text', 'phone2', get_string('phone2'), 'maxlength="20" size="25"');
+    // $mform->setType('phone2', core_user::get_property_type('phone2'));
+    // $mform->setForceLtr('phone2');
 
-    $mform->addElement('text', 'address', get_string('address'), 'maxlength="255" size="25"');
-    $mform->setType('address', core_user::get_property_type('address'));
+    // $mform->addElement('text', 'address', get_string('address'), 'maxlength="255" size="25"');
+    // $mform->setType('address', core_user::get_property_type('address'));
+
+    // END Edit_profile_user_right
+    $mform->addElement('html', '</div>');
+    // END Edit_profile_user
+    // $mform->addElement('html', '</div>');
 }
 
 /**
@@ -423,7 +487,8 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
  *
  * @return array required user name fields in order according to settings.
  */
-function useredit_get_required_name_fields() {
+function useredit_get_required_name_fields()
+{
     global $CFG;
 
     // Get the name display format.
@@ -456,7 +521,8 @@ function useredit_get_required_name_fields() {
  *
  * @return array Enabled user name fields.
  */
-function useredit_get_enabled_name_fields() {
+function useredit_get_enabled_name_fields()
+{
     global $CFG;
 
     // Get all of the other name fields which are not ranked as necessary.
@@ -480,15 +546,18 @@ function useredit_get_enabled_name_fields() {
  * @param array $enabledadditionalusernames Current enabled additional user name fields.
  * @return array Disabled user name fields.
  */
-function useredit_get_disabled_name_fields($enabledadditionalusernames = null) {
+function useredit_get_disabled_name_fields($enabledadditionalusernames = null)
+{
     // If we don't have enabled additional user name information then go and fetch it (try to avoid).
     if (!isset($enabledadditionalusernames)) {
         $enabledadditionalusernames = useredit_get_enabled_name_fields();
     }
 
     // These are the additional fields that are not currently enabled.
-    $nonusednamefields = array_diff(\core_user\fields::get_name_fields(),
-            array_merge(array('firstname', 'lastname'), $enabledadditionalusernames));
+    $nonusednamefields = array_diff(
+        \core_user\fields::get_name_fields(),
+        array_merge(array('firstname', 'lastname'), $enabledadditionalusernames)
+    );
 
     // It may not be significant anywhere, but for compatibility, this used to return an array
     // with keys and values the same.
