@@ -435,11 +435,6 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
 
     // }
 
-        $mform->addElement('text', 'imagealt', get_string('imagealt'), 'maxlength="100" size="30"');
-        $mform->setType('imagealt', PARAM_TEXT);
-    }
-
-
     // Display user name fields that are not currenlty enabled here if there are any.
     // $disabledusernamefields = useredit_get_disabled_name_fields($enabledusernamefields);
     // if (count($disabledusernamefields) > 0) {
@@ -457,18 +452,6 @@ function useredit_shared_definition(&$mform, $editoroptions, $filemanageroptions
     //         array('itemtype' => 'user', 'component' => 'core'));
     //     $mform->addHelpButton('interests', 'interestslist');
     // }
-
-    if (core_tag_tag::is_enabled('core', 'user') and empty($USER->newadminuser)) {
-        $mform->addElement('header', 'moodle_interests', get_string('interests'));
-        $mform->addElement(
-            'tags',
-            'interests',
-            get_string('interestslist'),
-            array('itemtype' => 'user', 'component' => 'core')
-        );
-        $mform->addHelpButton('interests', 'interestslist');
-    }
-
 
     // Moodle optional fields.
     // $mform->addElement('header', 'moodle_optional', get_string('optional', 'form'));

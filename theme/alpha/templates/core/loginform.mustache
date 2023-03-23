@@ -72,7 +72,7 @@
                 ]
             },
             "linktext": null,
-            "title": "Help with Cookies must be enabled in your browser",
+"title": "Help with Cookies must be enabled in your browser",
             "url": "http://localhost/stable_master/help.php?component=core&identifier=cookiesenabled&lang=en",
             "ltr": true
         },
@@ -129,8 +129,8 @@
                             <a href="{{{ config.wwwroot }}}"><h2 class="rui-login-logo-name">{{sitename}}</h2></a>
                             {{/logourl}}
                         {{/customloginlogo}}
-                    </div>   
-                    {{/loginlogooutside }}
+                    </div>
+{{/loginlogooutside}}
 
                     {{#loginhtmlcontent1}}
                     <div class="rui-login-top--content rui-topbar">                           
@@ -188,7 +188,7 @@
                         {{#hasidentityproviders}}
                             <div class="rui-potentialidplist mt-3 text-center">
                                 <h5 class="mb-2">{{#str}} potentialidps, auth {{/str}}</h5>
-                                <div class="row no-gutters mt-3">
+<div class="row no-gutters mt-3">
                                 {{#identityproviders}}
                                     <div class="rui-potentialidp w-100 mt-1">
                                         <a href="{{url}}" title={{#quote}}{{name}}{{/quote}} class="btn btn-outline-secondary mt-1 w-100">
@@ -228,7 +228,7 @@
                                         <div class="rui-rememberpass mt-1 text-right">
                                             <label class="custom-control ios-switch pr-0">
                                                 <input class="ios-switch-control-input form-check-input" type="checkbox" name="rememberusername" id="rememberusername" value="1" {{#username}}checked="checked"{{/username}} />
-                                                <span class="ios-switch-control-indicator"></span>
+<span class="ios-switch-control-indicator"></span>
                                                 <label class="rui-rememberusername-text my-0" for="rememberusername">{{#str}} rememberusername, admin {{/str}}</label>
                                             </label>
                                         </div>
@@ -254,7 +254,7 @@
                             {{#canloginasguest}}
                             <div class="rui-canloginasguest mt-2" title="{{#str}}someallowguest{{/str}}">
                                 <!--<hr />-->
-                                <div class="hr-line mb-5 mt-6" style="position: relative;">
+                                <div class="hr-line my-5" style="position: relative;">
                                     <div class="text-center" style="position: absolute;
                                     right: 36%;
                                     padding: 0 35px;
@@ -268,7 +268,7 @@
                                     <input type="hidden" name="logintoken" value="{{logintoken}}">
                                     <input type="hidden" name="username" value="guest" />
                                     <input type="hidden" name="password" value="guest" />
-                                    <button class="btn btn-sm btn-info w-100" type="submit">{{#str}}loginguest{{/str}}</button>
+<button class="btn btn-sm btn-info w-100" type="submit">{{#str}}loginguest{{/str}}</button>
                                 </form>-->
                             </div>
                             {{/canloginasguest}}
@@ -292,7 +292,7 @@
                         </div>-->
 
                         {{#instructions}}
-                            <!-- <div class="rui-hasinstructions-desc alert alert-warning">
+<!-- <div class="rui-hasinstructions-desc alert alert-warning">
                                 {{{instructions}}}
                             </div>-->
                             <!-- .rui-hasinstructions-desc -->
