@@ -62,14 +62,16 @@ class login_forgot_password_form extends moodleform
         // $mform->addElement('submit', 'submitbuttonusername', $submitlabel);
 
         // $mform->addElement('header', 'searchbyemail', get_string('searchbyemail'), '');
-        $mform->addElement('header', 'searchbyemail', 'Password recovery','style="text-align: center;font-size: 24px;"');
+        $mform->addElement('header', 'searchbyemail', 'Password recovery');
         $mform->addElement('html', 'Enter a username or email address. We will email instructions on how to recover your password.');
         $purpose = user_edit_map_field_purpose($USER->id, 'email');
+        $mform->addElement('html','<div style="margin-top: 35px;">');
         $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="30" style="width: 100%;' . $purpose);
+        $mform->addElement('html','</div>');
         $mform->setType('email', PARAM_RAW_TRIMMED);
 
         // $submitlabel = get_string('search');
-        $mform->addElement('submit', 'submitbuttonemail', 'Send request', 'style="margin: 0 auto;background:#0095F6;"');
+        $mform->addElement('submit', 'submitbuttonemail', 'Send request', 'style="margin: 0 auto;background:#0095F6;margin-top: 4px;"');
     }
 
     /**

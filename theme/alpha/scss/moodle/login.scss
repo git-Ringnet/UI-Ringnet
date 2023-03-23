@@ -3,6 +3,18 @@
 #page-login-signup,
 #page-login-forgot_password {
     background-color: $gray-100;
+    font-size: 14px;
+}
+
+#page-login-forgot_password legend{
+    text-align: center;
+    font-size: 24px;
+}
+
+.logo-forgot-pass{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: -28px;
 }
 
 #page-login-signup {
@@ -142,6 +154,7 @@
     margin: 0 auto;
     background-color: $container-bg;
     border-radius: $border-radius;
+    box-shadow: 0px 2px 15px #888888;
 
     @include media-breakpoint-down(sm) {
         padding: 20px;
