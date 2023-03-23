@@ -56,7 +56,7 @@ if ($id) {
 
 
 // $cohort->userid = $a;
-var_dump($cohort);
+
 require_capability('moodle/cohort:manage', $context);
 
 if ($returnurl) {

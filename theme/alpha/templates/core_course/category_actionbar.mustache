@@ -88,6 +88,212 @@ Example context (json):
 }
 }}
 {{>block_myoverview/nav-course}}
+<div class="d-inline-flex justify-content-between flex-wrap w-100 align-items-center">
+    <div class="course mb-1 mr-auto d-flex mt-auto">
+        <a class="title mr-2 pt-2 px-3 before" href="{{config.wwwroot}}/my/courses.php">
+            {{#str}}courses, moodle{{/str}}
+        </a>
+        <a href="{{config.wwwroot}}/course/index.php" class="title pt-2 px-2 active ">
+            {{#str}}categories, moodle{{/str}}
+        </a>
+    </div>
+</div>
+<hr>
+<div style="display: flex; justify-content:space-between;" class="mt-2">
+    <div data-region="filter" class="d-flex align-items-center"
+        aria-label="{{#str}} aria:controls, block_myoverview {{/str}}" style="margin-top:24px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14" fill="none">
+            <path
+                d="M6.66667 13C6.66667 12.7348 6.75446 12.4804 6.91074 12.2929C7.06702 12.1054 7.27899 12 7.5 12H12.5C12.721 12 12.933 12.1054 13.0893 12.2929C13.2455 12.4804 13.3333 12.7348 13.3333 13C13.3333 13.2652 13.2455 13.5196 13.0893 13.7071C12.933 13.8946 12.721 14 12.5 14H7.5C7.27899 14 7.06702 13.8946 6.91074 13.7071C6.75446 13.5196 6.66667 13.2652 6.66667 13ZM3.33333 7C3.33333 6.73478 3.42113 6.48043 3.57741 6.29289C3.73369 6.10536 3.94565 6 4.16667 6H15.8333C16.0543 6 16.2663 6.10536 16.4226 6.29289C16.5789 6.48043 16.6667 6.73478 16.6667 7C16.6667 7.26522 16.5789 7.51957 16.4226 7.70711C16.2663 7.89464 16.0543 8 15.8333 8H4.16667C3.94565 8 3.73369 7.89464 3.57741 7.70711C3.42113 7.51957 3.33333 7.26522 3.33333 7ZM0 1C0 0.734784 0.0877975 0.48043 0.244078 0.292893C0.400358 0.105357 0.61232 0 0.833333 0H19.1667C19.3877 0 19.5996 0.105357 19.7559 0.292893C19.9122 0.48043 20 0.734784 20 1C20 1.26522 19.9122 1.51957 19.7559 1.70711C19.5996 1.89464 19.3877 2 19.1667 2H0.833333C0.61232 2 0.400358 1.89464 0.244078 1.70711C0.0877975 1.51957 0 1.26522 0 1Z"
+                fill="#555555">
+        </svg>
+        <select name="selectedOption" id="selectedOption"
+            style="border:none; outline:none; height:24px; margin-left:8px; font-size:14px; appearance:none; font-weight: 400;line-height:24px;">
+            <option value="">Bộ lọc</option>
+            <option value="categories">Tên Danh mục</option>
+            <option value="number">Khóa học</option>
+        </select>
+        <input placeholder="Nhập từ khóa cần tìm kiếm" type="text" id="filter-keyword"
+            style="display:none; margin-left:8px; outline:none; padding:5px 5px;">
+        <div class="w-100" style="display:none;" id="search_all">
+            {{> block_myoverview/nav-search-widget }}
+        </div>
+    </div>
+
+    <div class="mt-3">
+        {{#status}}
+        <button type="button" class="create-course btn btn-primary" data-toggle="modal"
+            data-target="#myModal">{{#heading_title}}
+            {{heading_title}}{{/heading_title}}
+        </button>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog" style="max-width:644px !important;">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{#heading_title}}{{heading_title}}{{/heading_title}}</h4>
+                    </div>
+                    <form action="{{#action}}{{action}}{{/action}}" method="post" accept-charset="utf-8"
+                        id="mform1_BHSh8uNvIHu3DIL" class="mform" data-boost-form-errors-enhanced="1"
+                        autocomplete="off">
+                        <div class="modal-body">
+                            <div style="display: none;">
+                                <input name="id" type="hidden" value="0">
+                                <input name="sesskey" type="hidden" value="{{#sesskey}}{{sesskey}}{{/sesskey}}">
+                                <input name="_qf__core_course_editcategory_form" type="hidden" value="1">
+                            </div>
+
+                            {{!-- Parent id --}}
+                            <div id="fitem_id_parent" class="form-group row px-0  fitem d-block">
+                                <div class="px-4">
+                                    <label class="col-form-label d-inline " for="form_autocomplete_input-1679474161372">
+                                        {{#title_parent}}{{title_parent}}{{/title_parent}}
+                                    </label>
+                                </div>
+                                <div class="px-4" data-fieldtype="autocomplete" id="">
+                                    <select style="visibility : visible;" class="custom-select px-2 w-100 mt-2"
+                                        name="parent" id="id_parent" aria-hidden="true" data-aria-hidden-tab-index=""
+                                        tabindex="-1">
+                                        <option value="0" selected="">Top</option>
+                                        {{#select}}
+                                        <option value="{{id_category}}">{{name_category}}</option>
+                                        {{/select}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            {{!-- Name Category --}}
+                            <div id="fitem_id_name" class="form-group row px-4  mt-3 fitem d-block">
+                                <div class="">
+                                    <label class="col-form-label d-inline " for="id_name">
+                                        {{#title_category}}{{title_category}}{{/title_category}}
+                                    </label>
+                                </div>
+
+                                <div class="felement mt-2" data-fieldtype="text">
+                                    <input type="text" class="form-control " name="name" id="id_name" value="" size="30"
+                                        aria-describedby="id_error_name">
+                                    <div class="form-control-feedback invalid-feedback badge-sq badge-danger w-auto my-0 mx-2 d-none"
+                                        id="id_error_name">
+                                        <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="1.5"
+                                                d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z">
+                                            </path>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="M12 10V12"></path>
+                                            <circle cx="12" cy="16" r="1" fill="currentColor"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            {{!-- ID cate --}}
+                            <div id="fitem_id_idnumber" class="form-group row px-4 mt-3  fitem d-block">
+                                <div class="">
+                                    <label class="col-form-label d-inline " for="id_idnumber">
+                                        {{#title_id_cate}}{{title_id_cate}}{{/title_id_cate}}
+                                    </label>
+                                </div>
+                                <div class="felement mt-2" data-fieldtype="text">
+                                    <input type="text" class="form-control " name="idnumber" id="id_idnumber" value=""
+                                        size="10" maxlength="100">
+                                    <div class="form-control-feedback invalid-feedback badge-sq badge-danger w-auto my-0 mx-2 d-none"
+                                        id="id_error_idnumber">
+                                        <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="1.5"
+                                                d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z">
+                                            </path>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="M12 10V12"></path>
+                                            <circle cx="12" cy="16" r="1" fill="currentColor"></circle>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            {{!-- Mô tả --}}
+                            <div id="fitem_id_description_editor" class="form-group row px-4 mt-3 fitem d-block">
+                                <div class="">
+                                    <label class="col-form-label d-inline " for="id_description_editor" id="">
+                                        {{#description}}{{description}}{{/description}}
+                                    </label>
+                                </div>
+                                <div class="felement mt-2" data-fieldtype="editor" id="">
+                                    <div id="">
+                                        <div class="editor_atto_content_wrap d-none" id="">
+                                            <div id="id_description_editoreditable" contenteditable="true"
+                                                role="textbox" spellcheck="true" aria-live="off"
+                                                class="editor_atto_content form-control" aria-labelledby=""
+                                                style="min-height: 308px; height: 308px; display:none">
+                                                <p dir="ltr" style="text-align: left;"
+                                                    id="yui_3_17_2_1_1679539916177_617">
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <textarea id="id_description_editor" name="description_editor[text]"
+                                            class="form-control" rows="5" cols="20" spellcheck="true"
+                                            style="display: block !important;">
+                                        </textarea>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input name="description_editor[format]" id="menudescription_editorformat"
+                                        type="hidden" value="1">
+                                </div>
+
+                                <input type="hidden" name="description_editor[itemid]"
+                                    value="{{#itemid}}{{itemid}}{{/itemid}}">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            {{!-- submit --}}
+                            <div id="fgroup_id_buttonar" class="" data-groupname="buttonar">
+                                <div class="">
+                                    <label class="col-form-label d-inline " for="fgroup_id_buttonar">
+                                    </label>
+                                </div>
+                                <div class="" data-fieldtype="group">
+                                    <fieldset>
+                                        <legend class="sr-only"></legend>
+                                        <div class="d-flex align-items-center">
+                                            <div class="form-group  fitem  ">
+                                                <label class="col-form-label " for="id_submitbutton"></label>
+                                                <span data-fieldtype="submit">
+                                                    <input type="submit" class="btn btn-primary" name="submitbutton"
+                                                        id="id_submitbutton" value="{{#title_button}}{{title_button}}{{/title_button}}" style="background: #0095F6!important;">
+                                                </span>
+                                            </div>
+                                            <div class="modal-footer form-group  fitem   btn-cancel" style="border-top:none;">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-control-feedback invalid-feedback badge-sq badge-danger w-auto my-0 mx-2 d-none"
+                                        id="fgroup_id_error_buttonar">
+                                        <svg class="mr-2" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="1.5"
+                                                d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z">
+                                            </path>
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="M12 10V12"></path>
+                                            <circle cx="12" cy="16" r="1" fill="currentColor"></circle>
+                                        </svg>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{/status}}
+    </div>
+</div>
 <div class="container-fluid tertiary-navigation pt-2" id="action_bar">
     <div class="row">
         {{#categoryselect}}
@@ -119,4 +325,30 @@ Example context (json):
         {{/additionaloptions}}
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $("#selectedOption").on("change", function () {
+        var selectedOption = this.value,
+            input = $("#filter-keyword");
+        $('#filter-keyword').css("display", $.inArray(selectedOption, ["categories", "number"]) !== -1 ? "block" : "none");
+        if (selectedOption !== "keyword") {
+            input.val("");
+        }
+        input.trigger("keyup");
+        input.on("keyup", function () {
+            var filter = input.val().toUpperCase(),
+                table = $(".subcategories"),
+                tr = table.find("tr"),
+                td, txtValue;
+            tr.each(function (i, el) {
+                if (i !== 0) {
+                    td = $(el).find("th").eq(selectedOption === "categories" ? 1 : (selectedOption === "number" ? 2 : 3));
+                    if (td.length) {
+                        txtValue = td.text();
+                        $(el).closest('tr').css("display", txtValue.toUpperCase().indexOf(filter) > -1 ? "" : "none");
+                    }
+                }
+            });
+        });
+    });
+</script>

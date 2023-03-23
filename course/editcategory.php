@@ -105,8 +105,10 @@ $mform->set_data(file_prepare_standard_editor(
     'description',
     $itemid
 ));
-
-$manageurl = new moodle_url('/course/management.php');
+var_dump($mform->get_data());
+// url cũ trả về quản lý danh mục 
+// $manageurl = new moodle_url('/course/management.php');
+$manageurl = new moodle_url('/course/index.php');
 if ($mform->is_cancelled()) {
     if ($id) {
         $manageurl->param('categoryid', $id);
@@ -121,9 +123,10 @@ if ($mform->is_cancelled()) {
         }
         $coursecat->update($data, $mform->get_description_editor_options());
     } else {
+        // $manageurl = new moodle_url('/course/index.php');
         $category = core_course_category::create($data, $mform->get_description_editor_options());
     }
-    $manageurl->param('categoryid', $category->id);
+    // $manageurl->param('categoryid', $category->id);
     redirect($manageurl);
 }
 

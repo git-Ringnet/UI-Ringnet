@@ -387,8 +387,8 @@ class assign_grading_table extends table_sql implements renderable {
         // User picture.
         if ($this->hasviewblind || !$this->assignment->is_blind_marking()) {
             if (!$this->is_downloading()) {
-                $columns[] = 'picture';
-                $headers[] = get_string('pictureofuser');
+                // $columns[] = 'picture';
+                // $headers[] = get_string('pictureofuser');
             } else {
                 $columns[] = 'recordid';
                 $headers[] = get_string('recordid', 'assign');
