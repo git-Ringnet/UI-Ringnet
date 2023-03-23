@@ -1667,7 +1667,7 @@ class core_course_renderer extends plugin_renderer_base {
         $site = get_site();
         $actionbar = new \core_course\output\category_action_bar($this->page, $coursecat);
         $output = $this->render_from_template('core_course/category_actionbar', $actionbar->export_for_template($this));
-
+        
         if (core_course_category::is_simple_site()) {
             // There is only one category in the system, do not display link to it.
             $strfulllistofcourses = get_string('fulllistofcourses');

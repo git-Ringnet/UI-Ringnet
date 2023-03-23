@@ -163,15 +163,44 @@ class category_action_bar extends manage_categories_action_bar {
      *              - additionaloptions Additional actions that can be performed in a category
      */
     public function export_for_template(\renderer_base $output): array {
-        global $USER, $DB;
+        global $USER, $DB, $CFG;
+        $itemid = random_int(111111111,999999999);
         $roleid = $DB->get_field('role', 'id', ['shortname' => 'coursemanagement']);
         $isteacheranywhere = $DB->record_exists('role_assignments', ['userid' => $USER->id, 'roleid' => $roleid]);
+        $heading_title = get_string('addnewcategory','moodle');
+        $title_parent = get_string('parentcategory','quiz');
+        $title_category = get_string('categoryname','grades');
+        $title_id_cate = get_string('idnumbercoursecategory','moodle');
+        $title_description = get_string('description','moodle');
+        $title_button = get_string('createcategory','moodle');
+        $action = $CFG->wwwroot.'/course/editcategory.php?parent=0';
+        $sql = "SELECT * FROM `mdl_course_categories`";
+        $records = $DB->get_records_sql($sql);
+        $data = array();
+        foreach($records as $va){
+            $category =array(
+                'name_category' => $va->name,
+                'id_category' => $va->id
+            );
+            array_push($data, $category);
+        }
+        
         return [
             'categoryselect' => $this->get_category_select($output),
             'search' => $this->get_search_form(),
             'additionaloptions' => $this->get_additional_category_options(),
             //nếu là admin hoặc giáo viên tạo khóa học thì có nút tạo khóa học
             'status' => is_siteadmin() || $isteacheranywhere===true,
+            'heading_title' => $heading_title,
+            'sesskey' => sesskey(),
+            'select' => $data,
+            'action' => $action,
+            'itemid' => $itemid,
+            'title_parent' => $title_parent,
+            'title_category' => $title_category,
+            'title_id_cate' => $title_id_cate,
+            'description' => $title_description,
+            'title_button' =>$title_button
         ];
     }
 

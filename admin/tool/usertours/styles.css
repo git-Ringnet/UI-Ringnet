@@ -1711,4 +1711,10 @@ ul.rui-nav-tabs.nav.nav-tabs.float-right>li>a:active {
     font-size: 14px;
     line-height: 24px;
 }
+#page-course-index-category #id_parent{
+    max-width: 100% !important;
+}
+#page-course-index-category .pagination-centered:first-child{
+    display:none;
+}
 /*  */
