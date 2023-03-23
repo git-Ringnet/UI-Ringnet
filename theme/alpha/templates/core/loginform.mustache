@@ -112,12 +112,12 @@
             {{/cansignup}}
 
             <div class="rui-login-wrapper rui-login-wrapper--margin">
-                <div class="rui-login-top-wrapper" style="justify-content: center;">
+                <div class="rui-login-top-wrapper">
 
                     {{#loginlogooutside}}
                     <div class="rui-login-top">
                         {{#customloginlogo}}
-                        <a href="{{{ config.wwwroot }}}"><h2><img src="{{customloginlogo}}" title="{{sitename}}" alt="{{sitename}}" class="rui-login-logo img-fluid" style="width: 190px;height: 41px;"/></h2></a>
+                        <a href="{{{ config.wwwroot }}}"><h2><img src="{{customloginlogo}}" title="{{sitename}}" alt="{{sitename}}" class="rui-login-logo img-fluid"/></h2></a>
                         {{/customloginlogo}}
 
                         {{^customloginlogo}}
@@ -130,7 +130,7 @@
                             {{/logourl}}
                         {{/customloginlogo}}
                     </div>   
-                    {{/loginlogooutside }}
+                    {{/loginlogooutside}}
 
                     {{#loginhtmlcontent1}}
                     <div class="rui-login-top--content rui-topbar">                           
@@ -143,8 +143,8 @@
 
             <div class="rui-login-wrapper row no-gutters align-items-center justify-content-center w-100">
 
-                <div class="rui-login-container row no-gutters" style="width: auto!important;box-shadow: 0px 2px 15px #888888;">
-                    <div class="rui-login-box" style="width: 476px;height: 588px;">
+                <div class="rui-login-container row no-gutters">
+                    <div class="rui-login-box">
                         {{#cansignup}}
                             <div class="sr-only">
                                 <a href="{{signupurl}}">{{#str}} tocreatenewaccount {{/str}}</a>
@@ -210,7 +210,7 @@
                                 <script>document.getElementById('anchor').value = location.hash;</script>
                                 <input type="hidden" name="logintoken" value="{{logintoken}}">
                                 <div class="form-group my-0">
-                                    <label for="username" class="ml-3">
+                                    <label for="username" class="sr-only">
                                         {{^canloginbyemail}}
                                             {{#str}} username {{/str}}
                                         {{/canloginbyemail}}
@@ -219,7 +219,7 @@
                                         {{/canloginbyemail}}
                                     </label>                                
                                     <input type="text" name="username" id="username"
-                                        class="form-control form-control"
+                                        class="form-control form-control--username"
                                         value="{{username}}"
                                         placeholder={{#quote}}{{^canloginbyemail}}{{#str}}username{{/str}}{{/canloginbyemail}}{{#canloginbyemail}}{{#str}}usernameemail{{/str}}{{/canloginbyemail}}{{/quote}}
                                         autocomplete="username">
@@ -235,67 +235,46 @@
                                     {{/rememberusername}}
 
                                 </div>
-                                <div class="form-group my-2">
-                                    <label for="password" class="ml-3">{{#str}} password {{/str}}</label>
+                                <div class="form-group my-1">
+                                    <label for="password" class="sr-only">{{#str}} password {{/str}}</label>
                                     <input type="password" name="password" id="password" value=""
-                                        class="form-control form-control"
+                                        class="form-control form-control--password"
                                         placeholder={{#quote}}{{#str}}password{{/str}}{{/quote}}
                                         autocomplete="current-password">
                                 </div>
-                                <div class="w-100 text-right d-flex justify-content-between align-items-center">
-                                    <a class="rui-login-signup-btn" href="{{signupurl}}">{{#str}}startsignup{{/str}}</a>
+                                <div class="w-100 text-right">
                                     <a class="rui-login-forgot-btn" href="{{forgotpasswordurl}}">{{#str}}forgotten{{/str}}</a>
                                 </div>
-                                <button type="submit" class="text-white btn-block mt-4 rounded" id="loginbtn" style="height:40px;background-color: #0095F6;font-weight: 300;border: none;font-size: 14px;">{{#str}}login{{/str}}</button>
+                                <button type="submit" class="btn btn-lg btn-primary btn-block mt-3" id="loginbtn">{{#str}}login{{/str}}</button>
                             </form>
                         </div><!-- .rui-login-form -->
 
                         <div class="rui-login-additional-btns">
                             {{#canloginasguest}}
                             <div class="rui-canloginasguest mt-2" title="{{#str}}someallowguest{{/str}}">
-                                <!--<hr />-->
-                                <div class="hr-line mb-5 mt-6" style="position: relative;">
-                                    <div class="text-center" style="position: absolute;
-                                    right: 36%;
-                                    padding: 0 35px;
-                                    top: -11px;
-                                    background: white;">
-                                    {{#str}}or{{/str}}
-                                    </div>
-                                </div>
+                                <hr />
                                 <p class="small text-center mb-3">{{#str}}someallowguest{{/str}}</p>
-                                <!--<form action="{{loginurl}}" method="post" id="guestlogin">
+                                <form action="{{loginurl}}" method="post" id="guestlogin">
                                     <input type="hidden" name="logintoken" value="{{logintoken}}">
                                     <input type="hidden" name="username" value="guest" />
                                     <input type="hidden" name="password" value="guest" />
                                     <button class="btn btn-sm btn-info w-100" type="submit">{{#str}}loginguest{{/str}}</button>
-                                </form>-->
+                                </form>
                             </div>
                             {{/canloginasguest}}
                         </div><!-- .rui-additional-btns -->
 
-                        <!--login with google-->
-                        <button type="submit" class="btn-block mt-3 rounded" id="loginbtn" style="height:40px;background: transparent;font-weight: 300;border: 1px solid #C5C5C5;font-size: 14px;position: relative;">
-                            <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute;left: 14px;">
-                                <path d="M18.8485 10.0668C18.8597 9.39016 18.7948 8.71449 18.6553 8.05322H10.0369V11.7085H15.0949C15.0028 12.3424 14.7896 12.9513 14.4674 13.4998C14.1453 14.0484 13.7206 14.5257 13.2181 14.9042L13.2013 15.0277L15.9265 17.2945L16.1149 17.3142C17.0249 16.3607 17.7366 15.2263 18.2065 13.9802C18.6765 12.7342 18.8949 11.4026 18.8485 10.0668Z" fill="#4285F4"/>
-                                <path d="M10.0368 19.6983C12.2891 19.7592 14.4736 18.9019 16.1148 17.313L13.218 14.9054C12.2886 15.5786 11.1729 15.9252 10.0368 15.8936C8.85705 15.8699 7.71526 15.4602 6.77693 14.7237C5.8386 13.9872 5.15247 12.9622 4.818 11.7974L4.71 11.8072L1.8768 14.1543L1.8396 14.2655C2.56873 15.875 3.7254 17.2393 5.17594 18.2007C6.62649 19.162 8.3117 19.6812 10.0368 19.6983V19.6983Z" fill="#34A853"/>
-                                <path d="M4.81812 11.796C4.61735 11.1672 4.51408 10.5098 4.51212 9.84796C4.51565 9.1892 4.61474 8.53469 4.80612 7.90607V7.77513L1.93812 5.37866L1.84452 5.42684C1.20009 6.80627 0.865479 8.3173 0.865479 9.84796C0.865479 11.3786 1.20009 12.8896 1.84452 14.2691L4.81812 11.796Z" fill="#FBBC05"/>
-                                <path d="M10.037 3.80881C10.6931 3.80058 11.3444 3.92588 11.9533 4.17751C12.5623 4.42915 13.1169 4.80215 13.5854 5.2751L16.1762 2.55746C15.367 1.73595 14.408 1.08715 13.3545 0.648325C12.3009 0.209502 11.1735 -0.0106908 10.037 0.00039898C8.31201 0.0165539 6.62665 0.53482 5.17569 1.49531C3.72474 2.4558 2.56739 3.81931 1.8374 5.42828L4.805 7.89887C5.1442 6.73477 5.83356 5.71152 6.77379 4.97651C7.71402 4.24149 8.85661 3.83263 10.037 3.80881Z" fill="#EB4335"/>
-                            </svg>
-                            {{#str}}signinwithgoogle{{/str}}
-                        </button>
 
-                        <!--<div class="rui-login-createaccount my-4">
+                        <div class="rui-login-createaccount my-4">
                             <form action="{{signupurl}}" method="get" id="signup">
                                 {{#stringca}}<span class="rui-login-calabel">{{{stringca}}}</span>{{/stringca}} <button type="submit" class="btn-link--clean">{{#str}}startsignup{{/str}}</button>
                             </form>
-                        </div>-->
+                        </div>
 
                         {{#instructions}}
-                            <!-- <div class="rui-hasinstructions-desc alert alert-warning">
+                            <div class="rui-hasinstructions-desc alert alert-warning">
                                 {{{instructions}}}
-                            </div>-->
-                            <!-- .rui-hasinstructions-desc -->
+                            </div><!-- .rui-hasinstructions-desc -->
                         {{/instructions}}
                     </div><!-- .rui-login-box -->
 

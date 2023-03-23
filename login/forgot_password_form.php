@@ -24,8 +24,8 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir . '/formslib.php');
-require_once($CFG->dirroot . '/user/lib.php');
+require_once($CFG->libdir.'/formslib.php');
+require_once($CFG->dirroot.'/user/lib.php');
 require_once('lib.php');
 
 /**
@@ -36,14 +36,12 @@ require_once('lib.php');
  * @copyright  2006 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class login_forgot_password_form extends moodleform
-{
+class login_forgot_password_form extends moodleform {
 
     /**
      * Define the forgot password form.
      */
-    function definition()
-    {
+    function definition() {
         global $USER;
 
         $mform    = $this->_form;
@@ -52,26 +50,23 @@ class login_forgot_password_form extends moodleform
         // Hook for plugins to extend form definition.
         core_login_extend_forgot_password_form($mform);
 
-        // $mform->addElement('header', 'searchbyusername', get_string('searchbyusername'), '');
+        $mform->addElement('header', 'searchbyusername', get_string('searchbyusername'), '');
 
-        // $purpose = user_edit_map_field_purpose($USER->id, 'username');
-        // $mform->addElement('text', 'username', get_string('username'), 'size="20"' . $purpose);
-        // $mform->setType('username', PARAM_RAW);
+        $purpose = user_edit_map_field_purpose($USER->id, 'username');
+        $mform->addElement('text', 'username', get_string('username'), 'size="20"' . $purpose);
+        $mform->setType('username', PARAM_RAW);
 
-        // $submitlabel = get_string('search');
-        // $mform->addElement('submit', 'submitbuttonusername', $submitlabel);
+        $submitlabel = get_string('search');
+        $mform->addElement('submit', 'submitbuttonusername', $submitlabel);
 
-        // $mform->addElement('header', 'searchbyemail', get_string('searchbyemail'), '');
-        $mform->addElement('header', 'searchbyemail', 'Password recovery');
-        $mform->addElement('html', 'Enter a username or email address. We will email instructions on how to recover your password.');
+        $mform->addElement('header', 'searchbyemail', get_string('searchbyemail'), '');
+
         $purpose = user_edit_map_field_purpose($USER->id, 'email');
-        $mform->addElement('html','<div style="margin-top: 35px;">');
-        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="30" style="width: 100%;' . $purpose);
-        $mform->addElement('html','</div>');
+        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="30"' . $purpose);
         $mform->setType('email', PARAM_RAW_TRIMMED);
 
-        // $submitlabel = get_string('search');
-        $mform->addElement('submit', 'submitbuttonemail', 'Send request', 'style="margin: 0 auto;background:#0095F6;margin-top: 4px;"');
+        $submitlabel = get_string('search');
+        $mform->addElement('submit', 'submitbuttonemail', $submitlabel);
     }
 
     /**
@@ -80,8 +75,7 @@ class login_forgot_password_form extends moodleform
      * @param array $files submitted with the form.
      * @return array errors occuring during validation.
      */
-    function validation($data, $files)
-    {
+    function validation($data, $files) {
 
         $errors = parent::validation($data, $files);
 
@@ -92,4 +86,5 @@ class login_forgot_password_form extends moodleform
 
         return $errors;
     }
+
 }

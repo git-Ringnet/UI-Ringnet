@@ -65,9 +65,9 @@ function core_login_process_password_reset_request() {
     }
 
     // DISPLAY FORM.
-    echo $OUTPUT->box('<a href="/ringnet/login/index.php"><img src="https://drive.google.com/uc?id=1bKePXLk0huPJsqwJe51IKfjiWAsuDMWl" alt="Ringnet Smart Learning" title="Ringnet Smart Learning"></a>','logo-forgot-pass');
+
     echo $OUTPUT->header();
-    // echo $OUTPUT->box(get_string('passwordforgotteninstructions2'), 'generalbox boxwidthnormal boxaligncenter');
+    echo $OUTPUT->box(get_string('passwordforgotteninstructions2'), 'generalbox boxwidthnormal boxaligncenter');
     $mform->display();
 
     echo $OUTPUT->footer();
@@ -269,13 +269,12 @@ function core_login_process_password_set($token) {
         // User hasn't submitted form, they got here directly from email link.
         // Next, display the form.
         $setdata = new stdClass();
-        // $setdata->username = $user->username;
-        // $setdata->username2 = $user->username;
+        $setdata->username = $user->username;
+        $setdata->username2 = $user->username;
         $setdata->token = $user->token;
         $mform->set_data($setdata);
-        echo $OUTPUT->box('<a href="/ringnet/login/index.php"><img src="https://drive.google.com/uc?id=1bKePXLk0huPJsqwJe51IKfjiWAsuDMWl" alt="Ringnet Smart Learning" title="Ringnet Smart Learning"></a>','logo-forgot-pass');
         echo $OUTPUT->header();
-        // echo $OUTPUT->box(get_string('setpasswordinstructions'), 'generalbox boxwidthnormal boxaligncenter');
+        echo $OUTPUT->box(get_string('setpasswordinstructions'), 'generalbox boxwidthnormal boxaligncenter');
         $mform->display();
         echo $OUTPUT->footer();
         return;

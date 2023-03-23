@@ -25,26 +25,26 @@
     <div class="rui-signup-layout">
         <div class="rui-login-wrapper row no-gutters align-items-center justify-content-start">
             <div class="rui-login-container row no-gutters">
-                <div class="text-center mb-4 w-100">
-                    {{#customloginlogo}}
-                    <a href="{{{ config.wwwroot }}}"><h2 class="rui-login-logo mb-0"><img src="{{customloginlogo}}" title="{{sitename}}" alt="{{sitename}}" class="img-fluid"/></h2></a>
-                    {{/customloginlogo}}
-
-                    {{^customloginlogo}}
-                    {{#logourl}}
-                    <a href="{{{ config.wwwroot }}}"><h2 class="rui-login-logo mb-0"><img src="{{logourl}}" title="{{sitename}}" alt="{{sitename}}" class="img-fluid"/></h2></a>
-                    {{/logourl}}
-
-                    <!--{{^logourl}}
-                    <a href="{{{ config.wwwroot }}}"><h2 class="mb-0">{{sitename}}</h2></a>
-                    {{/logourl }}-->
-                    {{/customloginlogo}}
-                </div>
-                <div class="rui-signup-box rui-book-wrapper1" style="margin: 0 auto;max-width: 476px;max-height: 625px;box-shadow: 0px 2px 15px #888888;padding: 30px;border-radius: 8px;">
-
-                    <h4 class="rui-login-logo text-center" style="font-size: 24px;">{{#str}}newaccount{{/str}}</h4>
-                    
+                <div class="rui-signup-box rui-book-wrapper">
                     <div class="rui-loginpage-intro">
+
+                        <div class="d-inline-flex align-items-center border-bottom pb-4 mb-4 w-100">
+                            {{#customloginlogo}}
+                            <a href="{{{ config.wwwroot }}}"><h2 class="rui-login-logo mb-0"><img src="{{customloginlogo}}" title="{{sitename}}" alt="{{sitename}}" class="img-fluid"/></h2></a>
+                            {{/customloginlogo}}
+
+                            {{^customloginlogo}}
+                            {{#logourl}}
+                            <a href="{{{ config.wwwroot }}}"><h2 class="rui-login-logo mb-0"><img src="{{logourl}}" title="{{sitename}}" alt="{{sitename}}" class="img-fluid"/></h2></a>
+                            {{/logourl}}
+
+                            {{^logourl}}
+                            <a href="{{{ config.wwwroot }}}"><h2 class="mb-0">{{sitename}}</h2></a>
+                            {{/logourl}}
+                            {{/customloginlogo}}
+                            <h4 class="rui-login-logo--sep">{{#str}}newaccount{{/str}}</h4>
+                        </div>
+
                         {{#signupintrotext}}
                         <div class="rui-loginpage-intro-content">
                             {{{signupintrotext}}}
@@ -55,11 +55,10 @@
 
                     <div class="rui-login-form">
                         {{{formhtml}}}
-                    </div>
-                    <!-- .rui-login-form -->
+                    </div><!-- .rui-login-form -->
 
-                </div>
-                <!-- .rui-signup-box -->
+
+                </div><!-- .rui-signup-box -->
 
                 {{#signuptext}}
                 <div class="rui-signup-additional-content">
@@ -70,11 +69,3 @@
             </div>
         </div>
     </div><!-- .login layout #1 -->
-
-    <script>
-        var email1 = document.getElementById("email1");
-        var email2 = document.getElementById("email2");
-        email1.addEventListener("input", function() {
-            email2.value = email1.value;
-        });
-    </script>

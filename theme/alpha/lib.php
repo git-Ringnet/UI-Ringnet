@@ -79,7 +79,7 @@ function theme_alpha_get_extra_scss($theme) {
     $loginbackgroundimageurl = $theme->setting_file_url('loginbg', 'loginbg');
     if (!empty($loginbackgroundimageurl)) {
         $content .= 'body.pagelayout-login { ';
-        $content .= "background-image: url('$loginbackgroundimageurl'); background-size: cover;";   
+        $content .= "background-image: url('$loginbackgroundimageurl'); background-size: cover;";
         $content .= ' }';
     }
 

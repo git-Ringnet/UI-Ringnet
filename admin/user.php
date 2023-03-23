@@ -604,9 +604,7 @@ if (!empty($selected_users) && !empty($bulk_action)) {
     
 }
 echo '
-<p style="position: absolute;
-top: 72px;
-right: 215px;">
+<p>
 <select class"custom selectcheckbox ml-2" name="bulk_action" id="bulk_action">
   <option value="">Chỉnh sửa hàng loạt</option>
   <option value="delete">Delete</option>

@@ -26,7 +26,7 @@ if (!defined('MOODLE_INTERNAL')) {
     die('Direct access to this script is forbidden.');    //  It must be included from a Moodle page.
 }
 
-require_once($CFG->dirroot . '/lib/formslib.php');
+require_once($CFG->dirroot.'/lib/formslib.php');
 
 /**
  * Class user_edit_form.
@@ -34,14 +34,12 @@ require_once($CFG->dirroot . '/lib/formslib.php');
  * @copyright 1999 Martin Dougiamas  http://dougiamas.com
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class user_edit_form extends moodleform
-{
+class user_edit_form extends moodleform {
 
     /**
      * Define the form.
      */
-    public function definition()
-    {
+    public function definition () {
         global $CFG, $COURSE, $USER;
 
         $mform = $this->_form;
@@ -114,8 +112,7 @@ class user_edit_form extends moodleform
     /**
      * Extend the form definition after the data has been parsed.
      */
-    public function definition_after_data()
-    {
+    public function definition_after_data() {
         global $CFG, $DB, $OUTPUT;
 
         $mform = $this->_form;
@@ -188,6 +185,7 @@ class user_edit_form extends moodleform
 
             // Next the customisable profile fields.
             profile_definition_after_data($mform, $user->id);
+
         } else {
             profile_definition_after_data($mform, 0);
         }
@@ -199,8 +197,7 @@ class user_edit_form extends moodleform
      * @param array $files
      * @return array
      */
-    public function validation($usernew, $files)
-    {
+    public function validation($usernew, $files) {
         global $CFG, $DB;
 
         $errors = parent::validation($usernew, $files);
@@ -244,3 +241,5 @@ class user_edit_form extends moodleform
         return $errors;
     }
 }
+
+
