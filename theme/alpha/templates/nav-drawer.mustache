@@ -223,4 +223,37 @@ Example context (json): {}
         active_menu[3].classList.add('activee');
         linkActive_menu[3].classList.add('active');
     }
+    // Active link editadvanced
+    var ttcn = document.getElementById('ttcn');
+    var tb = document.getElementById('tb');
+    var urledituser = location_url[location_url.length - 2] + "/" + location_url[location_url.length - 1];
+    var listurl = ['user/editadvanced.php','message/notificationpreferences.php'];
+    var listli = document.querySelectorAll('.rui-sidebar-nav-item');
+    var at = document.querySelectorAll('.rui-flatnavigation');
+    if(urledituser == 'user/editadvanced.php' || urledituser == 'user/edit.php'){
+        if(ttcn){
+            if(ttcn){
+                ttcn.classList.add('active_editadvanced_text');
+                ttcn.querySelector('span').classList.add('active_editadvanced_span');
+                ttcn.querySelector('a').classList.add('active_editadvanced_color');
+            }
+            listli[2].classList.remove('activee');
+            listli[2].querySelector('a').classList.remove('active');
+            at[1].classList.add('active_menu');
+            at[1].querySelector('a').classList.add('active');
+        }
+    }
+     if(urledituser == 'message/notificationpreferences.php'){
+        if(tb){
+            if(tb){
+                tb.classList.add('active_editadvanced_text');
+                tb.querySelector('span').classList.add('active_editadvanced_span');
+                tb.querySelector('a').classList.add('active_editadvanced_color');
+            }
+            listli[2].classList.remove('activee');
+            listli[2].querySelector('a').classList.remove('active');
+            at[1].classList.add('active_menu');
+            at[1].querySelector('a').classList.add('active');
+        }
+    }
 </script>

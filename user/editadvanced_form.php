@@ -97,33 +97,33 @@ class user_editadvanced_form extends moodleform {
             }
         }
 
-        $purpose = user_edit_map_field_purpose($userid, 'username');
-        $mform->addElement('text', 'username', get_string('username'), 'size="20"' . $purpose);
-        $mform->addHelpButton('username', 'username', 'auth');
-        $mform->setType('username', PARAM_RAW);
+        // $purpose = user_edit_map_field_purpose($userid, 'username');
+        // $mform->addElement('text', 'username', get_string('username'), 'size="20"' . $purpose);
+        // $mform->addHelpButton('username', 'username', 'auth');
+        // $mform->setType('username', PARAM_RAW);
 
-        if ($userid !== -1) {
-            $mform->disabledIf('username', 'auth', 'in', $cannotchangeusername);
-        }
+        // if ($userid !== -1) {
+        //     $mform->disabledIf('username', 'auth', 'in', $cannotchangeusername);
+        // }
 
-        $mform->addElement('selectgroups', 'auth', get_string('chooseauthmethod', 'auth'), $authoptions);
-        $mform->addHelpButton('auth', 'chooseauthmethod', 'auth');
+        // $mform->addElement('selectgroups', 'auth', get_string('chooseauthmethod', 'auth'), $authoptions);
+        // $mform->addHelpButton('auth', 'chooseauthmethod', 'auth');
 
-        $mform->addElement('advcheckbox', 'suspended', get_string('suspended', 'auth'));
-        $mform->addHelpButton('suspended', 'suspended', 'auth');
+        // $mform->addElement('advcheckbox', 'suspended', get_string('suspended', 'auth'));
+        // $mform->addHelpButton('suspended', 'suspended', 'auth');
 
-        $mform->addElement('checkbox', 'createpassword', get_string('createpassword', 'auth'));
-        $mform->disabledIf('createpassword', 'auth', 'in', $cannotchangepass);
+        // $mform->addElement('checkbox', 'createpassword', get_string('createpassword', 'auth'));
+        // $mform->disabledIf('createpassword', 'auth', 'in', $cannotchangepass);
 
-        if (!empty($CFG->passwordpolicy)) {
-            $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
-        }
+        // if (!empty($CFG->passwordpolicy)) {
+        //     $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
+        // }
 
-        $purpose = user_edit_map_field_purpose($userid, 'password');
-        $mform->addElement('passwordunmask', 'newpassword', get_string('newpassword'), 'size="20"' . $purpose);
-        $mform->addHelpButton('newpassword', 'newpassword');
-        $mform->setType('newpassword', core_user::get_property_type('password'));
-        $mform->disabledIf('newpassword', 'createpassword', 'checked');
+        // $purpose = user_edit_map_field_purpose($userid, 'password');
+        // $mform->addElement('passwordunmask', 'newpassword', get_string('newpassword'), 'size="20"' . $purpose);
+        // $mform->addHelpButton('newpassword', 'newpassword');
+        // $mform->setType('newpassword', core_user::get_property_type('password'));
+        // $mform->disabledIf('newpassword', 'createpassword', 'checked');
 
         $mform->disabledIf('newpassword', 'auth', 'in', $cannotchangepass);
 
@@ -136,15 +136,15 @@ class user_editadvanced_form extends moodleform {
                 }
                 $services = get_string('userservices', 'webservice', rtrim($services, ','));
                 $mform->addElement('advcheckbox', 'signoutofotherservices', get_string('signoutofotherservices'), $services);
-                $mform->addHelpButton('signoutofotherservices', 'signoutofotherservices');
+                // $mform->addHelpButton('signoutofotherservices', 'signoutofotherservices');
                 $mform->disabledIf('signoutofotherservices', 'newpassword', 'eq', '');
                 $mform->setDefault('signoutofotherservices', 1);
             }
         }
 
-        $mform->addElement('advcheckbox', 'preference_auth_forcepasswordchange', get_string('forcepasswordchange'));
-        $mform->addHelpButton('preference_auth_forcepasswordchange', 'forcepasswordchange');
-        $mform->disabledIf('preference_auth_forcepasswordchange', 'createpassword', 'checked');
+        // $mform->addElement('advcheckbox', 'preference_auth_forcepasswordchange', get_string('forcepasswordchange'));
+        // $mform->addHelpButton('preference_auth_forcepasswordchange', 'forcepasswordchange');
+        // $mform->disabledIf('preference_auth_forcepasswordchange', 'createpassword', 'checked');
 
         // Shared fields.
         useredit_shared_definition($mform, $editoroptions, $filemanageroptions, $user);

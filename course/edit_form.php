@@ -372,7 +372,7 @@ class course_edit_form extends moodleform
 
         // Files and uploads.
         // $mform->addElement('header', 'filehdr', get_string('filesanduploads'));
-
+        
         if (!empty($course->legacyfiles) or !empty($CFG->legacyfilesinnewcourses)) {
             if (empty($course->legacyfiles)) {
                 //0 or missing means no legacy files ever used in this course - new course or nobody turned on legacy files yet

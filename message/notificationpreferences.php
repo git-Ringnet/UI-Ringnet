@@ -73,8 +73,17 @@ $PAGE->set_heading(fullname($user));
 // Grab the renderer.
 $renderer = $PAGE->get_renderer('core', 'message');
 $messagingoptions = $renderer->render_user_notification_preferences($user);
-
+$content = "
+<div style='display:flex; justify-content: space-between;'>
+    <div id='menu_editadvanced' style='width:17.15%;border-right:1px solid #D6D6D6; border-bottom: 1px solid #D6D6D6'>
+    <div id='ttcn' style='margin-top:13%; height:36px; padding:6px 0;'> <span></span><a href='$CFG->wwwroot/user/editadvanced.php?id=$user->id'>Thông tin cá nhân</a></div>
+    <div id='tb' style='margin-top:16%; height:36px; padding:6px 0;'> <span></span> <a href='$CFG->wwwroot/message/notificationpreferences.php?userid=$user->id'>Thông báo</a> </div>
+    </div>
+    <div style='width:75%;'>$messagingoptions</div>
+</div>";
 echo $OUTPUT->header();
-echo $messagingoptions;
+
+echo $content;
+
 echo $OUTPUT->footer();
 
