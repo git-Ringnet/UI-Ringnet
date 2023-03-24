@@ -25,24 +25,53 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir.'/formslib.php');
-require_once($CFG->dirroot.'/user/profile/lib.php');
+require_once($CFG->libdir . '/formslib.php');
+require_once($CFG->dirroot . '/user/profile/lib.php');
 require_once($CFG->dirroot . '/user/editlib.php');
 require_once('lib.php');
 
-class login_signup_form extends moodleform implements renderable, templatable {
-    function definition() {
+class login_signup_form extends moodleform implements renderable, templatable
+{
+    function definition()
+    {
         global $USER, $CFG;
 
         $mform = $this->_form;
+
+        $mform->addElement('html', '<div class="d-flex">');
+        $mform->addElement('html', '<div class="mr-3">');
+        $namefields = useredit_get_required_name_fields();
+        foreach ($namefields as $field) {
+            $mform->addElement('text', $field, get_string($field), 'maxlength="100" size="30"');
+            $mform->setType($field, core_user::get_property_type('firstname'));
+            $mform->addElement('html', '</div>');
+            $stringid = 'missing' . $field;
+            if (!get_string_manager()->string_exists($stringid, 'moodle')) {
+                $stringid = 'required';
+            }
+            $mform->addRule($field, get_string($stringid), 'required', null, 'client');
+        }
+        $mform->addElement('html', '</div>');
+
+        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="25" id="email1"');
+        $mform->setType('email', core_user::get_property_type('email'));
+        $mform->addRule('email', get_string('missingemail'), 'required', null, 'client');
+        $mform->setForceLtr('email');
+
+        $mform->addElement('html', '<div class="hidden">');
+        $mform->addElement('text', 'email2', get_string('emailagain'), 'maxlength="100" size="25" id="email2"');
+        $mform->setType('email2', core_user::get_property_type('email'));
+        $mform->addRule('email2', get_string('missingemail'), 'required', null, 'client');
+        $mform->setForceLtr('email2');
+        $mform->addElement('html', '</div>');
 
         $mform->addElement('text', 'username', get_string('username'), 'maxlength="100" size="12" autocapitalize="none"');
         $mform->setType('username', PARAM_RAW);
         $mform->addRule('username', get_string('missingusername'), 'required', null, 'client');
 
-        if (!empty($CFG->passwordpolicy)){
-            $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
-        }
+        // if (!empty($CFG->passwordpolicy)) {
+        //     $mform->addElement('static', 'passwordpolicyinfo', '', print_password_policy());
+        // }
         $mform->addElement('password', 'password', get_string('password'), [
             'maxlength' => 32,
             'size' => 12,
@@ -51,45 +80,29 @@ class login_signup_form extends moodleform implements renderable, templatable {
         $mform->setType('password', core_user::get_property_type('password'));
         $mform->addRule('password', get_string('missingpassword'), 'required', null, 'client');
 
-        $mform->addElement('text', 'email', get_string('email'), 'maxlength="100" size="25"');
-        $mform->setType('email', core_user::get_property_type('email'));
-        $mform->addRule('email', get_string('missingemail'), 'required', null, 'client');
-        $mform->setForceLtr('email');
+        $strpasswordagain = get_string('password') . ' (' . get_string('again') . ')';
+        $mform->addElement('password', 'password2', $strpasswordagain, 'style="width: 100%;"');
+        $mform->addRule('password2', get_string('required'), 'required', null, 'client');
+        $mform->setType('password2', PARAM_RAW);
 
-        $mform->addElement('text', 'email2', get_string('emailagain'), 'maxlength="100" size="25"');
-        $mform->setType('email2', core_user::get_property_type('email'));
-        $mform->addRule('email2', get_string('missingemail'), 'required', null, 'client');
-        $mform->setForceLtr('email2');
+        // $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="20"');
+        // $mform->setType('city', core_user::get_property_type('city'));
+        // if (!empty($CFG->defaultcity)) {
+        //     $mform->setDefault('city', $CFG->defaultcity);
+        // }
 
-        $namefields = useredit_get_required_name_fields();
-        foreach ($namefields as $field) {
-            $mform->addElement('text', $field, get_string($field), 'maxlength="100" size="30"');
-            $mform->setType($field, core_user::get_property_type('firstname'));
-            $stringid = 'missing' . $field;
-            if (!get_string_manager()->string_exists($stringid, 'moodle')) {
-                $stringid = 'required';
-            }
-            $mform->addRule($field, get_string($stringid), 'required', null, 'client');
-        }
+        // $country = get_string_manager()->get_list_of_countries();
+        // $default_country[''] = get_string('selectacountry');
+        // $country = array_merge($default_country, $country);
+        // $mform->addElement('select', 'country', get_string('country'), $country);
 
-        $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="20"');
-        $mform->setType('city', core_user::get_property_type('city'));
-        if (!empty($CFG->defaultcity)) {
-            $mform->setDefault('city', $CFG->defaultcity);
-        }
+        // if( !empty($CFG->country) ){
+        //     $mform->setDefault('country', $CFG->country);
+        // }else{
+        //     $mform->setDefault('country', '');
+        // }
 
-        $country = get_string_manager()->get_list_of_countries();
-        $default_country[''] = get_string('selectacountry');
-        $country = array_merge($default_country, $country);
-        $mform->addElement('select', 'country', get_string('country'), $country);
-
-        if( !empty($CFG->country) ){
-            $mform->setDefault('country', $CFG->country);
-        }else{
-            $mform->setDefault('country', '');
-        }
-
-        profile_signup_fields($mform);
+        // profile_signup_fields($mform);
 
         if (signup_captcha_enabled()) {
             $mform->addElement('recaptcha', 'recaptcha_element', get_string('security_question', 'auth'));
@@ -106,12 +119,13 @@ class login_signup_form extends moodleform implements renderable, templatable {
         $manager->signup_form($mform);
 
         // buttons
-        $this->set_display_vertical();
-        $this->add_action_buttons(true, get_string('createaccount'));
-
+        // $this->set_display_vertical();
+        // $this->add_action_buttons(true, get_string('createaccount'));
+        $mform->addElement('submit', 'submitbuttonemail', 'Create new', 'style="margin: 0 auto;background:#EC212D;margin-top: 4px;"');
     }
 
-    function definition_after_data(){
+    function definition_after_data()
+    {
         $mform = $this->_form;
         $mform->applyFilter('username', 'trim');
 
@@ -129,8 +143,10 @@ class login_signup_form extends moodleform implements renderable, templatable {
      * @return array of "element_name"=>"error_description" if there are errors,
      *         or an empty array if everything is OK (true allowed for backwards compatibility too).
      */
-    public function validation($data, $files) {
+    public function validation($data, $files)
+    {
         $errors = parent::validation($data, $files);
+        $user = $this->_customdata;
 
         // Extend validation for any form extensions from plugins.
         $errors = array_merge($errors, core_login_validate_extend_signup_form($data));
@@ -147,6 +163,20 @@ class login_signup_form extends moodleform implements renderable, templatable {
             }
         }
 
+        // Ignore submitted username.
+        if ($data['password'] !== $data['password2']) {
+            $errors['password'] = get_string('passwordsdiffer');
+            $errors['password2'] = get_string('passwordsdiffer');
+            return $errors;
+        }
+
+        $errmsg = ''; // Prevents eclipse warnings.
+        if (!check_password_policy($data['password'], $errmsg, $user)) {
+            $errors['password'] = $errmsg;
+            $errors['password2'] = $errmsg;
+            return $errors;
+        }
+
         $errors += signup_validate_data($data, $files);
 
         return $errors;
@@ -158,7 +188,8 @@ class login_signup_form extends moodleform implements renderable, templatable {
      * @param renderer_base $output Used to do a final render of any components that need to be rendered for export.
      * @return array
      */
-    public function export_for_template(renderer_base $output) {
+    public function export_for_template(renderer_base $output)
+    {
         ob_start();
         $this->display();
         $formhtml = ob_get_contents();

@@ -66,7 +66,7 @@ if ($confirmuser and confirm_sesskey()) {
         redirect($returnurl, get_string('usernotconfirmed', '', fullname($user, true)));
     }
 } else if ($resendemail && confirm_sesskey()) {
-    if (!$user = $DB->get_record('user', ['id' => $resendemail, 'mnethostid' => $CFG->mnet_localhost_id, 'deleted' => 0])) {
+if (!$user = $DB->get_record('user', ['id' => $resendemail, 'mnethostid' => $CFG->mnet_localhost_id, 'deleted' => 0])) {
         print_error('nousers');
     }
 
@@ -135,7 +135,7 @@ if ($confirmuser and confirm_sesskey()) {
     if (empty($aclrecord)) {
         $aclrecord = new stdClass();
         $aclrecord->mnet_host_id = $user->mnethostid;
-        $aclrecord->username = $user->username;
+$aclrecord->username = $user->username;
         $aclrecord->accessctrl = $accessctrl;
         $DB->insert_record('mnet_sso_access_control', $aclrecord);
     } else {
@@ -207,7 +207,7 @@ foreach ($columns as $column) {
             $columnicon = ($dir == "ASC") ? "sort_asc" : "sort_desc";
         }
         $columnicon = $OUTPUT->pix_icon(
-            't/' . $columnicon,
+'t/' . $columnicon,
             get_string(strtolower($columndir)),
             'core',
             ['class' => 'iconsort']
@@ -293,7 +293,7 @@ if (!$users) {
             $users[$key]->country = $countries[$user->country];
         }
     }
-    if ($sort == "country") {
+if ($sort == "country") {
         // Need to resort by full country name, not code.
         foreach ($users as $user) {
             $susers[$user->id] = $user->country;
@@ -359,7 +359,7 @@ if (!$users) {
     $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     foreach ($pages as $key => $value) {
         $active = $urltest === $value['url'] ? 'active' : 'before';
-        echo "<li class='nav-item {$active}  mr-2'>
+echo "<li class='nav-item {$active}  mr-2'>
         <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
         </li>";
     }
@@ -393,7 +393,7 @@ if (!$users) {
     // echo $OUTPUT->single_button($url1,'Quản lý roles');
     echo "<form id='myform' method='POST' action='$CFG->wwwroot/admin/user.php'>";
     $table->attributes['class'] = 'admintable generaltable table-sm';
-    foreach ($extracolumns as $field) {
+foreach ($extracolumns as $field) {
         $table->head[] = ${$field};
     }
    
@@ -430,7 +430,7 @@ if (!$users) {
         <a href='$CFG->wwwroot/admin/user.php?sort=$sort&dir=$dir&perpage=$perpage&page=$page&delete=$user->id&sesskey=$ses'
         class='dropdown-item dropdown-item-wrapper action-delete menu-action' data-action='delete'>
         <svg stroke='currentColor' fill='none' stroke-width='0' viewBox='0 0 24 24' height='1em' width='1em' xmlns='http://www.w3.org/2000/svg'>
-        <path fill-rule='evenodd' clip-rule='evenodd' d='M17 6V5C17 3.89543 16.1046 3 15 3H9C7.89543 3 7 3.89543 7 5V6H4C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8H5V19C5 20.6569 6.34315 22 8 22H16C17.6569 22 19 20.6569 19 19V8H20C20.5523 8 21 7.55228 21 7C21 6.44772 20.5523 6 20 6H17ZM15 5H9V6H15V5ZM17 8H7V19C7 19.5523 7.44772 20 8 20H16C16.5523 20 17 19.5523 17 19V8Z' fill='currentColor'></path></svg>
+<path fill-rule='evenodd' clip-rule='evenodd' d='M17 6V5C17 3.89543 16.1046 3 15 3H9C7.89543 3 7 3.89543 7 5V6H4C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8H5V19C5 20.6569 6.34315 22 8 22H16C17.6569 22 19 20.6569 19 19V8H20C20.5523 8 21 7.55228 21 7C21 6.44772 20.5523 6 20 6H17ZM15 5H9V6H15V5ZM17 8H7V19C7 19.5523 7.44772 20 8 20H16C16.5523 20 17 19.5523 17 19V8Z' fill='currentColor'></path></svg>
         </a>
         </div>
         </div>";
@@ -469,8 +469,7 @@ if (!$users) {
         //                 $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/hide', $strsuspend));
         //             }
         //         }
-
-        //         if (login_is_lockedout($user)) {
+//         if (login_is_lockedout($user)) {
         //             $url = new moodle_url($returnurl, array('unlock' => $user->id, 'sesskey' => sesskey()));
         //             $buttons[] = html_writer::link($url, $OUTPUT->pix_icon('t/unlock', $strunlock));
         //         }
@@ -539,7 +538,7 @@ if (!$users) {
 
         $row[] = $rolename;
         if ($user->suspended) {
-            foreach ($row as $k => $v) {
+foreach ($row as $k => $v) {
                 $row[$k] = html_writer::tag('span', $v, array('class' => 'usersuspended'));
             }
         }
@@ -695,7 +694,7 @@ echo $OUTPUT->footer();
                 tr = table.find("tr"),
                 td, txtValue;
             tr.each(function (i, el) {
-                if (i !== 0) {
+if (i !== 0) {
                     td = $(el).find("td").eq(selectedOption === "user_name" ? 1 : (selectedOption === "user_email" ? 2 : 3));
                     if (td.length) {
                         txtValue = td.text();

@@ -6,16 +6,16 @@
 }
 
 #page-login-signup {
-    background-image: none!important;
+    background-image: none !important;
 }
 
 .rui-login-footer {
     padding: 0 20px;
     margin-bottom: 80px;
 
-    @include media-breakpoint-between(xs,md) {
-    margin: 0 auto 40px;
-    width: 90%;
+    @include media-breakpoint-between(xs, md) {
+        margin: 0 auto 40px;
+        width: 90%;
     }
 }
 
@@ -33,7 +33,7 @@
 
 .rui-login-createaccount--top,
 .rui-logo-top-btn {
-    background-color: rgba($black, .4);
+    background-color: rgba($black, 0.4);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     padding: 5px 14px;
@@ -58,61 +58,59 @@
         font-size: 14px;
     }
 
-    @include media-breakpoint-between(xs,md) {
-    position: relative;
-    top: 0;
-    width: 100%;
+    @include media-breakpoint-between(xs, md) {
+        position: relative;
+        top: 0;
+        width: 100%;
     }
 
     @include media-breakpoint-only(md) {
-    padding: 39px 10px;
-    right: 30px;
+        padding: 39px 10px;
+        right: 30px;
     }
 
-    @include media-breakpoint-between(xs,sm) {
-    padding: 20px 10px 20px 90px;
-    right: 10px;
+    @include media-breakpoint-between(xs, sm) {
+        padding: 20px 10px 20px 90px;
+        right: 10px;
     }
 }
 
+.rui-login-createaccount--top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: $font-size-sm;
 
-        .rui-login-createaccount--top {
-            position: absolute;
-            top: 0;
-            right: 0;
-            font-size: $font-size-sm;
+    @include media-breakpoint-between(xs, md) {
+        position: relative;
+        top: auto;
+        right: auto;
+        width: 90%;
 
-            @include media-breakpoint-between(xs,md) {
-            position: relative;
-            top: auto;
-            right: auto;
-            width: 90%;
+        margin: 20px auto;
+        text-align: center;
+    }
 
-            margin: 20px auto;
-            text-align: center;
-            }
+    .btn-link--clean {
+        font-weight: $font-weight-bold;
+        color: inherit;
 
-            .btn-link--clean {
-                font-weight: $font-weight-bold;
-                color: inherit;
-
-                &:hover {
-                    opacity: 1;
-                }
-            }
+        &:hover {
+            opacity: 1;
         }
+    }
+}
 
-        .rui-loginpage-intro-logo {
-            margin-bottom: 30px;
-            text-align: center;
+.rui-loginpage-intro-logo {
+    margin-bottom: 30px;
+    text-align: center;
 
-            a {
-                &:hover {
-                    text-decoration: none;
-                }
-            }
+    a {
+        &:hover {
+            text-decoration: none;
         }
-
+    }
+}
 
 .rui-login-large-container {
     width: 700px;
@@ -123,8 +121,8 @@
         width: 100%;
     }
 
-    @include media-breakpoint-between(sm,md) {
-    max-width: 90%;
+    @include media-breakpoint-between(sm, md) {
+        max-width: 90%;
     }
 }
 
@@ -134,7 +132,7 @@
     border-radius: $border-radius;
 
     @include media-breakpoint-down(sm) {
-    padding: 20px;
+        padding: 20px;
     }
 }
 
@@ -146,20 +144,20 @@
     border-radius: $border-radius;
 
     @include media-breakpoint-down(sm) {
-    padding: 20px;
-    }    
+        padding: 20px;
+    }
 
     .mform {
-        .col-md-3, .col-md-9 {
-            padding: 0!important;
-            margin-bottom: .35rem!important;
-            flex: 0 0 100%!important;
-            max-width: 100%!important;
-            text-align: left!important;
+        .col-md-3,
+        .col-md-9 {
+            padding: 0 !important;
+            margin-bottom: 0.35rem !important;
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            text-align: left !important;
         }
     }
 }
-
 .rui-hasinstructions-desc {
     font-size: $font-size-sm;
 }
@@ -167,104 +165,120 @@
 .rui-rememberusername-text,
 .rui-login-forgot-btn {
     font-size: $font-size-sm;
-    font-weight: $font-weight-medium;
-    color: $body-color-light;
+    color: $black;
 }
 
+.rui-login-signup-btn{
+    font-size: $font-size-sm;
+    color: $red-700;
+}
+
+.btn-primary{
+    background: $primary-color-600;
+}
 
 // Layout
 
-    .rui-login-container {
-        margin: 40px auto;
+.rui-login-container {
+    margin: 40px auto;
 
-        overflow: hidden;
+    overflow: hidden;
 
-        display: flex;
-        flex-wrap: wrap;
-        align-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
 
-        background-color: $container-bg;
-        border-radius: $border-radius;
+    background-color: $container-bg;
+    border-radius: $border-radius;
 
-        .rui-login-layout-img & {
-            max-width: 1020px;
-            width: 100%;
+    .rui-login-layout-img & {
+        max-width: 1020px;
+        width: 100%;
 
-            @include media-breakpoint-between(sm,md) {
+        @include media-breakpoint-between(sm, md) {
             width: 90%;
-            }
-        }
-
-        .rui-login-layout-simple & {
-            @include media-breakpoint-between(sm,md) {
-            width: 90%;
-            }
-        }
-
-        .rui-login-layout--2 & {
-            flex-direction: row;
-        }
-
-        .rui-login-layout--3 & {
-            flex-direction: row-reverse;
-        }
-
-        #page-login-signup & {
-            background-color: transparent;
-        }
-
-        @include media-breakpoint-between(sm,md) {
-            margin: 30px auto;
-            width: 100%;
         }
     }
 
-    .rui-login-bg-container {
-        width: 50%;
-        background-color: $primary-color-600;
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        position: relative;   
+    .rui-login-layout-simple & {
+        @include media-breakpoint-between(sm, md) {
+            width: 90%;
+        }
+    }
 
-        @include media-breakpoint-between(sm,md) {
+    .rui-login-layout--2 & {
+        flex-direction: row;
+    }
+
+    .rui-login-layout--3 & {
+        flex-direction: row-reverse;
+    }
+
+    #page-login-signup & {
+        background-color: transparent;
+    }
+
+    @include media-breakpoint-between(sm, md) {
+        margin: 30px auto;
+        width: 100%;
+    }
+}
+
+.rui-login-bg-container {
+    width: 50%;
+    background-color: $primary-color-600;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+
+    @include media-breakpoint-between(sm, md) {
         display: none;
-        }
     }
+}
 
-    .rui-login-box {
-        .rui-login-layout-simple & {
-            max-width: 500px;
-        }
-        .rui-login-layout-img & {
-            width: 50%;
-            @include media-breakpoint-only(md) {
+.hr-line{
+    content: "";
+    background: #D6D6D6;
+    height: 1px;
+    width: 100%;
+    padding: 0.3px;
+    display: inline-block;
+}
+
+.rui-login-box {
+    .rui-login-layout-simple & {
+        max-width: 500px;
+    }
+    .rui-login-layout-img & {
+        width: 50%;
+        @include media-breakpoint-only(md) {
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
-            }
-            @include media-breakpoint-only(sm) {
+        }
+        @include media-breakpoint-only(sm) {
             width: 100%;
             margin: 0 auto;
-            }
         }
     }
+}
 
-    .rui-login-additional-content {
-        position: absolute;
-        top: 90px;
-        left: 90px;
+.rui-login-additional-content {
+    position: absolute;
+    top: 90px;
+    left: 90px;
 
-        font-size: 2rem;
-        font-weight: $font-weight-bold;
-    }
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+}
 
-    .rui-login-wrapper {
-        width: 90%;
-        max-width: 1020px;
-        margin-left: auto;
-        margin-right: auto;
-    }
+.rui-login-wrapper {
+    width: 90%;
+    max-width: 1020px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 // Sign up Page
 .rui-login-logo {
@@ -281,7 +295,7 @@
     position: relative;
 
     &:before {
-        content: '';
+        content: "";
         position: absolute;
         left: -10px;
         top: calc(50% - 10px);
@@ -300,28 +314,27 @@
     justify-content: center;
 
     @include media-breakpoint-only(md) {
-    padding: 0 30px 30px 30px;
+        padding: 0 30px 30px 30px;
     }
 
-    @include media-breakpoint-between(xs,sm) {
-    padding: 0 10px 30px 10px;
+    @include media-breakpoint-between(xs, sm) {
+        padding: 0 10px 30px 10px;
     }
 }
 
 .rui-signup-box {
     margin-bottom: 40px;
     max-width: 600px;
-
-    @include media-breakpoint-between(lg,xl) {
-    max-width: 500px;
+@include media-breakpoint-between(lg, xl) {
+        max-width: 500px;
     }
 
-    @include media-breakpoint-between(md,lg) {
-    max-width: 400px;
+    @include media-breakpoint-between(md, lg) {
+        max-width: 400px;
     }
 
-    @include media-breakpoint-between(xs,md) {
-    max-width: 100%;
+    @include media-breakpoint-between(xs, md) {
+        max-width: 100%;
     }
 
     .form-control {
@@ -332,13 +345,13 @@
     .col-md-9 {
         flex: 0 0 100%;
         max-width: 100%;
-        text-align: left!important;
+        text-align: left !important;
     }
 
     .col-md-3 {
-        padding: 0!important;
-        margin-top: 5px!important;
-        margin-bottom: 5px!important;
+        padding: 0 !important;
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
     }
 
     .rui-additional-content {
@@ -367,11 +380,11 @@
     position: sticky;
     top: 11%;
 
-    @include media-breakpoint-between(xs,md) {
-    width: 90%;
-    padding-left: 0;
-    margin: 30px auto;
-    position: relative;
+    @include media-breakpoint-between(xs, md) {
+        width: 90%;
+        padding-left: 0;
+        margin: 30px auto;
+        position: relative;
     }
 }
 
@@ -380,10 +393,10 @@
     top: 70px;
     left: 30px;
 
-    @include media-breakpoint-between(xs,sm) {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+    @include media-breakpoint-between(xs, sm) {
+        position: absolute;
+        top: 10px;
+        left: 10px;
     }
 }
 
@@ -440,7 +453,7 @@
     color: $gray-100;
 
     @include media-breakpoint-down(sm) {
-    padding: 8px;
+        padding: 8px;
     }
 
     &[aria-expanded="true"],
@@ -448,7 +461,7 @@
         color: $gray-100;
         background-color: $gray-800;
         text-decoration: none;
-    }    
+    }
 }
 
 // Form mod
@@ -462,7 +475,8 @@
 }
 
 .form-control--username {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='8' r='3.25' stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3C/circle%3E%3Cpath stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z'%3E%3C/path%3E%3C/svg%3E%0A");}
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='8' r='3.25' stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3C/circle%3E%3Cpath stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z'%3E%3C/path%3E%3C/svg%3E%0A");
+}
 
 .form-control--password {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M15 13.25C17.3472 13.25 19.25 11.3472 19.25 9C19.25 6.65279 17.3472 4.75 15 4.75C12.6528 4.75 10.75 6.65279 10.75 9C10.75 9.31012 10.7832 9.61248 10.8463 9.90372L4.75 16V19.25H8L8.75 18.5V16.75H10.5L11.75 15.5V13.75H13.5L14.0963 13.1537C14.3875 13.2168 14.6899 13.25 15 13.25Z'%3E%3C/path%3E%3Cpath stroke='#{url-friendly-colour($body-color-light)}' d='M16.5 8C16.5 8.27614 16.2761 8.5 16 8.5C15.7239 8.5 15.5 8.27614 15.5 8C15.5 7.72386 15.7239 7.5 16 7.5C16.2761 7.5 16.5 7.72386 16.5 8Z'%3E%3C/path%3E%3C/svg%3E%0A");
@@ -476,14 +490,14 @@
     z-index: $zindex-fixed;
 
     @include media-breakpoint-down(sm) {
-    left: 10px;
+        left: 10px;
     }
 }
 
 @include media-breakpoint-down(sm) {
-.rui-lang-btn .rui-lang-btn-text {
-    display: none;
-}
+    .rui-lang-btn .rui-lang-btn-text {
+        display: none;
+    }
 }
 
 .rui-login-wrapper--margin {
@@ -499,12 +513,12 @@
     width: 100%;
 
     @include media-breakpoint-up(lg) {
-    margin-bottom: -40px;
+        margin-bottom: -40px;
     }
 
-    @include media-breakpoint-between(sm,md) {
-    display: flex;
-    text-align: center;
+    @include media-breakpoint-between(sm, md) {
+        display: flex;
+        text-align: center;
     }
 
     .rui-login-logo {
@@ -514,18 +528,18 @@
 
 .rui-login-top,
 .rui-login-top--content {
-    @include media-breakpoint-between(sm,md) {
-    width: 100%;
-    margin: 0 auto 40px;
-    }   
+    @include media-breakpoint-between(sm, md) {
+        width: 100%;
+        margin: 0 auto 40px;
+    }
 }
 
 #page-login-index {
     .greedy {
-        @include media-breakpoint-between(sm,md) {
-        justify-content: center;
+        @include media-breakpoint-between(sm, md) {
+            justify-content: center;
         }
-    }    
+    }
 }
 
 .rui-login-logo-name {
