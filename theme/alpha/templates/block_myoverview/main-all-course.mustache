@@ -1,0 +1,129 @@
+{{!
+This file is part of Moodle - http://moodle.org/
+
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
+}}
+{{!
+@template block_myoverview/main-all-course
+
+This template renders the main content area for the myoverview block.
+
+Example context (json):
+{}
+}}
+{{>block_myoverview/nav-course}}
+        <ul class="list-group mt-2 mx-0">
+            <table class="table table-striped projects">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;font-size: 1rem;">
+                            {{#str}}coursename, grades{{/str}}
+                        </th>
+                        <th style="width: 15%;font-size: 1rem;">
+                            {{#str}}categories, moodle{{/str}}
+                        </th>
+                        <th style="width: 8%;font-size: 1rem;">
+                            {{#str}}defaultcourseteacher, moodle{{/str}}
+                        </th>
+                        <th style="width: 8%;font-size: 1rem;" class="text-right">
+                            {{#str}}student, grades{{/str}}
+                        </th>
+                        <th style="width: 8%;font-size: 1rem;" class="text-center">
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+            {{#courses}}
+            <li class="border-bottom list-group-item p-0 rui-progress-{{progress}} {{#showcoursecategory}}rui-course-listitem--cat{{/showcoursecategory}}"
+                data-region="course-content" data-course-id="{{{id}}}">
+                <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;border-bottom: 0 !important">
+                                <h4 class="d-block {{^showshortname}}mt-3{{/showshortname}} {{#visible}}mb-3{{/visible}}{{^visible}}mb-2{{/visible}}">
+                                    <a href="{{viewurl}}" class="d-inline-flex align-items-center">
+                                        {{> core_course/favouriteicon }}
+                                        <span class="sr-only">
+                                            {{#str}}aria:coursename, core_course{{/str}}
+                                        </span>
+                                        {{{fullname}}}
+                                    </a>
+                                </h4>
+                            </th>
+                            <th style="width: 15%;border-bottom: 0 !important">
+                                <span class="sr-only">
+                                    {{#str}}aria:coursecategory, core_course{{/str}}
+                                </span>
+                                <div class="badge badge-sm">
+                                    {{{coursecategory}}}
+                                </div>
+                            </th>
+                            <th style="width: 8%;border-bottom: 0 !important" class="text">
+                                {{{name}}}
+                            </th>
+                            <th style="width: 8%;border-bottom: 0 !important" class="text text-right">
+                                {{{student}}}
+                            </th>
+                            <th style="width: 8%;border-bottom: 0 !important" class="text-center">
+                                <div class="rui-myoverview-action-menu">
+                                    {{> block_myoverview/course-action-menu }}
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+                {{!-- <div class="rui-course-list-body"> --}}
+
+                    <div class="d-block">
+                        {{#showshortname}}
+                        <div class="d-block mt-2 mb-1">
+                            <span class="sr-only">
+                                {{#str}}aria:courseshortname, core_course{{/str}}
+                            </span>
+                            {{{shortname}}}
+                        </div>
+                        {{/showshortname}}
+
+
+                        {{!--
+                    </div> --}}
+
+                    {{#hasprogress}}
+                    <div class="rui-course-card-progress-bar d-none">
+                        {{> block_myoverview/progress-bar}}
+                    </div>
+                    {{/hasprogress}}
+                </div>
+
+            </li>
+            {{/courses}}
+        </ul>
+    </div>
+</div>
+
+{{#js}}
+require(
+[
+'jquery',
+'block_myoverview/main',
+],
+function(
+$,
+Main
+) {
+var root = $('#block-myoverview-{{uniqid}}');
+Main.init(root);
+});
+{{/js}}

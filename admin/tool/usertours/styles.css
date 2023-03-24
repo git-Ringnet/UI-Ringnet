@@ -645,10 +645,23 @@ a.text-dark:hover {
     color: black;
 }
 
+.course-child .title-child,
+.navbar-nav .title-child {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: black;
+}
+li{
+    list-style: none;
+}
+
 .course .before,
 .course .active,
 .navbar-nav .before,
-.navbar-nav .active {
+.navbar-nav .active,
+.course-child .before,
+.course-child .active {
     background-image: linear-gradient(to right,
             #0095F6,
             #0095F6 50%,
@@ -663,10 +676,18 @@ a.text-dark:hover {
     transition: all 0.3s ease-in-out;
 }
 
+.course-child .before,
+.course-child .active {
+    background-image: linear-gradient(to right, #000, #2a2e31 50%, #000 50%);
+    color: #3333;
+}
+
 .course .before:before,
 .course .active:before,
 .navbar-nav .before:before,
-.navbar-nav .active:before {
+.navbar-nav .active:before,
+.course-child .before:before,
+.course-child .active:before {
     content: '';
     background: #0095F6;
     display: block;
@@ -678,25 +699,33 @@ a.text-dark:hover {
     transition: all 0.3s ease-in-out;
 }
 
-.course .before:hover,
-.navbar-nav .before:hover {
+.course-child .before:before,
+.course-child .active:before {
+    background-color: #333333;
+}
 
+.course .before:hover,
+.navbar-nav .before:hover,
+.course-child .before:hover {
     background-position: 0;
 }
 
 .course .before:hover::before,
-.navbar-nav .before:hover::before {
+.navbar-nav .before:hover::before,
+.course-child .before:hover::before {
     width: 100%;
 }
 
 .course .active,
-.navbar-nav .active {
+.navbar-nav .active,
+.course-child .active {
     padding-bottom: 15px;
     background-position: 0;
 }
 
 .course .active::before,
-.navbar-nav .active::before {
+.navbar-nav .active::before,
+.course-child .active::before {
     width: 100%;
 }
 
@@ -782,7 +811,7 @@ body {
 }
 
 .wrapper-course hr {
-    margin: 0 -40px;
+    margin: -1px 0px;
 }
 
 .navbar-nav .title {
@@ -845,11 +874,11 @@ body {
     width: 100%;
 }
 
-/* #page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection*/
+#page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection,
 #page-course-edit #id_general legend,
 #page-course-edit #id_descriptionhdr legend {
     display: none !important;
-} 
+}
 
 #page-course-edit #fitem_id_overviewfiles_filemanager,
 #page-course-edit #fitem_id_fullname {
@@ -1153,23 +1182,15 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 }
 
 #page-admin-user #users th.header.c1.centeralign {
-    width: 23% !important;
+    width: 34% !important;
 }
 
 #page-admin-user #users th.header.c2.centeralign {
-    width: 40% !important;
+    width: 27% !important;
 }
 
 #page-admin-user #users th.header.c3.centeralign {
-    width: 20% !important;
-}
-
-#page-admin-user #users th.header.c4 {
-    width: 10% !important;
-}
-
-#page-admin-user #users th.header.c5 {
-    width: 5% !important;
+    width: 27% !important;
 }
 
 #page-admin-user form p {
@@ -1349,50 +1370,32 @@ ul.rui-nav-tabs.nav.nav-tabs.float-right>li>a:active {
     background: #D8121E;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.nav-tabs .nav-link:before{
+
+.nav-tabs .nav-link:before {
     border: none !important;
 }
-.rui-login-container.row.no-gutters{
+
+.rui-login-container.row.no-gutters {
     width: 50% !important;
 }
-#formactionid:focus-visible{
+
+#formactionid:focus-visible {
     outline: none !important;
 }
 
-.custom.ml-2
-,select#bulk_action {
-  padding: 8px 16px !important;
-  background: #555555!important;
-  border-radius: 8px !important;
-  font-weight: 500 !important;
-  font-size: 14px !important;
-  color: #FFFFFF !important;
-  height: 37px !important;
-  max-width: 190px !important;
+.custom.ml-2,
+select#bulk_action {
+    padding: 8px 16px !important;
+    background: #555555 !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    color: #FFFFFF !important;
+    height: 37px !important;
+    max-width: 190px !important;
 }
-/*  */
-#roles .c0, #cohorts .c0{
-    width: 2% !important;
-}
-#roles .c1, #cohorts .c1{
-    width: 23% !important;
-}
-#roles .c2, #cohorts .c2{
-    width: 40% !important;
-}
-#roles .c3, #cohorts .c3{
-    width: 20% !important;
-}
-#roles .c4, #cohorts .c4{
-    width: 10% !important;
-}
-#roles .c5, #cohorts .c5{
-    width: 5% !important;
-}
-#cohorts .c0{
-    border-bottom: 2px solid #e1e0e4;
-}
-#page-cohort-edit .rui-nav-tabs {
+.modal-backdrop.in.show,.modal.moodle-has-zindex.show{
+    z-index: unset !important;
     display: none !important;
 }
 /*  */

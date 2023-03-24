@@ -467,6 +467,8 @@ class main implements renderable, templatable
         }
         $roleid = $DB->get_field('role', 'id', ['shortname' => 'coursemanagement']);
         $isteacheranywhere = $DB->record_exists('role_assignments', ['userid' => $USER->id, 'roleid' => $roleid]);
+        //Để fix lỗi thanh search $test
+        $test = true;
         $defaultvariables = [
             'totalcoursecount' => count(enrol_get_all_users_courses($USER->id, true)),
             'nocoursesimg' => $nocoursesurl,
@@ -495,8 +497,12 @@ class main implements renderable, templatable
             'customfieldvalues' => $customfieldvalues,
             'selectedcustomfield' => $selectedcustomfield,
             'showsortbyshortname' => $CFG->courselistshortnames,
+            'test' => $test,
+            'creator' => new \moodle_url('/my/coursesall.php') || new \moodle_url('/my/courses.php'),
+
+
+
         ];
         return array_merge($defaultvariables, $preferences);
     }
-  
 }

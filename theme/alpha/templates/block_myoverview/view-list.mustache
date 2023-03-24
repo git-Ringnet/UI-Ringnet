@@ -38,17 +38,11 @@ Example context (json):
 }}
 
 {{!-- Sửa list Khóa học ở đây --}}
-
-{{fullnamedisplay}}
 {{checkRole}}
 <ul class="list-group mt-2 mx-0">
-
     <table class="table table-striped projects">
         <thead>
             <tr>
-                 <th style="width: 2%;font-size: 1rem;">
-                    check box
-                </th>
                 <th style="width: 30%;font-size: 1rem;">
                     {{#str}}coursename, grades{{/str}}
                 </th>
@@ -72,9 +66,6 @@ Example context (json):
         <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
             <thead>
                 <tr>
-                    <th style="width: 2%;border-bottom: 0 !important">
-                        <input type="checkbox" name="checkbox1" value="{{checkboxValue}}">
-                    </th>
                     <th style="width: 30%;border-bottom: 0 !important">
                         <h4
                             class="d-block {{^showshortname}}mt-3{{/showshortname}} {{#visible}}mb-3{{/visible}}{{^visible}}mb-2{{/visible}}">

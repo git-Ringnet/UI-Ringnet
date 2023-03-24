@@ -51,31 +51,31 @@ class login_set_password_form extends moodleform {
         $mform->addElement('header', 'setpassword', get_string('setpassword'), '');
 
         // Include the username in the form so browsers will recognise that a password is being set.
-        $mform->addElement('text', 'username', '', 'style="display: none;"');
-        $mform->setType('username', PARAM_RAW);
+        // $mform->addElement('text', 'username', '', 'style="display: none;"');
+        // $mform->setType('username', PARAM_RAW);
         // Token gives authority to change password.
         $mform->addElement('hidden', 'token', '');
         $mform->setType('token', PARAM_ALPHANUM);
 
         // Visible elements.
-        $mform->addElement('static', 'username2', get_string('username'));
+        // $mform->addElement('static', 'username2', get_string('username'));
 
-        $policies = array();
-        if (!empty($CFG->passwordpolicy)) {
-            $policies[] = print_password_policy();
-        }
-        if (!empty($CFG->passwordreuselimit) and $CFG->passwordreuselimit > 0) {
-            $policies[] = get_string('informminpasswordreuselimit', 'auth', $CFG->passwordreuselimit);
-        }
-        if ($policies) {
-            $mform->addElement('static', 'passwordpolicyinfo', '', implode('<br />', $policies));
-        }
-        $mform->addElement('password', 'password', get_string('newpassword'));
+        // $policies = array();
+        // if (!empty($CFG->passwordpolicy)) {
+        //     $policies[] = print_password_policy();
+        // }
+        // if (!empty($CFG->passwordreuselimit) and $CFG->passwordreuselimit > 0) {
+        //     $policies[] = get_string('informminpasswordreuselimit', 'auth', $CFG->passwordreuselimit);
+        // }
+        // if ($policies) {
+        //     $mform->addElement('static', 'passwordpolicyinfo', '', implode('<br />', $policies));
+        // }
+        $mform->addElement('password', 'password', get_string('newpassword'),'style="width: 100%;"');
         $mform->addRule('password', get_string('required'), 'required', null, 'client');
         $mform->setType('password', PARAM_RAW);
 
         $strpasswordagain = get_string('newpassword') . ' (' . get_string('again') . ')';
-        $mform->addElement('password', 'password2', $strpasswordagain);
+        $mform->addElement('password', 'password2', $strpasswordagain, 'style="width: 100%;"');
         $mform->addRule('password2', get_string('required'), 'required', null, 'client');
         $mform->setType('password2', PARAM_RAW);
 
@@ -83,7 +83,8 @@ class login_set_password_form extends moodleform {
         $user = $this->_customdata;
         core_login_extend_set_password_form($mform, $user);
 
-        $this->add_action_buttons(true);
+        $mform->addElement('submit', 'submitbuttonemail', 'Confirm', 'style="margin: 0 auto;background:#0095F6;margin-top: 4px;"');
+        // $this->add_action_buttons(true);
     }
 
     /**
@@ -114,10 +115,10 @@ class login_set_password_form extends moodleform {
             return $errors;
         }
 
-        if (user_is_previously_used_password($user->id, $data['password'])) {
-            $errors['password'] = get_string('errorpasswordreused', 'core_auth');
-            $errors['password2'] = get_string('errorpasswordreused', 'core_auth');
-        }
+        // if (user_is_previously_used_password($user->id, $data['password'])) {
+        //     $errors['password'] = get_string('errorpasswordreused', 'core_auth');
+        //     $errors['password2'] = get_string('errorpasswordreused', 'core_auth');
+        // }
 
         return $errors;
     }

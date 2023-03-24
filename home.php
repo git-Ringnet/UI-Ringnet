@@ -21,272 +21,127 @@
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-?>
 
-<?php require_once './components/header.php' ?>
+if (!file_exists('./config.php')) {
+    header('Location: install.php');
+    die;
+}
 
-<body class="tl-body">
-	<?php
-	if (!file_exists('./config.php')) {
-		header('Location: install.php');
-		die;
-	}
-	require_once('config.php');
-	require_once($CFG->dirroot . '/course/lib.php');
-	require_once($CFG->libdir . '/filelib.php');
+require_once('config.php');
+require_once($CFG->dirroot .'/course/lib.php');
+require_once($CFG->libdir .'/filelib.php');
 
+redirect_if_major_upgrade_required();
 
-	redirect_if_major_upgrade_required();
+$urlparams = array();
+if (!empty($CFG->defaulthomepage) &&
+        ($CFG->defaulthomepage == HOMEPAGE_MY || $CFG->defaulthomepage == HOMEPAGE_MYCOURSES) &&
+        optional_param('redirect', 1, PARAM_BOOL) === 0
+) {
+    $urlparams['redirect'] = 0;
+}
+$PAGE->set_url('/', $urlparams);
+$PAGE->set_pagelayout('frontpage');
+$PAGE->add_body_class('limitedwidth');
+$PAGE->set_other_editing_capability('moodle/course:update');
+$PAGE->set_other_editing_capability('moodle/course:manageactivities');
+$PAGE->set_other_editing_capability('moodle/course:activityvisibility');
 
-	$urlparams = array();
-	if (
-		!empty($CFG->defaulthomepage) &&
-		($CFG->defaulthomepage == HOMEPAGE_MY || $CFG->defaulthomepage == HOMEPAGE_MYCOURSES) &&
-		optional_param('redirect', 1, PARAM_BOOL) === 0
-	) {
-		$urlparams['redirect'] = 0;
-	}
-	$PAGE->set_url('/', $urlparams);
-	$PAGE->set_pagelayout('frontpage');
-	$PAGE->add_body_class('limitedwidth');
-	$PAGE->set_other_editing_capability('moodle/course:update');
-	$PAGE->set_other_editing_capability('moodle/course:manageactivities');
-	$PAGE->set_other_editing_capability('moodle/course:activityvisibility');
+// Prevent caching of this page to stop confusion when changing page after making AJAX changes.
+$PAGE->set_cacheable(false);
 
-	// Prevent caching of this page to stop confusion when changing page after making AJAX changes.
-	$PAGE->set_cacheable(false);
+require_course_login($SITE);
 
-	require_course_login($SITE);
+$hasmaintenanceaccess = has_capability('moodle/site:maintenanceaccess', context_system::instance());
 
-	$hasmaintenanceaccess = has_capability('moodle/site:maintenanceaccess', context_system::instance());
+// If the site is currently under maintenance, then print a message.
+if (!empty($CFG->maintenance_enabled) and !$hasmaintenanceaccess) {
+    print_maintenance_message();
+}
 
-	// If the site is currently under maintenance, then print a message.
-	if (!empty($CFG->maintenance_enabled) and !$hasmaintenanceaccess) {
-		print_maintenance_message();
-	}
+$hassiteconfig = has_capability('moodle/site:config', context_system::instance());
 
-	$hassiteconfig = has_capability('moodle/site:config', context_system::instance());
+if ($hassiteconfig && moodle_needs_upgrading()) {
+    redirect($CFG->wwwroot .'/'. $CFG->admin .'/index.php');
+}
 
-	if ($hassiteconfig && moodle_needs_upgrading()) {
-		redirect($CFG->wwwroot . '/' . $CFG->admin . '/index.php');
-	}
+// If site registration needs updating, redirect.
+\core\hub\registration::registration_reminder('/index.php');
 
-	// If site registration needs updating, redirect.
-	\core\hub\registration::registration_reminder('/index.php');
+if (get_home_page() != HOMEPAGE_SITE) {
+    // Redirect logged-in users to My Moodle overview if required.
+    $redirect = optional_param('redirect', 1, PARAM_BOOL);
+    if (optional_param('setdefaulthome', false, PARAM_BOOL)) {
+        set_user_preference('user_home_page_preference', HOMEPAGE_SITE);
+    } else if (!empty($CFG->defaulthomepage) && ($CFG->defaulthomepage == HOMEPAGE_MY) && $redirect === 1) {
+        // At this point, dashboard is enabled so we don't need to check for it (otherwise, get_home_page() won't return it).
+        redirect($CFG->wwwroot .'/my/');
+    } else if (!empty($CFG->defaulthomepage) && ($CFG->defaulthomepage == HOMEPAGE_MYCOURSES) && $redirect === 1) {
+        redirect($CFG->wwwroot .'/my/courses.php');
+    } else if (!empty($CFG->defaulthomepage) && ($CFG->defaulthomepage == HOMEPAGE_USER)) {
+        $frontpagenode = $PAGE->settingsnav->find('frontpage', null);
+        if ($frontpagenode) {
+            $frontpagenode->add(
+                get_string('makethismyhome'),
+                new moodle_url('/', array('setdefaulthome' => true)),
+                navigation_node::TYPE_SETTING);
+        } else {
+            $frontpagenode = $PAGE->settingsnav->add(get_string('frontpagesettings'), null, navigation_node::TYPE_SETTING, null);
+            $frontpagenode->force_open();
+            $frontpagenode->add(get_string('makethismyhome'),
+                new moodle_url('/', array('setdefaulthome' => true)),
+                navigation_node::TYPE_SETTING);
+        }
+    }
+}
 
-	if (get_home_page() != HOMEPAGE_SITE) {
-		// Redirect logged-in users to My Moodle overview if required.
-		$redirect = optional_param('redirect', 1, PARAM_BOOL);
-		if (optional_param('setdefaulthome', false, PARAM_BOOL)) {
-			set_user_preference('user_home_page_preference', HOMEPAGE_SITE);
-		} else if (!empty($CFG->defaulthomepage) && ($CFG->defaulthomepage == HOMEPAGE_MY) && $redirect === 1) {
-			// At this point, dashboard is enabled so we don't need to check for it (otherwise, get_home_page() won't return it).
-			redirect($CFG->wwwroot . '/my/');
-		} else if (!empty($CFG->defaulthomepage) && ($CFG->defaulthomepage == HOMEPAGE_MYCOURSES) && $redirect === 1) {
-			redirect($CFG->wwwroot . '/my/courses.php');
-		} else if (!empty($CFG->defaulthomepage) && ($CFG->defaulthomepage == HOMEPAGE_USER)) {
-			$frontpagenode = $PAGE->settingsnav->find('frontpage', null);
-			if ($frontpagenode) {
-				$frontpagenode->add(
-					get_string('makethismyhome'),
-					new moodle_url('/', array('setdefaulthome' => true)),
-					navigation_node::TYPE_SETTING
-				);
-			} else {
-				$frontpagenode = $PAGE->settingsnav->add(get_string('frontpagesettings'), null, navigation_node::TYPE_SETTING, null);
-				$frontpagenode->force_open();
-				$frontpagenode->add(
-					get_string('makethismyhome'),
-					new moodle_url('/', array('setdefaulthome' => true)),
-					navigation_node::TYPE_SETTING
-				);
-			}
-		}
-	}
+// Trigger event.
+course_view(context_course::instance(SITEID));
 
-	// Trigger event.
-	course_view(context_course::instance(SITEID));
+$PAGE->set_pagetype('site-index');
+$PAGE->set_docs_path('');
+$editing = $PAGE->user_is_editing();
+$PAGE->set_title($SITE->fullname);
+$PAGE->set_heading($SITE->fullname);
+if (has_capability('moodle/course:update', context_system::instance())) {
+    $PAGE->set_secondary_navigation(true);
+    $PAGE->set_secondary_active_tab('coursehome');
+} else {
+    $PAGE->set_secondary_navigation(false);
+}
 
-	$PAGE->set_pagetype('site-index');
-	$PAGE->set_docs_path('');
-	$editing = $PAGE->user_is_editing();
-	$PAGE->set_title($SITE->fullname);
-	$PAGE->set_heading($SITE->fullname);
-	if (has_capability('moodle/course:update', context_system::instance())) {
-		$PAGE->set_secondary_navigation(true);
-		$PAGE->set_secondary_active_tab('coursehome');
-	} else {
-		$PAGE->set_secondary_navigation(false);
-	}
+$courserenderer = $PAGE->get_renderer('core', 'course');
 
-	if ($hassiteconfig) {
-		$editurl = new moodle_url('/course/view.php', ['id' => SITEID, 'sesskey' => sesskey()]);
-		$editbutton = $OUTPUT->edit_button($editurl);
-		$PAGE->set_button($editbutton);
-	}
+if ($hassiteconfig) {
+    $editurl = new moodle_url('/course/view.php', ['id' => SITEID, 'sesskey' => sesskey()]);
+    $editbutton = $OUTPUT->edit_button($editurl);
+    $PAGE->set_button($editbutton);
+}
 
-	echo $OUTPUT->header();
+echo $OUTPUT->header();
 
-	$siteformatoptions = course_get_format($SITE)->get_format_options();
-	$modinfo = get_fast_modinfo($SITE);
-	$modnamesused = $modinfo->get_used_module_names();
+$siteformatoptions = course_get_format($SITE)->get_format_options();
+$modinfo = get_fast_modinfo($SITE);
+$modnamesused = $modinfo->get_used_module_names();
 
-	// Print Section or custom info.
-	if (!empty($CFG->customfrontpageinclude)) {
-		// Pre-fill some variables that custom front page might use.
-		$modnames = get_module_types_names();
-		$modnamesplural = get_module_types_names(true);
-		$mods = $modinfo->get_cms();
+// Print Section or custom info.
+if (!empty($CFG->customfrontpageinclude)) {
+    // Pre-fill some variables that custom front page might use.
+    $modnames = get_module_types_names();
+    $modnamesplural = get_module_types_names(true);
+    $mods = $modinfo->get_cms();
 
-		include($CFG->customfrontpageinclude);
-	} else if ($siteformatoptions['numsections'] > 0) {
-		// echo $courserenderer->frontpage_section1();
-	}
-	// Include course AJAX.
-	include_course_ajax($SITE, $modnamesused);
+    include($CFG->customfrontpageinclude);
 
-	if ($editing && has_capability('moodle/course:create', context_system::instance())) {
-		echo $courserenderer->add_new_course_button();
-	}
+} else if ($siteformatoptions['numsections'] > 0) {
+    echo $courserenderer->frontpage_section1();
+}
+// Include course AJAX.
+include_course_ajax($SITE, $modnamesused);
 
-	//Kiểm tra quyền
-	$queryrole  = $DB->get_records('role_assignments', array('userid' => $USER->id));
-	$roles = [];
-	foreach ($queryrole as $qrole) :
-		//echo $qrole->roleid;
-		$roles[] = $qrole->roleid;
-		echo $qrole->roleid;
-		echo $qrole->rolename;
-	endforeach;
+echo $courserenderer->frontpage();
 
-	if (in_array('1', $roles) || in_array('3', $roles)) :
-		// $admins = get_admins();
-		// $isadmin = false;
-		// foreach ($admins as $admin) {
-		// 	if ($USER->id == $admin->id) {
-		// 		$isadmin = true;
-		// 		break;
-		// 	}
-		// }
-		// echo "Đây là " . $USER->id;
-	?>
-		<div class="container ">
-			<div class="row">
-				<div class="span12">
-					<div class="tl-onboarding-container">
-						<div class="tl-onboarding-completed-screen active" data-onboard-screen="completed">
-							<div class="d-row align-items-stretch">
-								<div class="d-col tl-onboarding-end-item-cont">
-									<?php if (in_array('1', $roles)) : ?>
-										<a href="<?php echo $CFG->wwwroot . '/home.php' ?>" data-create-course-button>
-											<div class="tl-onboarding-end-item tl-onboarding-end-item--hoverable">
-												<div class="tl-onboarding-end-item_img">
-													<img src="https://d3j0t7vrtr92dk.cloudfront.net/images/onboarding/final/CreateCourse.svg" width="100" height="100" alt="">
-												</div>
-												<div class="tl-onboarding-end-item_content">
-													<b>Trang chủ</b>
-												</div>
-											</div>
-										</a>
-									<?php
-									elseif (in_array('3', $roles)) : ?>
-										<a href="<?php echo $CFG->wwwroot . '/home.php' ?>" data-create-course-button>
-											<div class="tl-onboarding-end-item tl-onboarding-end-item--hoverable">
-												<div class="tl-onboarding-end-item_img">
-													<img src="https://d3j0t7vrtr92dk.cloudfront.net/images/onboarding/final/CreateCourse.svg" width="100" height="100" alt="">
-												</div>
-												<div class="tl-onboarding-end-item_content">
-													<b>Quản lý nhóm</b>
-												</div>
-											</div>
-										</a>
-									<?php endif; ?>
-								</div>
-								<div class="d-col tl-onboarding-end-item-cont">
-									<a href="<?php echo $CFG->wwwroot . '/my/courses.php' ?>">
-										<div class="tl-onboarding-end-item tl-onboarding-end-item--hoverable tl-onboarding-end-item--bordered">
-											<div class="tl-onboarding-end-item_img">
-												<img src="https://d3j0t7vrtr92dk.cloudfront.net/images/onboarding/final/SampleCourse.svg" width="100" height="100" alt="">
-											</div>
-											<div class="tl-onboarding-end-item_content">
-												<b>Khoá học của tôi</b>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="d-col tl-onboarding-end-item-cont">
-									<a href="<?php echo $CFG->wwwroot . '/course/edit.php?category=1&returnto=catmanage' ?>">
-										<div class="tl-onboarding-end-item tl-onboarding-end-item--hoverable">
-											<div class="tl-onboarding-end-item_img">
-												<img src="https://d3j0t7vrtr92dk.cloudfront.net/images/onboarding/final/CustomizePortal.svg" width="100" height="100" alt="">
-											</div>
-											<div class="tl-onboarding-end-item_content">
-												<b>Báo Cáo</b>
-											</div>
-										</div>
-									</a>
-								</div>
-								<div class="d-col tl-onboarding-end-item-cont">
-									<a href="<?php echo $CFG->wwwroot . '/admin/search.php' ?>">
-										<div class="tl-onboarding-end-item tl-onboarding-end-item--hoverable">
-											<div class="tl-onboarding-end-item_img">
-												<img src="https://d3j0t7vrtr92dk.cloudfront.net/images/onboarding/final/Admin.svg" width="100" height="100" alt="">
-											</div>
-											<div class="tl-onboarding-end-item_content">
-												<b>Administrator dashboard</b>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	<?php else :  ?>
-		<div class="row bg-light d-flex justify-content-center">
-			<div class="span2">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-			<div class="span2">
-				<div class="row">
-					<div class="span2">
-						Sub Header
-					</div>
-				</div>
-			</div>
-		</div>
-	<?php endif;
-	?>
-	<?php echo $OUTPUT->footer(); ?>
-
-
-</body>
-
-</html>
+if ($editing && has_capability('moodle/course:create', context_system::instance())) {
+    echo $courserenderer->add_new_course_button();
+}
+echo $OUTPUT->footer();

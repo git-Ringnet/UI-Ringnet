@@ -292,7 +292,7 @@ class course_renderer extends \core_course_renderer
             $content .= $pagingbar;
         }
         $content .= "<form id='myform' method='POST' action='$CFG->wwwroot/course/index.php'>";
-        if(checkRole() == true){
+        if (checkRole() == true) {
             $content .= ' <table class="table table-striped projects">
             <thead>
                 <tr>
@@ -315,7 +315,7 @@ class course_renderer extends \core_course_renderer
                 </tr>
             </thead>
         </table>';
-        }else{
+        } else {
             $content .= ' <table class="table table-striped projects">
             <thead>
                 <tr>
@@ -336,7 +336,7 @@ class course_renderer extends \core_course_renderer
             </thead>
         </table>';
         }
-       
+
         foreach ($subcategories as $subcategory) {
             $content .= $this->coursecat_category($chelper, $subcategory, $depth);
         }
@@ -361,7 +361,7 @@ class course_renderer extends \core_course_renderer
                 break;
         }
         // var_dump($SESSION->bulk_category);
-        if(checkRole() == true){
+        if (checkRole() == true) {
             $content .= "<p class='mt-3'>
             <select class'custom selectcheckbox ml-2' name='bulk_action' id='bulk_action'>
               <option value=''>Thao tác hàng loạt</option>
@@ -370,7 +370,7 @@ class course_renderer extends \core_course_renderer
             </p>";
             $content .= "</form>";
         }
-       
+
 
 
 
@@ -623,7 +623,7 @@ class course_renderer extends \core_course_renderer
         $coursescount = $coursecat->get_courses_count();
 
         $content .= html_writer::start_tag('div', array('class' => 'wrapper-fw info'));
-      
+
 
         if (checkRole() == true) {
             $content .= html_writer::start_tag('div', array('class' => 'wrapper-fw info'));
@@ -673,6 +673,7 @@ class course_renderer extends \core_course_renderer
         } else {
             $content .= ' <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
             <thead>
+            <li>
                 <tr>
                     <th style="width:0%; border-bottom: 0 !important;"></th>
                     <th style="width: 30%;border-bottom: 0 !important;">
@@ -688,6 +689,7 @@ class course_renderer extends \core_course_renderer
                     <th style="width: 8%;border-bottom: 0 !important" class="text-center">
                     </th>
                 </tr>
+                </li>
             </thead>
         </table>';
         }

@@ -58,7 +58,7 @@ class course_summary_exporter extends \core\external\exporter
     protected static function define_related()
     {
         // We cache the context so it does not need to be retrieved from the course.
-        return array('context' => '\\context', 'isfavourite' => 'bool?' , 'checkRole' => 'bool?');
+        return array('context' => '\\context', 'isfavourite' => 'bool?', 'checkRole' => 'bool?');
     }
 
     protected function get_other_values(renderer_base $output)
@@ -88,8 +88,6 @@ class course_summary_exporter extends \core\external\exporter
         $student = get_role_users($rolestudent->id, $context);
         $count = count($student);
         $checkRole = checkRole();
-        $test = "123";
-
         return array(
             'fullnamedisplay' => get_course_display_name_for_list($this->data),
             'viewurl' => (new moodle_url('/course/view.php', array('id' => $this->data->id)))->out(false),
@@ -103,7 +101,6 @@ class course_summary_exporter extends \core\external\exporter
             'coursecategory' => $coursecategory->name,
             'name' =>  $name,
             'student' =>  $count,
-            'test' => $test
         );
     }
 
@@ -206,7 +203,7 @@ class course_summary_exporter extends \core\external\exporter
                 'type' => PARAM_INT,
                 'optional' => true
             ),
-            
+
         );
     }
 

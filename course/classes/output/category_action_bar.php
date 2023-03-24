@@ -191,6 +191,9 @@ class category_action_bar extends manage_categories_action_bar {
             'additionaloptions' => $this->get_additional_category_options(),
             //nếu là admin hoặc giáo viên tạo khóa học thì có nút tạo khóa học
             'status' => is_siteadmin() || $isteacheranywhere===true,
+            'check' => true,
+            
+
             'heading_title' => $heading_title,
             'sesskey' => sesskey(),
             'select' => $data,
