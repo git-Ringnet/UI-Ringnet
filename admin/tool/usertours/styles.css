@@ -1394,10 +1394,10 @@ select#bulk_action {
     height: 37px !important;
     max-width: 190px !important;
 }
-.modal-backdrop.in.show,.modal.moodle-has-zindex.show{
+/* .modal-backdrop.in.show,.modal.moodle-has-zindex.show{
     z-index: unset !important;
     display: none !important;
-}
+} */
 /*  */
 #page-user-editadvanced #id_moodlecontainer,
 #page-admin-user-editadvanced #id_moodlecontainer,
