@@ -37,10 +37,13 @@ use mod_forum\local\factories\url as url_factory;
 use mod_forum\local\factories\vault as vault_factory;
 use mod_forum\local\managers\capability as capability_manager;
 use mod_forum\local\renderers\posts as posts_renderer;
+use core_privacy\local\request\transform;
+
 use forum_portfolio_caller;
 use core\output\notification;
 use context;
 use context_module;
+use core\navigation\views\view;
 use html_writer;
 use moodle_exception;
 use moodle_page;
@@ -51,6 +54,7 @@ use single_button;
 use single_select;
 use stdClass;
 use url_select;
+use context_course;
 
 require_once($CFG->dirroot . '/mod/forum/lib.php');
 require_once($CFG->dirroot . '/mod/forum/locallib.php');
@@ -61,7 +65,8 @@ require_once($CFG->dirroot . '/mod/forum/locallib.php');
  * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class discussion {
+class discussion
+{
     /** @var forum_entity $forum The forum that the discussion belongs to */
     private $forum;
     /** @var discussion_entity $discussion The discussion entity */
@@ -179,7 +184,7 @@ class discussion {
         stdClass $user,
         post_entity $firstpost,
         array $replies
-    ) : string {
+    ): string {
         global $CFG;
 
         $displaymode = $this->displaymode;
@@ -193,9 +198,9 @@ class discussion {
         }
 
         $posts = array_merge([$firstpost], array_values($replies));
-
+        
         if ($this->postprocessfortemplate !== null) {
-            $exporteddiscussion = ($this->postprocessfortemplate) ($this->discussion, $user, $this->forum);
+            $exporteddiscussion = ($this->postprocessfortemplate)($this->discussion, $user, $this->forum);
         } else {
             $exporteddiscussion = $this->get_exported_discussion($user);
         }
@@ -215,17 +220,27 @@ class discussion {
                 'movediscussion' => null,
                 'pindiscussion' => null,
                 'neighbourlinks' => $this->get_neighbour_links_html(),
-                'exportdiscussion' => !empty($CFG->enableportfolios) ? $this->get_export_discussion_html($user) : null
+                'exportdiscussion' => !empty($CFG->enableportfolios) ? $this->get_export_discussion_html($user) : null,
             ],
             'settingsselector' => true,
         ]);
+        $exporteddiscussion['timecreated'] = $firstpost->get_time_created();
 
         $capabilities = (array) $exporteddiscussion['capabilities'];
 
         if ($capabilities['move']) {
             $exporteddiscussion['html']['movediscussion'] = $this->get_move_discussion_html();
         }
-
+        global $COURSE;
+        $name = 'a';
+        global $DB;
+        $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
+        $context = context_course::instance($COURSE->id);
+        $teachers = get_role_users($role->id, $context);
+        $a = count($teachers);
+        foreach ($teachers as $teacher) {
+            $name = fullname($teacher);
+        }
         if (!empty($user->id)) {
             $loggedinuser = $entityfactory->get_author_from_stdClass($user);
             $exporteddiscussion['loggedinuser'] = [
@@ -233,17 +248,48 @@ class discussion {
                 'fullname' => $loggedinuser->get_full_name(),
                 'profileimageurl' => ($urlfactory->get_author_profile_image_url($loggedinuser, null))->out(false)
             ];
+            $exporteddiscussion['creator'] = $name;
         }
+
+
+
 
         $exporteddiscussion['throttlingwarningmsg'] = '';
         $cmrecord = $this->forum->get_course_module_record();
+
+
+
+
         if (($warningobj = forum_check_throttling($this->forumrecord, $cmrecord)) && $warningobj->canpost) {
             $throttlewarnnotification = (new notification(
-                    get_string($warningobj->errorcode, $warningobj->module, $warningobj->additional)
+                get_string($warningobj->errorcode, $warningobj->module, $warningobj->additional)
             ))->set_show_closebutton();
             $exporteddiscussion['throttlingwarningmsg'] = $throttlewarnnotification->get_message();
         }
 
+        // global $USER;
+        // $forumobject = $this->forumrecord;
+        // $context = $this->forum->get_context();
+        // $activeenrolled = is_enrolled($context, $USER, '', true);
+        // $canmanage = has_capability('mod/forum:managesubscriptions', $context);
+        // $cansubscribe = $activeenrolled && !($this->forum->get_subscription_mode() === FORUM_FORCESUBSCRIBE) &&
+        //     (!($this->forum->get_subscription_mode() === FORUM_DISALLOWSUBSCRIBE) || $canmanage);
+        // if ($cansubscribe) {
+        //     $returnurl =
+        //         (new moodle_url('/mod/forum/discuss.php', ['d' => $_GET['d']]))->out(false);
+        //     if (!\mod_forum\subscriptions::is_subscribed($USER->id, $forumobject, null, $this->forum->get_course_module_record())) {
+        //         $exporteddiscussion['subscribetoforum'] = (new moodle_url(
+        //             '/mod/forum/subscribe.php',
+        //             ['id' => $forumobject->id, 'sesskey' => sesskey(), 'returnurl' => $returnurl]
+        //             ))->out(false);
+        //     } else {
+        //         $exporteddiscussion['unsubscribefromforum'] = (new moodle_url(
+        //             '/mod/forum/subscribe.php',
+        //             ['id' => $forumobject->id, 'sesskey' => sesskey(), 'returnurl' => $returnurl]
+        //         ))->out(false);
+        //     }
+        // }
+        // var_dump($loggedinuser);
         if ($this->displaymode === FORUM_MODE_NESTED_V2) {
             $template = 'mod_forum/forum_discussion_nested_v2';
         } else {
@@ -258,7 +304,8 @@ class discussion {
      *
      * @return  stdClass[]
      */
-    private function get_groups_available_in_forum() : array {
+    private function get_groups_available_in_forum(): array
+    {
         $course = $this->forum->get_course_record();
         $coursemodule = $this->forum->get_course_module_record();
 
@@ -271,7 +318,8 @@ class discussion {
      * @param stdClass $user The user viewing the discussion
      * @return array
      */
-    private function get_exported_discussion(stdClass $user) : array {
+    private function get_exported_discussion(stdClass $user): array
+    {
         $discussionexporter = $this->exporterfactory->get_discussion_exporter(
             $user,
             $this->forum,
@@ -289,7 +337,8 @@ class discussion {
      * @param stdClass $user The current user
      * @return string
      */
-    private function get_display_mode_selector_html(int $displaymode, stdClass $user) : string {
+    private function get_display_mode_selector_html(int $displaymode, stdClass $user): string
+    {
         $baseurl = $this->baseurl;
         $select = new single_select(
             $baseurl,
@@ -309,7 +358,8 @@ class discussion {
      *
      * @return string
      */
-    private function get_move_discussion_html() : ?string {
+    private function get_move_discussion_html(): ?string
+    {
         global $DB;
 
         $forum = $this->forum;
@@ -324,8 +374,10 @@ class discussion {
             // Check forum types and eliminate simple discussions.
             $forumcheck = $DB->get_records('forum', ['course' => $courseid], '', 'id, type');
             foreach ($modinfo->instances['forum'] as $forumcm) {
-                if (!$forumcm->uservisible || !has_capability('mod/forum:startdiscussion',
-                    context_module::instance($forumcm->id))) {
+                if (!$forumcm->uservisible || !has_capability(
+                    'mod/forum:startdiscussion',
+                    context_module::instance($forumcm->id)
+                )) {
                     continue;
                 }
                 $section = $forumcm->sectionnum;
@@ -337,7 +389,7 @@ class discussion {
                 $forumtypecheck = $forumcheck[$forumcm->instance]->type !== 'single';
 
                 if ($forumidcompare and $forumtypecheck) {
-                    $url = "/mod/forum/discuss.php?d={$discussion->get_id()}&move=$forumcm->instance&sesskey=".sesskey();
+                    $url = "/mod/forum/discuss.php?d={$discussion->get_id()}&move=$forumcm->instance&sesskey=" . sesskey();
                     $forummenu[$section][$sectionname][$url] = format_string($forumcm->name);
                 }
             }
@@ -349,9 +401,13 @@ class discussion {
                     // Move discussion selector will be rendered on the settings drawer. We won't output the button in this mode.
                     $movebutton = null;
                 }
-                $select = new url_select($forummenu, '',
-                        ['/mod/forum/discuss.php?d=' . $discussion->get_id() => get_string("movethisdiscussionto", "forum")],
-                        'forummenu', $movebutton);
+                $select = new url_select(
+                    $forummenu,
+                    '',
+                    ['/mod/forum/discuss.php?d=' . $discussion->get_id() => get_string("movethisdiscussionto", "forum")],
+                    'forummenu',
+                    $movebutton
+                );
                 $select->set_label(get_string('movethisdiscussionlabel', 'mod_forum'), [
                     'class' => 'sr-only',
                 ]);
@@ -370,7 +426,8 @@ class discussion {
      * @param   stdClass $user The user viewing the discussion
      * @return  string|null
      */
-    private function get_export_discussion_html(stdClass $user) : ?string {
+    private function get_export_discussion_html(stdClass $user): ?string
+    {
         global $CFG;
 
         if (!$this->capabilitymanager->can_export_discussions($user)) {
@@ -389,15 +446,16 @@ class discussion {
      * @param stdClass $user The user viewing the discussion
      * @return string[]
      */
-    private function get_notifications($user) : array {
+    private function get_notifications($user): array
+    {
         $notifications = $this->notifications;
         $discussion = $this->discussion;
         $forum = $this->forum;
 
         if ($forum->is_cutoff_date_reached()) {
             $notifications[] = (new notification(
-                    get_string('cutoffdatereached', 'forum'),
-                    notification::NOTIFY_INFO
+                get_string('cutoffdatereached', 'forum'),
+                notification::NOTIFY_INFO
             ))->set_show_closebutton();
         } else if ($forum->get_type() != 'single') {
             // Due date is already shown at the top of the page for single simple discussion forums.
@@ -419,8 +477,8 @@ class discussion {
                 get_string('discussionlocked', 'forum'),
                 notification::NOTIFY_INFO
             ))
-            ->set_extra_classes(['discussionlocked'])
-            ->set_show_closebutton();
+                ->set_extra_classes(['discussionlocked'])
+                ->set_show_closebutton();
         }
 
         if ($forum->get_type() == 'qanda') {
@@ -438,10 +496,9 @@ class discussion {
                     'blockperiod' => get_string('secondstotime' . $forum->get_block_period())
                 ])
             ))->set_show_closebutton();
-
         }
 
-        return array_map(function($notification) {
+        return array_map(function ($notification) {
             return $notification->export_for_template($this->renderer);
         }, $notifications);
     }
@@ -451,7 +508,8 @@ class discussion {
      *
      * @return string
      */
-    private function get_neighbour_links_html() : string {
+    private function get_neighbour_links_html(): string
+    {
         $forum = $this->forum;
         $coursemodule = $forum->get_course_module_record();
         $neighbours = forum_get_discussion_neighbours($coursemodule, $this->discussionrecord, $this->forumrecord);

@@ -40,7 +40,8 @@ use stdClass;
  * @copyright 2020 Ferran Recio <ferran@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class section implements named_templatable, renderable {
+class section implements named_templatable, renderable
+{
     use courseformat_named_templatable;
 
     /** @var course_format the course format */
@@ -86,7 +87,8 @@ class section implements named_templatable, renderable {
      * @param course_format $format the course format
      * @param section_info $section the section info
      */
-    public function __construct(course_format $format, section_info $section) {
+    public function __construct(course_format $format, section_info $section)
+    {
         $this->format = $format;
         $this->section = $section;
 
@@ -109,7 +111,8 @@ class section implements named_templatable, renderable {
      *
      * This is used on blocks or in the home page where an isolated section is displayed.
      */
-    public function hide_title(): void {
+    public function hide_title(): void
+    {
         $this->hidetitle = true;
     }
 
@@ -118,7 +121,8 @@ class section implements named_templatable, renderable {
      *
      * This is used on blocks or in the home page where an isolated section is displayed.
      */
-    public function hide_controls(): void {
+    public function hide_controls(): void
+    {
         $this->hidecontrols = true;
     }
 
@@ -128,7 +132,8 @@ class section implements named_templatable, renderable {
      * @param renderer_base $output typically, the renderer that's calling this function
      * @return stdClass data context for a mustache template
      */
-    public function export_for_template(renderer_base $output): stdClass {
+    public function export_for_template(renderer_base $output): stdClass
+    {
         global $USER, $PAGE;
 
         $format = $this->format;
@@ -136,6 +141,8 @@ class section implements named_templatable, renderable {
         $section = $this->section;
 
         $summary = new $this->summaryclass($format, $section);
+        $params = ['courseid' => $course->id, 'insertsection' => $section->section + 1, 'sesskey' => sesskey()];
+        $addsections = $_SESSION['addsections'];
 
         $data = (object)[
             'num' => $section->section ?? '0',
@@ -145,7 +152,9 @@ class section implements named_templatable, renderable {
             'summary' => $summary->export_for_template($output),
             'highlightedlabel' => $format->get_section_highlighted_name(),
             'sitehome' => $course->id == SITEID,
-            'editing' => $PAGE->user_is_editing()
+            'editing' => $PAGE->user_is_editing(),
+            'url' => new \moodle_url('/course/changenumsections.php', $params),
+            'title-add-sections' => $addsections->title,
         ];
 
         $haspartials = [];
@@ -156,6 +165,7 @@ class section implements named_templatable, renderable {
         $haspartials['cm'] = $this->add_cm_data($data, $output);
         $this->add_format_data($data, $haspartials, $output);
 
+        // var_dump($data);
         return $data;
     }
 
@@ -166,7 +176,8 @@ class section implements named_templatable, renderable {
      * @param renderer_base $output typically, the renderer that's calling this function
      * @return bool if the cm has name data
      */
-    protected function add_header_data(stdClass &$data, renderer_base $output): bool {
+    protected function add_header_data(stdClass &$data, renderer_base $output): bool
+    {
         if (!empty($this->hidetitle)) {
             return false;
         }
@@ -193,7 +204,8 @@ class section implements named_templatable, renderable {
      * @param renderer_base $output typically, the renderer that's calling this function
      * @return bool if the cm has name data
      */
-    protected function add_cm_data(stdClass &$data, renderer_base $output): bool {
+    protected function add_cm_data(stdClass &$data, renderer_base $output): bool
+    {
         $result = false;
 
         $section = $this->section;
@@ -235,7 +247,8 @@ class section implements named_templatable, renderable {
      * @param renderer_base $output typically, the renderer that's calling this function
      * @return bool if the cm has name data
      */
-    protected function add_availability_data(stdClass &$data, renderer_base $output): bool {
+    protected function add_availability_data(stdClass &$data, renderer_base $output): bool
+    {
         $availability = new $this->availabilityclass($this->format, $this->section);
         $data->availability = $availability->export_for_template($output);
         $data->restrictionlock = !empty($this->section->availableinfo);
@@ -250,7 +263,8 @@ class section implements named_templatable, renderable {
      * @param renderer_base $output typically, the renderer that's calling this function
      * @return bool if the cm has name data
      */
-    protected function add_visibility_data(stdClass &$data, renderer_base $output): bool {
+    protected function add_visibility_data(stdClass &$data, renderer_base $output): bool
+    {
         global $USER;
         $result = false;
         $course = $this->format->get_course();
@@ -280,7 +294,8 @@ class section implements named_templatable, renderable {
      * @param renderer_base $output typically, the renderer that's calling this function
      * @return bool if the cm has name data
      */
-    protected function add_editor_data(stdClass &$data, renderer_base $output): bool {
+    protected function add_editor_data(stdClass &$data, renderer_base $output): bool
+    {
         if (!$this->format->show_editor()) {
             return false;
         }
@@ -294,7 +309,7 @@ class section implements named_templatable, renderable {
             $data->cmcontrols = $output->course_section_add_cm_control(
                 $course,
                 $this->section->section,
-           0
+                0
             );
         }
 
@@ -309,7 +324,8 @@ class section implements named_templatable, renderable {
      * @param renderer_base $output typically, the renderer that's calling this function
      * @return bool if the cm has name data
      */
-    protected function add_format_data(stdClass &$data, array $haspartials, renderer_base $output): bool {
+    protected function add_format_data(stdClass &$data, array $haspartials, renderer_base $output): bool
+    {
         $section = $this->section;
         $format = $this->format;
 

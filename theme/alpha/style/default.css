@@ -8705,7 +8705,7 @@ a.close.disabled, .yui3-skin-sam a.disabled.yui3-button.closebutton {
 @media (min-width: 1089px) {
   .modal-lg,
 .modal-xl {
-    max-width: 800px;
+    max-width: 576px;
   }
 }
 @media (min-width: 1600px) {
@@ -25938,7 +25938,6 @@ ul[aria-labelledby=category-listing-title] li {
 
 /* Activity Chooser */
 .rui-activitychooser-bg {
-  background-color: #F5F5F5;
   border-radius: 5px;
 }
 .theme-dark .rui-activitychooser-bg {
@@ -35937,11 +35936,6 @@ div#dock {
 .forumheaderlist .discussion .replies,
 .forumheaderlist .discussion .lastpost {
   vertical-align: top;
-}
-
-.discussion-list .topic {
-  font-weight: inherit;
-  padding-left: 12px !important;
 }
 .discussion-list .userpicture {
   width: 45px;
