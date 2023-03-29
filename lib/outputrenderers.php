@@ -5853,10 +5853,12 @@ class core_renderer_maintenance extends core_renderer
         global $CFG, $COURSE, $DB, $USER;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
         if(is_siteadmin()){
-            $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+            $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+            // '&returnto=catmanage'
         }else if(is_teacher()){
             if(is_course_creator($COURSE->id)){
-                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+                // '&returnto=catmanage'
             }else{
                 $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
             }

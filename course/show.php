@@ -100,10 +100,12 @@ $content = html_writer::start_div('course-teachers-box');
 $pages = new stdClass();
 $content = html_writer::start_div('course-navigation');
 if (is_siteadmin()) {
-    $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+    $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+    // '&returnto=catmanage'
 } else if (is_teacher()) {
     if (is_course_creator($COURSE->id)) {
-        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+        // '&returnto=catmanage'
     } else {
         $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
     }

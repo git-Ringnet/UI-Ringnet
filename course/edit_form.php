@@ -1,5 +1,7 @@
 <?php
 
+use core_search\document;
+
 defined('MOODLE_INTERNAL') || die;
 
 require_once($CFG->libdir . '/formslib.php');
@@ -46,8 +48,8 @@ class course_edit_form extends moodleform
         $this->context = $context;
 
         // Form definition with new course defaults.
-        $mform->addElement('header', 'general', get_string('general', 'form'));
-
+        // $mform->addElement('header', 'general', get_string('general', 'form'));
+      
         $mform->addElement('hidden', 'returnto', null);
         $mform->setType('returnto', PARAM_ALPHANUM);
         $mform->setConstant('returnto', $returnto);
@@ -55,6 +57,8 @@ class course_edit_form extends moodleform
         $mform->addElement('hidden', 'returnurl', null);
         $mform->setType('returnurl', PARAM_LOCALURL);
         $mform->setConstant('returnurl', $returnurl);
+        $mform->addElement('html','<div id="content_edit" class="d-flex justify-content-between" style="padding:0 100px;">');
+        $mform->addElement('html','<div class="edit_left" style="width:35%;">');
 
         // ảnh đại diện
         $summaryfields = 'summary_editor';
@@ -63,7 +67,17 @@ class course_edit_form extends moodleform
             $mform->addHelpButton('overviewfiles_filemanager', 'courseoverviewfiles');
             $summaryfields .= ',overviewfiles_filemanager';
         }
-
+        $mform->addElement('html','<div style="width:80%; text-align:right; position:relative">');
+        if($overviewfilesoptions['context'] != null){
+            $mform->addElement('html','<button id="btn_edit" class="delete_image btn btn-danger" style="position:absolute; right:0;">Delete Image</button>');
+            $mform->addElement('html','<button id="btn_upload" class="upload_image" style="display:none;position:absolute; right:0;">Tải lên</button>');
+        }else{
+            $mform->addElement('html','<button id="btn_edit" class="delete_image btn btn-danger" style="display:none;position:absolute; right:0;">Delete Image</button>');
+            $mform->addElement('html','<button id="btn_upload" class="upload_image" style="position:absolute; right:0;">Tải lên</button>');
+        }
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','<div class="edit_right" style="width:100%;">');
 
         $mform->addElement('text', 'fullname', get_string('fullnamecourse'), 'maxlength="254" size="50"');
         $mform->addHelpButton('fullname', 'fullnamecourse');
@@ -119,39 +133,23 @@ class course_edit_form extends moodleform
         }
 
         // Description.
-        $mform->addElement('header', 'descriptionhdr', get_string('description'));
+        // $mform->addElement('header', 'descriptionhdr', get_string('description'));
         $mform->setExpanded('descriptionhdr');
-
         $mform->addElement('editor', 'summary_editor', get_string('coursesummary'), null, $editoroptions);
         $mform->addHelpButton('summary_editor', 'coursesummary');
         $mform->setType('summary_editor', PARAM_RAW);
 
-
         // Chế độ
-
         // Select visible old
         $choices = array();
-        // $choices['0'] = get_string('hide');
-        // $choices['1'] = get_string('show');
-      
-        
-        // Change select visible to radio button visible
-        // $choices = array();
-        // $choices['0'] = $mform->createElement('radio', 'visible', '', get_string('hide'));
-        // $choices['1'] = $mform->createElement('radio', 'visible', '', get_string('show'));
-        // $mform->addGroup($choices, 'coursevisibility', get_string('coursevisibility'));
-        // $mform->addElement('select', 'visible', get_string('coursevisibility'), $choices);
-
         // fix radio button
         $radioarray = array();
-        $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('hide'), 0);
         $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('show'), 1);
+        $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('hide'), 0);
         $mform->addGroup($radioarray, 'coursevisibility', get_string('coursevisibility'), array(' ', ' '), false);
-
 
         $mform->addHelpButton('visible', 'coursevisibility');
         $mform->setDefault('visible', $courseconfig->visible);
-
 
         if (!empty($course->id)) {
             if (!has_capability('moodle/course:visibility', $coursecontext)) {
@@ -188,8 +186,6 @@ class course_edit_form extends moodleform
             }
         }
 
-
-
         // Thời gian hiệu lực
         // $mform->addElement('text', 'startdate', get_string('startdate'));
         // $mform->addHelpButton('startdate', 'startdate');
@@ -204,13 +200,10 @@ class course_edit_form extends moodleform
         $date->modify('+1 day');
         $mform->setDefault('startdate', $date->getTimestamp());
         
-      
-
         // Thời gian hết hạn
 
         $mform->addElement('date_time_selector', 'enddate', get_string('enddate'), array('optional' => true));
         $mform->addHelpButton('enddate', 'enddate');
-
         // if (!empty($CFG->enablecourserelativedates)) {
         //     $attributes = [
         //         'aria-describedby' => 'relativedatesmode_warning'
@@ -230,8 +223,6 @@ class course_edit_form extends moodleform
         //     $mform->addGroup($relativedatesmodegroup, 'relativedatesmodegroup', get_string('relativedatesmode'), null, false);
         //     $mform->addHelpButton('relativedatesmodegroup', 'relativedatesmode');
         // }
-
-
 
         // $mform->addElement('text','idnumber', get_string('idnumbercourse'),'maxlength="100"  size="10"');
         // $mform->addHelpButton('idnumber', 'idnumbercourse');
@@ -256,7 +247,6 @@ class course_edit_form extends moodleform
         //     $summaryfields .= ',overviewfiles_filemanager';
         // }
 
-
         if (!empty($course->id) and !has_capability('moodle/course:changesummary', $coursecontext)) {
             // Remove the description header it does not contain anything any more.
             $mform->removeElement('descriptionhdr');
@@ -265,7 +255,6 @@ class course_edit_form extends moodleform
 
         // Course format.
         // $mform->addElement('header', 'courseformathdr', get_string('type_format', 'plugin'));
-
 
         // $courseformats = get_sorted_course_formats(true);
         // $formcourseformats = array();
@@ -298,15 +287,16 @@ class course_edit_form extends moodleform
         $mform->addElement('select', 'format', get_string('format'), $formcourseformats, [
             'data-formatchooser-field' => 'selector',
         ]);
+        
         $mform->addHelpButton('format', 'format');
         $mform->setDefault('format', $courseconfig->format);
         $mform->setDefault('numsections', 3);
 
         // Button to update format-specific options on format change (will be hidden by JavaScript).
-        $mform->addHelpButton('format', 'format');
-        $mform->setDefault('format', 'flexsections');
+        // $mform->addHelpButton('format', 'format');
+        // $mform->setDefault('format', 'flexsections');
         //Button to update format-specific options on format change (will be hidden by JavaScript).
-        $mform->registerNoSubmitButton('updatecourseformat');
+        // $mform->registerNoSubmitButton('updatecourseformat');
         // $mform->addElement('submit', 'updatecourseformat', get_string('courseformatudpate'), [
         //     'data-formatchooser-field' => 'updateButton',
         //     'class' => 'd-none',
@@ -365,7 +355,6 @@ class course_edit_form extends moodleform
         $mform->setDefault('showreports', $courseconfig->showreports);
 
         // Show activity dates.
-
         // $mform->addElement('selectyesno', 'showactivitydates', get_string('showactivitydates'));
         // $mform->addHelpButton('showactivitydates', 'showactivitydates');
         // $mform->setDefault('showactivitydates', $courseconfig->showactivitydates);
@@ -393,10 +382,15 @@ class course_edit_form extends moodleform
         $coursemaxbytes = !isset($course->maxbytes) ? null : $course->maxbytes;
 
         // Let's prepare the maxbytes popup.
-        $choices = get_max_upload_sizes($CFG->maxbytes, 0, 0, $coursemaxbytes);
-        $mform->addElement('select', 'maxbytes', get_string('maximumupload'), $choices);
-        $mform->addHelpButton('maxbytes', 'maximumupload');
-        $mform->setDefault('maxbytes', $courseconfig->maxbytes);
+        // $choices = get_max_upload_sizes($CFG->maxbytes, 0, 0, $coursemaxbytes);
+        // $mform->addElement('select', 'maxbytes', get_string('maximumupload'), $choices);
+        // $mform->addHelpButton('maxbytes', 'maximumupload');
+        // $mform->setDefault('maxbytes', $courseconfig->maxbytes);
+
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','<div id="div_left" style="width:10%;">');
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','</div>');
 
         // Completion tracking.
         // if (completion_info::is_enabled_for_site()) {
@@ -593,3 +587,40 @@ class course_edit_form extends moodleform
         return $errors;
     }
 }
+?>
+<script>
+    window.onload = function(){
+        var num = 1;
+        var delete1 =  document.querySelector('.delete_image');
+        var upload_image = document.getElementById('btn_upload');
+        if(delete1){
+            delete1.addEventListener('click',function(e){
+                e.preventDefault();
+                click_image = document.querySelector('.fp-thumbnail').click();
+                document.querySelector('.fp-file-delete').click();
+                document.querySelector('.fp-dlg-butconfirm').click();
+                upload_image.style.display = "block";
+                delete1.style.display = "none";
+            });
+        }
+        if(upload_image){
+            upload_image.addEventListener('click',function(e){
+                e.preventDefault();
+                    upload = document.querySelector('.dndupload-arrow').click();
+                    setTimeout(function(){
+                        var up = document.querySelector('.fp-formset');
+                    if(up)
+                    {
+                        var img_extent = up.querySelector('input');
+                        img_extent.click();
+                        img_extent.addEventListener('change',function(){
+                        document.querySelector('.fp-upload-btn').click()
+                        upload_image.style.display = "none";
+                        delete1.style.display = "block";
+                        });
+                    }
+                    },200)
+            });
+        }
+    }
+</script>
