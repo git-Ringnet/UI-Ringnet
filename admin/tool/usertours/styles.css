@@ -874,7 +874,7 @@ body {
     width: 100%;
 }
 
-#page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection,
+/* #page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection */
 #page-course-edit #id_general legend,
 #page-course-edit #id_descriptionhdr legend {
     display: none !important;
