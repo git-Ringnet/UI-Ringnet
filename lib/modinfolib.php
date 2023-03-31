@@ -2549,6 +2549,7 @@ function get_fast_modinfo($courseorid, $userid = 0, $resetonly = false) {
     return course_modinfo::instance($courseorid, $userid);
 }
 
+
 /**
  * Efficiently retrieves the $course (stdclass) and $cm (cm_info) objects, given
  * a cmid. If module name is also provided, it will ensure the cm is of that type.

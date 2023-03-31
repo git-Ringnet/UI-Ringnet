@@ -1918,3 +1918,77 @@ select#bulk_action {
     position: absolute;
     right: 0;
 }
+#page-course-show #show_img_student{
+    width:74%;
+    background:#D6D6D6;
+    border-radius:6px;
+}
+#page-course-show #show_img_student img{
+    width:100%; 
+    padding:20px 20px;
+}
+#myModal #show_img_modal{
+    width:30%; 
+    background:#D6D6D6;
+}
+#myModal #show_img_modal img{
+    width:100%; 
+    padding:20px 25px;
+}
+#myModal #show_namecourse_modal{
+    width:65%; 
+    font-size:16px; 
+    font-weight:600; 
+    line-height:20px;
+}
+#myModal #show_title_modal{
+    font-size:13px; 
+    font-weight: 600; 
+    line-height:18px;
+}
+#myModal #show_input_modal{
+    padding:11px 15px; 
+    border:1px solid #D6D6D6; 
+    border-radius:8px; 
+    width:80%; 
+    font-size:14px; 
+    font-weight:400; 
+    line-height:24px;
+}
+#myModal #show_button_modal{
+    border-radius:4px;
+    color:#0095F6; 
+    line-height:24px; 
+    font-weight: 500;
+    font-size:12px; 
+    padding:0 8px; 
+    background:transparent; 
+    border: 1px solid #0095F6;
+}
+#page-course-show .show_course_stu .title_course_student{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #555555;
+}
+#page-course-show .show_course_sty .bool_course_student{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    color: #555555;
+}
+#page-course-show #stu_id_fullname h1{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: #1D1C20;
+}
+#page-course-show #content_course_student{
+    box-shadow: 4px 8px 16px rgba(69, 79, 89, 0.08);
+    border-radius: 16px;
+}
+@media only screen and (min-width: 1900px){
+    #page-course-show .show_course_stu .row{
+        padding: 20px 180px;
+    }
+}
