@@ -160,9 +160,9 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #id_general .fdescription {
     display: none;
 }
+
 #page-course-edit #fitem_id_overviewfiles_filemanager p,
-#page-course-edit #fitem_id_overviewfiles_filemanager .form-filetypes-descriptions
-{
+#page-course-edit #fitem_id_overviewfiles_filemanager .form-filetypes-descriptions {
     display: none;
 }
 
@@ -173,7 +173,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #page-course-edit #fgroup_id_coursevisibility,
 #page-course-edit #fitem_id_startdate,
 #page-course-edit #fitem_id_enddate,
-#page-course-edit #fitem_id_format{
+#page-course-edit #fitem_id_format {
     display: block !important;
 }
 
@@ -184,7 +184,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #page-course-edit #fgroup_id_coursevisibility .col-md-3,
 #page-course-edit #fitem_id_startdate .col-md-3,
 #page-course-edit #fitem_id_enddate .col-md-3,
-#page-course-edit #fitem_id_format .col-md-3{
+#page-course-edit #fitem_id_format .col-md-3 {
     text-align: left !important;
     max-width: 100%;
 }
@@ -195,24 +195,27 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #page-course-edit #fgroup_id_coursevisibility .col-md-9,
 #page-course-edit #fitem_id_startdate .col-md-9,
 #page-course-edit #fitem_id_enddate .col-md-9,
-#page-course-edit #fitem_id_format .col-md-9{
+#page-course-edit #fitem_id_format .col-md-9 {
     max-width: 100%;
     margin-top: 1%;
     margin-bottom: 2%;
 }
-#page-course-edit #fitem_id_summary_editor .col-md-9{
+
+#page-course-edit #fitem_id_summary_editor .col-md-9 {
     max-width: 100%;
     margin-top: 1%;
     margin-bottom: 2%;
     width: 56%;
 }
-#page-course-edit #fitem_id_fullname .col-md-9 input
-{
+
+#page-course-edit #fitem_id_fullname .col-md-9 input {
     width: 56%;
 }
-#page-course-edit #fitem_id_category .col-md-9 .d-md-inline-block{
+
+#page-course-edit #fitem_id_category .col-md-9 .d-md-inline-block {
     width: 62.5%;
 }
+
 #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3 label,
 #page-course-edit #fitem_id_fullname .col-md-3 label,
 #page-course-edit #fitem_id_category .col-md-3 label,
@@ -220,34 +223,40 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #page-course-edit #fgroup_id_coursevisibility .col-md-3 label,
 #page-course-edit #fitem_id_startdate .col-md-3 label,
 #page-course-edit #fitem_id_enddate .col-md-3 label,
-#page-course-edit #fitem_id_format .col-md-3 label{
-   font-size: 13px;
-   font-weight: 600;
-   color: #000000;
-   line-height: 18px;
+#page-course-edit #fitem_id_format .col-md-3 label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    line-height: 18px;
 }
+
 #page-course-edit #fitem_id_overviewfiles_filemanager .fp-pathbar,
-#page-course-edit #fitem_id_overviewfiles_filemanager .filemanager-container{
+#page-course-edit #fitem_id_overviewfiles_filemanager .filemanager-container {
     width: 83%;
 }
-#page-course-edit #fitem_id_overviewfiles_filemanager .fp-thumbnail img{
+
+#page-course-edit #fitem_id_overviewfiles_filemanager .fp-thumbnail img {
     border-radius: 8px;
     width: 100%;
     max-width: 100% !important;
     max-height: 100% !important;
     object-fit: cover;
 }
+
 #page-course-edit #fitem_id_enddate .col-md-3,
-#page-course-edit #fitem_id_format{
+#page-course-edit #fitem_id_format {
     display: none !important;
 }
-#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 .border-top{
+
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 .border-top {
     border-top: none !important;
 }
-#page-course-edit #fitem_id_category .col-md-9{
+
+#page-course-edit #fitem_id_category .col-md-9 {
     width: 50% !important;
 }
-#page-course-edit #btn_upload{
+
+#page-course-edit #btn_upload {
     font-size: 14px;
     border-radius: 6px;
     background-color: #555555;
@@ -256,7 +265,8 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     font-weight: 500;
     line-height: 24px;
 }
-#page-course-eidt #id_saveanddisplay{
+
+#page-course-eidt #id_saveanddisplay {
     line-height: 24px;
     font-size: 14px;
     padding: 8px 16px;
@@ -264,7 +274,8 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     border: 8px;
     font-weight: 500;
 }
-#page-course-edit #id_cancel{
+
+#page-course-edit #id_cancel {
     font-weight: 500;
     font-size: 14px;
     padding: 8px 16px;
@@ -272,37 +283,46 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     border-radius: 8px;
     line-height: 24px;
 }
+
 /* #page-course-edit .moodle-dialogue-wrap{
     opacity: 0 !important;
 } */
-@media only screen and (min-width: 500px) and (max-width:1000px){
-    #page-course-edit #div_left{
+@media only screen and (min-width: 500px) and (max-width:1000px) {
+    #page-course-edit #div_left {
         width: 0% !important;
     }
+
     #page-course-edit .edit_left,
-    #page-course-edit .edit_right{
+    #page-course-edit .edit_right {
         width: 100% !important;
     }
+
     #page-course-edit #fitem_id_fullname .col-md-9 input,
-    #page-course-edit #fitem_id_summary_editor .col-md-9{
+    #page-course-edit #fitem_id_summary_editor .col-md-9 {
         width: 100% !important;
     }
-    #page-course-edit #fitem_id_category .col-md-9{
+
+    #page-course-edit #fitem_id_category .col-md-9 {
         max-width: 80% !important;
     }
 }
+
 @media only screen and (max-width:1919px) {
+
     #page-course-edit #fitem_id_summary_editor .col-md-9,
-    #page-course-edit #fitem_id_fullname .col-md-9 input{
+    #page-course-edit #fitem_id_fullname .col-md-9 input {
         width: 95% !important;
     }
-    #page-course-edit #content_edit{
+
+    #page-course-edit #content_edit {
         padding: 0 20px !important;
     }
-    #page-course-edit #fitem_id_category .col-md-9 .d-md-inline-block{
+
+    #page-course-edit #fitem_id_category .col-md-9 .d-md-inline-block {
         width: 100% !important;
     }
 }
+
 /*
 #filemanager-639844a710b13 .fp-navbar {
     display: none
@@ -1006,6 +1026,7 @@ body {
 .no-overflow>.rolecap {
     width: 100%;
 }
+
 /* Đây */
 /* #page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection */
 #page-course-edit #id_general legend,
@@ -1166,6 +1187,9 @@ body {
 
 
 
+
+/* /Update Create New Course */
+
 .activity-add-text.add-activity {
     color: #0095F6;
 }
@@ -1202,8 +1226,6 @@ body {
     border: none;
 }
 
-
-/* /Update Create New Course */
 #users tbody tr,
 #users thead tr th,
 #roles tbody tr,
@@ -1913,16 +1935,19 @@ select#bulk_action {
 #section-0 #btn_addSection {
     display: none !important;
 }
+
 .rui--activity-is-manual .activity-information {
     left: unset !important;
     right: 0;
 }
+
 #page-badges-view #navbar_PNSection,
 #page-mod-forum-discuss #navbar_PNSection,
 #page-mod-forum-view #navbar_PNSection,
 h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
     display: none !important;
 }
+
 #page-course-edit #id_completionhdr {
     display: none !important;
 }
@@ -1944,6 +1969,7 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
 #s-page-footer {
     display: none;
 }
+
 #btn_addSection>#btn_add_section>.add-sections {
     padding: 8px 16px;
     background: #555555;
@@ -1955,64 +1981,165 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
     color: #FFFFFF;
 }
 
-#btn_addSection {
-    background: white;
-    border: 1px solid blue;
-}
 /* Mới */
 #page-course-view-participants .modal-header {
     background: #0095F6;
 }
-#page-course-view-participants .modal-header h5{
+
+#page-course-view-participants .modal-header h5 {
     line-height: 28px;
     font-weight: 600;
     font-size: 18px;
     color: #FFF;
 }
+
 #page-course-view-participants #fitem_id_userlist .col-md-3 label,
-#page-course-view-participants #fitem_id_cohortlist .col-md-3 label
-{
+#page-course-view-participants #fitem_id_cohortlist .col-md-3 label {
     font-weight: 600;
     font-size: 14px;
     line-height: 24px;
 }
-#page-course-view-participants .modal-content{
+
+#page-course-view-participants .modal-content {
     border: none;
 }
-#page-course-view-participants #fitem_id_roletoassign .col-md-3 label{
+
+#page-course-view-participants #fitem_id_roletoassign .col-md-3 label {
     font-size: 13px;
     font-weight: 600;
     line-height: 18px;
 }
-#page-course-view-participants .form-autocomplete-suggestions{
+
+#page-course-view-participants .form-autocomplete-suggestions {
     width: 100% !important;
 }
-#page-course-edit #fitem_id_startdate .col-md-9 span{
+
+#page-course-edit #fitem_id_startdate .col-md-9 span {
     height: 3rem;
 }
+
 #page-course-edit #fitem_id_startdate .col-md-9 select,
-#page-course-edit #fitem_id_enddate .col-md-9 select
-{
+#page-course-edit #fitem_id_enddate .col-md-9 select {
     line-height: 24px;
     font-weight: 400;
     font-size: 14px;
 }
-#page-course-edit #fitem_id_fullname .col-md-9 input{
+
+#page-course-edit #fitem_id_fullname .col-md-9 input {
     font-weight: 400;
     font-size: 14px;
     padding: 12px 16px 12px 16px;
     background: #FFF;
 }
+
 #page-course-edit #fitem_id_fullname .col-md-3 label,
 #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3 label,
 #page-course-edit #fitem_id_category .col-md-3 label,
 #page-course-edit #fitem_id_summary_editor .col-md-3 label,
 #page-course-edit #fgroup_id_coursevisibility .col-md-3 label,
-#page-course-edit #fitem_id_startdate .col-md-3 label
-{
+#page-course-edit #fitem_id_startdate .col-md-3 label {
     font-size: .813rem;
     line-height: 18px;
     font-weight: 600;
     color: #1D1C20;
 }
+
 /*  */
+/* Tuấn Lê */
+#page-course-edit #btn_edit {
+    line-height: 24px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 4px 16px;
+    position: absolute;
+    right: 0;
+}
+
+#page-course-show #show_img_student {
+    width: 74%;
+    background: #D6D6D6;
+    border-radius: 6px;
+}
+
+#page-course-show #show_img_student img {
+    width: 100%;
+    padding: 20px 20px;
+}
+
+#myModal #show_img_modal {
+    width: 30%;
+    background: #D6D6D6;
+}
+
+#myModal #show_img_modal img {
+    width: 100%;
+    padding: 20px 25px;
+}
+
+#myModal #show_namecourse_modal {
+    width: 65%;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+#myModal #show_title_modal {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+}
+
+#myModal #show_input_modal {
+    padding: 11px 15px;
+    border: 1px solid #D6D6D6;
+    border-radius: 8px;
+    width: 80%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+#myModal #show_button_modal {
+    border-radius: 4px;
+    color: #0095F6;
+    line-height: 24px;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 0 8px;
+    background: transparent;
+    border: 1px solid #0095F6;
+}
+
+#page-course-show .show_course_stu .title_course_student {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #555555;
+}
+
+#page-course-show .show_course_sty .bool_course_student {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+    color: #555555;
+}
+
+#page-course-show #stu_id_fullname h1 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    color: #1D1C20;
+}
+
+#page-course-show #content_course_student {
+    width: 75%;
+    box-shadow: 4px 8px 16px rgba(69, 79, 89, 0.08);
+    border-radius: 16px;
+}
+
+@media only screen and (min-width: 1900px) {
+    #page-course-show .show_course_stu .row {
+        padding: 20px 180px;
+    }
+}
