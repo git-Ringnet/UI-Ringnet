@@ -28130,9 +28130,9 @@ a.ygtvspacer:hover {
 }
 
 /* Filemanager on the course edit page, form below editor */
-#fitem_id_overviewfiles_filemanager {
+/* #fitem_id_overviewfiles_filemanager {
   margin-top: 30px;
-}
+} */
 
 .theme-dark .file-picker .ygtvtn,
 .theme-dark .filemanager .ygtvtn,

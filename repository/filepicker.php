@@ -180,7 +180,7 @@ case 'sign':
         if (!empty($list['upload'])) {
             echo '<form action="'.$url->out().'" method="post" enctype="multipart/form-data" style="display:inline">';
             echo '<label>'.$list['upload']['label'].': </label>';
-            echo '<input type="file" name="repo_upload_file" /><br />';
+            echo '<input class="input_file_image" type="file" name="repo_upload_file" /><br />';
             echo '<input type="hidden" name="action" value="upload" /><br />';
             echo '<input type="hidden" name="draftpath" value="'.s($draftpath).'" /><br />';
             echo '<input type="hidden" name="savepath" value="'.s($savepath).'" /><br />';

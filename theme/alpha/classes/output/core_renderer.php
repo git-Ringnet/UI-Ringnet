@@ -379,10 +379,12 @@ class core_renderer extends \core_renderer
         // Kiểm tra role có phải là teacher hay không
         // sau đó kiểm tra có phải là người tạo khóa học hay không
         if (is_siteadmin()) {
-            $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+            $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+            // '&returnto=catmanage'
         } else if (is_teacher()) {
             if (is_course_creator($COURSE->id)) {
-                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id ;
+                // '&returnto=catmanage'
             } else {
                 $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
             }
