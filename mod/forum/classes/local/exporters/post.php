@@ -45,7 +45,8 @@ require_once($CFG->dirroot . '/mod/forum/lib.php');
  * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class post extends exporter {
+class post extends exporter
+{
     /** @var post_entity $post The post to export */
     private $post;
 
@@ -55,7 +56,8 @@ class post extends exporter {
      * @param post_entity $post The post to export
      * @param array $related List of related data
      */
-    public function __construct(post_entity $post, array $related = []) {
+    public function __construct(post_entity $post, array $related = [])
+    {
         $this->post = $post;
         return parent::__construct([], $related);
     }
@@ -65,7 +67,8 @@ class post extends exporter {
      *
      * @return array
      */
-    protected static function define_other_properties() {
+    protected static function define_other_properties()
+    {
         $attachmentdefinition = stored_file_exporter::read_properties_definition();
         $attachmentdefinition['urls'] = [
             'type' => [
@@ -353,13 +356,44 @@ class post extends exporter {
         ];
     }
 
+    protected function getMessageParent($postid)
+    {
+        global $DB;
+        // $post = $this->post;
+        // var_dump($post->get_parent_id());
+        $messagea = "";
+        $postcha = $DB->get_record('forum_posts', array('id' => $postid), 'id, message');
+        if ($postcha) {
+            $messagea = $postcha->message;
+            // use $message for further processing
+        }
+        return $messagea;
+        // var_dump($messagea);
+    }
+    protected function getauthorparent($postid)
+    {
+        global $DB;
+        $creatorname = "";
+        $post = $DB->get_record('forum_posts', array('id' => $postid), 'id, userid');
+        if ($post) {
+            $creatorid = $post->userid;
+            $creator = $DB->get_record('user', array('id' => $creatorid), 'id, firstname, lastname, email');
+            if ($creator) {
+                $creatorname = fullname($creator);
+            }
+        }
+        return $creatorname;
+    }
+
+
     /**
      * Get the additional values to inject while exporting.
      *
      * @param renderer_base $output The renderer.
      * @return array Keys are the property names, values are their values.
      */
-    protected function get_other_values(renderer_base $output) {
+    protected function get_other_values(renderer_base $output)
+    {
         $post = $this->post;
         $authorgroups = $this->related['authorgroups'];
         $forum = $this->related['forum'];
@@ -404,6 +438,7 @@ class post extends exporter {
         $markasunreadurl = $cancontrolreadstatus ? $urlfactory->get_mark_post_as_unread_url_from_post($post) : null;
         $discussurl = $canview ? $urlfactory->get_discussion_view_url_from_post($post) : null;
 
+
         $authorexporter = new author_exporter(
             $author,
             $authorcontextid,
@@ -433,6 +468,9 @@ class post extends exporter {
             $replysubject = "{$strre} {$replysubject}";
         }
 
+
+        // var_dump($replysubject);
+
         $showwordcount = $forum->should_display_word_count();
         if ($showwordcount) {
             $wordcount = $post->get_wordcount() ?? count_words($message);
@@ -442,6 +480,10 @@ class post extends exporter {
             $charcount = null;
         }
 
+        $messageparent = $this->getMessageParent($post->get_parent_id());
+        $authorparent = $this->getauthorparent($post->get_parent_id());
+        // var_dump($authorparent);
+        $count =0;
         return [
             'id' => $post->get_id(),
             'subject' => $subject,
@@ -450,6 +492,7 @@ class post extends exporter {
             'messageformat' => $post->get_message_format(),
             'author' => $exportedauthor,
             'discussionid' => $post->get_discussion_id(),
+      
             'hasparent' => $post->has_parent(),
             'parentid' => $post->has_parent() ? $post->get_parent_id() : null,
             'timecreated' => $timecreated,
@@ -472,6 +515,9 @@ class post extends exporter {
                 'selfenrol' => $canselfenrol
             ],
             'urls' => [
+                'num' => ++$count,
+                'messageparent' => $messageparent,
+                'authorparent' => $authorparent,
                 'view' => $viewurl ? $viewurl->out(false) : null,
                 'viewisolated' => $viewisolatedurl ? $viewisolatedurl->out(false) : null,
                 'viewparent' => $viewparenturl ? $viewparenturl->out(false) : null,
@@ -485,8 +531,11 @@ class post extends exporter {
                 'discuss' => $discussurl ? $discussurl->out(false) : null,
             ],
             'attachments' => ($exportattachments) ? $this->export_attachments($attachments, $post, $output, $canexport) : [],
-            'messageinlinefiles' => ($exportinlineattachments) ? $this->export_inline_attachments($inlineattachments,
-                $post, $output) : [],
+            'messageinlinefiles' => ($exportinlineattachments) ? $this->export_inline_attachments(
+                $inlineattachments,
+                $post,
+                $output
+            ) : [],
             'tags' => ($loadcontent && $hastags) ? $this->export_tags($tags) : [],
             'html' => $includehtml ? [
                 'rating' => ($loadcontent && $hasrating) ? $output->render($rating) : null,
@@ -501,7 +550,8 @@ class post extends exporter {
      *
      * @return array
      */
-    protected static function define_related() {
+    protected static function define_related()
+    {
         return [
             'capabilitymanager' => 'mod_forum\local\managers\capability',
             'readreceiptcollection' => 'mod_forum\local\entities\post_read_receipt_collection?',
@@ -527,7 +577,8 @@ class post extends exporter {
      *
      * @return array
      */
-    protected function get_format_parameters_for_message() {
+    protected function get_format_parameters_for_message()
+    {
         return [
             'component' => 'mod_forum',
             'filearea' => 'post',
@@ -545,7 +596,8 @@ class post extends exporter {
      * @param post_entity $post The post
      * @return string
      */
-    private function get_message(post_entity $post) : string {
+    private function get_message(post_entity $post): string
+    {
         global $CFG;
 
         $message = $post->get_message();
@@ -574,7 +626,8 @@ class post extends exporter {
      * @param bool $canexport If the user can export the post (relates to portfolios not exporters like this class)
      * @return array
      */
-    private function export_attachments(array $attachments, post_entity $post, renderer_base $output, bool $canexport) : array {
+    private function export_attachments(array $attachments, post_entity $post, renderer_base $output, bool $canexport): array
+    {
         global $CFG;
 
         $urlfactory = $this->related['urlfactory'];
@@ -583,10 +636,10 @@ class post extends exporter {
         $context = $this->related['context'];
 
         if ($enableplagiarism) {
-            require_once($CFG->libdir . '/plagiarismlib.php' );
+            require_once($CFG->libdir . '/plagiarismlib.php');
         }
 
-        return array_map(function($attachment) use (
+        return array_map(function ($attachment) use (
             $output,
             $enableplagiarism,
             $canexport,
@@ -630,9 +683,10 @@ class post extends exporter {
      * @param renderer_base $output Renderer base
      * @return array
      */
-    private function export_inline_attachments(array $inlineattachments, post_entity $post, renderer_base $output) : array {
+    private function export_inline_attachments(array $inlineattachments, post_entity $post, renderer_base $output): array
+    {
 
-        return array_map(function($attachment) use (
+        return array_map(function ($attachment) use (
             $output,
             $post
         ) {
@@ -647,13 +701,14 @@ class post extends exporter {
      * @param core_tag_tag[] $tags List of tags to export
      * @return array
      */
-    private function export_tags(array $tags) : array {
+    private function export_tags(array $tags): array
+    {
         $user = $this->related['user'];
         $context = $this->related['context'];
         $capabilitymanager = $this->related['capabilitymanager'];
         $canmanagetags = $capabilitymanager->can_manage_tags($user);
 
-        return array_values(array_map(function($tag) use ($context, $canmanagetags) {
+        return array_values(array_map(function ($tag) use ($context, $canmanagetags) {
             $viewurl = core_tag_tag::make_url($tag->tagcollid, $tag->rawname, 0, $context->id);
             return [
                 'id' => $tag->taginstanceid,
@@ -675,7 +730,8 @@ class post extends exporter {
      * @param int $timecreated The post time created timestamp if it's to be displayed
      * @return string
      */
-    private function get_author_subheading_html(stdClass $exportedauthor, int $timecreated) : string {
+    private function get_author_subheading_html(stdClass $exportedauthor, int $timecreated): string
+    {
         $fullname = $exportedauthor->fullname;
         $profileurl = $exportedauthor->urls['profile'] ?? null;
         $name = $profileurl ? "<a href=\"{$profileurl}\">{$fullname}</a>" : $fullname;
@@ -690,7 +746,8 @@ class post extends exporter {
      * @param post_entity $post entity
      * @return int The start time (timestamp) for a post
      */
-    private function get_start_time(discussion_entity $discussion, post_entity $post) {
+    private function get_start_time(discussion_entity $discussion, post_entity $post)
+    {
         global $CFG;
 
         $posttime = $post->get_time_created();

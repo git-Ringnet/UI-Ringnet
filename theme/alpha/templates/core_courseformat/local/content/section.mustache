@@ -105,5 +105,26 @@ Example context (json):
         {{$ core_courseformat/local/content/section/content }}
         {{> core_courseformat/local/content/section/content }}
         {{/ core_courseformat/local/content/section/content }}
+
+        <div id="btn_addSection" style="display: ;">
+            <div id="btn_add_section">
+                {{!-- Add new action --}}
+                <a href="{{{url}}}" class="btn btn-primary mt-3 add-sections mb-3 mx-2"
+                    data-add-sections="{{title-add-sections}}" data-new-sections="{{newsection}}" data-action=""
+                    {{#insertafter}} data-id="{{id}}" {{/insertafter}}>
+                    <span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M8 4C8.25861 4 8.46825 4.20964 8.46825 4.46825L8.46825 11.5318C8.46825 11.7904 8.25861 12 8 12C7.74139 12 7.53175 11.7904 7.53175 11.5318V4.46825C7.53175 4.20964 7.74139 4 8 4Z"
+                            fill="white" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M12 8C12 8.25861 11.7904 8.46825 11.5318 8.46825H4.46825C4.20964 8.46825 4 8.25861 4 8C4 7.74139 4.20964 7.53175 4.46825 7.53175H11.5318C11.7904 7.53175 12 7.74139 12 8Z"
+                            fill="white" />
+                    </svg>
+                    {{title-add-sections}}
+                    </span>
+                </a>
+            </div>
+        </div>
     </div>
 </li>

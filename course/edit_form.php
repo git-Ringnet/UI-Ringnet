@@ -393,22 +393,22 @@ class course_edit_form extends moodleform
         $mform->addElement('html','</div>');
 
         // Completion tracking.
-        // if (completion_info::is_enabled_for_site()) {
-        //     $mform->addElement('header', 'completionhdr', get_string('completion', 'completion'));
-        //     $mform->addElement('selectyesno', 'enablecompletion', get_string('enablecompletion', 'completion'));
-        //     $mform->setDefault('enablecompletion', $courseconfig->enablecompletion);
-        //     $mform->addHelpButton('enablecompletion', 'enablecompletion', 'completion');
+        if (completion_info::is_enabled_for_site()) {
+            $mform->addElement('header', 'completionhdr', get_string('completion', 'completion'));
+            $mform->addElement('selectyesno', 'enablecompletion', get_string('enablecompletion', 'completion'));
+            $mform->setDefault('enablecompletion', $courseconfig->enablecompletion);
+            $mform->addHelpButton('enablecompletion', 'enablecompletion', 'completion');
 
-        //     $showcompletionconditions = $courseconfig->showcompletionconditions ?? COMPLETION_SHOW_CONDITIONS;
-        //     $mform->addElement('selectyesno', 'showcompletionconditions', get_string('showcompletionconditions', 'completion'));
-        //     $mform->addHelpButton('showcompletionconditions', 'showcompletionconditions', 'completion');
-        //     $mform->setDefault('showcompletionconditions', $showcompletionconditions);
-        //     $mform->hideIf('showcompletionconditions', 'enablecompletion', 'eq', COMPLETION_DISABLED);
-        // } else {
-        //     $mform->addElement('hidden', 'enablecompletion');
-        //     $mform->setType('enablecompletion', PARAM_INT);
-        //     $mform->setDefault('enablecompletion', 0);
-        // }
+            $showcompletionconditions = $courseconfig->showcompletionconditions ?? COMPLETION_SHOW_CONDITIONS;
+            $mform->addElement('selectyesno', 'showcompletionconditions', get_string('showcompletionconditions', 'completion'));
+            $mform->addHelpButton('showcompletionconditions', 'showcompletionconditions', 'completion');
+            $mform->setDefault('showcompletionconditions', $showcompletionconditions);
+            $mform->hideIf('showcompletionconditions', 'enablecompletion', 'eq', COMPLETION_DISABLED);
+        } else {
+            $mform->addElement('hidden', 'enablecompletion');
+            $mform->setType('enablecompletion', PARAM_INT);
+            $mform->setDefault('enablecompletion', 0);
+        }
 
         // enrol_course_edit_form($mform, $course, $context);
 

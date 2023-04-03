@@ -2095,7 +2095,8 @@ function forum_get_course_forum($courseid, $type) {
             $forum->name  = get_string("namenews", "forum");
             $forum->intro = get_string("intronews", "forum");
             $forum->introformat = FORMAT_HTML;
-            $forum->forcesubscribe = FORUM_FORCESUBSCRIBE;
+            //Mặc định là tùy chọn đăng kí
+            $forum->forcesubscribe = FORUM_CHOOSESUBSCRIBE;
             $forum->assessed = 0;
             if ($courseid == SITEID) {
                 $forum->name  = get_string("sitenews");

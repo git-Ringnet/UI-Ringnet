@@ -59,7 +59,7 @@
 <div class="{{#activityinfo}}{{#isautomatic}}rui--activity-is-automatic{{/isautomatic}}{{#showmanualcompletion}}rui--activity-is-manual{{/showmanualcompletion}}{{/activityinfo}}">
     {{#moveicon}} {{{moveicon}}} {{/moveicon}}
     {{#activityinfo}}
-    <div data-region="activity-information" data-activityname="{{activityname}}" class="activity-information">
+    <div data-region="activity-information float-right" data-activityname="{{activityname}}" class="activity-information" style="display: none;">
         {{#hascompletion}}
             {{#uservisible}}
                 <div data-region="completion-info">

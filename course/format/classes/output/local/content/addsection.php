@@ -38,7 +38,8 @@ use stdClass;
  * @copyright 2020 Ferran Recio <ferran@moodle.com>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class addsection implements named_templatable, renderable {
+class addsection implements named_templatable, renderable
+{
 
     use courseformat_named_templatable;
 
@@ -50,7 +51,8 @@ class addsection implements named_templatable, renderable {
      *
      * @param course_format $format the course format
      */
-    public function __construct(course_format $format) {
+    public function __construct(course_format $format)
+    {
         $this->format = $format;
     }
 
@@ -60,7 +62,8 @@ class addsection implements named_templatable, renderable {
      * @param \renderer_base $output typically, the renderer that's calling this function
      * @return stdClass data context for a mustache template
      */
-    public function export_for_template(\renderer_base $output): stdClass {
+    public function export_for_template(\renderer_base $output): stdClass
+    {
 
         // If no editor must be displayed, just return an empty structure.
         if (!$this->format->show_editor()) {
@@ -102,7 +105,8 @@ class addsection implements named_templatable, renderable {
      * @param int $maxsections the maximum number of sections
      * @return stdClass data context for a mustache template
      */
-    protected function get_num_sections_data(\renderer_base $output, int $lastsection, int $maxsections): stdClass {
+    protected function get_num_sections_data(\renderer_base $output, int $lastsection, int $maxsections): stdClass
+    {
         $format = $this->format;
         $course = $format->get_course();
         $data = new stdClass();
@@ -140,7 +144,8 @@ class addsection implements named_templatable, renderable {
      * @param int $maxsections the maximum number of sections
      * @return stdClass data context for a mustache template
      */
-    protected function get_add_section_data(\renderer_base $output, int $lastsection, int $maxsections): stdClass {
+    protected function get_add_section_data(\renderer_base $output, int $lastsection, int $maxsections): stdClass
+    {
         $format = $this->format;
         $course = $format->get_course();
         $data = new stdClass();
@@ -150,14 +155,14 @@ class addsection implements named_templatable, renderable {
         } else {
             $addstring = get_string('addsections');
         }
+        $addsections = $_SESSION['sectionid'];
 
         $params = ['courseid' => $course->id, 'insertsection' => 0, 'sesskey' => sesskey()];
-
+        // var_dump($params);
         $singlesection = $this->format->get_section_number();
         if ($singlesection) {
             $params['sectionreturn'] = $singlesection;
         }
-
         $data->addsections = (object) [
             'url' => new moodle_url('/course/changenumsections.php', $params),
             'title' => $addstring,
@@ -166,6 +171,14 @@ class addsection implements named_templatable, renderable {
             'maxsections' => $lastsection,
 
         ];
+        $_SESSION['addsections'] = (object) [
+            'url' => new moodle_url('/course/changenumsections.php', $params),
+            'title' => $addstring,
+            'newsection' => $maxsections - $lastsection,
+            // Thêm mục vào section cuối cùng
+            'maxsections' => $lastsection,
+        ];
+        // var_dump($data);
         return $data;
     }
 }

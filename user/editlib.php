@@ -96,6 +96,7 @@ function useredit_setup_preference_page($userid, $courseid)
         if (!has_capability('moodle/user:editownprofile', $systemcontext)) {
             print_error('cannotedityourprofile');
         }
+
     } else {
         // Teachers, parents, etc.
         require_capability('moodle/user:editprofile', $personalcontext);

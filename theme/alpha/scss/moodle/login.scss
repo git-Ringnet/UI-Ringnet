@@ -3,6 +3,18 @@
 #page-login-signup,
 #page-login-forgot_password {
     background-color: $gray-100;
+    font-size: 14px;
+}
+
+#page-login-forgot_password legend{
+    text-align: center;
+    font-size: 24px;
+}
+
+.logo-forgot-pass{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: -28px;
 }
 
 #page-login-signup {
@@ -142,6 +154,7 @@
     margin: 0 auto;
     background-color: $container-bg;
     border-radius: $border-radius;
+    box-shadow: 0px 2px 15px #888888;
 
     @include media-breakpoint-down(sm) {
         padding: 20px;
@@ -158,6 +171,7 @@
         }
     }
 }
+
 .rui-hasinstructions-desc {
     font-size: $font-size-sm;
 }
@@ -325,7 +339,8 @@
 .rui-signup-box {
     margin-bottom: 40px;
     max-width: 600px;
-@include media-breakpoint-between(lg, xl) {
+
+    @include media-breakpoint-between(lg, xl) {
         max-width: 500px;
     }
 
@@ -475,7 +490,7 @@
 }
 
 .form-control--username {
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='8' r='3.25' stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3C/circle%3E%3Cpath stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z'%3E%3C/path%3E%3C/svg%3E%0A");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='8' r='3.25' stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5'%3E%3C/circle%3E%3Cpath stroke='#{url-friendly-colour($body-color-light)}' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6.8475 19.25H17.1525C18.2944 19.25 19.174 18.2681 18.6408 17.2584C17.8563 15.7731 16.068 14 12 14C7.93201 14 6.14367 15.7731 5.35924 17.2584C4.82597 18.2681 5.70558 19.25 6.8475 19.25Z'%3E%3C/path%3E%3C/svg%3E%0A");
 }
 
 .form-control--password {

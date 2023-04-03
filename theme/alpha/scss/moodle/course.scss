@@ -757,8 +757,6 @@ body:not(.editing)  .sitetopic ul.section {
     margin: 0;
     clear: both;
 
-    border-bottom: 1px solid $border-color;
-
     @include media-breakpoint-between(xs,md) {
     padding: 16px;
     }
@@ -2799,7 +2797,6 @@ $rui-date-margin-left: 60px;
 
 /* Activity Chooser */
 .rui-activitychooser-bg {
-    background-color: $gray-100;
     border-radius: $border-radius;
 
     .theme-dark & {

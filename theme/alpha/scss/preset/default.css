@@ -8647,7 +8647,7 @@ a.close.disabled, .yui3-skin-sam a.disabled.yui3-button.closebutton {
 @media (min-width: 1089px) {
   .modal-lg,
 .modal-xl {
-    max-width: 800px;
+    max-width: 576px;
   }
 }
 @media (min-width: 1600px) {
@@ -24079,10 +24079,9 @@ body:not(.editing) .sitetopic ul.section .label .mod-indent-outer {
   padding: 16px;
   margin: 0;
   clear: both;
-  border-bottom: 1px solid #e1e0e4;
 }
 @media (max-width: 1088.98px) {
-  .section li.activity {
+  .section li.activity {  
     padding: 16px;
   }
 }
@@ -25664,7 +25663,7 @@ ul[aria-labelledby=category-listing-title] li {
 .rui--activity-is-manual .activity-information {
   position: absolute;
   top: 5px;
-  left: 5px;
+  right: 0 !important;
 }
 
 .rui--activity-hasdates {
@@ -25863,7 +25862,6 @@ ul[aria-labelledby=category-listing-title] li {
 
 /* Activity Chooser */
 .rui-activitychooser-bg {
-  background-color: #f9f9fa;
   border-radius: 7px;
 }
 .theme-dark .rui-activitychooser-bg {
@@ -36001,11 +35999,6 @@ div#dock {
 .forumheaderlist .discussion .lastpost {
   vertical-align: top;
 }
-
-.discussion-list .topic {
-  font-weight: inherit;
-  padding-left: 12px !important;
-}
 .discussion-list .userpicture {
   width: 45px;
   height: 45px;
@@ -38809,7 +38802,7 @@ a.rui-backup-progress .backup_stage:hover, a.rui-backup-progress .backup_stage:f
 .grading-report thead th,
 .gradereport-grader-table thead th,
 #completion-progress thead th {
-  border-bottom: 2px solid #e1e0e4;
+  border-bottom: 1px solid #e1e0e4;
   color: #a19eab;
 }
 .theme-dark .table thead th,
