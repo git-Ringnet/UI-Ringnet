@@ -784,7 +784,8 @@ a.text-dark:hover {
     line-height: 24px;
     color: black;
 }
-li{
+
+li {
     list-style: none;
 }
 
@@ -1163,13 +1164,43 @@ body {
     color: black !important;
 }
 
-#btn_addSection {
-    background: white;
-    border: 1px solid blue;
-} */
 
 
+.activity-add-text.add-activity {
+    color: #0095F6;
+}
 
+@media (min-width: 1089px) {
+
+    .modal-lg,
+    .modal-xl {
+        max-width: 576px !important;
+    }
+}
+
+.modal-content {
+    border: none !important;
+}
+
+.modal-content .close {
+    background-color: transparent;
+    filter: brightness(0) invert(1);
+    top: 12px;
+}
+
+#page-course-view-flexsections .modal-header {
+    background: #0095F6;
+}
+
+#page-course-view-flexsections .modal-header h5 {
+    font-weight: 600;
+    font-size: 18px;
+    color: #FFF;
+}
+
+.modal-content {
+    border: none;
+}
 
 
 /* /Update Create New Course */
@@ -1224,10 +1255,14 @@ body {
     padding-right: 0 !important;
 }
 
-.course-section-header.d-flex.align-items-center {
-    background: #ECECEC;
-    padding: 5px;
-    border-radius: 8px;
+.course-section-header.d-flex.align-items-center {}
+
+#page-course-view-flexsections .course-content {
+    padding: 0 15%;
+}
+
+.dropdown>a {
+    background: none !important;
 }
 
 ul.rui-section.section.img-text.d-block {
@@ -1405,10 +1440,6 @@ ul.flexsections-level-1 {
     background: #0095F6 !important;
 }
 
-.modal-footer>.justify-content-between {
-    justify-content: end !important;
-}
-
 .modal-footer>.w-100>.btn.btn-secondary {
     background: none !important;
     border: 1px solid #555555;
@@ -1526,59 +1557,60 @@ select#bulk_action {
     height: 37px !important;
     max-width: 190px !important;
 }
-/* .modal-backdrop.in.show,.modal.moodle-has-zindex.show{
-    z-index: unset !important;
-    display: none !important;
-} */
+
 /*  */
 #page-user-editadvanced #id_moodlecontainer,
 #page-admin-user-editadvanced #id_moodlecontainer,
-#page-user-edit #id_moodlecontainer{
+#page-user-edit #id_moodlecontainer {
     display: flex;
     justify-content: space-between;
     padding: 0 0 !important;
 }
+
 #page-user-editadvanced #fitem_id_imagefile,
-#page-user-edit #fitem_id_imagefile{
+#page-user-edit #fitem_id_imagefile {
     position: absolute;
     top: 35px;
     left: 0;
     right: 0;
     opacity: 0;
 }
+
 #page-user-editadvanced #fitem_id_imagefile .fp-navbar,
 #page-admin-user-editadvanced #fitem_id_imagefile .fp-navbar,
-#page-user-edit #fitem_id_imagefile .fp-navbar{
+#page-user-edit #fitem_id_imagefile .fp-navbar {
     display: none;
 }
+
 #page-user-editadvanced .filemanager-container,
 #page-admin-user-editadvanced .filemanager-container,
-#page-user-edit .filemanager-container{
+#page-user-edit .filemanager-container {
     width: 100%;
 }
+
 #page-user-editadvanced #fitem_id_currentpicture,
 #page-admin-user-editadvanced #fitem_id_currentpicture,
-#page-user-edit #fitem_id_currentpicture
-{
+#page-user-edit #fitem_id_currentpicture {
     display: block;
     /* margin-left: 69%; */
 }
+
 #page-user-editadvanced #fitem_id_currentpicture .col-md-3,
 #page-admin-user-editadvanced #fitem_id_currentpicture .col-md-3,
-#page-user-edit #fitem_id_currentpicture .col-md-3
-{
+#page-user-edit #fitem_id_currentpicture .col-md-3 {
     max-width: 100%;
     width: 100%;
     text-align: left !important;
 }
+
 #page-user-editadvanced #fitem_id_currentpicture .col-md-9 img,
 #page-user-editadvanced #fitem_id_imagefile .col-md-9 .dndupload-arrow,
 #page-user-edit #fitem_id_currentpicture .col-md-9 img,
-#page-user-edit #fitem_id_imagefile .col-md-9 .dndupload-arrow
-{
-   width: 172px;
-   height: 172px;
+#page-user-edit #fitem_id_imagefile .col-md-9 .dndupload-arrow {
+    width: 172px;
+    height: 172px;
 }
+
 #page-user-edit #fitem_id_imagefile .col-md-3,
 #page-user-edit #fitem_id_imagefile .col-md-9 p,
 #page-user-edit #fitem_id_imagefile .col-md-9 .fdescription,
@@ -1587,9 +1619,10 @@ select#bulk_action {
 #page-user-editadvanced #fitem_id_imagefile .col-md-9 .fdescription,
 #page-admin-user-editadvanced #fitem_id_imagefile .col-md-3,
 #page-admin-user-editadvanced #fitem_id_imagefile .col-md-9 p,
-#page-admin-user-editadvanced #fitem_id_imagefile .col-md-9 .fdescription{
-   display: none !important;
+#page-admin-user-editadvanced #fitem_id_imagefile .col-md-9 .fdescription {
+    display: none !important;
 }
+
 #page-user-editadvanced #fitem_id_firstname,
 #page-user-editadvanced #fitem_id_lastname,
 #page-user-editadvanced #fitem_id_email,
@@ -1607,8 +1640,7 @@ select#bulk_action {
 #page-admin-user-editadvanced #fitem_id_email,
 #page-admin-user-editadvanced #fitem_id_username,
 #page-admin-user-editadvanced #fitem_id_newpassword,
-#page-admin-user-editadvanced #fitem_id_description_editor
-{
+#page-admin-user-editadvanced #fitem_id_description_editor {
     display: block;
 }
 
@@ -1629,14 +1661,14 @@ select#bulk_action {
 #page-admin-user-editadvanced #fitem_id_email .col-md-3,
 #page-admin-user-editadvanced #fitem_id_username .col-md-3,
 #page-admin-user-editadvanced #fitem_id_newpassword .col-md-3,
-#page-admin-user-editadvanced #fitem_id_description_editor .col-md-3
-{
+#page-admin-user-editadvanced #fitem_id_description_editor .col-md-3 {
     text-align: left !important;
     font-size: 13px;
     line-height: 18px;
     font-weight: 600;
     max-width: 100%;
 }
+
 #page-user-editadvanced #fitem_id_firstname .col-md-9,
 #page-user-editadvanced #fitem_id_lastname .col-md-9,
 #page-user-editadvanced #fitem_id_email .col-md-9,
@@ -1654,12 +1686,12 @@ select#bulk_action {
 #page-admin-user-editadvanced #fitem_id_email .col-md-9,
 #page-admin-user-editadvanced #fitem_id_username .col-md-9,
 #page-admin-user-editadvanced #fitem_id_newpassword .col-md-9,
-#page-admin-user-editadvanced #fitem_id_description_editor .col-md-9
-{
+#page-admin-user-editadvanced #fitem_id_description_editor .col-md-9 {
     font-size: 14px;
     line-height: 24px;
     font-weight: 400;
 }
+
 #page-user-editadvanced #fitem_id_firstname .col-md-9,
 #page-user-editadvanced #fitem_id_lastname .col-md-9,
 #page-user-editadvanced #fitem_id_email .col-md-9,
@@ -1674,37 +1706,37 @@ select#bulk_action {
 #page-admin-user-editadvanced #fitem_id_lastname .col-md-9,
 #page-admin-user-editadvanced #fitem_id_email .col-md-9,
 #page-admin-user-editadvanced #fitem_id_username .col-md-9,
-#page-admin-user-editadvanced #fitem_id_newpassword .col-md-9
-{
+#page-admin-user-editadvanced #fitem_id_newpassword .col-md-9 {
     max-width: 70% !important;
 }
+
 #page-user-editadvanced #fitem_id_description_editor .col-md-9,
 #page-user-edit #fitem_id_description_editor .col-md-9,
-#page-admin-user-editadvanced #fitem_id_description_editor .col-md-9
-{
+#page-admin-user-editadvanced #fitem_id_description_editor .col-md-9 {
     max-width: 80%;
 }
+
 #page-user-editadvanced form,
 #page-user-edit form,
-#page-admin-user-editadvanced form
-{
+#page-admin-user-editadvanced form {
     margin-top: -2.2%;
 }
+
 #page-user-editadvanced form legend,
 #page-user-editadvanced #id_category_2container,
 #page-user-edit form legend,
 #page-user-edit #id_category_2container,
 #page-admin-user-editadvanced form legend,
-#page-admin-user-editadvanced #id_category_2container
-{
+#page-admin-user-editadvanced #id_category_2container {
     display: none !important;
 }
+
 #page-user-editadvanced #fitem_id_newpassword span,
 #page-user-edit #fitem_id_newpassword span,
-#page-admin-user-editadvanced #fitem_id_newpassword span
-{
+#page-admin-user-editadvanced #fitem_id_newpassword span {
     width: 100%;
 }
+
 #page-user-editadvanced #fitem_id_currentpicture .col-md-9,
 #page-user-editadvanced #fitem_id_firstname .col-md-9,
 #page-user-editadvanced #fitem_id_lastname .col-md-9,
@@ -1725,10 +1757,10 @@ select#bulk_action {
 #page-admin-user-editadvanced #fitem_id_email .col-md-9,
 #page-admin-user-editadvanced #fitem_id_username .col-md-9,
 #page-admin-user-editadvanced #fitem_id_newpassword .col-md-9,
-#page-admin-user-editadvanced #fitem_id_description_editor .col-md-9
-{
+#page-admin-user-editadvanced #fitem_id_description_editor .col-md-9 {
     margin-top: 1.8%;
 }
+
 #page-user-editadvanced #fitem_id_lastname,
 #page-user-editadvanced #fitem_id_email,
 #page-user-editadvanced #fitem_id_username,
@@ -1743,169 +1775,141 @@ select#bulk_action {
 #page-admin-user-editadvanced #fitem_id_email,
 #page-admin-user-editadvanced #fitem_id_username,
 #page-admin-user-editadvanced #fitem_id_newpassword,
-#page-admin-user-editadvanced #fitem_id_description_editor
-{
+#page-admin-user-editadvanced #fitem_id_description_editor {
     margin-top: 5%;
 }
+
 #page-user-editadvanced #fitem_id_description_editor #id_description_editoreditable,
 #page-user-edit #fitem_id_description_editor #id_description_editoreditable,
-#page-admin-user-editadvanced #fitem_id_description_editor #id_description_editoreditable
-{
+#page-admin-user-editadvanced #fitem_id_description_editor #id_description_editoreditable {
     height: 200px !important;
 }
+
 #page-user-editadvanced .wrapper-course,
-#page-user-edit .wrapper-course
-{
+#page-user-edit .wrapper-course {
     padding: 22px 0px;
 }
-@media (min-width: 320px){
-    #page-user-editadvanced .form-inline .form-control{
-        width:90% !important;
+
+@media (min-width: 320px) {
+    #page-user-editadvanced .form-inline .form-control {
+        width: 90% !important;
     }
-    #page-user-editadvanced .form-inline .form-control:last-child{
-        width:100% !important;
+
+    #page-user-editadvanced .form-inline .form-control:last-child {
+        width: 100% !important;
     }
-    #page-user-edit .form-inline .form-control{
-        width:90% !important;
+
+    #page-user-edit .form-inline .form-control {
+        width: 90% !important;
     }
-    #page-user-edit .form-inline .form-control:last-child{
-        width:100% !important;
+
+    #page-user-edit .form-inline .form-control:last-child {
+        width: 100% !important;
     }
-    #page-admin-user-editadvanced .form-inline .form-control{
-        width:90% !important;
+
+    #page-admin-user-editadvanced .form-inline .form-control {
+        width: 90% !important;
     }
-    #page-admin-user-editadvanced .form-inline .form-control:last-child{
-        width:100% !important;
+
+    #page-admin-user-editadvanced .form-inline .form-control:last-child {
+        width: 100% !important;
     }
 }
-#page-admin-user-editadvanced #menu_editadvanced{
+
+#page-admin-user-editadvanced #menu_editadvanced {
     display: none;
 }
+
 #page-user-editadvanced #menu_editadvanced,
-#page-user-edit #menu_editadvanced
-{
-    width:17.15%; 
-    border-right:1px solid #D6D6D6; 
-    border-bottom:1px solid #D6D6D6;
+#page-user-edit #menu_editadvanced {
+    width: 17.15%;
+    border-right: 1px solid #D6D6D6;
+    border-bottom: 1px solid #D6D6D6;
 }
+
 #page-user-editadvanced #menu_editadvanced a,
 #page-user-edit #menu_editadvanced a,
-#page-message-notificationpreferences #menu_editadvanced a
-{
+#page-message-notificationpreferences #menu_editadvanced a {
     margin-left: 10px;
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
     color: #555555;
 }
-.active_editadvanced_span{
+
+.active_editadvanced_span {
     border-left: 3px solid #0095F6;
 }
-.active_editadvanced_text{
+
+.active_editadvanced_text {
     background: #ECECEC;
 }
-.active_editadvanced_color{
+
+.active_editadvanced_color {
     color: #0095F6 !important;
 }
-.active_menu{
-    border-left: 3px solid #EC212D!important;
+
+.active_menu {
+    border-left: 3px solid #EC212D !important;
 }
+
 #page-user-editadvanced #edit_profile_user_right,
-#page-user-edit #edit_profile_user_right
-{
+#page-user-edit #edit_profile_user_right {
     width: 50%;
     margin-top: 3%;
 }
+
 #page-user-editadvanced #edit_profile_user_left,
-#page-user-edit #edit_profile_user_left
-{
-    position:relative;
-    margin-top : 3%;
+#page-user-edit #edit_profile_user_left {
+    position: relative;
+    margin-top: 3%;
 }
-#page-admin-user-editadvanced #edit_profile_user_right{
+
+#page-admin-user-editadvanced #edit_profile_user_right {
     width: 60%;
     margin-top: 3%;
 }
-#page-admin-user-editadvanced #edit_profile_user_left{
-    position:relative;
-    margin-top : 3%;
+
+#page-admin-user-editadvanced #edit_profile_user_left {
+    position: relative;
+    margin-top: 3%;
     width: 30%;
 }
-#page-message-notificationpreferences .wrapper-course{
+
+#page-message-notificationpreferences .wrapper-course {
     padding: 0;
 }
-#page-message-notificationpreferences .preferences-page-container h2{
+
+#page-message-notificationpreferences .preferences-page-container h2 {
     display: none;
 }
-#page-message-notificationpreferences .checkbox-container{
+
+#page-message-notificationpreferences .checkbox-container {
     text-align: right;
 }
-#page-message-notificationpreferences .checkbox-container label{
+
+#page-message-notificationpreferences .checkbox-container label {
     color: #EC212D;
     font-weight: 500;
     font-size: 14px;
     line-height: 24px;
 }
-#page-course-index-category #id_parent{
+
+#page-course-index-category #id_parent {
     max-width: 100% !important;
 }
-#page-course-index-category .pagination-centered:first-child{
-    display:none;
+
+#page-course-index-category .pagination-centered:first-child {
+    display: none;
 }
-/* Mới */
-#page-course-view-participants .modal-header {
-    background: #0095F6;
+
+
+#page-my-index .modal-backdrop.in.show,
+#page-my-index .modal.moodle-has-zindex.show {
+    z-index: unset !important;
+    display: none !important;
 }
-#page-course-view-participants .modal-header h5{
-    line-height: 28px;
-    font-weight: 600;
-    font-size: 18px;
-    color: #FFF;
+
+#section-0 #btn_addSection {
+    display: none !important;
 }
-#page-course-view-participants #fitem_id_userlist .col-md-3 label,
-#page-course-view-participants #fitem_id_cohortlist .col-md-3 label
-{
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
-}
-#page-course-view-participants .modal-content{
-    border: none;
-}
-#page-course-view-participants #fitem_id_roletoassign .col-md-3 label{
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 18px;
-}
-#page-course-view-participants .form-autocomplete-suggestions{
-    width: 100% !important;
-}
-#page-course-edit #fitem_id_startdate .col-md-9 span{
-    height: 3rem;
-}
-#page-course-edit #fitem_id_startdate .col-md-9 select,
-#page-course-edit #fitem_id_enddate .col-md-9 select
-{
-    line-height: 24px;
-    font-weight: 400;
-    font-size: 14px;
-}
-#page-course-edit #fitem_id_fullname .col-md-9 input{
-    font-weight: 400;
-    font-size: 14px;
-    padding: 12px 16px 12px 16px;
-    background: #FFF;
-}
-#page-course-edit #fitem_id_fullname .col-md-3 label,
-#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3 label,
-#page-course-edit #fitem_id_category .col-md-3 label,
-#page-course-edit #fitem_id_summary_editor .col-md-3 label,
-#page-course-edit #fgroup_id_coursevisibility .col-md-3 label,
-#page-course-edit #fitem_id_startdate .col-md-3 label
-{
-    font-size: .813rem;
-    line-height: 18px;
-    font-weight: 600;
-    color: #1D1C20;
-}
-/*  */

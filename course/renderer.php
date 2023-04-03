@@ -287,10 +287,25 @@ class core_course_renderer extends plugin_renderer_base {
             return '';
         }
 
+        $addsections = $_SESSION['addsections'];
+
+        $_SESSION['sectionid'] = (object) [
+            'sectionid' => $section,
+        ];
         $data = [
             'sectionid' => $section,
-            'sectionreturn' => $sectionreturn
+            'sectionreturn' => $sectionreturn,
+            'url' => $addsections->url,
+            'title' => $addsections->title,
+            'newsection' => $addsections->newsection,
+            'maxsections' => $addsections->maxsections,
         ];
+        
+
+        // Sử dụng thông tin
+        // echo $addsections->title;
+        // var_dump($data);
+        
         $ajaxcontrol = $this->render_from_template('course/activitychooserbutton', $data);
 
         // Load the JS for the modal.

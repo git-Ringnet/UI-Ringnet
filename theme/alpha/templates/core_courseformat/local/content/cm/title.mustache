@@ -1,62 +1,71 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+This file is part of Moodle - http://moodle.org/
 
-    Moodle is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
 }}
 {{!
-    @template core_courseformat/local/content/cm/title
+@template core_courseformat/local/content/cm/title
 
-    Displays a course module instance inside a course section.
+Displays a course module instance inside a course section.
 
-    Example context (json):
-    {
-        "url": "#",
-        "instancename": "Activity name",
-        "uservisible": true,
-        "icon": "../../../pix/help.svg",
-        "onclick": "alert('ok')",
-        "pluginname": "File",
-        "altname": "PDF file",
-        "linkclasses": "",
-        "textclasses": "",
-        "purpose": "content",
-        "modname": "resource"
-    }
+Example context (json):
+{
+"url": "#",
+"instancename": "Activity name",
+"uservisible": true,
+"icon": "../../../pix/help.svg",
+"onclick": "alert('ok')",
+"pluginname": "File",
+"altname": "PDF file",
+"linkclasses": "",
+"textclasses": "",
+"purpose": "content",
+"modname": "resource"
+}
 }}
 {{#url}}
-    <div class="activity-instance d-flex flex-column">
-        <div class="activitytitle media {{textclasses}} modtype_{{modname}} position-relative">
-            <div class="activityiconcontainer {{purpose}} courseicon align-self-start">
-                <img src="{{{icon}}}" class="rui-activityicon" alt="{{{modname}}} icon">
+<div class="activity-instance d-flex flex-column">
+    <div class="activitytitle media {{textclasses}} modtype_{{modname}} position-relative">
+        <div class="move">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M11.6903 5.12852C11.7309 5.08778 11.7792 5.05546 11.8323 5.0334C11.8855 5.01135 11.9425 5 12 5C12.0575 5 12.1145 5.01135 12.1677 5.0334C12.2208 5.05546 12.2691 5.08778 12.3097 5.12852L14.0595 6.87832C14.1002 6.91899 14.1325 6.96728 14.1545 7.02042C14.1765 7.07356 14.1878 7.13052 14.1878 7.18804C14.1878 7.24556 14.1765 7.30251 14.1545 7.35565C14.1325 7.4088 14.1002 7.45708 14.0595 7.49775C14.0188 7.53843 13.9706 7.57069 13.9174 7.5927C13.8643 7.61471 13.8073 7.62604 13.7498 7.62604C13.6923 7.62604 13.6353 7.61471 13.5822 7.5927C13.529 7.57069 13.4808 7.53843 13.4401 7.49775L12.4375 6.49424V9.81274C12.4375 9.92876 12.3914 10.04 12.3093 10.1221C12.2273 10.2041 12.116 10.2502 12 10.2502C11.884 10.2502 11.7727 10.2041 11.6907 10.1221C11.6086 10.04 11.5625 9.92876 11.5625 9.81274V6.49424L10.5599 7.49775C10.4778 7.57989 10.3664 7.62604 10.2502 7.62604C10.134 7.62604 10.0226 7.57989 9.94048 7.49775C9.85834 7.41561 9.81219 7.3042 9.81219 7.18804C9.81219 7.07187 9.85834 6.96046 9.94048 6.87832L11.6903 5.12852ZM12 13.7498C12.116 13.7498 12.2273 13.7959 12.3093 13.8779C12.3914 13.96 12.4375 14.0712 12.4375 14.1873V17.5058L13.4401 16.5022C13.5222 16.4201 13.6336 16.374 13.7498 16.374C13.866 16.374 13.9774 16.4201 14.0595 16.5022C14.1417 16.5844 14.1878 16.6958 14.1878 16.812C14.1878 16.9281 14.1417 17.0395 14.0595 17.1217L12.3097 18.8715C12.2691 18.9122 12.2208 18.9445 12.1677 18.9666C12.1145 18.9886 12.0575 19 12 19C11.9425 19 11.8855 18.9886 11.8323 18.9666C11.7792 18.9445 11.7309 18.9122 11.6903 18.8715L9.94048 17.1217C9.89981 17.081 9.86754 17.0327 9.84553 16.9796C9.82352 16.9264 9.81219 16.8695 9.81219 16.812C9.81219 16.7544 9.82352 16.6975 9.84553 16.6443C9.86754 16.5912 9.89981 16.5429 9.94048 16.5022C10.0226 16.4201 10.134 16.374 10.2502 16.374C10.3077 16.374 10.3647 16.3853 10.4178 16.4073C10.471 16.4293 10.5192 16.4616 10.5599 16.5022L11.5625 17.5058V14.1873C11.5625 14.0712 11.6086 13.96 11.6907 13.8779C11.7727 13.7959 11.884 13.7498 12 13.7498ZM5.12852 12.3097C5.08778 12.2691 5.05546 12.2208 5.0334 12.1677C5.01135 12.1145 5 12.0575 5 12C5 11.9425 5.01135 11.8855 5.0334 11.8323C5.05546 11.7792 5.08778 11.7309 5.12852 11.6903L6.87832 9.94048C6.96046 9.85834 7.07187 9.81219 7.18804 9.81219C7.3042 9.81219 7.41561 9.85834 7.49775 9.94048C7.57989 10.0226 7.62604 10.134 7.62604 10.2502C7.62604 10.3664 7.57989 10.4778 7.49775 10.5599L6.49424 11.5625H9.81274C9.92876 11.5625 10.04 11.6086 10.1221 11.6907C10.2041 11.7727 10.2502 11.884 10.2502 12C10.2502 12.116 10.2041 12.2273 10.1221 12.3093C10.04 12.3914 9.92876 12.4375 9.81274 12.4375H6.49424L7.49775 13.4401C7.57989 13.5222 7.62604 13.6336 7.62604 13.7498C7.62604 13.866 7.57989 13.9774 7.49775 14.0595C7.41561 14.1417 7.3042 14.1878 7.18804 14.1878C7.07187 14.1878 6.96046 14.1417 6.87832 14.0595L5.12852 12.3097ZM13.7498 12C13.7498 11.884 13.7959 11.7727 13.8779 11.6907C13.96 11.6086 14.0712 11.5625 14.1873 11.5625H17.5058L16.5022 10.5599C16.4616 10.5192 16.4293 10.471 16.4073 10.4178C16.3853 10.3647 16.374 10.3077 16.374 10.2502C16.374 10.1927 16.3853 10.1357 16.4073 10.0826C16.4293 10.0294 16.4616 9.98115 16.5022 9.94048C16.5844 9.85834 16.6958 9.81219 16.812 9.81219C16.8695 9.81219 16.9264 9.82352 16.9796 9.84553C17.0327 9.86754 17.081 9.89981 17.1217 9.94048L18.8715 11.6903C18.9122 11.7309 18.9445 11.7792 18.9666 11.8323C18.9886 11.8855 19 11.9425 19 12C19 12.0575 18.9886 12.1145 18.9666 12.1677C18.9445 12.2208 18.9122 12.2691 18.8715 12.3097L17.1217 14.0595C17.081 14.1002 17.0327 14.1325 16.9796 14.1545C16.9264 14.1765 16.8695 14.1878 16.812 14.1878C16.7544 14.1878 16.6975 14.1765 16.6443 14.1545C16.5912 14.1325 16.5429 14.1002 16.5022 14.0595C16.4616 14.0188 16.4293 13.9706 16.4073 13.9174C16.3853 13.8643 16.374 13.8073 16.374 13.7498C16.374 13.6923 16.3853 13.6353 16.4073 13.5822C16.4293 13.529 16.4616 13.4808 16.5022 13.4401L17.5058 12.4375H14.1873C14.0712 12.4375 13.96 12.3914 13.8779 12.3093C13.7959 12.2273 13.7498 12.116 13.7498 12Z"
+                    fill="#555555" />
+            </svg>
+        </div>
+        <div class="activityiconcontainer {{purpose}} courseicon align-self-start pl-2">
+            <img src="{{{icon}}}" class="rui-activityicon" alt="{{{modname}}} icon">
+        </div>
+        <div class="media-body align-self-center">
+            <div class="rui-pluginname d-none">
+                {{{pluginname}}}
             </div>
-            <div class="media-body align-self-center">
-                <div class="rui-pluginname">
-                    {{{pluginname}}}
-                </div>
-                <div class="activityname">
-                    {{#uservisible}}
-                        <a href="{{url}}" class="{{linkclasses}} rui-instancename aalink stretched-link" onclick="{{{onclick}}}">
-                            <span class="instancename">{{{instancename}}} {{{altname}}}</span>
-                        </a>
-                    {{/uservisible}}
-                    {{^uservisible}}
-                        <span class="instancename">
-                            {{{instancename}}} {{{altname}}}
-                        </span>
-                    {{/uservisible}}
-                </div>
+            <div class="activityname">
+                {{#uservisible}}
+                <a href="{{url}}" class="{{linkclasses}} rui-instancename aalink stretched-link"
+                    onclick="{{{onclick}}}">
+                    <span class="instancename">{{{instancename}}} {{{altname}}}</span>
+                </a>
+                {{/uservisible}}
+                {{^uservisible}}
+                <span class="instancename">
+                    {{{instancename}}} {{{altname}}}
+                </span>
+                {{/uservisible}}
             </div>
         </div>
     </div>
+</div>
 {{/url}}

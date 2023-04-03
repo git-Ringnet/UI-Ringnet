@@ -1,107 +1,156 @@
 {{!
-    This file is part of Moodle - http://moodle.org/
+This file is part of Moodle - http://moodle.org/
 
-    Moodle is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    Moodle is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
 }}
 {{!
-    @template mod_forum/forum_discussion
+@template mod_forum/forum_discussion
 
-    Template for displaying a single forum discussion.
+Template for displaying a single forum discussion.
 
-    Classes required for JS:
-    * none
+Classes required for JS:
+* none
 
-    Data attributes required for JS:
-    * none
+Data attributes required for JS:
+* none
 
-    Example context (json):
-    {
-    }
+Example context (json):
+{
+}
 }}
 
 <div id="discussion-container-{{uniqid}}" data-content="forum-discussion">
-{{#html}}
+    {{#html}}
     <div class="d-flex flex-wrap mb-4 position-relative">
-        <div>{{{exportdiscussion}}}</div>
-        <div class="{{#exportdiscussion}}ml-2{{/exportdiscussion}}">{{{modeselectorform}}}</div>
-        <div class="mt-sm-3 mt-md-0 ml-md-2">{{{movediscussion}}}</div>
-
         <div class="ml-auto">
             {{#hasanyactions}}
             <div class="d-flex flex-wrap flex-row-reverse mb-3 position-relative" data-container="discussion-tools">
-                <div class="discussion-settings-menu">
+                <div class="discussion-settings-menu d-none">
                     {{> mod_forum/forum_action_menu}}
                 </div>
             </div>
-            {{/hasanyactions}}    
+            {{/hasanyactions}}
         </div>
     </div>
-    {{{neighbourlinks}}}    
-{{/html}}
+    {{{neighbourlinks}}}
+    {{/html}}
 
-{{#notifications}}
+    {{#notifications}}
     {{> core/notification}}
-{{/notifications}}
+    {{/notifications}}
 
-{{{html.posts}}}
-
-{{#html.neighbourlinks}}{{{.}}}{{/html.neighbourlinks}}
+    <div class="head-forum px-4 pt-2 pb-5 border rounded" style="background: #D6D6D6;">
+        <div class="title-forum d-flex">
+            <h2 class="name-forum mr-auto">{{name}}</h2>
+            <div class="icon-share p-2">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_3632_7283)">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M11.0476 3.85707C10.757 3.85707 10.4782 3.97252 10.2727 4.17803C10.0672 4.38355 9.95171 4.66228 9.95171 4.95292C9.95171 5.09889 9.98084 5.24187 10.0359 5.37407C10.0504 5.39372 10.0634 5.41489 10.0747 5.43749C10.0862 5.46039 10.0954 5.48382 10.1024 5.50754C10.1492 5.58723 10.2062 5.66135 10.2727 5.7278C10.4781 5.93324 10.7568 6.04865 11.0473 6.04865C11.3379 6.04865 11.6165 5.93324 11.822 5.7278C12.0274 5.52237 12.1429 5.24374 12.1429 4.9532C12.1429 4.66267 12.0274 4.38404 11.822 4.17861C11.8167 4.17328 11.8115 4.16785 11.8065 4.16232C11.6027 3.96665 11.3308 3.85707 11.0476 3.85707ZM9.09459 4.95292C9.09459 5.11168 9.11392 5.26844 9.15128 5.42007L6.46376 6.76375C6.42289 6.71381 6.37939 6.66572 6.33336 6.6197C5.96717 6.25353 5.47051 6.04782 4.95264 6.04782C4.43476 6.04782 3.9381 6.25353 3.57191 6.6197C3.20572 6.98586 3 7.48249 3 8.00033C3 8.51817 3.20572 9.0148 3.57191 9.38097C3.9381 9.74714 4.43476 9.95285 4.95264 9.95285C5.47051 9.95285 5.96717 9.74714 6.33336 9.38097C6.37938 9.33495 6.42286 9.28687 6.46372 9.23695L9.15132 10.5807C9.114 10.7322 9.09469 10.8888 9.09469 11.0475C9.09469 11.5653 9.30042 12.062 9.66661 12.4281C9.84793 12.6094 10.0632 12.7533 10.3001 12.8514C10.537 12.9495 10.7909 13 11.0473 13C11.3038 13 11.5577 12.9495 11.7946 12.8514C12.0315 12.7533 12.2467 12.6094 12.4281 12.4281C12.6094 12.2468 12.7532 12.0316 12.8513 11.7947C12.9495 11.5578 13 11.3039 13 11.0475C13 10.7911 12.9495 10.5372 12.8513 10.3003C12.7532 10.0634 12.6094 9.84817 12.4281 9.66686C12.0619 9.30069 11.5652 9.09498 11.0473 9.09498C10.5295 9.09498 10.0328 9.30069 9.66661 9.66686C9.61971 9.71375 9.57545 9.76278 9.53391 9.81372L6.84776 8.47073C6.88566 8.3181 6.90527 8.16023 6.90527 8.00033C6.90527 7.84045 6.88566 7.6826 6.84778 7.52998L9.53393 6.18698C9.57547 6.23792 9.61973 6.28695 9.66662 6.33384C10.0328 6.70001 10.5295 6.90572 11.0473 6.90572C11.5652 6.90572 12.0619 6.70001 12.4281 6.33384C12.7943 5.96767 13 5.47104 13 4.9532C13 4.4454 12.8022 3.95799 12.4492 3.594C12.4426 3.58649 12.4358 3.57915 12.4286 3.572C12.0624 3.20575 11.5656 3 11.0476 3C10.5297 3 10.0329 3.20575 9.66662 3.572C9.30035 3.93824 9.09459 4.43497 9.09459 4.95292ZM10.0359 10.6266C10.0504 10.607 10.0634 10.5858 10.0747 10.5632C10.0862 10.5403 10.0954 10.5169 10.1024 10.4932C10.1492 10.4135 10.2062 10.3393 10.2727 10.2729C10.4781 10.0675 10.7568 9.95205 11.0473 9.95205C11.3379 9.95205 11.6165 10.0675 11.822 10.2729C11.9237 10.3746 12.0044 10.4954 12.0595 10.6283C12.1145 10.7612 12.1428 10.9036 12.1428 11.0475C12.1428 11.1914 12.1145 11.3338 12.0595 11.4667C12.0044 11.5996 11.9237 11.7204 11.822 11.8221C11.7202 11.9238 11.5995 12.0045 11.4666 12.0596C11.3337 12.1146 11.1912 12.1429 11.0473 12.1429C10.9035 12.1429 10.761 12.1146 10.6281 12.0596C10.4952 12.0045 10.3744 11.9238 10.2727 11.8221C10.0672 11.6167 9.95181 11.338 9.95181 11.0475C9.95181 10.9016 9.98091 10.7587 10.0359 10.6266ZM5.90033 7.45079C5.85306 7.36927 5.79507 7.29352 5.72728 7.22573C5.52183 7.0203 5.24319 6.90488 4.95264 6.90488C4.66209 6.90488 4.38344 7.0203 4.17799 7.22573C3.97254 7.43117 3.85712 7.7098 3.85712 8.00033C3.85712 8.29086 3.97254 8.56949 4.17799 8.77493C4.38344 8.98037 4.66209 9.09578 4.95264 9.09578C5.24319 9.09578 5.52183 8.98037 5.72728 8.77493C5.79509 8.70713 5.85309 8.63135 5.90037 8.54981C5.90701 8.52913 5.91531 8.50869 5.92533 8.48866C5.9355 8.46832 5.94707 8.44914 5.95986 8.43118C6.01757 8.29629 6.04815 8.14989 6.04815 8.00033C6.04815 7.85082 6.01759 7.70447 5.95992 7.56961C5.9471 7.55163 5.93551 7.53243 5.92533 7.51206C5.91529 7.49199 5.90698 7.47151 5.90033 7.45079Z"
+                            fill="#555555" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_3632_7283">
+                            <rect width="16" height="16" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <div class="navitem">
+                <div class="ml-sm-auto navitem" style="z-index: 100;">
+                    {{#capabilities.subscribe}}
+                    <a href="{{{urls.subscribe}}}" class="btn btn-primary" data-type="subscription-toggle"
+                        data-action="toggle" data-discussionid="{{data.id}}" data-forumid="{{data.forumid}}"
+                        {{#userstate.subscribed}} title="{{#str}}clicktounsubscribe, mod_forum{{/str}}"
+                        data-targetstate="0" {{/userstate.subscribed}} {{^userstate.subscribed}}
+                        title="{{#str}}clicktosubscribe, mod_forum{{/str}}" data-targetstate="1"
+                        {{/userstate.subscribed}}>
+                        <svg class="" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M9.31884 12.0225C9.57657 12.0225 9.7855 12.2314 9.7855 12.4891V12.7161C9.7855 12.7161 9.7855 12.7162 9.7855 12.7161C9.78558 13.2181 9.58628 13.6996 9.23142 14.0546C8.87654 14.4097 8.39515 14.6092 7.89316 14.6093C7.39117 14.6094 6.9097 14.4101 6.55467 14.0552C6.19963 13.7003 6.00011 13.2189 6 12.7169V12.4897C6 12.232 6.20893 12.0231 6.46665 12.0231C6.72438 12.0231 6.93331 12.232 6.93331 12.4897V12.7167C6.93331 12.7167 6.93331 12.7168 6.93331 12.7167C6.93339 12.9712 7.03452 13.2152 7.21447 13.3951C7.39444 13.575 7.6385 13.676 7.89296 13.676C8.14742 13.6759 8.39143 13.5748 8.57132 13.3948C8.75122 13.2148 8.85225 12.9708 8.85219 12.7163V12.4891C8.85219 12.2314 9.06112 12.0225 9.31884 12.0225Z"
+                                fill="white" />
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M8.00044 2C7.81366 2 7.62872 2.03353 7.45616 2.09867C7.28361 2.16382 7.12682 2.2593 6.99475 2.37967C6.86268 2.50005 6.75792 2.64295 6.68645 2.80022C6.61497 2.95749 6.57818 3.12606 6.57818 3.29629V3.75699C6.57818 3.79873 6.58564 3.83889 6.5994 3.87641C6.41433 3.91909 6.23236 3.9755 6.05515 4.04539C5.60597 4.22255 5.19457 4.48353 4.8457 4.81583C4.49672 5.14822 4.217 5.54569 4.02516 5.98695C3.8333 6.42828 3.73383 6.90348 3.7339 7.38447L3.73383 8.80499L3.73382 8.95239C3.73382 8.95239 3.73348 8.95381 3.73281 8.95536C3.73152 8.9583 3.72807 8.96454 3.72006 8.97217L3.34296 9.33135C2.91693 9.73707 2.66713 10.2988 2.66699 10.8962C2.66699 11.4773 2.90982 12.0236 3.32376 12.4179C3.73592 12.8105 4.28433 13.0225 4.84591 13.0225H11.155C11.4341 13.0225 11.7116 12.9702 11.9721 12.8674C12.2326 12.7646 12.4726 12.6127 12.6771 12.4179C12.8818 12.223 13.047 11.9888 13.1608 11.7272C13.2746 11.4655 13.3339 11.183 13.3339 10.8964C13.3338 10.2991 13.0841 9.73718 12.6581 9.33146L12.2808 8.97217C12.2728 8.96454 12.2694 8.9583 12.2681 8.95536C12.2674 8.95381 12.2671 8.95239 12.2671 8.95239L12.267 7.38447C12.2671 6.90348 12.1676 6.42828 11.9757 5.98695C11.7839 5.54569 11.5042 5.14822 11.1552 4.81583C10.8063 4.48353 10.3949 4.22255 9.94576 4.04539C9.76854 3.9755 9.58656 3.91908 9.40148 3.8764C9.41524 3.83888 9.42269 3.79873 9.42269 3.75699V3.29629C9.42269 3.12606 9.3859 2.95749 9.31443 2.80022C9.24295 2.64295 9.13819 2.50005 9.00612 2.37967C8.87405 2.2593 8.71727 2.16382 8.54471 2.09867C8.37216 2.03353 8.18721 2 8.00044 2ZM8.59741 3.77834C8.59698 3.77127 8.59676 3.76416 8.59676 3.75699V3.29629C8.59676 3.22492 8.58134 3.15424 8.55137 3.0883C8.5214 3.02236 8.47748 2.96244 8.4221 2.91197C8.36673 2.8615 8.30099 2.82147 8.22864 2.79415C8.15629 2.76684 8.07875 2.75278 8.00044 2.75278C7.92213 2.75278 7.84458 2.76684 7.77223 2.79415C7.69989 2.82147 7.63415 2.8615 7.57877 2.91197C7.5234 2.96244 7.47948 3.02236 7.44951 3.0883C7.41954 3.15424 7.40411 3.22492 7.40411 3.29629V3.75699C7.40411 3.76416 7.40389 3.77128 7.40346 3.77834C7.42463 3.778 7.44581 3.77783 7.46699 3.77783H8.53391C8.55508 3.77783 8.57625 3.778 8.59741 3.77834ZM4.80064 7.36839C4.80061 7.37367 4.80059 7.37895 4.8006 7.38422V8.95199C4.80053 9.24928 4.67649 9.53437 4.45575 9.74456L4.07853 10.1039C3.85779 10.314 3.73375 10.5991 3.73368 10.8964C3.73368 11.1774 3.85086 11.4468 4.05945 11.6455C4.26803 11.8442 4.55093 11.9558 4.84591 11.9558H11.155C11.3011 11.9558 11.4457 11.9284 11.5806 11.8752C11.7156 11.8219 11.8382 11.7439 11.9415 11.6455C12.0447 11.5471 12.1267 11.4304 12.1826 11.3018C12.2384 11.1733 12.2672 11.0355 12.2672 10.8964C12.2671 10.5991 12.1431 10.314 11.9224 10.1039L11.5452 9.74456C11.3244 9.53437 11.2004 9.24928 11.2003 8.95199V7.38422C11.2004 7.05068 11.1315 6.7204 10.9975 6.41223C10.8635 6.10407 10.6671 5.82407 10.4195 5.58822C10.1719 5.35237 9.87792 5.1653 9.55438 5.03769C9.23085 4.91009 8.88408 4.84445 8.53391 4.84452H7.46699C7.15864 4.84446 6.85293 4.89535 6.5634 4.99463C6.52413 5.0081 6.48516 5.02245 6.44652 5.03769C6.12298 5.1653 5.82901 5.35237 5.58139 5.58822C5.33378 5.82407 5.13738 6.10407 5.00341 6.41223C4.87155 6.71552 4.80272 7.04024 4.80064 7.36839Z"
+                                fill="white" />
+                        </svg>
+                        {{#userstate.subscribed}}
+                        Hủy theo dõi
+                        {{/userstate.subscribed}}
+                        {{^userstate.subscribed}}
+                        Theo dõi
+                        {{/userstate.subscribed}}
+                    </a>
+                    {{/capabilities.subscribe}}
+                </div>
+            </div>
+        </div>
+        <div class="author-info d-flex">
+            <div class="name-author pr-2">{{creator}}</div>
+            <div class="create-time"> {{< core/time_element }} {{$elementid}}created-{{id}}-{{uniqid}}{{/elementid}}
+                    {{$timestampval}}{{timecreated}}{{/timestampval}} {{/core/time_element}}</div>
+            </div>
+        </div>
+        {{{html.posts}}}
+        {{#html.neighbourlinks}}{{{.}}}{{/html.neighbourlinks}}
+    </div>
 </div>
 {{#js}}
 require(
 [
-    'jquery',
-    'core/templates',
-    'mod_forum/discussion',
-    'mod_forum/posts_list',
-    'mod_forum/lock_toggle',
-    'mod_forum/favourite_toggle',
-    'mod_forum/pin_toggle',
-    'mod_forum/subscription_toggle'
+'jquery',
+'core/templates',
+'mod_forum/discussion',
+'mod_forum/posts_list',
+'mod_forum/lock_toggle',
+'mod_forum/favourite_toggle',
+'mod_forum/pin_toggle',
+'mod_forum/subscription_toggle'
 ],
 function(
-    $,
-    Templates,
-    Discussion,
-    PostsList,
-    LockToggle,
-    FavouriteToggle,
-    Pin,
-    SubscribeToggle
+$,
+Templates,
+Discussion,
+PostsList,
+LockToggle,
+FavouriteToggle,
+Pin,
+SubscribeToggle
 ) {
-    var root = $("[data-content='forum-discussion']");
-    Discussion.init(root);
-    PostsList.init(root);
-    root = $('[data-container="discussion-tools"]');
-    LockToggle.init(root, true);
-    FavouriteToggle.init(root, true, function(toggleElement, context) {
-        return Templates.render('mod_forum/discussion_favourite_toggle', context)
-            .then(function(html, js) {
-                return Templates.replaceNode(toggleElement, html, js);
-            });
-    });
-    Pin.init(root, true, function(toggleElement, context) {
-        return Templates.render('mod_forum/discussion_pin_toggle', context)
-            .then(function(html, js) {
-                return Templates.replaceNode(toggleElement, html, js);
-            });
-    });
-    SubscribeToggle.init(root, true, function(toggleElement, context) {
-        return Templates.render('mod_forum/discussion_subscription_toggle', context)
-            .then(function(html, js) {
-                return Templates.replaceNode(toggleElement, html, js);
-            });
-    });
+var root = $("[data-content='forum-discussion']");
+Discussion.init(root);
+PostsList.init(root);
+root = $('[data-container="discussion-tools"]');
+LockToggle.init(root, true);
+FavouriteToggle.init(root, true, function(toggleElement, context) {
+return Templates.render('mod_forum/discussion_favourite_toggle', context)
+.then(function(html, js) {
+return Templates.replaceNode(toggleElement, html, js);
+});
+});
+Pin.init(root, true, function(toggleElement, context) {
+return Templates.render('mod_forum/discussion_pin_toggle', context)
+.then(function(html, js) {
+return Templates.replaceNode(toggleElement, html, js);
+});
+});
+SubscribeToggle.init(root, true, function(toggleElement, context) {
+return Templates.render('mod_forum/discussion_subscription_toggle', context)
+.then(function(html, js) {
+return Templates.replaceNode(toggleElement, html, js);
+});
+});
 });
 {{/js}}

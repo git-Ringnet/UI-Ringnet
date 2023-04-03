@@ -41,7 +41,7 @@ Example context (json):
 }}
 
 {{#showaddsection}}
-<div id="changenumsections" class="mdl-left py-2 d-flex float-right">
+<div id="changenumsections" class="mdl-left py-2 d-flex float-right d-none">
     {{#increase}}
     <a href="{{{url}}}" class="increase-sections">
         {{#pix}}t/switch_plus, moodle, {{#str}} increasesections, moodle {{/str}}{{/pix}}
@@ -54,14 +54,14 @@ Example context (json):
     {{/decrease}}
     {{#addsections}}
     {{!-- dropdown button --}}
-    <div id="btn_add_anActivity1">
+    <div id="btn_add_anActivity1" class="d-none">
         <button
             class="btn btn-success text-light section-modchooser section-modchooser-link activity-add d-flex align-items-center"
             data-action="open-chooser" data-sectionid="{{maxsections}}" data-sectionreturnid="1">
             <span class="activity-add-text" style="color: #fff;">{{#str}}addresourceoractivity, core{{/str}}</span>
         </button>
     </div>
-    <div id="btn_add_section">
+    <div id="btn_add_section" class="d-none">
         {{!-- Add new action --}}
         <a href="{{{url}}}" class="add-sections mb-3 mx-2" data-add-sections="{{title}}"
             data-new-sections="{{newsection}}" data-action="addSection" {{#insertafter}} data-id="{{id}}"
@@ -69,7 +69,6 @@ Example context (json):
             {{title}}
         </a>
     </div>
-
     {{/addsections}}
 </div>
 {{/showaddsection}}

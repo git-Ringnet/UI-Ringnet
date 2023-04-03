@@ -39,7 +39,7 @@
 }}
 <time id="time-{{$elementid}}{{uniqid}}{{/elementid}}" class="{{$elementclass}}{{timeclass}}{{/elementclass}}" datetime="{{$datetimeval}}{{datetime}}{{/datetimeval}}"
       data-timestamp="{{$timestampval}}{{timestamp}}{{/timestampval}}"
-      data-datetimeformat="{{$datetimeformatval}}{{#datetimeformat}}{{.}}{{/datetimeformat}}{{^datetimeformat}}%Y-%m-%dT%H:%M%z{{/datetimeformat}}{{/datetimeformatval}}">
+      data-datetimeformat="{{$datetimeformatval}}{{#datetimeformat}}{{.}}{{/datetimeformat}}{{^datetimeformat}}%d/%m/%Y %H:%M:%S{{/datetimeformat}}{{/datetimeformatval}}">
     {{$datedisplay}}
         {{#userdate}} {{$timestampval}}{{timestamp}}{{/timestampval}}, {{$userdateformatval}}{{userdateformat}}{{/userdateformatval}} {{/userdate}}
     {{/datedisplay}}

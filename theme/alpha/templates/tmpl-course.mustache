@@ -124,36 +124,3 @@ Drawer.init();
 M.util.js_complete('theme_alpha/loader');
 });
 {{/js}}
-<script>
-    var btn_addSection = document.getElementById('btn_addSection');
-    var btn_add_section = document.getElementById('btn_add_section');
-    var btn_add_anActivity = document.getElementById('btn_add_anActivity');
-    var btn_add_anActivity1 = document.getElementById('btn_add_anActivity1');
-    var url = window.location.pathname;
-    var setmode = document.getElementsByClassName('ios-switch-control-input')[0];
-    var from = document.forms[0];
-    var icon_Preview = document.getElementById('icon_Preview');
-    var icon_Hidden = document.getElementById('icon_Hidden');
-    var span_editMode = document.getElementById('span_editMode');
-    var formsubmit = document.getElementById('form_submit');
-    if ((setmode.getAttribute('aria-checked') == 'false')) {
-        //setmode.checked = true;
-        //from.submit();
-        icon_Hidden.setAttribute('style', 'display:block;');
-        span_editMode.setAttribute('style', 'display:none;');
-    } else {
-        icon_Preview.setAttribute('style', 'display:block;');
-        span_editMode.setAttribute('style', 'display:none;');
-        btn_addSection.appendChild(btn_add_section);    
-        btn_add_anActivity.appendChild(btn_add_anActivity1);
-    }
-  
-    if (setmode.getAttribute('aria-checked') == 'false') {
-        document.getElementById('btn_add_anActivity').setAttribute('style', 'display:none');
-        document.getElementById('btn_addSection').setAttribute('style', 'display:none');
-    }
-    else {
-        document.getElementById('btn_add_anActivity').setAttribute('style', 'display:block');
-        document.getElementById('btn_addSection').setAttribute('style', 'display:block');
-    }
-</script>
