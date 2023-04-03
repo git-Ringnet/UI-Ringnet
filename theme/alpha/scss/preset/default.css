@@ -25663,7 +25663,7 @@ ul[aria-labelledby=category-listing-title] li {
 .rui--activity-is-manual .activity-information {
   position: absolute;
   top: 5px;
-  left: 5px;
+  right: 0 !important;
 }
 
 .rui--activity-hasdates {

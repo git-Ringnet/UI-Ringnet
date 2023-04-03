@@ -310,6 +310,10 @@ echo $OUTPUT->footer();
     if (setmode) {
         var btns = document.querySelectorAll('#btn_addSection');
         var btnsmove = document.querySelectorAll('.move');
+        var btnchecked = document.querySelectorAll('.activity-information');
+        for (var i = 0; i < btnchecked.length; i++) {
+            btnchecked[i].style.display = setmode.checked ? 'none' : '';
+        }
         for (var i = 0; i < btnsmove.length; i++) {
             btnsmove[i].style.display = setmode.checked ? '' : 'none';
         }

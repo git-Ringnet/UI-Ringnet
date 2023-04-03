@@ -198,7 +198,7 @@ class discussion
         }
 
         $posts = array_merge([$firstpost], array_values($replies));
-        
+
         if ($this->postprocessfortemplate !== null) {
             $exporteddiscussion = ($this->postprocessfortemplate)($this->discussion, $user, $this->forum);
         } else {
@@ -225,6 +225,7 @@ class discussion
             'settingsselector' => true,
         ]);
         $exporteddiscussion['timecreated'] = $firstpost->get_time_created();
+        $exporteddiscussion['postid'] = $firstpost->get_id();
 
         $capabilities = (array) $exporteddiscussion['capabilities'];
 
@@ -267,29 +268,52 @@ class discussion
             $exporteddiscussion['throttlingwarningmsg'] = $throttlewarnnotification->get_message();
         }
 
-        // global $USER;
-        // $forumobject = $this->forumrecord;
-        // $context = $this->forum->get_context();
-        // $activeenrolled = is_enrolled($context, $USER, '', true);
-        // $canmanage = has_capability('mod/forum:managesubscriptions', $context);
-        // $cansubscribe = $activeenrolled && !($this->forum->get_subscription_mode() === FORUM_FORCESUBSCRIBE) &&
-        //     (!($this->forum->get_subscription_mode() === FORUM_DISALLOWSUBSCRIBE) || $canmanage);
-        // if ($cansubscribe) {
-        //     $returnurl =
-        //         (new moodle_url('/mod/forum/discuss.php', ['d' => $_GET['d']]))->out(false);
-        //     if (!\mod_forum\subscriptions::is_subscribed($USER->id, $forumobject, null, $this->forum->get_course_module_record())) {
-        //         $exporteddiscussion['subscribetoforum'] = (new moodle_url(
-        //             '/mod/forum/subscribe.php',
-        //             ['id' => $forumobject->id, 'sesskey' => sesskey(), 'returnurl' => $returnurl]
-        //             ))->out(false);
-        //     } else {
-        //         $exporteddiscussion['unsubscribefromforum'] = (new moodle_url(
-        //             '/mod/forum/subscribe.php',
-        //             ['id' => $forumobject->id, 'sesskey' => sesskey(), 'returnurl' => $returnurl]
-        //         ))->out(false);
-        //     }
-        // }
-        // var_dump($loggedinuser);
+        global $USER;
+        $forumobject = $this->forumrecord;
+        $context = $this->forum->get_context();
+        $activeenrolled = is_enrolled($context, $USER, '', true);
+        $canmanage = has_capability('mod/forum:managesubscriptions', $context);
+        $cansubscribe = $activeenrolled && !($this->forum->get_subscription_mode() === FORUM_FORCESUBSCRIBE) &&
+            (!($this->forum->get_subscription_mode() === FORUM_DISALLOWSUBSCRIBE) || $canmanage);
+        if ($cansubscribe) {
+            $returnurl =
+                (new moodle_url('/mod/forum/discuss.php', ['d' => $_GET['d']]))->out(false);
+            if (!\mod_forum\subscriptions::is_subscribed($USER->id, $forumobject, null, $this->forum->get_course_module_record())) {
+                $exporteddiscussion['subscribethisforum'] = (new moodle_url(
+                    '/mod/forum/subscribe.php',
+                    ['id' => $forumobject->id, 'd' => $_GET['d'], 'sesskey' => sesskey(), 'returnurl' => $returnurl]
+                ))->out(false);
+            } else {
+                $exporteddiscussion['unsubscribethisforum'] = (new moodle_url(
+                    '/mod/forum/subscribe.php',
+                    ['id' => $forumobject->id, 'd' => $_GET['d'], 'sesskey' => sesskey(), 'returnurl' => $returnurl]
+                ))->out(false);
+            }
+        }
+        $urlfactory = $this->urlfactory;
+        $exporteddiscussion['data'] = [
+            'id' => $this->discussion->get_id(),
+            'forumid' => $this->forum->get_id(),
+            'pinned' => $this->discussion->is_pinned(),
+            'locked' => $this->forum->is_discussion_locked($this->discussion),
+            'istimelocked' => $this->forum->is_discussion_time_locked($this->discussion),
+            'firstpostid' => $this->discussion->get_first_post_id(),
+        ];
+        $exporteddiscussion['userstate'] = [
+            'subscribed' => \mod_forum\subscriptions::is_subscribed($user->id, $this->forumrecord, $this->discussion->get_id()),
+        ];
+        $exporteddiscussion['capabilities'] = [
+            'subscribe' => $capabilitymanager->can_subscribe_to_discussion($user, $this->discussion),
+        ];
+        $exporteddiscussion['urls'] = [
+            'subscribe' => (new moodle_url(
+                '/mod/forum/subscribe.php',
+                ['id' => $forumobject->id, 'd' => $_GET['d'], 'sesskey' => sesskey(), 'returnurl' => $returnurl]
+            ))->out(false)
+        ];
+        // var_dump( $exporteddiscussion['data']);
+        // var_dump( $exporteddiscussion);
+
         if ($this->displaymode === FORUM_MODE_NESTED_V2) {
             $template = 'mod_forum/forum_discussion_nested_v2';
         } else {

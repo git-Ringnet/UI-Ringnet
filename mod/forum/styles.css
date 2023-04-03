@@ -100,9 +100,14 @@
 #page-mod-forum-search .c0 {
     text-align: right;
 }
-
 .path-mod-forum .indent {
-    margin-left: 3%;
+    /* margin-left: 3%; */
+}
+.firstpost .re-replies{
+    display: none;
+}
+.re-replies{
+    border-left: 4px solid #0095F6;
 }
 
 .path-mod-forum .forumheaderlist {
@@ -277,11 +282,11 @@ span.unread {
 }
 
 .path-mod-forum .discussion-nav .next-discussion {
-    float: right;
+    display: none;
 }
 
 .path-mod-forum .discussion-nav .prev-discussion {
-    float: left;
+    display: none;
 }
 
 .path-mod-forum .preload-subscribe {

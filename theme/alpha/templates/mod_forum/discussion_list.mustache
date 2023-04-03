@@ -59,7 +59,7 @@ Example context (json):
         {{/forum.capabilities.grade}}
     </div>
     {{#forum.capabilities.create}}
-    <div class="rui-collapseaddform collapse m-t-1 p-b-1" id="collapseAddForm">
+    <div class="rui-collapseaddform collapse m-t-1 p-b-1 pb-3" id="collapseAddForm">
         {{{newdiscussionhtml}}}
     </div>
     {{/forum.capabilities.create}}
@@ -189,7 +189,7 @@ Example context (json):
                     </th>
                     {{/forum.capabilities.viewdiscussions}}
                     {{#forum.capabilities.subscribe}}
-                    <th scope="col" class="text-center px-2 reply">{{#str}} notsubscribed, mod_forum {{/str}}</th>
+                    <th scope="col" class="text-center px-2 reply d-none">{{#str}} notsubscribed, mod_forum {{/str}}</th>
                     {{/forum.capabilities.subscribe}}
                     <th scope="col" class="discussionsubscription px-5">
                         <span class="accesshide">{{#str}}actions{{/str}}</span>
@@ -326,7 +326,7 @@ Example context (json):
                     </td>
                     {{#forum.capabilities.viewdiscussions}}
                     <td class="p-0 text-right align-middle fit-content px-2">
-                        <span class="badge text">{{replies}}</span>
+                        <span class="text">{{replies}}</span>
                         {{#forum.userstate.tracked}}
                         {{#unread}}
                         {{! TODO Rewrite as AJAX}}
@@ -343,7 +343,7 @@ Example context (json):
                     </td>
                     {{/forum.capabilities.viewdiscussions}}
                     {{#forum.capabilities.subscribe}}
-                    <td class="text-center align-middle fit-content px-2">
+                    <td class="text-center align-middle fit-content px-2 d-none">
                         {{#discussion}}
                         <label class="custom-control ios-switch form-check-inline m-0">
                             <input type="checkbox" class="ios-switch-control-input form-check-input"
