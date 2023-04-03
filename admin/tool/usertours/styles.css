@@ -160,17 +160,150 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #id_general .fdescription {
     display: none;
 }
+#page-course-edit #fitem_id_overviewfiles_filemanager p,
+#page-course-edit #fitem_id_overviewfiles_filemanager .form-filetypes-descriptions
+{
+    display: none;
+}
 
-#fitem_id_overviewfiles_filemanager {
-    float: left !important;
+#page-course-edit #fitem_id_overviewfiles_filemanager,
+#page-course-edit #fitem_id_fullname,
+#page-course-edit #fitem_id_category,
+#page-course-edit #fitem_id_summary_editor,
+#page-course-edit #fgroup_id_coursevisibility,
+#page-course-edit #fitem_id_startdate,
+#page-course-edit #fitem_id_enddate,
+#page-course-edit #fitem_id_format{
     display: block !important;
 }
 
-#fitem_id_overviewfiles_filemanager .col-md-3,
-#fitem_id_overviewfiles_filemanager .col-md-9 {
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3,
+#page-course-edit #fitem_id_fullname .col-md-3,
+#page-course-edit #fitem_id_category .col-md-3,
+#page-course-edit #fitem_id_summary_editor .col-md-3,
+#page-course-edit #fgroup_id_coursevisibility .col-md-3,
+#page-course-edit #fitem_id_startdate .col-md-3,
+#page-course-edit #fitem_id_enddate .col-md-3,
+#page-course-edit #fitem_id_format .col-md-3{
+    text-align: left !important;
     max-width: 100%;
 }
 
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9,
+#page-course-edit #fitem_id_fullname .col-md-9,
+#page-course-edit #fitem_id_category .col-md-9,
+#page-course-edit #fgroup_id_coursevisibility .col-md-9,
+#page-course-edit #fitem_id_startdate .col-md-9,
+#page-course-edit #fitem_id_enddate .col-md-9,
+#page-course-edit #fitem_id_format .col-md-9{
+    max-width: 100%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+}
+#page-course-edit #fitem_id_summary_editor .col-md-9{
+    max-width: 100%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+    width: 56%;
+}
+#page-course-edit #fitem_id_fullname .col-md-9 input
+{
+    width: 56%;
+}
+#page-course-edit #fitem_id_category .col-md-9 .d-md-inline-block{
+    width: 62.5%;
+}
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3 label,
+#page-course-edit #fitem_id_fullname .col-md-3 label,
+#page-course-edit #fitem_id_category .col-md-3 label,
+#page-course-edit #fitem_id_summary_editor .col-md-3 label,
+#page-course-edit #fgroup_id_coursevisibility .col-md-3 label,
+#page-course-edit #fitem_id_startdate .col-md-3 label,
+#page-course-edit #fitem_id_enddate .col-md-3 label,
+#page-course-edit #fitem_id_format .col-md-3 label{
+   font-size: 13px;
+   font-weight: 600;
+   color: #000000;
+   line-height: 18px;
+}
+#page-course-edit #fitem_id_overviewfiles_filemanager .fp-pathbar,
+#page-course-edit #fitem_id_overviewfiles_filemanager .filemanager-container{
+    width: 83%;
+}
+#page-course-edit #fitem_id_overviewfiles_filemanager .fp-thumbnail img{
+    border-radius: 8px;
+    width: 100%;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover;
+}
+#page-course-edit #fitem_id_enddate .col-md-3,
+#page-course-edit #fitem_id_format{
+    display: none !important;
+}
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 .border-top{
+    border-top: none !important;
+}
+#page-course-edit #fitem_id_category .col-md-9{
+    width: 50% !important;
+}
+#page-course-edit #btn_upload{
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: #555555;
+    padding: 4px 16px 4px 16px;
+    color: #FFFFFF;
+    font-weight: 500;
+    line-height: 24px;
+}
+#page-course-eidt #id_saveanddisplay{
+    line-height: 24px;
+    font-size: 14px;
+    padding: 8px 16px;
+    background: #0095F6;
+    border: 8px;
+    font-weight: 500;
+}
+#page-course-edit #id_cancel{
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: 1px solid #555555;
+    border-radius: 8px;
+    line-height: 24px;
+}
+/* #page-course-edit .moodle-dialogue-wrap{
+    opacity: 0 !important;
+} */
+@media only screen and (min-width: 500px) and (max-width:1000px){
+    #page-course-edit #div_left{
+        width: 0% !important;
+    }
+    #page-course-edit .edit_left,
+    #page-course-edit .edit_right{
+        width: 100% !important;
+    }
+    #page-course-edit #fitem_id_fullname .col-md-9 input,
+    #page-course-edit #fitem_id_summary_editor .col-md-9{
+        width: 100% !important;
+    }
+    #page-course-edit #fitem_id_category .col-md-9{
+        max-width: 80% !important;
+    }
+}
+@media only screen and (max-width:1919px) {
+    #page-course-edit #fitem_id_summary_editor .col-md-9,
+    #page-course-edit #fitem_id_fullname .col-md-9 input{
+        width: 95% !important;
+    }
+    #page-course-edit #content_edit{
+        padding: 0 20px !important;
+    }
+    #page-course-edit #fitem_id_category .col-md-9 .d-md-inline-block{
+        width: 100% !important;
+    }
+}
+/*
 #filemanager-639844a710b13 .fp-navbar {
     display: none
 }
@@ -266,8 +399,8 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 .editor_atto_content_wrap,
 .editor_atto+textarea {
     border-radius: 8px !important;
-}
-
+} */
+/* Đây */
 /* CSS participants */
 /* #page-course-view-participants #fitem_id_userlist .form-autocomplete-selection,
 #page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection {
@@ -296,7 +429,6 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 
 #page-course-view-participants #fitem_id_userlist .col-md-3 label,
 #page-course-view-participants #fitem_id_cohortlist .col-md-3 label {
-    height: 18px;
     top: 0;
     left: 0;
     position: absolute;
@@ -396,7 +528,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     display: none;
 }
 
-@media only screen and (max-width: 526px) {
+/* @media only screen and (max-width: 526px) {
     #fitem_id_category .col-md-9 .form-autocomplete-downarrow {
         right: 5px !important;
     }
@@ -437,9 +569,9 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     #fitem_id_maxbytes .col-md-3 {
         max-width: 100%;
     }
-}
+} */
 
-@media only screen and (min-width: 527px) and (max-width:999px) {
+/* @media only screen and (min-width: 527px) and (max-width:999px) {
     #page-course-edit #fitem_id_overviewfiles_filemanager .col-md-9 {
         max-width: 100% !important;
     }
@@ -465,9 +597,9 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     #fitem_id_category .col-md-9 {
         max-width: 60%;
     }
-}
+} */
 
-@media only screen and (min-width: 1000px) {
+/* @media only screen and (min-width: 1000px) {
     .tertiary-navigation .navitem .enrol_manual_plugin form input {
         background: rgb(230, 8, 8);
     }
@@ -486,7 +618,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 
     #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail {
         width: 155px !important;
-        height: 135px !important;
+        height: 145px !important;
     }
 
     #fitem_id_overviewfiles_filemanager .col-md-9 .fp-hascontextmenu .fp-thumbnail img {
@@ -500,7 +632,7 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
         width: 150px !important;
     }
 
-}
+} */
 
 /* /CSS */
 
@@ -874,14 +1006,14 @@ body {
 .no-overflow>.rolecap {
     width: 100%;
 }
-
-#page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection,
+/* Đây */
+/* #page-course-edit #fitem_id_category .col-md-9 .form-autocomplete-selection */
 #page-course-edit #id_general legend,
 #page-course-edit #id_descriptionhdr legend {
     display: none !important;
 }
 
-#page-course-edit #fitem_id_overviewfiles_filemanager,
+/* #page-course-edit #fitem_id_overviewfiles_filemanager,
 #page-course-edit #fitem_id_fullname {
     margin-top: -2%;
 }
@@ -1032,16 +1164,7 @@ body {
     color: black !important;
 }
 
-#btn_addSection>#btn_add_section>.add-sections {
-    padding: 8px 16px;
-    background: #555555;
-}
 
-#btn_add_section>.add-sections {
-    font-weight: 500;
-    font-size: 12px;
-    color: #FFFFFF;
-}
 
 .activity-add-text.add-activity {
     color: #0095F6;
@@ -1780,7 +1903,6 @@ select#bulk_action {
     display: none;
 }
 
-/*  */
 
 #page-my-index .modal-backdrop.in.show,
 #page-my-index .modal.moodle-has-zindex.show {

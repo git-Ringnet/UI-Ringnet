@@ -65,7 +65,7 @@ function core_login_process_password_reset_request() {
     }
 
     // DISPLAY FORM.
-
+    echo $OUTPUT->box('<a href="/ringnet/login/index.php"><img src="https://drive.google.com/uc?id=1bKePXLk0huPJsqwJe51IKfjiWAsuDMWl" alt="Ringnet Smart Learning" title="Ringnet Smart Learning"></a>','logo-forgot-pass');
     echo $OUTPUT->header();
     // echo $OUTPUT->box(get_string('passwordforgotteninstructions2'), 'generalbox boxwidthnormal boxaligncenter');
     $mform->display();
@@ -85,7 +85,7 @@ function core_login_process_password_reset($username, $email) {
     global $CFG, $DB;
 
     if (empty($username) && empty($email)) {
-print_error('cannotmailconfirm');
+        print_error('cannotmailconfirm');
     }
 
     // Next find the user account in the database which the requesting user claims to own.
@@ -140,7 +140,7 @@ print_error('cannotmailconfirm');
         } else {
             // The account the requesting user claims to be is entitled to change their password.
             // Next, check if they have an existing password reset in progress.
-$resetinprogress = $DB->get_record('user_password_resets', array('userid' => $user->id));
+            $resetinprogress = $DB->get_record('user_password_resets', array('userid' => $user->id));
             if (empty($resetinprogress)) {
                 // Completely new reset request - common case.
                 $resetrecord = core_login_generate_password_reset($user);
@@ -197,7 +197,7 @@ $resetinprogress = $DB->get_record('user_password_resets', array('userid' => $us
         // Don't send a 3rd reset email.
         $status = 'emailalreadysent';
         $notice = get_string($status);
-} else if ($pwresetstatus == PWRESET_STATUS_NOEMAILSENT) {
+    } else if ($pwresetstatus == PWRESET_STATUS_NOEMAILSENT) {
         // User found, protectusernames is off, but user is not confirmed.
         // Pretend we sent them an email.
         // This is a big usability problem - need to tell users why we didn't send them an email.
@@ -259,7 +259,7 @@ function core_login_process_password_set($token) {
 
     // Check this isn't guest user.
     if (isguestuser($user)) {
-print_error('cannotresetguestpwd');
+        print_error('cannotresetguestpwd');
     }
 
     // Token is correct, and unexpired.
@@ -269,12 +269,13 @@ print_error('cannotresetguestpwd');
         // User hasn't submitted form, they got here directly from email link.
         // Next, display the form.
         $setdata = new stdClass();
-        $setdata->username = $user->username;
-        $setdata->username2 = $user->username;
+        // $setdata->username = $user->username;
+        // $setdata->username2 = $user->username;
         $setdata->token = $user->token;
         $mform->set_data($setdata);
+        echo $OUTPUT->box('<a href="/ringnet/login/index.php"><img src="https://drive.google.com/uc?id=1bKePXLk0huPJsqwJe51IKfjiWAsuDMWl" alt="Ringnet Smart Learning" title="Ringnet Smart Learning"></a>','logo-forgot-pass');
         echo $OUTPUT->header();
-        echo $OUTPUT->box(get_string('setpasswordinstructions'), 'generalbox boxwidthnormal boxaligncenter');
+        // echo $OUTPUT->box(get_string('setpasswordinstructions'), 'generalbox boxwidthnormal boxaligncenter');
         $mform->display();
         echo $OUTPUT->footer();
         return;
@@ -334,7 +335,7 @@ function core_login_generate_password_reset ($user) {
 function core_login_get_return_url() {
     global $CFG, $SESSION, $USER;
     // Prepare redirection.
-if (user_not_fully_set_up($USER, true)) {
+    if (user_not_fully_set_up($USER, true)) {
         $urltogo = $CFG->wwwroot.'/user/edit.php';
         // We don't delete $SESSION->wantsurl yet, so we get there later.
 
@@ -401,7 +402,7 @@ function core_login_validate_forgot_password_data($data) {
                 if (empty($CFG->protectusernames)) {
                     $errors['email'] = get_string('emailnotfound');
                 }
-} catch (dml_multiple_records_exception $multipleexception) {
+            } catch (dml_multiple_records_exception $multipleexception) {
                 // Multiple records found. Ask the user to enter a username instead.
                 if (empty($CFG->protectusernames)) {
                     $errors['email'] = get_string('forgottenduplicate');
@@ -494,7 +495,7 @@ function core_login_extend_signup_form($mform) {
 
 /**
  * Plugins can add additional validation to forms.
-*/
+ */
 
 /** Inject validation into change_password_form.
  * @param array $data the data array from submitted form values.
@@ -572,7 +573,7 @@ function core_login_validate_extend_signup_form($data) {
 function core_login_post_change_password_requests($data) {
     $pluginsfunction = get_plugins_with_function('post_change_password_requests');
     foreach ($pluginsfunction as $plugintype => $plugins) {
-foreach ($plugins as $pluginfunction) {
+        foreach ($plugins as $pluginfunction) {
             $pluginfunction($data);
         }
     }
