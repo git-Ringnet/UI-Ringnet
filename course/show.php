@@ -21,9 +21,7 @@ foreach ($teachers as $teacher) {
 $count_content = get_fast_modinfo($course->id);
 $total_sections = count($count_content->get_cms());
 $num_users = count_enrolled_users(context_course::instance($course->id), '', 0);
-$completion = new completion_info($course->id);
 
-var_dump($completion);
 $streditcoursesettings = get_string("editcoursesettings");
 $title = $streditcoursesettings;
 $course = course_get_format($course)->get_course();

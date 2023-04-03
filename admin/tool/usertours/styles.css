@@ -1984,6 +1984,7 @@ select#bulk_action {
     color: #1D1C20;
 }
 #page-course-show #content_course_student{
+    width: 75%;
     box-shadow: 4px 8px 16px rgba(69, 79, 89, 0.08);
     border-radius: 16px;
 }
