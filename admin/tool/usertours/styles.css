@@ -1913,3 +1913,106 @@ select#bulk_action {
 #section-0 #btn_addSection {
     display: none !important;
 }
+.rui--activity-is-manual .activity-information {
+    left: unset !important;
+    right: 0;
+}
+#page-badges-view #navbar_PNSection,
+#page-mod-forum-discuss #navbar_PNSection,
+#page-mod-forum-view #navbar_PNSection,
+h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
+    display: none !important;
+}
+#page-course-edit #id_completionhdr {
+    display: none !important;
+}
+
+#page-mod-forum-view .title-name {
+    width: 50%;
+}
+
+#page-mod-forum-view .creator,
+#page-mod-forum-view .lastpost {
+    width: 15%;
+}
+
+#page-mod-forum-view .reply,
+#page-mod-forum-view .action {
+    width: 10%;
+}
+
+#s-page-footer {
+    display: none;
+}
+#btn_addSection>#btn_add_section>.add-sections {
+    padding: 8px 16px;
+    background: #555555;
+}
+
+#btn_add_section>.add-sections {
+    font-weight: 500;
+    font-size: 12px;
+    color: #FFFFFF;
+}
+
+#btn_addSection {
+    background: white;
+    border: 1px solid blue;
+}
+/* Mới */
+#page-course-view-participants .modal-header {
+    background: #0095F6;
+}
+#page-course-view-participants .modal-header h5{
+    line-height: 28px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #FFF;
+}
+#page-course-view-participants #fitem_id_userlist .col-md-3 label,
+#page-course-view-participants #fitem_id_cohortlist .col-md-3 label
+{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+}
+#page-course-view-participants .modal-content{
+    border: none;
+}
+#page-course-view-participants #fitem_id_roletoassign .col-md-3 label{
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+}
+#page-course-view-participants .form-autocomplete-suggestions{
+    width: 100% !important;
+}
+#page-course-edit #fitem_id_startdate .col-md-9 span{
+    height: 3rem;
+}
+#page-course-edit #fitem_id_startdate .col-md-9 select,
+#page-course-edit #fitem_id_enddate .col-md-9 select
+{
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 14px;
+}
+#page-course-edit #fitem_id_fullname .col-md-9 input{
+    font-weight: 400;
+    font-size: 14px;
+    padding: 12px 16px 12px 16px;
+    background: #FFF;
+}
+#page-course-edit #fitem_id_fullname .col-md-3 label,
+#page-course-edit #fitem_id_overviewfiles_filemanager .col-md-3 label,
+#page-course-edit #fitem_id_category .col-md-3 label,
+#page-course-edit #fitem_id_summary_editor .col-md-3 label,
+#page-course-edit #fgroup_id_coursevisibility .col-md-3 label,
+#page-course-edit #fitem_id_startdate .col-md-3 label
+{
+    font-size: .813rem;
+    line-height: 18px;
+    font-weight: 600;
+    color: #1D1C20;
+}
+/*  */
