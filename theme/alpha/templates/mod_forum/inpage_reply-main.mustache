@@ -1,0 +1,152 @@
+{{!
+This file is part of Moodle - http://moodle.org/
+
+Moodle is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Moodle is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Moodle. If not, see
+<http: //www.gnu.org/licenses />.
+}}
+{{!
+@template mod_forum/inpage_reply
+
+Template which defines a forum post for sending in a single-post HTML email.
+
+Classes required for JS:
+* none
+
+Data attributes required for JS:
+* none
+
+Example context (json):
+{
+"postid": 0,
+"reply_url": "",
+"sesskey": "",
+"parentsubject": ""
+}
+}}
+<div data-content="inpage-reply-content">
+    <div class="row mx-auto mb-2 focus-target border rounded">
+        <div class="col-2 border-right rounded-left" style="background: #E0E0E0;">
+            <div class="d-flex flex-column align-items-center w-100 pt-2" data-region-content="forum-post-core">
+                <header id="post-header-{{id}}-{{uniqid}}" class="mb-2 forum-post-header d-flex align-items-center">
+                    {{^isdeleted}}
+                    <div class="mb-sm-3 mb-md-0" style="width: 60px;">
+                        <img class="rounded w-100" src="{{{loggedinuser.profileimageurl}}}"
+                            alt="{{#str}} pictureof, core, {{loggedinuser.fullname}} {{/str}}" aria-hidden="true"
+                            title="{{#str}} pictureof, core, {{loggedinuser.fullname}} {{/str}}">
+                    </div>
+                    {{/isdeleted}}
+                    <div class="d-flex flex-column">
+                        {{#parentauthorname}}
+                        <span class="sr-only">{{#str}} inreplyto, mod_forum, {{.}} {{/str}}</span>
+                        {{/parentauthorname}}
+                        {{$subjectheading}}
+
+                        {{#subject}}
+                        <div {{!
+                            }}class="{{#unread}} forum-post-unread font-weight-bold{{/unread}} my-1 forum-post-core-subject"
+                            {{! }}data-region-content="forum-post-core-subject" {{!
+                            }}data-reply-subject="{{replysubject}}" {{! }}>
+
+                            {{$subject}}<h5 class="d-none my-0" title="{{{subject}}}"><span
+                                    class="d-inline-block text-truncate font-weight-bold" style="max-width: 600px;"
+                                    title="{{subject}}">{{{subject}}}</span></h5>{{/subject}}
+
+                        </div>
+                        {{/subject}}
+
+                        {{/subjectheading}}
+                        {{^isdeleted}}
+                        <div class="forum-post-details d-none" tabindex="-1">
+                            {{#html.authorsubheading}}{{{.}}}{{/html.authorsubheading}}
+                            {{^html.authorsubheading}}
+                            {{< core/time_element }} {{$elementid}}created-{{id}}-{{uniqid}}{{/elementid}}
+                                {{$timestampval}}{{timecreated}}{{/timestampval}} {{$userdateformatval}}{{#str}}
+                                strftimedaydatetime, core_langconfig {{/str}}{{/userdateformatval}}
+                                {{/core/time_element}} {{/html.authorsubheading}} </div>
+                                {{/isdeleted}}
+                                {{#isprivatereply}}
+                                <div class="privatereplyinfo badge badge-dark mt-1">
+                                    {{#str}}postisprivatereply, forum{{/str}}
+                                </div>
+                                {{/isprivatereply}}
+                                {{#hasreplycount}}
+                                <span class="sr-only">{{#str}} numberofreplies, mod_forum, {{replycount}}
+                                    {{/str}}</span>
+                                {{/hasreplycount}}
+                        </div>
+
+                </header>
+                <div class="author-name">
+                    {{loggedinuser.fullname}}
+                </div>
+            </div>
+        </div>
+        <div class="col-10 pt-2" style="background: #ECECEC;">
+            <form data-post-id="{{postid}}" id="inpage-reply-{{postid}}" data-content="inpage-reply-form"
+                action="{{{reply_url}}}">
+                <div class="pb-1">
+                    <div class="w-100">
+                        <textarea rows="5" name="post" title="post" class="form-control mb-2 w-100"
+                            placeholder="{{#str}} replyplaceholder, forum {{/str}}"></textarea>
+                        <input type="hidden" name="postformat" value="{{postformat}}" />
+                    </div>
+                    <input type="hidden" name="subject" value="{{parentsubject}}" />
+                    <input type="hidden" name="reply" value="{{postid}}" />
+                    <input type="hidden" name="sesskey" value="{{sesskey}}" />
+                </div>
+                <div class="d-inline-flex justify-content-between align-items-center w-100 mb-4">
+                    <div class="d-inline-flex align-items-center">
+                        <button class="btn btn-primary mr-1" title="{{#str}} submit, core {{/str}}"
+                            data-action="forum-inpage-submit">
+                            <span data-region="submit-text">{{#str}} submit, core {{/str}}</span>
+                            <span data-region="loading-icon-container" class="hidden">{{> core/loading }}</span>
+                        </button>
+                        <button class="btn btn-secondary" title="{{#str}} cancel, core {{/str}}"
+                            data-action="collapsible-link">
+                            {{#str}} cancel, core {{/str}}
+                        </button>
+                        {{#canreplyprivately}}
+                        <div class="ml-4 form-check form-check-inline">
+
+                            <label class="custom-control ios-switch mb-0">
+                                <input type="checkbox" class="ios-switch-control-input form-check-input"
+                                    id="private-reply-checkbox-{{uniqid}}" title="{{#str}} privatereply, forum {{/str}}"
+                                    name="privatereply" />
+                                <span class="ios-switch-control-indicator"></span>
+                                <label class="form-check-label" for="private-reply-checkbox-{{uniqid}}">{{#str}}
+                                    privatereply, forum {{/str}}</label>
+                            </label>
+
+                        </div>
+                        {{/canreplyprivately}}
+                    </div>
+
+                    <button title="{{#str}} advanced, core {{/str}}" data-action="forum-advanced-reply"
+                        class="forum-advanced-btn btn btn-info border-0 float-right" type="submit">
+                        <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.75 13L7.75 19.25H16.25L18.25 13L12 4.75L5.75 13Z" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M5.75 19.25H18.25" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            <path d="M12 4.75V12.25" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>
+                        {{#str}} advanced, core {{/str}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
