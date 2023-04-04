@@ -492,7 +492,6 @@ class post extends exporter
             'messageformat' => $post->get_message_format(),
             'author' => $exportedauthor,
             'discussionid' => $post->get_discussion_id(),
-      
             'hasparent' => $post->has_parent(),
             'parentid' => $post->has_parent() ? $post->get_parent_id() : null,
             'timecreated' => $timecreated,

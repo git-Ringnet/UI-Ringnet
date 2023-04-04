@@ -1,4 +1,3 @@
-
 <?php
 // This file is part of Moodle - http://moodle.org/
 //
@@ -24,6 +23,7 @@
  */
 
 use mod_forum\grades\forum_gradeitem;
+
 require_once('../../config.php');
 
 $managerfactory = mod_forum\local\container::get_manager_factory();
@@ -149,8 +149,8 @@ if (!empty($CFG->enablerssfeeds) && !empty($CFG->forum_enablerssfeeds) && $forum
     require_once("{$CFG->libdir}/rsslib.php");
 
     $rsstitle = format_string($course->shortname, true, [
-            'context' => context_course::instance($course->id),
-        ]) . ': ' . format_string($forum->get_name());
+        'context' => context_course::instance($course->id),
+    ]) . ': ' . format_string($forum->get_name());
     rss_add_http_header($forum->get_context(), 'mod_forum', $forumrecord, $rsstitle);
 }
 $activityheader = $PAGE->activityheader;
@@ -219,20 +219,24 @@ switch ($forum->get_type()) {
         $discussion = $discussionvault->get_last_discussion_in_forum($forum);
         $discussioncount = $discussionvault->get_count_discussions_in_forum($forum);
         $hasmultiplediscussions = $discussioncount > 1;
-        $discussionsrenderer = $rendererfactory->get_single_discussion_list_renderer($forum, $discussion,
-            $hasmultiplediscussions, $displaymode);
+        $discussionsrenderer = $rendererfactory->get_single_discussion_list_renderer(
+            $forum,
+            $discussion,
+            $hasmultiplediscussions,
+            $displaymode
+        );
         $post = $postvault->get_from_id($discussion->get_first_post_id());
         $orderpostsby = $displaymode == FORUM_MODE_FLATNEWEST ? 'created DESC' : 'created ASC';
         $replies = $postvault->get_replies_to_post(
-                $USER,
-                $post,
-                $capabilitymanager->can_view_any_private_reply($USER),
-                $orderpostsby
-            );
+            $USER,
+            $post,
+            $capabilitymanager->can_view_any_private_reply($USER),
+            $orderpostsby
+        );
         echo $discussionsrenderer->render($USER, $post, $replies);
 
         if (!$CFG->forum_usermarksread && forum_tp_is_tracked($forumrecord, $USER)) {
-            $postids = array_map(function($post) {
+            $postids = array_map(function ($post) {
                 return $post->get_id();
             }, array_merge([$post], array_values($replies)));
             forum_tp_mark_posts_read($USER, $postids);
@@ -241,12 +245,20 @@ switch ($forum->get_type()) {
     case 'blog':
         $discussionsrenderer = $rendererfactory->get_blog_discussion_list_renderer($forum);
         // Blog forums always show discussions newest first.
-        echo $discussionsrenderer->render($USER, $cm, $groupid, $discussionlistvault::SORTORDER_CREATED_DESC,
-            $pageno, $pagesize, null, false);
+        echo $discussionsrenderer->render(
+            $USER,
+            $cm,
+            $groupid,
+            $discussionlistvault::SORTORDER_CREATED_DESC,
+            $pageno,
+            $pagesize,
+            null,
+            false
+        );
 
         if (!$CFG->forum_usermarksread && forum_tp_is_tracked($forumrecord, $USER)) {
             $discussions = mod_forum_get_discussion_summaries($forum, $USER, $groupid, null, $pageno, $pagesize);
-            $firstpostids = array_map(function($discussion) {
+            $firstpostids = array_map(function ($discussion) {
                 return $discussion->get_first_post()->get_id();
             }, array_values($discussions));
             forum_tp_mark_posts_read($USER, $firstpostids);
@@ -272,3 +284,7 @@ switch ($forum->get_type()) {
 // echo "idforum của khóa học $id_khoa_hoc là: " . $idforum;
 echo '</div>';
 echo $OUTPUT->footer();
+?>
+<script>
+
+</script>

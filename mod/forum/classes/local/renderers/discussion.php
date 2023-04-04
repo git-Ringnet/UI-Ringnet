@@ -226,7 +226,8 @@ class discussion
         ]);
         $exporteddiscussion['timecreated'] = $firstpost->get_time_created();
         $exporteddiscussion['postid'] = $firstpost->get_id();
-
+        $exporteddiscussion['seskey'] = sesskey();
+        $exporteddiscussion['reply_url'] = new moodle_url('/mod/forum/post.php?reply_id=' . $exporteddiscussion['postid'] . '#mformforum');
         $capabilities = (array) $exporteddiscussion['capabilities'];
 
         if ($capabilities['move']) {
@@ -251,9 +252,7 @@ class discussion
             ];
             $exporteddiscussion['creator'] = $name;
         }
-
-
-
+        var_dump(get_role_users($user->id,$context));
 
         $exporteddiscussion['throttlingwarningmsg'] = '';
         $cmrecord = $this->forum->get_course_module_record();
