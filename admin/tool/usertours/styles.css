@@ -273,6 +273,54 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
 #page-course-view-participants #fitem_id_cohortlist .form-autocomplete-selection {
     display: none !important;
 } */
+#page-course-view-participants .badge-light {
+    height: 46px;
+}
+#page-course-view-participants .custom-select {
+    background-color: #FFFFFF;
+}
+#page-course-view-participants [data-action="cancel"]{
+    border: none;
+}
+#page-course-view-participants .modal-content {
+    width: 56.875rem;
+    height: 42.25rem;
+}
+#page-course-view-participants .modal-content .close{
+    background-color: transparent;
+    filter: brightness(0) invert(1);
+    top: 12px;
+}
+#page-course-view-participants .form-control{
+    background: #FFFFFF;
+}
+#page-course-view-participants .modal-header {
+    background: #0095F6;
+}
+#page-course-view-participants .modal-header h5{
+    line-height: 28px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #FFF;
+}
+#page-course-view-participants #fitem_id_userlist .col-md-3 label,
+#page-course-view-participants #fitem_id_cohortlist .col-md-3 label
+{
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+}
+#page-course-view-participants .modal-content{
+    border: none;
+}
+#page-course-view-participants #fitem_id_roletoassign .col-md-3 label{
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+}
+#page-course-view-participants .form-autocomplete-suggestions{
+    width: 100% !important;
+}
 
 #page-course-view-participants #fitem_id_userlist {
     width: 98% !important;

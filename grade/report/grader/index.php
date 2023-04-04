@@ -185,6 +185,9 @@ if (!empty($USER->editing) && ($report->get_pref('showquickfeedback') || $report
     echo '<input type="hidden" value="'.time().'" name="timepageload" />';
     echo '<input type="hidden" value="grader" name="report"/>';
     echo '<input type="hidden" value="'.$page.'" name="page"/>';
+    echo '<script>';
+    echo 'document.getElementById("page-grade-report-grader-index").getElementsByClassName("c1")[0].style.display = "block";';
+    echo '</script>';
     echo $gpr->get_form_fields();
     echo $reporthtml;
     echo '<div class="submit"><input type="submit" id="gradersubmit" class="btn btn-primary"
