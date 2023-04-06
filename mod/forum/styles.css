@@ -394,3 +394,9 @@ span.unread {
 .forum-course{
     margin-top: -10px;
 }
+#page-mod-lti-view #navbar_PNSection{
+    display: none !important;
+}
+#page-mod-lti-view .activity-navigation{
+    display: none !important;
+}
