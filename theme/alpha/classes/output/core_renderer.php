@@ -391,55 +391,63 @@ class core_renderer extends \core_renderer
         } else {
             $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
         }
-        $content = html_writer::start_div('course-navigation');
-        //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
-        $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
-        $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
-        $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
-        $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
-        //Thảo luận
-        $id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
-        $sql = sprintf(
-            "
-    SELECT f.id
-    FROM mdl_forum f
-    INNER JOIN mdl_course_modules cm ON f.id = cm.instance
-    WHERE cm.module = (SELECT id FROM mdl_modules WHERE name = 'forum')
-    AND cm.course = %d",
-            $id_khoa_hoc
-        );
-        $idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
-        $urlforum = $CFG->wwwroot . '/mod/forum/view.php?f=' . $idforum;
 
-        $pages = new stdClass();
-        $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
-        $pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
-        $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
-        if (is_siteadmin() || is_teacher()) {
-            $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-            $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
-            $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+        if($course->id!=1)
+        {
+            $content = html_writer::start_div('course-navigation');
+            //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+            $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
+            $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
+            $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
+            $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+            //Thảo luận
+            $id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
+            $sql = sprintf(
+                "
+        SELECT f.id
+        FROM mdl_forum f
+        INNER JOIN mdl_course_modules cm ON f.id = cm.instance
+        WHERE cm.module = (SELECT id FROM mdl_modules WHERE name = 'forum')
+        AND cm.course = %d",
+                $id_khoa_hoc
+            );
+            $idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
+            $urlforum = $CFG->wwwroot . '/mod/forum/view.php?f=' . $idforum;
+    
+            $pages = new stdClass();
+            $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
+            $pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
+            $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
+            if (is_siteadmin() || is_teacher()) {
+                $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+                $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+                $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+            }
+    
+            $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+    
+            $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    
+            $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
+    <div id='navbarNav'>
+      <ul class='navbar-nav'>";
+            foreach ($pages as $key => $value) {
+                $active = $urltest === $value['url'] ? 'active' : 'before';
+                $content .=
+                    "<li class='nav-item {$active}  mr-2'>
+            <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
+            </li>";
+            }
+            $content .= "</ul>
+        </div>
+      </nav> <hr/>";
+            //     echo '<br/>';
+            $content .= html_writer::end_div(); // navigation-box
         }
-
-        $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-
-        $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-        $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
-<div id='navbarNav'>
-  <ul class='navbar-nav'>";
-        foreach ($pages as $key => $value) {
-            $active = $urltest === $value['url'] ? 'active' : 'before';
-            $content .=
-                "<li class='nav-item {$active}  mr-2'>
-        <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
-        </li>";
+        else
+        {
+            $content="";
         }
-        $content .= "</ul>
-    </div>
-  </nav> <hr/>";
-        //     echo '<br/>';
-        $content .= html_writer::end_div(); // navigation-box
         return $content;
     }
     /**
@@ -919,7 +927,6 @@ class core_renderer extends \core_renderer
             $html .= html_writer::end_tag('div');
             $html .= html_writer::end_tag('div');
         }
-
         // If the setting showhintcourseguestaccesssetting is set, a hint for users that view the course with guest access is shown.
         // We also check that the user did not switch the role. This is a special case for roles that can fully access the course
         // without being enrolled. A role switch would show the guest access hint additionally in that case and this is not
@@ -954,6 +961,8 @@ class core_renderer extends \core_renderer
 
         //$html .= $this->courseprogress($this->page->course);
 
+        
+  
         $html .= html_writer::start_tag('div', array('class' => 'rui-course-navigation'));
         $html .= $this->course_navigate();
         $html .= html_writer::end_tag('div'); //rui-course-navigation
@@ -1477,6 +1486,25 @@ class core_renderer extends \core_renderer
             $calendarurl = new moodle_url('/calendar/view.php?view=month');
         }
 
+        /*
+        if (! $basicltis = get_all_instances_in_course("lti", $course)) {
+            notice(get_string('noltis', 'lti'), "../../course/view.php?id=$course->id");
+            die;
+        }
+        */
+        $basicltis = get_all_instances_in_course("lti", $course);
+        foreach ($basicltis as $basiclti)
+       {
+          if ($basiclti->visible)
+          {
+            // Show normal if the mod is visible.
+           $linkzoom = "mod/lti/view.php?id=$basiclti->coursemodule";
+            }
+           break;
+        }
+        
+
+
         // Header links on non course areas.
         if (isloggedin() && !isguestuser()) {
 
@@ -1786,8 +1814,8 @@ class core_renderer extends \core_renderer
                            </svg>',
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
-                            'url' => new moodle_url('dsad'),
-                            'isactiveitem' => $this->isMenuActive('dmaksdl'),
+                            'url' => new moodle_url('/mod/lti/view.php', array('id' => 188)),
+                            'isactiveitem' => $this->isMenuActive('mod/lti/view.php', array('contextid' => 188)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
