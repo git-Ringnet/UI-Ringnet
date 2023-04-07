@@ -32,6 +32,57 @@
 #page-grade-report-grader-index .gradeparent .grade_type_value {
     text-align: center;
 }
+#page-grade-report-grader-index .gradereport-grader-table .user.cell {
+    position: static;
+}
+
+#page-grade-report-grader-index .highlightable .rui-icon-container,
+#page-grade-report-grader-index .grade_type_value .rui-icon-container,
+#page-grade-report-grader-index .highlightable .gradeitemheader img,
+#page-grade-report-user-index .generaltable .rui-icon-container,
+#page-grade-report-user-index #contributiontocoursetotal,
+#page-grade-report-user-index .column-contributiontocoursetotal {
+    display: none;
+}
+
+#page-grade-report-grader-index .username img, #page-grade-report-grader-index .username .userinitials {
+    max-width: 32px;
+    max-height: 32px;
+}
+
+#page-grade-report-user-index .column-itemname{
+    width: 25%;
+}
+
+#page-grade-report-user-index .column-weight,
+#page-grade-report-user-index .column-grade,
+#page-grade-report-user-index .column-range,
+#page-grade-report-user-index .column-percentage {
+    width: 14%;
+}
+
+#page-grade-report-grader-index .grade_type_value a {
+    position: absolute;
+    left: 65px;
+    top: 15px;
+    opacity: 0;
+}
+
+#page-grade-report-user-index .page-context-header .header-button-group,
+#page-grade-report-user-index #graded_users_selector,
+#page-grade-report-user-index .view_users_selector {
+    display: none;
+}
+
+#page-grade-report-user-index .generaltable .column-leader {
+    min-width: 0;
+    width: 0;
+}
+
+#page-grade-report-grader-index .grade_type_value {
+    position: relative;
+}
+
 .path-grade-report-grader .gradeparent table {
     /* border: 1px solid #ccc; */
     border-collapse: separate;
@@ -72,7 +123,7 @@
 }
 
 #page-grade-report-grader-index .gradereport-grader-table th {
-    padding: 2px 0 !important;
+    padding: 9px 0 !important;
 }
 
 #page-grade-report-grader-index .gradeparent::-webkit-scrollbar {

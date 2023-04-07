@@ -23,10 +23,10 @@
  */
 
 require_once('../../../config.php');
-require_once($CFG->libdir.'/gradelib.php');
-require_once($CFG->dirroot.'/user/renderer.php');
-require_once($CFG->dirroot.'/grade/lib.php');
-require_once($CFG->dirroot.'/grade/report/grader/lib.php');
+require_once($CFG->libdir . '/gradelib.php');
+require_once($CFG->dirroot . '/user/renderer.php');
+require_once($CFG->dirroot . '/grade/lib.php');
+require_once($CFG->dirroot . '/grade/report/grader/lib.php');
 
 $courseid      = required_param('id', PARAM_INT);        // course id
 $page          = optional_param('page', 0, PARAM_INT);   // active page
@@ -43,7 +43,7 @@ $toggle_type   = optional_param('toggle_type', 0, PARAM_ALPHANUM);
 $graderreportsifirst  = optional_param('sifirst', null, PARAM_NOTAGS);
 $graderreportsilast   = optional_param('silast', null, PARAM_NOTAGS);
 
-$PAGE->set_url(new moodle_url('/grade/report/grader/index.php', array('id'=>$courseid)));
+$PAGE->set_url(new moodle_url('/grade/report/grader/index.php', array('id' => $courseid)));
 $PAGE->set_pagelayout('report');
 $PAGE->requires->js_call_amd('gradereport_grader/stickycolspan', 'init');
 
@@ -85,7 +85,7 @@ $USER->grade_last_report[$course->id] = 'grader';
 $buttons = '';
 if (has_capability('moodle/grade:edit', $context)) {
 
-    if (($edit != - 1) and $PAGE->user_allowed_editing()) {
+    if (($edit != -1) and $PAGE->user_allowed_editing()) {
         $USER->editing = $edit;
     }
 
@@ -110,7 +110,7 @@ $gradeserror = array();
 
 // Handle toggle change request
 if (!is_null($toggle) && !empty($toggle_type)) {
-    set_user_preferences(array('grade_report_show'.$toggle_type => $toggle));
+    set_user_preferences(array('grade_report_show' . $toggle_type => $toggle));
 }
 
 // Perform actions
@@ -180,18 +180,15 @@ $reporthtml = $report->get_grade_table($displayaverages);
 if (!empty($USER->editing) && ($report->get_pref('showquickfeedback') || $report->get_pref('quickgrading'))) {
     echo '<form action="index.php" enctype="application/x-www-form-urlencoded" method="post" id="gradereport_grader">'; // Enforce compatibility with our max_input_vars hack.
     echo '<div>';
-    echo '<input type="hidden" value="'.s($courseid).'" name="id" />';
-    echo '<input type="hidden" value="'.sesskey().'" name="sesskey" />';
-    echo '<input type="hidden" value="'.time().'" name="timepageload" />';
+    echo '<input type="hidden" value="' . s($courseid) . '" name="id" />';
+    echo '<input type="hidden" value="' . sesskey() . '" name="sesskey" />';
+    echo '<input type="hidden" value="' . time() . '" name="timepageload" />';
     echo '<input type="hidden" value="grader" name="report"/>';
-    echo '<input type="hidden" value="'.$page.'" name="page"/>';
-    echo '<script>';
-    echo 'document.getElementById("page-grade-report-grader-index").getElementsByClassName("c1")[0].style.display = "block";';
-    echo '</script>';
+    echo '<input type="hidden" value="' . $page . '" name="page"/>';
     echo $gpr->get_form_fields();
     echo $reporthtml;
     echo '<div class="submit"><input type="submit" id="gradersubmit" class="btn btn-primary"
-        value="'.s(get_string('savechanges')).'" /></div>';
+        value="' . s(get_string('savechanges')) . '" /></div>';
     echo '</div></form>';
 } else {
     echo $reporthtml;
