@@ -1433,8 +1433,6 @@ class core_renderer extends \core_renderer
         }
     }
 
-
-
     public function mainsidebarmenu()
     {
         global $CFG, $PAGE, $COURSE, $USER, $DB;
@@ -1486,25 +1484,25 @@ class core_renderer extends \core_renderer
             $calendarurl = new moodle_url('/calendar/view.php?view=month');
         }
 
-        /*
-        if (! $basicltis = get_all_instances_in_course("lti", $course)) {
-            notice(get_string('noltis', 'lti'), "../../course/view.php?id=$course->id");
-            die;
-        }
-        */
-        $basicltis = get_all_instances_in_course("lti", $course);
-        foreach ($basicltis as $basiclti)
-       {
-          if ($basiclti->visible)
-          {
-            // Show normal if the mod is visible.
-           $linkzoom = "mod/lti/view.php?id=$basiclti->coursemodule";
+        if($_SESSION["sessionzoomid"]==null)
+        {        
+            session_start();
+            $coursezoom = get_course(1);
+            $basicltis = get_all_instances_in_course("lti", $coursezoom);
+            foreach ($basicltis as $basiclti)
+           {
+              if ($basiclti->visible)
+              {
+               $idzoom = $basiclti->coursemodule;
+                }
+               break;
             }
-           break;
+            $_SESSION["sessionzoomid"] = $idzoom;
         }
-        
-
-
+        else
+        {
+            $idzoom = $_SESSION["sessionzoomid"];
+        }
         // Header links on non course areas.
         if (isloggedin() && !isguestuser()) {
 
@@ -1556,8 +1554,8 @@ class core_renderer extends \core_renderer
                                </svg>',
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
-                            'url' => '',
-                            'isactiveitem' => $this->isMenuActive('/dasd'),
+                            'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('mod/lti/view.php', array('contextid' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
@@ -1814,8 +1812,8 @@ class core_renderer extends \core_renderer
                            </svg>',
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
-                            'url' => new moodle_url('/mod/lti/view.php', array('id' => 188)),
-                            'isactiveitem' => $this->isMenuActive('mod/lti/view.php', array('contextid' => 188)),
+                            'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('mod/lti/view.php', array('contextid' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
