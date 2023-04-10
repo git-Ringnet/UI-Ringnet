@@ -946,6 +946,7 @@ body {
     display: none !important;
 } */
 .rui-navbar-nav--sep:before {
+    background: none !important;
     left: 52px !important;
 }
 
@@ -2095,7 +2096,8 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
     line-height: 18px;
 }
 
-#myModal #show_input_modal {
+#myModal #show_input_modal,
+.show_input_modal {
     padding: 11px 15px;
     border: 1px solid #D6D6D6;
     border-radius: 8px;
@@ -2105,7 +2107,7 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
     line-height: 24px;
 }
 
-#myModal #show_button_modal {
+#show_button_modal {
     border-radius: 4px;
     color: #0095F6;
     line-height: 24px;
@@ -2153,8 +2155,150 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
     display: none;
 }
 
-#page-mod-forum-discuss .btn-reply {
+#page-mod-forum-discuss .btn-reply,
+#page-mod-forum-discuss .btn-edit,
+#page-mod-forum-discuss .btn-comment,
+#page-mod-forum-discuss .btn-delete {
     color: #ffff;
     font-weight: 500;
     font-size: 12px;
+    padding: 4px 16px;
 }
+
+#page-mod-forum-discuss .rui-topbar-wrapper {
+    z-index: 1000 !important;
+}
+
+#page-mod-forum-discuss .modal-header {
+    background: #0095F6;
+    color: #ffff;
+}
+
+.modal-title-forum {
+    font-weight: 600;
+}
+
+#show_content_modal {
+    font-weight: 600;
+    font-size: 16px;
+    color: #1D1C20;
+}
+
+#page-mod-forum-discuss #show_title_modal {
+    font-weight: 600;
+    font-size: 13px;
+    color: #1D1C20;
+}
+
+.author-name {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.author-role {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+
+/* Css các nội dung khóa học */
+#page-mod-forum-view .d-flex.align-items-center.ml-2,
+#page-mod-forum-view .tertiary-navigation .ml-sm-auto.navitem,
+#page-mod-forum-view #btn_showListCourse,
+#page-mod-forum-view #theme_alpha-drawers-courseindex,
+#page-course-view-participants #theme_alpha-drawers-courseindex,
+#page-course-view-participants #btn_showListCourse,
+#page-mod-page-view .course-navigation,
+#page-mod-page-view .sticky-header-settings-menu,
+#page-mod-page-view #mainNav,
+#page-mod-assign-view #mainNav,
+#page-mod-assign-view .course-navigation,
+#page-mod-assign-view .sticky-header-settings-menu,
+#page-mod-assign-editsubmission #mainNav,
+#page-mod-assign-editsubmission .course-navigation,
+#page-mod-assign-editsubmission .sticky-header-settings-menu,
+#page-mod-assign-grading #mainNav,
+#page-mod-assign-grading .course-navigation,
+#page-mod-assign-grading .sticky-header-settings-menu,
+#page-mod-resource-view #mainNav,
+#page-mod-resource-view .course-navigation,
+#page-mod-resource-view .sticky-header-settings-menu,
+#page-mod-quiz-view #mainNav,
+#page-mod-quiz-view .course-navigation,
+#page-mod-quiz-view .sticky-header-settings-menu,
+#page-mod-quiz-attempt #mainNav,
+#page-mod-quiz-attempt .course-navigation,
+#page-mod-quiz-attempt .sticky-header-settings-menu,
+#page-mod-quiz-summary #mainNav,
+#page-mod-quiz-summary .course-navigation,
+#page-mod-quiz-summary .sticky-header-settings-menu,
+#page-mod-quiz-review #mainNav,
+#page-mod-quiz-review .course-navigation,
+#page-mod-quiz-review .sticky-header-settings-menu{
+    display: none !important;
+}
+
+body#page-mod-page-view,
+body#page-mod-assign-view,
+body#page-mod-assign-editsubmission,
+body#page-mod-assign-grading,
+body#page-mod-resource-view,
+body#page-mod-quiz-view,
+body#page-mod-quiz-attempt,
+body#page-mod-quiz-summary,
+body#page-mod-quiz-review {
+    margin: 0;
+}
+
+#page-course-view-flexsections #theme_alpha-drawers-courseindex,
+#page-mod-page-view div#nav-drawer,
+#page-mod-assign-view div#nav-drawer,
+#page-mod-assign-editsubmission div#nav-drawer,
+#page-mod-assign-grading div#nav-drawer,
+#page-mod-resource-view div#nav-drawer,
+#page-mod-quiz-view div#nav-drawer,
+#page-mod-quiz-attempt div#nav-drawer,
+#page-mod-quiz-summary div#nav-drawer,
+#page-mod-quiz-review div#nav-drawer{
+    display: none !important;
+}
+
+#page-mod-page-view #page,
+#page-mod-assign-view #page,
+#page-mod-assign-editsubmission #page,
+#page-mod-assign-grading #page,
+#page-mod-resource-view #page,
+#page-mod-quiz-view #page,
+#page-mod-quiz-attempt #page,
+#page-mod-quiz-summary #page,
+#page-mod-quiz-review #page{
+    padding: 0 !important;
+}
+
+#page-mod-page-view .wrapper-course,
+#page-mod-assign-view .wrapper-course,
+#page-mod-assign-editsubmission .wrapper-course,
+#page-mod-assign-grading .wrapper-course,
+#page-mod-resource-view .wrapper-course,
+#page-mod-quiz-view .wrapper-course,
+#page-mod-quiz-attempt .wrapper-course,
+#page-mod-quiz-summary .wrapper-course,
+#page-mod-quiz-review .wrapper-course{
+    padding: 10px 20% !important;
+}
+
+#page-mod-forum-view #region-main,
+#page-course-view-participants #region-main {
+    margin-left: 0 !important;
+}
+
+.breadcrumb {
+    display: none !important;
+}
+
+.drawer-course-index.show {
+    top: 60px !important;
+    left: 0px !important;
+}
+
+/*  */

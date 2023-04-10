@@ -49,7 +49,7 @@ $manageurl = new moodle_url('/admin/roles/manage.php');
 if ($return === 'manage') {
     $returnurl = $manageurl;
 } else {
-    $returnurl = new moodle_url('/admin/roles/define.php', array('action'=>'view', 'roleid'=>$roleid));;
+    $returnurl = new moodle_url('/admin/roles/define.php', array('action'=>'view', 'roleid'=>$roleid));
 }
 
 admin_externalpage_setup('defineroles', '', array('action' => $action, 'roleid' => $roleid),

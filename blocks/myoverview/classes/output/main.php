@@ -498,6 +498,7 @@ class main implements renderable, templatable
             'selectedcustomfield' => $selectedcustomfield,
             'showsortbyshortname' => $CFG->courselistshortnames,
             'test' => $test,
+            'filter' => true,
             'creator' => new \moodle_url('/my/coursesall.php') || new \moodle_url('/my/courses.php'),
 
 

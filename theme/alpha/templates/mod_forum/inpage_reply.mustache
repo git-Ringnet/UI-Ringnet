@@ -34,7 +34,7 @@
     }
 }}
 <div data-content="inpage-reply-content" style="display: none;">
-    <div class="forum-post-reply">
+    <div class="px-3">
         <form data-post-id="{{postid}}" id="inpage-reply-{{postid}}" data-content="inpage-reply-form" action="{{{reply_url}}}">
             <div class="row pb-1">
                 <div class="w-100">
@@ -47,15 +47,15 @@
             </div>
             <div class="d-inline-flex justify-content-between align-items-center w-100 mb-4">
                 <div class="d-inline-flex align-items-center">
-                    <button class="btn btn-primary mr-1" title="{{#str}} submit, core {{/str}}" data-action="forum-inpage-submit">
+                    <button class="btn btn-primary mr-1 btn-comment" style="background:#0095F6" title="{{#str}} submit, core {{/str}}" data-action="forum-inpage-submit">
                         <span data-region="submit-text">{{#str}} submit, core {{/str}}</span>
                         <span data-region="loading-icon-container" class="hidden">{{> core/loading }}</span>
                     </button>
-                    <button class="btn btn-secondary" title="{{#str}} cancel, core {{/str}}" data-action="collapsible-link">
+                    <button class="btn btn-secondary btn-comment" style="background:#555555" title="{{#str}} cancel, core {{/str}}" data-action="collapsible-link">
                         {{#str}} cancel, core {{/str}}
                     </button>
                     {{#canreplyprivately}}
-                    <div class="ml-4 form-check form-check-inline">
+                    <div class="ml-4 form-check form-check-inline d-none">
 
                         <label class="custom-control ios-switch mb-0">
                             <input type="checkbox" class="ios-switch-control-input form-check-input" id="private-reply-checkbox-{{uniqid}}" title="{{#str}} privatereply, forum {{/str}}" name="privatereply"/>
@@ -67,8 +67,8 @@
                     {{/canreplyprivately}}
                 </div>
 
-                <button title="{{#str}} advanced, core {{/str}}" data-action="forum-advanced-reply" class="forum-advanced-btn btn btn-info border-0 float-right" type="submit">
-                    <svg class="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <button title="{{#str}} advanced, core {{/str}}" data-action="forum-advanced-reply" class="d-none forum-advanced-btn btn btn-info border-0 float-right" type="submit">
+                    <svg class="mr-2 d-none" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.75 13L7.75 19.25H16.25L18.25 13L12 4.75L5.75 13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M5.75 19.25H18.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         <path d="M12 4.75V12.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>

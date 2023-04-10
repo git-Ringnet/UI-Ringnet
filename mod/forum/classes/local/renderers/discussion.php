@@ -226,16 +226,17 @@ class discussion
         ]);
         $exporteddiscussion['timecreated'] = $firstpost->get_time_created();
         $exporteddiscussion['postid'] = $firstpost->get_id();
-        $exporteddiscussion['seskey'] = sesskey();
+        $exporteddiscussion['sesskey'] = sesskey();
         $exporteddiscussion['reply_url'] = new moodle_url('/mod/forum/post.php?reply_id=' . $exporteddiscussion['postid'] . '#mformforum');
         $capabilities = (array) $exporteddiscussion['capabilities'];
+        
 
         if ($capabilities['move']) {
             $exporteddiscussion['html']['movediscussion'] = $this->get_move_discussion_html();
         }
         global $COURSE;
         $name = 'a';
-        global $DB;
+        global $DB,$SESSION;
         $role = $DB->get_record('role', array('shortname' => 'editingteacher'));
         $context = context_course::instance($COURSE->id);
         $teachers = get_role_users($role->id, $context);
@@ -248,12 +249,13 @@ class discussion
             $exporteddiscussion['loggedinuser'] = [
                 'firstname' => $loggedinuser->get_first_name(),
                 'fullname' => $loggedinuser->get_full_name(),
+                'authorcreat' => $SESSION->authorcreat,
                 'profileimageurl' => ($urlfactory->get_author_profile_image_url($loggedinuser, null))->out(false)
             ];
             $exporteddiscussion['creator'] = $name;
         }
-        var_dump(get_role_users($user->id,$context));
-
+        // var_dump(get_role_users($user->id,$context));
+        
         $exporteddiscussion['throttlingwarningmsg'] = '';
         $cmrecord = $this->forum->get_course_module_record();
 
@@ -266,7 +268,7 @@ class discussion
             ))->set_show_closebutton();
             $exporteddiscussion['throttlingwarningmsg'] = $throttlewarnnotification->get_message();
         }
-
+        $exporteddiscussion['discussurl']=new moodle_url('/mod/forum/discuss.php', ['d' => $_GET['d']]);
         global $USER;
         $forumobject = $this->forumrecord;
         $context = $this->forum->get_context();

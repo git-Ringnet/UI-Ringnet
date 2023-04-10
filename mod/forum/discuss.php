@@ -353,3 +353,14 @@ if ($istracked && !$CFG->forum_usermarksread) {
         forum_tp_mark_posts_read($USER, $postids);
     }
 }
+
+?>
+<script>
+    function myFunction(id) {
+        var copyText = document.getElementById("show_input_modal_"+id);
+        console.log(copyText);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+    }
+</script>

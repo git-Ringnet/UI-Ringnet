@@ -211,6 +211,8 @@ $nameNext = reset($urlNext)->name;
 $btnUrlPre =  $CFG->wwwroot . "/mod/".$namePre."/view.php?id=".$pre;
 $btnUrlNext =  $CFG->wwwroot . "/mod/".$nameNext."/view.php?id=".$next;
 
+$returnurl= new moodle_url('/course/view.php', ['id' => $COURSE->id]);
+
 $title = $PAGE->title;
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
@@ -240,7 +242,8 @@ $templatecontext = [
     'secondarymoremenu' => $secondarynavigation ?: false,
     'headercontent' => $headercontent,
     'overflow' => $overflow,
-    'addblockbutton' => $addblockbutton
+    'addblockbutton' => $addblockbutton,
+    'returnurl' => $returnurl,
 ];
 
 // Get and use the course page information banners HTML code, if any course page hints are configured.

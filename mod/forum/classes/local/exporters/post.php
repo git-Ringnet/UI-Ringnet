@@ -479,11 +479,11 @@ class post extends exporter
             $wordcount = null;
             $charcount = null;
         }
-
+        // var_dump($post);
         $messageparent = $this->getMessageParent($post->get_parent_id());
         $authorparent = $this->getauthorparent($post->get_parent_id());
         // var_dump($authorparent);
-        $count =0;
+        global $SESSION;
         return [
             'id' => $post->get_id(),
             'subject' => $subject,
@@ -514,7 +514,7 @@ class post extends exporter
                 'selfenrol' => $canselfenrol
             ],
             'urls' => [
-                'num' => ++$count,
+                'authorcreat' => $SESSION->authorcreat,
                 'messageparent' => $messageparent,
                 'authorparent' => $authorparent,
                 'view' => $viewurl ? $viewurl->out(false) : null,
