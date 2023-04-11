@@ -56,6 +56,14 @@
     display: none;
 }
 
+#page-grade-report-grader-index .gradeparent tbody .controls{
+    display: none;
+}
+
+#page-grade-report-grader-index .gradeparent .submit {
+    opacity: 0;
+}
+
 /*Phân trang phần chỉnh sửa điểm số*/
 #page-grade-report-singleview-index .main-content .nextitem,
 #page-grade-report-singleview-index .main-content .previtem,
