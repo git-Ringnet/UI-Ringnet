@@ -838,7 +838,6 @@ class MoodleMatchController extends IvsMatchControllerBase implements IIvsMatch 
     public function get_current_user_id() {
         global $USER;
         return $USER->id;
-
     }
 
     /**

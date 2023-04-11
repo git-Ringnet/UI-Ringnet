@@ -25,15 +25,15 @@
 define('NO_OUTPUT_BUFFERING', true);
 
 require_once('../../../config.php');
-require_once($CFG->dirroot.'/lib/gradelib.php');
-require_once($CFG->dirroot.'/grade/lib.php');
-require_once($CFG->dirroot.'/grade/report/singleview/lib.php');
+require_once($CFG->dirroot . '/lib/gradelib.php');
+require_once($CFG->dirroot . '/grade/lib.php');
+require_once($CFG->dirroot . '/grade/report/singleview/lib.php');
 
 $courseid = required_param('id', PARAM_INT);
 $groupid  = optional_param('group', null, PARAM_INT);
 
 // Making this work with profile reports.
-$userid   = optional_param('userid', null, PARAM_INT);
+$userid  = optional_param('userid', null, PARAM_INT);
 
 $defaulttype = $userid ? 'user' : 'select';
 
@@ -47,16 +47,31 @@ if (empty($itemid)) {
     $itemtype = $defaulttype;
 }
 
+// print edit button
+$id = $_GET['id'];
+unset($_SESSION['userid']);
+if (empty($USER->editing)) {
+    header("Location: $CFG->wwwroot/grade/report/user/index.php?userid=$itemid&id=$id");
+}
+
+//JS
+echo '<script>
+var inputElements = document.getElementsByTagName("input");
+for (var i = 0; i < inputElements.length; i++) {
+  inputElements[i].removeAttribute("disabled");
+}
+</script>';
+
 $courseparams = array('id' => $courseid);
 $pageparams = array(
-        'id'        => $courseid,
-        'group'     => $groupid,
-        'userid'    => $userid,
-        'itemid'    => $itemid,
-        'item'      => $itemtype,
-        'page'      => $page,
-        'perpage'   => $perpage,
-    );
+    'id'        => $courseid,
+    'group'     => $groupid,
+    'userid'    => $userid,
+    'itemid'    => $itemid,
+    'item'      => $itemtype,
+    'page'      => $page,
+    'perpage'   => $perpage,
+);
 $PAGE->set_url(new moodle_url('/grade/report/singleview/index.php', $pageparams));
 $PAGE->set_pagelayout('incourse');
 
@@ -107,15 +122,41 @@ $pageparams = array(
 
 $PAGE->set_pagelayout('report');
 
-$actionbar = new \core_grades\output\general_action_bar($context,
-    new moodle_url('/grade/report/singleview/index.php', ['id' => $courseid]), 'report', 'singleview');
+$actionbar = new \core_grades\output\general_action_bar(
+    $context,
+    new moodle_url('/grade/report/singleview/index.php', ['id' => $courseid]),
+    'report',
+    'singleview'
+);
 
 if ($itemtype == 'user') {
-    print_grade_page_head($course->id, 'report', 'singleview', $reportname, false, false,
-        true, null, null, $report->screen->item, $actionbar);
+    print_grade_page_head(
+        $course->id,
+        'report',
+        'singleview',
+        $reportname,
+        false,
+        false,
+        true,
+        null,
+        null,
+        $report->screen->item,
+        $actionbar
+    );
 } else {
-    print_grade_page_head($course->id, 'report', 'singleview', $reportname, false, false,
-        true, null, null, null, $actionbar);
+    print_grade_page_head(
+        $course->id,
+        'report',
+        'singleview',
+        $reportname,
+        false,
+        false,
+        true,
+        null,
+        null,
+        null,
+        $actionbar
+    );
 }
 
 if ($data = data_submitted()) {
@@ -133,7 +174,7 @@ if ($data = data_submitted()) {
 
         // And notify the user of the success result.
         \core\notification::add(
-            get_string('savegradessuccess', 'gradereport_singleview', count ((array)$result->changecount)),
+            get_string('savegradessuccess', 'gradereport_singleview', count((array)$result->changecount)),
             \core\notification::SUCCESS
         );
     }
@@ -152,8 +193,11 @@ if (!empty($options)) {
     $optionitemid = array_shift($optionkeys);
 
     $relreport = new gradereport_singleview(
-                $courseid, $gpr, $context,
-                $report->screen->item_type(), $optionitemid
+        $courseid,
+        $gpr,
+        $context,
+        $report->screen->item_type(),
+        $optionitemid
     );
     $reloptions = $relreport->screen->options();
     $reloptionssorting = array_keys($relreport->screen->options());
