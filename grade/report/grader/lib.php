@@ -752,7 +752,7 @@ class grade_report_grader extends grade_report
             $fullname = fullname($user, $viewfullnames);
             $usercell->text = html_writer::link(
                 new moodle_url('/grade/report/user/index.php', ['userid' => $user->id, 'id' => $this->course->id]),
-                $usercell->text . '<div class="username-email">' . '<p class="m-0" style="font-size: 14px;line-height: 24px;">' . $fullname . '</p>' . '<p class="m-0">' . $user->email . '</p>' . '</div>',
+                    $usercell->text . '<div class="username-email">' . '<p class="m-0" style="font-size: 14px;line-height: 24px;">' . $fullname . '</p>' . '<p class="m-0">' . $user->email . '</p>' . '</div>',
                 ['class' => 'username']
             );
 
@@ -776,26 +776,27 @@ class grade_report_grader extends grade_report
             $userreportcell = new html_table_cell();
             $userreportcell->attributes['class'] = 'userreport';
             $userreportcell->header = false;
-            if ($canseeuserreport) {
-                $a = new stdClass();
-                $a->user = $fullname;
-                $strgradesforuser = get_string('gradesforuser', 'grades', $a);
-                $url = new moodle_url(
-                    '/grade/report/' . $CFG->grade_profilereport . '/index.php',
-                    ['userid' => $user->id, 'id' => $this->course->id]
-                );
-                $userreportcell->text .= $OUTPUT->action_icon(
-                    $url,
-                    new pix_icon('t/grades', ''),
-                    null,
-                    ['title' => $strgradesforuser, 'aria-label' => $strgradesforuser]
-                );
-            }
+
+            // if ($canseeuserreport) {
+            //     $a = new stdClass();
+            //     $a->user = $fullname;
+            //     $strgradesforuser = get_string('gradesforuser', 'grades', $a);
+            //     $url = new moodle_url(
+            //         '/grade/report/' . $CFG->grade_profilereport . '/index.php',
+            //         ['userid' => $user->id, 'id' => $this->course->id]
+            //     );
+            //     $userreportcell->text .= $OUTPUT->action_icon(
+            //         $url,
+            //         new pix_icon('t/grades', ''),
+            //         null,
+            //         ['title' => $strgradesforuser, 'aria-label' => $strgradesforuser]
+            //     );
+            // }
 
             if ($canseesingleview) {
                 $strsingleview = get_string('singleview', 'grades', $fullname);
                 $url = new moodle_url(
-                    '/grade/report/singleview/index.php',
+                    // '/grade/report/singleview/index.php',
                     ['id' => $this->course->id, 'itemid' => $user->id, 'item' => 'user']
                 );
                 $singleview = $OUTPUT->action_icon(

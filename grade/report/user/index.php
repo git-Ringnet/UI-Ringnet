@@ -86,6 +86,21 @@ $USER->grade_last_report[$course->id] = 'user';
 // First make sure we have proper final grades.
 grade_regrade_final_grades_if_required($course);
 
+//save userid in session
+if (isset($_GET['userid']) && !empty($_GET['userid'])) {
+    session_start();
+    $_SESSION['userid'] = $_GET['userid'];
+}
+
+//Get userid, id
+$id = $_GET['id'];
+// print edit button
+if (!empty($USER->editing)) {
+    session_start();
+    $itemid = $_SESSION['userid'];
+    header("Location: $CFG->wwwroot/grade/report/singleview/index.php?id=$id&itemid=$itemid&item=user");
+}
+
 if (has_capability('moodle/grade:viewall', $context)) { //Teachers will see all student reports
     $groupmode    = groups_get_course_groupmode($course);   // Groups are being used
     $currentgroup = $gpr->groupid;
@@ -109,21 +124,6 @@ if (has_capability('moodle/grade:viewall', $context)) { //Teachers will see all 
     $showonlyactiveenrol = $showonlyactiveenrol || !has_capability('moodle/course:viewsuspendedusers', $context);
 
     $renderer = $PAGE->get_renderer('gradereport_user');
-
-    global $USER;
-
-    $userid = $_GET['userid'];
-
-    var_dump($userid);
-
-    // print submit button
-    // if (!empty($USER->editing) && ($report->get_pref('showquickfeedback') || $report->get_pref('quickgrading'))) {
-    //     // header("Location: $CFG->wwwroot");
-    //     header("Location: https://www.youtube.com/watch?v=vnXvYy_GIGI");
-    // } else {
-    //     // header("Location: $CFG->wwwroot.'grade/report/singleview/index.php?id = $this->course->id&itemid = $user->id&item=user'");
-    //     header("Location: $CFG->wwwroot . /grade/report/user/index.php");
-    // }
 
     if ($userview == GRADE_REPORT_USER_VIEW_USER) {
         $viewasuser = true;

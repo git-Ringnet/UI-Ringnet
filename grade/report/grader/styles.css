@@ -41,16 +41,47 @@
 #page-grade-report-grader-index .highlightable .gradeitemheader img,
 #page-grade-report-user-index .generaltable .rui-icon-container,
 #page-grade-report-user-index #contributiontocoursetotal,
-#page-grade-report-user-index .column-contributiontocoursetotal {
+#page-grade-report-user-index .column-contributiontocoursetotal,
+#page-grade-report-singleview-index .page-context-header .header-button-group {
     display: none;
 }
 
-#page-grade-report-grader-index .username img, #page-grade-report-grader-index .username .userinitials {
+#page-grade-report-singleview-index .generaltable .dropdown-item,
+#page-grade-report-singleview-index .generaltable thead .c2,
+#page-grade-report-singleview-index .generaltable tbody .category {
+    display: none;
+}
+
+#page-grade-report-singleview-index .reporttable .singleview_bulk{
+    display: none;
+}
+
+#page-grade-report-grader-index .gradeparent tbody .controls{
+    display: none;
+}
+
+#page-grade-report-grader-index .gradeparent .submit {
+    opacity: 0;
+}
+
+/*Phân trang phần chỉnh sửa điểm số*/
+#page-grade-report-singleview-index .main-content .nextitem,
+#page-grade-report-singleview-index .main-content .previtem,
+#page-grade-report-singleview-index .reporttable .selectitems {
+    display: none;
+}
+
+#page-grade-report-grader-index .userreport .dropdown-item-text {
+    opacity: 0;
+}
+
+#page-grade-report-grader-index .username img,
+#page-grade-report-grader-index .username .userinitials {
     max-width: 32px;
     max-height: 32px;
 }
 
-#page-grade-report-user-index .column-itemname{
+#page-grade-report-user-index .column-itemname {
     width: 25%;
 }
 
