@@ -115,15 +115,18 @@ if (!$attemptobj->set_currentpage($page)) {
     redirect($attemptobj->start_attempt_url(null, $attemptobj->get_currentpage()));
 }
 
-// Initialise the JavaScript.
-$headtags = $attemptobj->get_html_head_contributions($page);
-$PAGE->requires->js_init_call('M.mod_quiz.init_attempt_form', null, false, quiz_get_js_module());
-\core\session\manager::keepalive(); // Try to prevent sessions expiring during quiz attempts.
 
 // Arrange for the navigation to be displayed in the first region on the page.
 $navbc = $attemptobj->get_navigation_panel($output, 'quiz_attempt_nav_panel', $page);
 $regions = $PAGE->blocks->get_regions();
-$PAGE->blocks->add_fake_block($navbc, reset($regions));
+$PAGE->add_body_class('drawer-open-right');
+$PAGE->blocks->add_fake_block($navbc, $regions);
+
+// $navbc = $attemptobj->get_navigation_panel($output, 'quiz_attempt_nav_panel', $page);
+// $PAGE->set_pagelayout('your_layout_name');
+
+// echo $content;
+
 
 $headtags = $attemptobj->get_html_head_contributions($page);
 $PAGE->set_title($attemptobj->attempt_page_title($page));
@@ -135,5 +138,11 @@ if ($attemptobj->is_last_page($page)) {
 } else {
     $nextpage = $page + 1;
 }
+// $content = html_writer::div(html_writer::div($navbc, 'navigation-panel'), 'container');
 
 echo $output->attempt_page($attemptobj, $page, $accessmanager, $messages, $slots, $id, $nextpage);
+
+
+
+// echo $navbc;
+
