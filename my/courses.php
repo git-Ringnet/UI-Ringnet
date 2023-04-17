@@ -83,6 +83,9 @@ if (!empty($coursemanagemenu)) {
     $PAGE->add_header_action($OUTPUT->render_from_template('my/dropdown', $coursemanagemenu));
 }
 
+// editmode turn off Việt
+$USER->editing = 0;
+
 echo $OUTPUT->header();
 
 if (core_userfeedback::should_display_reminder()) {
@@ -97,5 +100,3 @@ echo $OUTPUT->footer();
 $eventparams = array('context' => $context);
 $event = \core\event\mycourses_viewed::create($eventparams);
 $event->trigger();
-
-

@@ -155,7 +155,7 @@ Example context (json):
                     {{{ output.user_menu }}}
                 </li>
             </div>
-            <div class="d-flex align-center" id="navbar_PNSection">
+            <div class="d-flex align-items-center" id="navbar_PNSection">
                 <a href="{{btnUrlPre}}" id="pre_section"
                     style="border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
                     <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em"
@@ -164,8 +164,8 @@ Example context (json):
                     </svg>
                 </a>
                 <div id="title"
-                    style="margin-left:5px; text-align:center; padding:5px 5px; width:50%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size:14px;font-weight:400; line-height:24px;">
-                    {{title}}
+                    style="margin-left:5px; text-align:center; padding:5px 5px; width:70%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size:14px;font-weight:400; line-height:24px;">
+                    {{get_title}}
                 </div>
                 <a href="{{btnUrlNext}}" id="next_section"
                     style="margin-left:5px; border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
@@ -175,12 +175,10 @@ Example context (json):
                     </svg>
                 </a>
             </div>
-            <a href="{{returnurl}}"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M24 24L8 8" stroke="#555555" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    <path d="M24 8L8 24" stroke="#555555" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round" />
+            <a class="d-flex align-items-center ml-3 px-2 border rounded" href="{{returnurl}}"><svg class="mr-2" width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.76877 0.231232C6.07708 0.53954 6.07708 1.03941 5.76877 1.34772L2.11648 5L5.76877 8.65228C6.07708 8.96059 6.07708 9.46046 5.76877 9.76877C5.46046 10.0771 4.96059 10.0771 4.65228 9.76877L0.441758 5.55824C0.13345 5.24993 0.13345 4.75007 0.441758 4.44176L4.65228 0.231231C4.96059 -0.0770772 5.46046 -0.0770772 5.76877 0.231232Z" fill="#555555"/>
                 </svg>
+                Trở về khóa học
             </a>
         </ul>
     </div>

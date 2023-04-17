@@ -32,8 +32,10 @@ if ($id = optional_param('id', 0, PARAM_INT)) {
     if (!$cm = get_coursemodule_from_instance('quiz', $qid)) {
         print_error('invalidquizid', 'quiz');
     }
-    redirect(new moodle_url('/mod/quiz/startattempt.php',
-            array('cmid' => $cm->id, 'sesskey' => sesskey())));
+    redirect(new moodle_url(
+        '/mod/quiz/startattempt.php',
+        array('cmid' => $cm->id, 'sesskey' => sesskey())
+    ));
 }
 
 // Get submitted parameters.
@@ -67,7 +69,6 @@ if (!$attemptobj->is_preview_user()) {
     if (empty($attemptobj->get_quiz()->showblocks)) {
         $PAGE->blocks->show_only_fake_blocks();
     }
-
 } else {
     navigation_node::override_active_url($attemptobj->start_attempt_url());
 }
@@ -85,8 +86,12 @@ $accessmanager->setup_attempt_page($PAGE);
 $output = $PAGE->get_renderer('mod_quiz');
 $messages = $accessmanager->prevent_access();
 if (!$attemptobj->is_preview_user() && $messages) {
-    print_error('attempterror', 'quiz', $attemptobj->view_url(),
-            $output->access_messages($messages));
+    print_error(
+        'attempterror',
+        'quiz',
+        $attemptobj->view_url(),
+        $output->access_messages($messages)
+    );
 }
 if ($accessmanager->is_preflight_check_required($attemptobj->get_attemptid())) {
     redirect($attemptobj->start_attempt_url(null, $page));
@@ -95,8 +100,11 @@ if ($accessmanager->is_preflight_check_required($attemptobj->get_attemptid())) {
 // Set up auto-save if required.
 $autosaveperiod = get_config('quiz', 'autosaveperiod');
 if ($autosaveperiod) {
-    $PAGE->requires->yui_module('moodle-mod_quiz-autosave',
-            'M.mod_quiz.autosave.init', array($autosaveperiod));
+    $PAGE->requires->yui_module(
+        'moodle-mod_quiz-autosave',
+        'M.mod_quiz.autosave.init',
+        array($autosaveperiod)
+    );
 }
 
 // Log this page view.
@@ -122,6 +130,7 @@ $PAGE->requires->js_init_call('M.mod_quiz.init_attempt_form', null, false, quiz_
 
 // Arrange for the navigation to be displayed in the first region on the page.
 $navbc = $attemptobj->get_navigation_panel($output, 'quiz_attempt_nav_panel', $page);
+$PAGE->add_body_class('drawer-open-right');
 $regions = $PAGE->blocks->get_regions();
 $PAGE->blocks->add_fake_block($navbc, reset($regions));
 
@@ -135,5 +144,8 @@ if ($attemptobj->is_last_page($page)) {
 } else {
     $nextpage = $page + 1;
 }
-
 echo $output->attempt_page($attemptobj, $page, $accessmanager, $messages, $slots, $id, $nextpage);
+
+// echo $output->summary_page_controls($attemptobj);
+
+

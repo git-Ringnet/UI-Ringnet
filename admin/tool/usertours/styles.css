@@ -2234,7 +2234,10 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
 #page-mod-quiz-summary .sticky-header-settings-menu,
 #page-mod-quiz-review #mainNav,
 #page-mod-quiz-review .course-navigation,
-#page-mod-quiz-review .sticky-header-settings-menu{
+#page-mod-quiz-review .sticky-header-settings-menu,
+#page-mod-quiz-edit #mainNav,
+#page-mod-quiz-edit .course-navigation,
+#page-mod-quiz-edit .sticky-header-settings-menu {
     display: none !important;
 }
 
@@ -2246,7 +2249,8 @@ body#page-mod-resource-view,
 body#page-mod-quiz-view,
 body#page-mod-quiz-attempt,
 body#page-mod-quiz-summary,
-body#page-mod-quiz-review {
+body#page-mod-quiz-review,
+body#page-mod-quiz-edit {
     margin: 0;
 }
 
@@ -2259,7 +2263,8 @@ body#page-mod-quiz-review {
 #page-mod-quiz-view div#nav-drawer,
 #page-mod-quiz-attempt div#nav-drawer,
 #page-mod-quiz-summary div#nav-drawer,
-#page-mod-quiz-review div#nav-drawer{
+#page-mod-quiz-review div#nav-drawer,
+#page-mod-quiz-edit div#nav-drawer {
     display: none !important;
 }
 
@@ -2271,7 +2276,8 @@ body#page-mod-quiz-review {
 #page-mod-quiz-view #page,
 #page-mod-quiz-attempt #page,
 #page-mod-quiz-summary #page,
-#page-mod-quiz-review #page{
+#page-mod-quiz-review #page,
+#page-mod-quiz-edit #page {
     padding: 0 !important;
 }
 
@@ -2281,9 +2287,9 @@ body#page-mod-quiz-review {
 #page-mod-assign-grading .wrapper-course,
 #page-mod-resource-view .wrapper-course,
 #page-mod-quiz-view .wrapper-course,
-#page-mod-quiz-attempt .wrapper-course,
 #page-mod-quiz-summary .wrapper-course,
-#page-mod-quiz-review .wrapper-course{
+#page-mod-quiz-review .wrapper-course,
+#page-mod-quiz-edit .wrapper-course {
     padding: 10px 20% !important;
 }
 
@@ -2292,7 +2298,9 @@ body#page-mod-quiz-review {
     margin-left: 0 !important;
 }
 
-.breadcrumb {
+.breadcrumb,
+#page-mod-quiz-attempt #sidepreopen-control,
+#page-mod-quiz-attempt #btnCourseIndex {
     display: none !important;
 }
 
@@ -2301,4 +2309,144 @@ body#page-mod-quiz-review {
     left: 0px !important;
 }
 
+#page-mod-quiz-view .tertiary-navigation .row {
+    float: none !important;
+}
+
+#page-mod-quiz-attempt #sidepre-blocks {
+    margin-top: 16px;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 10px 15px;
+}
+
+#page-mod-quiz-attempt .qn_buttons.clearfix.multipages {
+    grid-gap: 0 !important;
+    flex-direction: column;
+    width: 100%;
+    /* overflow-y: auto;
+  max-height: 300px;  */
+}
+
+#page-mod-quiz-attempt .qnbutton {
+    padding: 0px 15px;
+    display: flex;
+    justify-content: space-between;
+    width: 100% !important;
+    color: #000 !important;
+    margin: 0 !important;
+    height: 4rem !important;
+    border-radius: initial !important;
+}
+
+#page-mod-quiz-attempt .qn_buttons .title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #1D1C20;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton.flagged .star {
+    stroke: red !important;
+    fill: red !important;
+}
+
+.path-mod-quiz .qnbutton.thispage {
+    background: #E5E5E5 !important;
+}
+
+.path-mod-quiz #mod_quiz_navblock a.qnbutton:hover {
+    text-decoration: none !important;
+}
+
+.path-mod-quiz #mod_quiz_navblock .qnbutton .state {
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+
+.path-mod-quiz #mod_quiz_navblock hr {
+    width: 100%;
+    margin: 0 !important;
+}
+
+#page-mod-quiz-attempt #sidepre-blocks {
+    right: 40px !important;
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+#page-mod-quiz-view #theme_alpha-drawers-courseindex {
+    z-index: 1 !important;
+}
+
+#page-mod-quiz-attempt .row.no-gutters {
+    display: none !important;
+}
+
+#page-mod-quiz-attempt #quiz-timer-wrapper {
+    float: left;
+}
+
+/* #page-mod-quiz-attempt .que .info {
+    flex-direction: column;
+    align-items: end !important;
+} */
+
+.submitbtns-pre-next .btn-prev {
+    background: none;
+}
+
+.submitbtns-pre-next .btn-next {
+    background: #555555 !important;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+
+#page-mod-quiz-attempt .que .grade {
+    display: none;
+}
+
 /*  */
+
+#page-mod-forum-discuss #region-main {
+    margin: 0 !important;
+}
+
+#page-mod-forum-discuss #theme_alpha-drawers-courseindex,
+#page-mod-forum-discuss #btnCourseIndex,
+#page-mod-forum-post #theme_alpha-drawers-courseindex,
+#page-mod-forum-post #btnCourseIndex,
+#page-mod-forum-post #click_showListCourse,
+#page-mod-forum-discuss #click_showListCourse,
+#page-mod-quiz-attempt .othernav {
+    display: none !important;
+}
+
+#page-mod-quiz-attempt .rui-submitbtns {
+    width: initial !important;
+}
+
+#page-mod-quiz-attempt .rui-submitbtns .btn.btn-primary {
+    background: #EC212D;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+
+#page-mod-quiz-attempt .rui-submitbtns .btn.btn-primary:hover {
+    background: #D8121E;
+}
+
+#page-mod-quiz-attempt .rui-submitbtns .btn.btn-primary:focus {
+    background: #D8121E;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+}
+
+#page-mod-quiz-view .no-gutters .btn.btn-primary,#page-mod-quiz-view #id_submitbutton {
+    background: #0095F6;
+    border-radius: 8px;
+    padding: 8px 16px;
+}
+#page-my-index #form_submit .input-group{
+    display: none;
+}
