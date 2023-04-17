@@ -115,7 +115,7 @@ $item_ids = array();
 foreach ($results as $favourite) {
     $item_ids[] = $favourite->itemid;
 }
-$related=false;
+$related = false;
 
 foreach ($items as $course) {
     $context = context_course::instance($course->id);
@@ -147,6 +147,7 @@ foreach ($items as $course) {
         'isfavourite' => $related,
         'checkRole' => checkRole(),
         'hidden' => boolval(get_user_preferences('block_myoverview_hidden_course_' . $course->id, 0)),
+        
     );
 }
 
@@ -159,8 +160,8 @@ echo $OUTPUT->render_from_template('block_myoverview/main-all-course', array(
     'courses' => $courses,
     'status' => is_siteadmin() || is_teacher(),
     'active' => true,
+    'filter' => true,
     'creator' => (new moodle_url('/my/coursesall.php') || new moodle_url('/my/courses.php')),
-
 ));
 
 echo $OUTPUT->footer();

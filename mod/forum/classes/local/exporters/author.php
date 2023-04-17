@@ -39,7 +39,8 @@ require_once($CFG->dirroot . '/mod/forum/lib.php');
  * @copyright  2019 Ryan Wyllie <ryan@moodle.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class author extends exporter {
+class author extends exporter
+{
     /** @var author_entity $author Author entity */
     private $author;
     /** @var int|null $authorcontextid The context id for the author entity */
@@ -77,7 +78,8 @@ class author extends exporter {
      *
      * @return array
      */
-    protected static function define_other_properties() {
+    protected static function define_other_properties()
+    {
         return [
             'id' => [
                 'type' => PARAM_INT,
@@ -142,13 +144,22 @@ class author extends exporter {
      * @param renderer_base $output The renderer.
      * @return array Keys are the property names, values are their values.
      */
-    protected function get_other_values(renderer_base $output) {
+    protected function get_other_values(renderer_base $output)
+    {
         $author = $this->author;
         $authorcontextid = $this->authorcontextid;
         $urlfactory = $this->related['urlfactory'];
         $context = $this->related['context'];
         $forum = $this->related['forum'];
-
+        $rolename = '';
+        $roleid = get_user_roles($context, $author->get_id());
+        $roles = role_fix_names($roleid, $context, ROLENAME_ORIGINAL);
+        foreach ($roles as $role) {
+            // Basic data.
+            $rolename = $role->localname;
+        }
+        global $SESSION;
+        $SESSION->authorcreat =$rolename;
         if ($this->canview) {
             if ($author->is_deleted()) {
                 return [
@@ -162,7 +173,7 @@ class author extends exporter {
                     ]
                 ];
             } else {
-                $groups = array_map(function($group) use ($urlfactory, $context, $output) {
+                $groups = array_map(function ($group) use ($urlfactory, $context, $output) {
                     $groupurl = null;
                     $imageurl = get_group_picture_url($group, $group->courseid, true);
 
@@ -180,10 +191,12 @@ class author extends exporter {
                         ]
                     ];
                 }, $this->authorgroups);
-
+                
+             
                 return [
                     'id' => $author->get_id(),
                     'fullname' => $author->get_full_name(),
+                    'authorcreate' => $rolename,
                     'isdeleted' => false,
                     'groups' => $groups,
                     'urls' => [
@@ -197,6 +210,7 @@ class author extends exporter {
             return [
                 'id' => null,
                 'fullname' => get_string('forumauthorhidden', 'mod_forum'),
+                'authorcreate' => $rolename,
                 'isdeleted' => null,
                 'groups' => [],
                 'urls' => [
@@ -212,7 +226,8 @@ class author extends exporter {
      *
      * @return array
      */
-    protected static function define_related() {
+    protected static function define_related()
+    {
         return [
             'urlfactory' => 'mod_forum\local\factories\url',
             'context' => 'context',

@@ -175,7 +175,9 @@ echo $OUTPUT->render_from_template('block_myoverview/main-all-course', array(
     'courses' => $courses,
     'status' => is_siteadmin() || is_teacher(),
     'activefavourites' => true,
+    'filter' => true,
     'creator' => (new moodle_url('/my/coursesall.php') || new moodle_url('/my/courses.php')),
+    
 
 ));
 

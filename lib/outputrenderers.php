@@ -2982,17 +2982,18 @@ EOD;
     public function edit_switch()
     {
         if ($this->page->user_allowed_editing()) {
-
+            $mycoursesurl = new moodle_url('/my/courses.php');
             $temp = (object) [
                 'legacyseturl' => (new moodle_url('/editmode.php'))->out(false),
                 'pagecontextid' => $this->page->context->id,
                 'pageurl' => $this->page->url,
                 'sesskey' => sesskey(),
+                'mycoursesurl' => $mycoursesurl,
             ];
+
             if ($this->page->user_is_editing()) {
                 $temp->checked = true;
             }
-
             return $this->render_from_template('core/editswitch', $temp);
         }
     }
@@ -5852,17 +5853,17 @@ class core_renderer_maintenance extends core_renderer
     {
         global $CFG, $COURSE, $DB, $USER;
         $course = $DB->get_record('course', ['id' => $COURSE->id]);
-        if(is_siteadmin()){
+        if (is_siteadmin()) {
             $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
             // '&returnto=catmanage'
-        }else if(is_teacher()){
-            if(is_course_creator($COURSE->id)){
+        } else if (is_teacher()) {
+            if (is_course_creator($COURSE->id)) {
                 $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
                 // '&returnto=catmanage'
-            }else{
+            } else {
                 $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
             }
-        }else{
+        } else {
             $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
         }
         $content = html_writer::start_div('course-navigation');
@@ -5872,29 +5873,30 @@ class core_renderer_maintenance extends core_renderer
         $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
         $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
 
-        
+
         //Thảo luận
-$id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
-$sql = sprintf("
+        $id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
+        $sql = sprintf(
+            "
     SELECT f.id
     FROM mdl_forum f
     INNER JOIN mdl_course_modules cm ON f.id = cm.instance
     WHERE cm.module = (SELECT id FROM mdl_modules WHERE name = 'forum')
     AND cm.course = %d",
-    $id_khoa_hoc
-);
-$idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
-$urlforum = $CFG->wwwroot . '/mod/forum/view.php?f='.$idforum;
+            $id_khoa_hoc
+        );
+        $idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
+        $urlforum = $CFG->wwwroot . '/mod/forum/view.php?f=' . $idforum;
 
 
         $pages = new stdClass();
         $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
         $pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
         $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
-        if(is_siteadmin() || is_teacher()){
-        $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-        $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
-        $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+        if (is_siteadmin() || is_teacher()) {
+            $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+            $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+            $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
         }
 
         $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";

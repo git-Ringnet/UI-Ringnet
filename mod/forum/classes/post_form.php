@@ -34,7 +34,8 @@ require_once($CFG->dirroot . '/repository/lib.php');
  * @copyright Jamie Pratt <me@jamiep.org>
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class mod_forum_post_form extends moodleform {
+class mod_forum_post_form extends moodleform
+{
 
     /**
      * Returns the options array to use in filemanager for forum attachments
@@ -42,7 +43,8 @@ class mod_forum_post_form extends moodleform {
      * @param stdClass $forum
      * @return array
      */
-    public static function attachment_options($forum) {
+    public static function attachment_options($forum)
+    {
         global $COURSE, $PAGE, $CFG;
         $maxbytes = get_user_max_upload_file_size($PAGE->context, $CFG->maxbytes, $COURSE->maxbytes, $forum->maxbytes);
         return array(
@@ -61,15 +63,16 @@ class mod_forum_post_form extends moodleform {
      * @param int $postid post id, use null when adding new post
      * @return array
      */
-    public static function editor_options(context_module $context, $postid) {
+    public static function editor_options(context_module $context, $postid)
+    {
         global $COURSE, $PAGE, $CFG;
         // TODO: add max files and max size support
         $maxbytes = get_user_max_upload_file_size($PAGE->context, $CFG->maxbytes, $COURSE->maxbytes);
         return array(
             'maxfiles' => EDITOR_UNLIMITED_FILES,
             'maxbytes' => $maxbytes,
-            'trusttext'=> true,
-            'return_types'=> FILE_INTERNAL | FILE_EXTERNAL,
+            'trusttext' => true,
+            'return_types' => FILE_INTERNAL | FILE_EXTERNAL,
             'subdirs' => file_area_contains_subdirs($context, 'mod_forum', 'post', $postid)
         );
     }
@@ -79,10 +82,11 @@ class mod_forum_post_form extends moodleform {
      *
      * @return void
      */
-    function definition() {
+    function definition()
+    {
         global $CFG, $OUTPUT;
 
-        $mform =& $this->_form;
+        $mform = &$this->_form;
 
         $course = $this->_customdata['course'];
         $cm = $this->_customdata['cm'];
@@ -110,7 +114,16 @@ class mod_forum_post_form extends moodleform {
                 $mform->addElement('html', $OUTPUT->notification($message));
             }
         }
-
+        // $mform->addElement('html', '<div id="collapseAddForm" class="modal fade" role="dialog">
+        // <div class="modal-dialog" style="max-width:644px !important;">
+        //     <div class="modal-content">
+        //     <div class="modal-header">
+        //       <h5 class="modal-title" id="exampleModalLabel">Thêm thảo luận</h5>
+        //       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        //         <span aria-hidden="true">&times;</span>
+        //       </button>
+        //     </div>
+        //     <div class="modal-body">');
         $mform->addElement('text', 'subject', get_string('subject', 'forum'), 'size="48"');
         $mform->setType('subject', PARAM_TEXT);
         $mform->addRule('subject', get_string('required'), 'required', null, 'client');
@@ -119,6 +132,7 @@ class mod_forum_post_form extends moodleform {
         $mform->addElement('editor', 'message', get_string('message', 'forum'), null, self::editor_options($modcontext, (empty($post->id) ? null : $post->id)));
         $mform->setType('message', PARAM_RAW);
         $mform->addRule('message', get_string('required'), 'required', null, 'client');
+        // $mform->addElement('html', '</div>');
 
         if (!$inpagereply) {
             $manageactivities = has_capability('moodle/course:manageactivities', $coursecontext);
@@ -128,21 +142,24 @@ class mod_forum_post_form extends moodleform {
                 $mform->freeze('discussionsubscribe');
                 $mform->setDefaults('discussionsubscribe', 0);
                 $mform->addHelpButton('discussionsubscribe', 'forcesubscribed', 'forum');
-
             } else if (\mod_forum\subscriptions::subscription_disabled($forum) && !$manageactivities) {
                 $mform->addElement('checkbox', 'discussionsubscribe', get_string('discussionsubscription', 'forum'));
                 $mform->freeze('discussionsubscribe');
                 $mform->setDefaults('discussionsubscribe', 0);
                 $mform->addHelpButton('discussionsubscribe', 'disallowsubscription', 'forum');
-
             } else {
                 $mform->addElement('checkbox', 'discussionsubscribe', get_string('discussionsubscription', 'forum'));
                 $mform->addHelpButton('discussionsubscribe', 'discussionsubscription', 'forum');
             }
 
             if (forum_can_create_attachment($forum, $modcontext)) {
-                $mform->addElement('filemanager', 'attachments', get_string('attachment', 'forum'), null,
-                    self::attachment_options($forum));
+                $mform->addElement(
+                    'filemanager',
+                    'attachments',
+                    get_string('attachment', 'forum'),
+                    null,
+                    self::attachment_options($forum)
+                );
                 $mform->addHelpButton('attachments', 'attachment', 'forum');
             }
 
@@ -240,18 +257,27 @@ class mod_forum_post_form extends moodleform {
                 }
             }
 
-            if (!empty($CFG->forum_enabletimedposts) && !$post->parent &&
-                has_capability('mod/forum:viewhiddentimedposts', $coursecontext)) {
+            if (
+                !empty($CFG->forum_enabletimedposts) && !$post->parent &&
+                has_capability('mod/forum:viewhiddentimedposts', $coursecontext)
+            ) {
                 $mform->addElement('header', 'displayperiod', get_string('displayperiod', 'forum'));
 
-                $mform->addElement('date_time_selector', 'timestart', get_string('displaystart', 'forum'),
-                    array('optional' => true));
+                $mform->addElement(
+                    'date_time_selector',
+                    'timestart',
+                    get_string('displaystart', 'forum'),
+                    array('optional' => true)
+                );
                 $mform->addHelpButton('timestart', 'displaystart', 'forum');
 
-                $mform->addElement('date_time_selector', 'timeend', get_string('displayend', 'forum'),
-                    array('optional' => true));
+                $mform->addElement(
+                    'date_time_selector',
+                    'timeend',
+                    get_string('displayend', 'forum'),
+                    array('optional' => true)
+                );
                 $mform->addHelpButton('timeend', 'displayend', 'forum');
-
             } else {
                 $mform->addElement('hidden', 'timestart');
                 $mform->setType('timestart', PARAM_INT);
@@ -263,11 +289,15 @@ class mod_forum_post_form extends moodleform {
             if (core_tag_tag::is_enabled('mod_forum', 'forum_posts')) {
                 $mform->addElement('header', 'tagshdr', get_string('tags', 'tag'));
 
-                $mform->addElement('tags', 'tags', get_string('tags'),
-                    array('itemtype' => 'forum_posts', 'component' => 'mod_forum'));
+                $mform->addElement(
+                    'tags',
+                    'tags',
+                    get_string('tags'),
+                    array('itemtype' => 'forum_posts', 'component' => 'mod_forum')
+                );
             }
         }
-
+        // $mform->addElement('html', '<div class="modal-footer">');
         //-------------------------------------------------------------------------------
         // buttons
         if (isset($post->edit)) { // hack alert
@@ -286,18 +316,29 @@ class mod_forum_post_form extends moodleform {
             $mform->disable_form_change_checker();
             $buttonarray = array();
             $buttonarray[] = &$mform->createElement('submit', 'submitbutton', $submitstring);
-            $buttonarray[] = &$mform->createElement('button', 'cancelbtn',
+            $buttonarray[] = &$mform->createElement(
+                'button',
+                'cancelbtn',
                 get_string('cancel', 'core'),
                 // Additional attribs to handle collapsible div.
-                ['data-toggle' => 'collapse', 'data-target' => "#collapseAddForm"]);
-            $buttonarray[] = &$mform->createElement('submit', 'advancedadddiscussion',
-                get_string('showadvancededitor'), null, null, ['customclassoverride' => 'btn-link']);
+                ['data-toggle' => 'collapse', 'data-target' => "#collapseAddForm"]
+            );
+            $buttonarray[] = &$mform->createElement(
+                'submit',
+                'advancedadddiscussion',
+                get_string('showadvancededitor'),
+                null,
+                null,
+                ['customclassoverride' => 'btn-link']
+            );
 
             $mform->addGroup($buttonarray, 'buttonar', '', array(' '), false);
             $mform->closeHeaderBefore('buttonar');
         } else {
             $this->add_action_buttons(true, $submitstring);
         }
+        // $mform->addElement('html', '</div>');
+        // $mform->addElement('html', '</div></div></div></div>');
 
         $mform->addElement('hidden', 'course');
         $mform->setType('course', PARAM_INT);
@@ -328,9 +369,10 @@ class mod_forum_post_form extends moodleform {
      * @param array $files files uploaded.
      * @return array of errors.
      */
-    function validation($data, $files) {
+    function validation($data, $files)
+    {
         $errors = parent::validation($data, $files);
-        if (($data['timeend']!=0) && ($data['timestart']!=0) && $data['timeend'] <= $data['timestart']) {
+        if (($data['timeend'] != 0) && ($data['timestart'] != 0) && $data['timeend'] <= $data['timestart']) {
             $errors['timeend'] = get_string('timestartenderror', 'forum');
         }
         if (empty($data['message']['text'])) {
