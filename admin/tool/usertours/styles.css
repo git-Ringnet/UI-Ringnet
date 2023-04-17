@@ -2466,7 +2466,8 @@ body#page-mod-quiz-edit{
 
 /*  */
 
-#page-mod-forum-discuss #region-main {
+#page-mod-forum-discuss #region-main,
+#page-mod-lti-view #region-main{
     margin: 0 !important;
 }
 
@@ -2476,7 +2477,10 @@ body#page-mod-quiz-edit{
 #page-mod-forum-post #btnCourseIndex,
 #page-mod-forum-post #click_showListCourse,
 #page-mod-forum-discuss #click_showListCourse,
-#page-mod-quiz-attempt .othernav {
+#page-mod-quiz-attempt .othernav,
+#page-mod-lti-view #theme_alpha-drawers-courseindex,
+#page-mod-lti-view #btnCourseIndex,
+#page-mod-lti-view #click_showListCourse {
     display: none !important;
 }
 
