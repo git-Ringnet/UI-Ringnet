@@ -2295,10 +2295,7 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
 #page-mod-quiz-review .sticky-header-settings-menu,
 #page-mod-quiz-edit #mainNav,
 #page-mod-quiz-edit .course-navigation,
-#page-mod-quiz-edit .sticky-header-settings-menu,
-#page-mod-lti-view .s#mainNav,
-#page-mod-lti-view .course-navigation,
-#page-mod-lti-view .sticky-header-settings-menu{
+#page-mod-quiz-edit .sticky-header-settings-menu{
     display: none !important;
 }
 
@@ -2311,8 +2308,7 @@ body#page-mod-quiz-view,
 body#page-mod-quiz-attempt,
 body#page-mod-quiz-summary,
 body#page-mod-quiz-review,
-body#page-mod-quiz-edit,
-body#page-mod-lti-view {
+body#page-mod-quiz-edit{
     margin: 0;
 }
 
@@ -2326,8 +2322,7 @@ body#page-mod-lti-view {
 #page-mod-quiz-attempt div#nav-drawer,
 #page-mod-quiz-summary div#nav-drawer,
 #page-mod-quiz-review div#nav-drawer,
-#page-mod-quiz-edit div#nav-drawer,
-#page-mod-lti-view div#nav-drawer{
+#page-mod-quiz-edit div#nav-drawer{
     display: none !important;
 }
 
@@ -2340,8 +2335,7 @@ body#page-mod-lti-view {
 #page-mod-quiz-attempt #page,
 #page-mod-quiz-summary #page,
 #page-mod-quiz-review #page,
-#page-mod-quiz-edit #page,
-#page-mod-lti-view #page{
+#page-mod-quiz-edit #page{
     padding: 0 !important;
 }
 
@@ -2353,8 +2347,7 @@ body#page-mod-lti-view {
 #page-mod-quiz-view .wrapper-course,
 #page-mod-quiz-summary .wrapper-course,
 #page-mod-quiz-review .wrapper-course,
-#page-mod-quiz-edit .wrapper-course,
-#page-mod-lti-view .wrapper-course{
+#page-mod-quiz-edit .wrapper-course{
     padding: 10px 20% !important;
 }
 
