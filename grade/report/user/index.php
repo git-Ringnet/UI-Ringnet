@@ -91,7 +91,6 @@ if (isset($_GET['userid']) && !empty($_GET['userid'])) {
     session_start();
     $_SESSION['userid'] = $_GET['userid'];
 }
-
 //Get userid, id
 $id = $_GET['id'];
 // print edit button
@@ -149,7 +148,7 @@ if (has_capability('moodle/grade:viewall', $context)) { //Teachers will see all 
             $user = $userdata->user;
             $report = new grade_report_user($courseid, $gpr, $context, $user->id, $viewasuser);
 
-            $studentnamelink = html_writer::link(new moodle_url('/user/view.php', array('id' => $report->user->id, 'course' => $courseid)), fullname($report->user));
+            $studentnamelink = html_writer::link(new moodle_url('/user/view.php', array('id' => $report->user->id, 'course' => $courseid)), fullname($report->user->email),);
             echo $OUTPUT->heading($studentnamelink);
 
             if ($report->fill_table()) {
@@ -214,3 +213,15 @@ if (isset($report)) {
 }
 
 echo $OUTPUT->footer();
+?>
+<script>
+var elements = document.querySelectorAll(".column-feedback");
+var lastElement = elements[elements.length - 1];
+var itemname = document.querySelectorAll(".column-itemname");
+var lastItemname = itemname[itemname.length - 1];
+var weight = document.querySelectorAll(".column-weight");
+var lastWeight = weight[weight.length - 1];
+lastElement.remove();
+lastItemname.remove();
+lastWeight.remove();
+</script>

@@ -52,16 +52,56 @@
     display: none;
 }
 
-#page-grade-report-singleview-index .reporttable .singleview_bulk{
+#page-grade-report-singleview-index .reporttable .singleview_bulk {
     display: none;
 }
 
-#page-grade-report-grader-index .gradeparent tbody .controls{
+#page-grade-report-grader-index .gradeparent tbody .controls {
     display: none;
 }
 
-#page-grade-report-grader-index .gradeparent .submit {
+#page-grade-report-grader-index .main-content .submit {
     opacity: 0;
+}
+
+#page-grade-report-singleview-index .generaltable thead .lastcol,
+#page-grade-report-singleview-index .generaltable tbody .lastcol,
+#page-grade-report-singleview-index .generaltable thead .c6,
+#page-grade-report-singleview-index .generaltable tbody .c6 {
+    display: none;
+}
+
+#page-grade-report-singleview-index .generaltable thead .c1 {
+    width: 30%;
+}
+
+#page-grade-report-singleview-index .generaltable thead .c3 {
+    text-align: center;
+}
+
+#page-grade-report-user-index .rui-blocks-wrapper .main-content {
+    position: relative;
+    overflow: hidden;
+}
+
+#page-grade-report-user-index .main-content .tertiary-navigation,
+#page-grade-report-user-index .user-grade tbody tr .column-weight:last-of-type {
+    display: none;
+}
+
+#page-grade-report-user-index .user-grade tbody tr .column-grade:last-of-type {
+    position: absolute;
+    top: -1px;
+    left: 160px;
+    width: 100%;
+    background-color: transparent;
+}
+
+#page-grade-report-user-index .user-grade tbody tr .column-grade:last-of-type::before {
+    content: "Điểm trung bình: ";
+}
+#page-grade-report-user-index .user-grade tbody tr .column-grade:last-of-type {
+    font-size: 18px;
 }
 
 /*Phân trang phần chỉnh sửa điểm số*/
@@ -187,6 +227,20 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: 140px;
+}
+
+#page-grade-report-user-index .main-content .rui-main-content-title--h4 {
+    font-size: 14px;
+}
+
+#page-grade-report-grader-index .gradeparent .highlightable {
+    text-align: center;
+}
+
+#page-grade-report-singleview-index .main-content .tertiary-navigation,
+#page-grade-report-singleview-index .main-content .singleview_buttons,
+#page-grade-report-grader-index .main-content .tertiary-navigation {
+    display: none;
 }
 
 /* #page-grade-report-grader-index .c1 {
