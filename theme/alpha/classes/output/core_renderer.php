@@ -1234,7 +1234,7 @@ class core_renderer extends \core_renderer
             $course = $this->page->course;
             $context = context_course::instance($course->id);
             $hasadminlink = has_capability('moodle/site:configview', $context);
-
+           
             if ($COURSE->id > 1 && isloggedin() && !isguestuser() && is_enrolled($context, $USER->id, '', true) || is_siteadmin() || $hasadminlink) {
                 global $CFG;
                 $headerlinks = [
@@ -1505,7 +1505,6 @@ class core_renderer extends \core_renderer
         }
         // Header links on non course areas.
         if (isloggedin() && !isguestuser()) {
-
             if ($COURSE->id > 1) {
                 $headerlinks = [
                     'headerlinksdata' => array(
@@ -1555,11 +1554,11 @@ class core_renderer extends \core_renderer
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
                             'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
-                            'isactiveitem' => $this->isMenuActive('mod/lti/view.php', array('contextid' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('id' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
-
+                   
                         //Quản lí khóa học
                         array(
                             'status' => !isguestuser(),
@@ -1813,7 +1812,7 @@ class core_renderer extends \core_renderer
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
                             'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
-                            'isactiveitem' => $this->isMenuActive('mod/lti/view.php', array('contextid' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('id' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
