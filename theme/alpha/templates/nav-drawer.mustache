@@ -243,7 +243,7 @@ Example context (json): {}
             at[1].querySelector('a').classList.add('active');
         }
     }
-     if(urledituser == 'message/notificationpreferences.php'){
+    if(urledituser == 'message/notificationpreferences.php'){
         if(tb){
             if(tb){
                 tb.classList.add('active_editadvanced_text');
@@ -255,5 +255,87 @@ Example context (json): {}
             at[1].classList.add('active_menu');
             at[1].querySelector('a').classList.add('active');
         }
+    }
+    var btn_content = document.getElementById('btn_content');
+    var btn_settings = document.getElementById('btn_settings1');
+    var btn_setting_all = document.getElementById('btn_setting_all');
+    var btn_setting_grade = document.getElementById('btn_setting_grade');
+    var btn_setting_limit = document.getElementById('btn_setting_limit');
+    var content = document.getElementById('content');
+    var content_settings = document.getElementById('content_settings');
+    var content_setting_all = document.getElementById('content_setting_all');
+    var content_setting_limit = document.getElementById('content_setting_limit');
+    var content_setting_grade = document.getElementById('content_grade');
+    var switch1 = document.getElementById('switch-i');
+    if(btn_content){
+         btn_content.addEventListener('click', function (e) {
+        e.preventDefault();
+        content.style.display = "block";
+        content_settings.style.display = "none";
+        content_setting_all.style.display = 'block';
+        content_setting_limit.style.display = 'none';
+    });
+    }
+    if(btn_settings){
+         btn_settings.addEventListener('click',function(e){
+        e.preventDefault();
+        content.style.display = "none";
+        content_settings.style.display = "flex";
+    });
+    }
+    if(btn_setting_all){
+         btn_setting_all.addEventListener('click',function(e){
+        e.preventDefault();
+        content_setting_all.style.display = 'block';
+        content_setting_limit.style.display = 'none';
+        content_setting_grade.style.display = 'none';
+    });
+    }
+   if(btn_setting_grade){
+      btn_setting_grade.addEventListener('click',function(e){
+        e.preventDefault();
+        content_setting_all.style.display = 'none';
+        content_setting_limit.style.display = 'none';
+        content_setting_grade.style.display = 'block';
+
+    });
+   }
+    if(btn_setting_limit){
+         btn_setting_limit.addEventListener('click',function(e){
+        e.preventDefault();
+        content_setting_all.style.display = 'none';
+        content_setting_limit.style.display = 'block';
+        content_setting_grade.style.display = 'none';
+    });
+    }
+   
+    var switch1 = document.getElementById('switch-i');
+    var numcheck = 1;
+    var checkbox1 = document.getElementById('id_grade_modgrade_point');
+    var checkbox2 = document.getElementById('id_gradepass');
+    if(checkbox1 && checkbox2){
+        checkbox1.setAttribute('disabled','disabled');
+        checkbox2.setAttribute('disabled','disabled');
+    }
+    if(switch1){
+         switch1.addEventListener('change',function(){
+        if(numcheck == 1){
+            if(checkbox1){
+                checkbox1.removeAttribute('disabled');
+            }
+           if(checkbox2){
+                checkbox2.removeAttribute('disabled');
+           }
+            numcheck = 2;
+        }else{
+            if(checkbox1){
+                checkbox1.setAttribute('disabled','disabled');
+            }
+            if(checkbox2){
+                checkbox2.setAttribute('disabled','disabled');
+            }
+            numcheck = 1;
+        }
+    });
     }
 </script>

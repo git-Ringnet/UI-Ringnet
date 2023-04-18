@@ -256,7 +256,8 @@ span[data-flexitour="container"].orphan div[data-role="arrow"] {
     width: 50% !important;
 }
 
-#page-course-edit #btn_upload {
+#page-course-edit #btn_upload,
+#page-mod-resource-mod #btn_upload {
     font-size: 14px;
     border-radius: 6px;
     background-color: #555555;
@@ -2137,9 +2138,301 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
     box-shadow: 4px 8px 16px rgba(69, 79, 89, 0.08);
     border-radius: 16px;
 }
-
+/* asdádadasada12121211 */
 @media only screen and (min-width: 1900px) {
     #page-course-show .show_course_stu .row {
         padding: 20px 180px;
     }
+    #page-mod-lesson-mod .availability-children {
+        width: 60%;
+    } 
+    #page-mod-lesson-mod .availability-button,
+    #page-mod-lesson-mod .availability-inner .availability-none{
+        max-width: 60%;
+    }
+    #page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_completion,
+    #page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_grade{
+        display: block;
+    }
+    #page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_completion .availability-group,
+    #page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_grade .availability-group{
+        width: 100%;
+    }
+    #page-mod-lesson-mod #fitem_id_gradepass .col-md-3{
+        flex: 0 0 11% !important;
+    }
+    #page-mod-lesson-mod #fitem_id_gradepass .col-md-9 input{
+        width: 24%;
+    }
 }
+
+#page-mod-lesson-mod #id_competenciessection
+{
+    display: none;
+}
+
+#page-mod-lesson-mod #fitem_id_name,
+#page-mod-lesson-mod #fitem_id_introeditor,
+#page-mod-lesson-mod #fitem_id_cmidnumber,
+#page-mod-lesson-mod #fgroup_id_visible{
+    display: block;
+}
+#page-mod-lesson-mod #fitem_id_introeditor{
+    padding-top: 24px;
+}
+#page-mod-lesson-mod #fitem_id_name .col-md-3,
+#page-mod-lesson-mod #fitem_id_introeditor .col-md-3{
+    text-align: left !important;
+}
+#page-mod-lesson-mod #fitem_id_name .col-md-9,
+#page-mod-lesson-mod #fitem_id_introeditor .col-md-9{
+    padding-top: 12px;
+}
+#page-mod-lesson-mod #content{
+    padding: 24px 0 10px 20%;
+}
+#page-mod-lesson-mod #content_settings{
+    padding: 24px 0 0 0;
+}
+#page-mod-lesson-mod #nav_menu_create{
+    border-right: 1px solid #D6D6D6;
+}
+#page-mod-lesson-mod #btn_content,
+#page-mod-lesson-mod #btn_settings1,
+#page-mod-lesson-mod #btn_setting_all,
+#page-mod-lesson-mod #btn_setting_grade,
+#page-mod-lesson-mod #btn_setting_limit{
+    color: #555555;
+    padding: 0 4px;
+    border: none;
+    background: #FCFCFC;
+}
+#page-mod-lesson-mod #fitem_id_completion{
+    display: none;
+}
+#page-mod-lesson-mod #id_modstandardgrade legend{
+    display: none !important;
+}
+#page-mod-lesson-mod #content_setting_all,
+#page-mod-lesson-mod #content_setting_limit,
+#page-mod-lesson-mod #content_grade
+{
+    margin: 0 0 0 10%;
+}
+#page-mod-lesson-mod #content_grade #fitem_fgroup_id_grade .col-md-3,
+#page-mod-lesson-mod #fitem_fgroup_id_grade .col-md-9 label:first-child,
+#page-mod-lesson-mod #id_grade_modgrade_type
+{
+    display: none;
+}
+#page-mod-lesson-mod #content_grade #fitem_fgroup_id_grade .col-md-9 fieldset
+{
+    border: none !important;
+}
+#page-mod-lesson-mod #content_require .form-group .col-md-3{
+    display: none;
+}
+#page-mod-lesson-mod #fitem_id_cmidnumber .col-md-3,
+#page-mod-lesson-mod #fgroup_id_visible .col-md-3,
+#page-mod-lesson-mod #fgroup_id_completiontimespentgroup .col-md-3,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .col-md-3{
+    text-align: left !important;
+}
+#page-mod-lesson-mod #fgroup_id_completiontimespentgroup,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson{
+    display: block;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .col-md-9,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .col-md-9 .availability-field,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .col-md-9 .availability-field .availability-inner
+{
+    width: 100%;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .col-md-9{
+    max-width: 100%;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-header,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-connector
+{
+    display: none;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-inner,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-inner .availability-item,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-inner .availability-item .availability_completion,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-item .availability_date,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-item .availability_grade,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-item .availability_profile
+{
+    border: none;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_completion .form-group label:last-child,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_profile  .availability-group label:nth-child(2) {
+    display: none;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_completion,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_date,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade
+{
+    display: block;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade label{
+    justify-content: normal;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade .custom-select{
+    width: 80%;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_completion .availability-group,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade .availability-group,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_completion,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_date,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile{
+    width: 100%;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile .availability-group{
+    width: 100%;
+    display: block;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile .custom-select{
+    width: 30%;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile .custom-select{
+    width: 30%;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile #user-profile-f label{
+    width: 60%;
+}
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile #user-profile-f label input{
+    width: 100% !important;
+}
+#page-mod-lesson-mod .availability-delete img{
+    margin-top: 10px;
+}
+#page-mod-lesson-mod #fgroup_id_completiontimespentgroup .ios-switch-label{
+    display: none;
+}
+#page-mod-lesson-mod #fgroup_id_completiontimespentgroup .col-md-9,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_completion .availability-group,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_date  .availability-group,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_grade  .availability-group,
+#page-mod-lesson-mod #fitem_id_availabilityconditionsjson .availability_profile  #user-profile-f
+{
+    margin-top: 8px;
+}
+#page-mod-lesson-mod #fgroup_id_visible,
+#page-mod-lesson-mod .pl-3
+{
+    margin-top: 24px;
+}
+#page-mod-lesson-mod #fitem_id_cmidnumber .col-md-9,
+#page-mod-lesson-mod #fgroup_id_visible .col-md-9
+{
+    margin-top: 8px;
+}
+#page-mod-lesson-mod #content_require .form-group .col-md-9 .form-check,
+#page-mod-lesson-mod .form-group .col-md-9 .form-check{
+    background: none;
+}
+#page-mod-lesson-mod  .custom-control .ios-switch-control-input:checked ~.ios-switch-control-indicator{
+    background-color: #0095F6 !important;
+    border :2px solid #0095F6 !important;
+}
+#page-mod-lesson-mod #content_require .form-check .text{
+    color: #1D1C20 !important;
+}
+#page-mod-lesson-mod .availability-delete img{
+    width: 12px;
+}
+#page-mod-lesson-mod .availability-delete{
+    background-color: none !important;
+}
+#page-mod-lesson-mod .availability-children .availability-eye{
+    margin-top: 0.5% ;
+}
+#page-mod-lesson-mod .availability-item > :nth-child(2){
+    align-self: start;
+}
+#page-mod-lesson-mod #fitem_fgroup_id_grade .col-md-9 .d-flex.flex-wrap.align-items-center.rui-form-element-group{
+    padding-left: 0 !important;
+}
+#page-mod-lesson-mod #id_modstandardgradecontainer,
+#page-mod-lesson-mod #switch-i{
+    margin-left: -3%;
+}
+#page-mod-lesson-mod #switch-i p{
+    font-size: 13px;
+    font-weight: 600;
+}
+#page-mod-lesson-mod #id_grade_modgrade_point{
+    height: calc(1.5em + 1.5rem + 5px);
+    padding: 0.75rem 1.25rem;
+}
+#page-mod-lesson-mod #fitem_id_gradepass .col-md-3{
+    text-align: left !important;
+    padding: 0 !important;
+    max-width: 17% !important;
+}
+#page-mod-lesson-mod #fitem_fgroup_id_grade .col-md-9 fieldset{
+    padding: 0 !important;
+}
+#page-mod-lesson-mod #fitem_fgroup_id_grade .col-md-9 .form-group span{
+    padding-left: 5%;
+}
+#page-mod-lesson-mod #fitem_id_gradepass .col-md-9 input{
+    width: 38%;
+}
+.switch {
+position: relative;
+display: inline-block;
+width: 32px;
+height: 20px;
+}
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 12px;
+width: 12px;
+left: 4px;
+bottom: 4px;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+}
+input:checked + .slider {
+background-color: #2196F3;
+}
+input:focus + .slider {
+box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .slider:before {
+-webkit-transform: translateX(26px);
+-ms-transform: translateX(26px);
+transform: translateX(12px);
+}
+.slider.round {
+border-radius: 34px;
+}
+.slider.round:before {
+border-radius: 50%;
+}
+
+
+
+
+

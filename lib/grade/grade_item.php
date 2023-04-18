@@ -184,7 +184,7 @@ class grade_item extends grade_object {
      * grade required to pass. (grademin <= gradepass <= grademax)
      * @var float $gradepass
      */
-    public $gradepass = 0;
+    public $gradepass = 5;
 
     /**
      * Multiply all grades by this number.

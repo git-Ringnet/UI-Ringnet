@@ -64,8 +64,10 @@ class mod_quiz_mod_form extends moodleform_mod {
         $mform = $this->_form;
 
         // -------------------------------------------------------------------------------
-        $mform->addElement('header', 'general', get_string('general', 'form'));
-
+        // $mform->addElement('header', 'general', get_string('general', 'form'));
+        $mform->addElement("html","<button id='btn_content'>Nội dung</button>");
+        $mform->addElement("html","<button class='ml-3' id='btn_settings1'>Cài đặt</button>");
+        $mform->addElement('html','<div id="content">');
         // Name.
         $mform->addElement('text', 'name', get_string('name'), array('size'=>'64'));
         if (!empty($CFG->formatstringstriptags)) {
@@ -78,68 +80,68 @@ class mod_quiz_mod_form extends moodleform_mod {
 
         // Introduction.
         $this->standard_intro_elements(get_string('introduction', 'quiz'));
-
+        $mform->addElement('html','</div>');
         // -------------------------------------------------------------------------------
-        $mform->addElement('header', 'timing', get_string('timing', 'quiz'));
+        // $mform->addElement('header', 'timing', get_string('timing', 'quiz'));
 
         // Open and close dates.
-        $mform->addElement('date_time_selector', 'timeopen', get_string('quizopen', 'quiz'),
-                self::$datefieldoptions);
-        $mform->addHelpButton('timeopen', 'quizopenclose', 'quiz');
+        // $mform->addElement('date_time_selector', 'timeopen', get_string('quizopen', 'quiz'),
+        //         self::$datefieldoptions);
+        // $mform->addHelpButton('timeopen', 'quizopenclose', 'quiz');
 
-        $mform->addElement('date_time_selector', 'timeclose', get_string('quizclose', 'quiz'),
-                self::$datefieldoptions);
+        // $mform->addElement('date_time_selector', 'timeclose', get_string('quizclose', 'quiz'),
+        //         self::$datefieldoptions);
 
         // Time limit.
-        $mform->addElement('duration', 'timelimit', get_string('timelimit', 'quiz'),
-                array('optional' => true));
-        $mform->addHelpButton('timelimit', 'timelimit', 'quiz');
+        // $mform->addElement('duration', 'timelimit', get_string('timelimit', 'quiz'),
+        //         array('optional' => true));
+        // $mform->addHelpButton('timelimit', 'timelimit', 'quiz');
 
         // What to do with overdue attempts.
-        $mform->addElement('select', 'overduehandling', get_string('overduehandling', 'quiz'),
-                quiz_get_overdue_handling_options());
-        $mform->addHelpButton('overduehandling', 'overduehandling', 'quiz');
+        // $mform->addElement('select', 'overduehandling', get_string('overduehandling', 'quiz'),
+        //         quiz_get_overdue_handling_options());
+        // $mform->addHelpButton('overduehandling', 'overduehandling', 'quiz');
         // TODO Formslib does OR logic on disableif, and we need AND logic here.
         // $mform->disabledIf('overduehandling', 'timelimit', 'eq', 0);
         // $mform->disabledIf('overduehandling', 'timeclose', 'eq', 0);
 
         // Grace period time.
-        $mform->addElement('duration', 'graceperiod', get_string('graceperiod', 'quiz'),
-                array('optional' => true));
-        $mform->addHelpButton('graceperiod', 'graceperiod', 'quiz');
-        $mform->hideIf('graceperiod', 'overduehandling', 'neq', 'graceperiod');
+        // $mform->addElement('duration', 'graceperiod', get_string('graceperiod', 'quiz'),
+        //         array('optional' => true));
+        // $mform->addHelpButton('graceperiod', 'graceperiod', 'quiz');
+        // $mform->hideIf('graceperiod', 'overduehandling', 'neq', 'graceperiod');
 
         // -------------------------------------------------------------------------------
         // Grade settings.
-        $this->standard_grading_coursemodule_elements();
+        // $this->standard_grading_coursemodule_elements();
 
-        $mform->removeElement('grade');
-        if (property_exists($this->current, 'grade')) {
-            $currentgrade = $this->current->grade;
-        } else {
-            $currentgrade = $quizconfig->maximumgrade;
-        }
-        $mform->addElement('hidden', 'grade', $currentgrade);
-        $mform->setType('grade', PARAM_FLOAT);
+        // $mform->removeElement('grade');
+        // if (property_exists($this->current, 'grade')) {
+        //     $currentgrade = $this->current->grade;
+        // } else {
+        //     $currentgrade = $quizconfig->maximumgrade;
+        // }
+        // $mform->addElement('hidden', 'grade', $currentgrade);
+        // $mform->setType('grade', PARAM_FLOAT);
 
         // Number of attempts.
-        $attemptoptions = array('0' => get_string('unlimited'));
-        for ($i = 1; $i <= QUIZ_MAX_ATTEMPT_OPTION; $i++) {
-            $attemptoptions[$i] = $i;
-        }
-        $mform->addElement('select', 'attempts', get_string('attemptsallowed', 'quiz'),
-                $attemptoptions);
+        // $attemptoptions = array('0' => get_string('unlimited'));
+        // for ($i = 1; $i <= QUIZ_MAX_ATTEMPT_OPTION; $i++) {
+        //     $attemptoptions[$i] = $i;
+        // }
+        // $mform->addElement('select', 'attempts', get_string('attemptsallowed', 'quiz'),
+        //         $attemptoptions);
 
-        // Grading method.
-        $mform->addElement('select', 'grademethod', get_string('grademethod', 'quiz'),
-                quiz_get_grading_options());
-        $mform->addHelpButton('grademethod', 'grademethod', 'quiz');
-        if ($this->get_max_attempts_for_any_override() < 2) {
-            $mform->hideIf('grademethod', 'attempts', 'eq', 1);
-        }
+        // // Grading method.
+        // $mform->addElement('select', 'grademethod', get_string('grademethod', 'quiz'),
+        //         quiz_get_grading_options());
+        // $mform->addHelpButton('grademethod', 'grademethod', 'quiz');
+        // if ($this->get_max_attempts_for_any_override() < 2) {
+        //     $mform->hideIf('grademethod', 'attempts', 'eq', 1);
+        // }
 
-        // -------------------------------------------------------------------------------
-        $mform->addElement('header', 'layouthdr', get_string('layout', 'quiz'));
+        // // // -------------------------------------------------------------------------------
+        // // $mform->addElement('header', 'layouthdr', get_string('layout', 'quiz'));
 
         $pagegroup = array();
         $pagegroup[] = $mform->createElement('select', 'questionsperpage',
@@ -156,19 +158,19 @@ class mod_quiz_mod_form extends moodleform_mod {
         $mform->addHelpButton('questionsperpagegrp', 'newpage', 'quiz');
         $mform->setAdvanced('questionsperpagegrp', $quizconfig->questionsperpage_adv);
 
-        // Navigation method.
+        // // // Navigation method.
         $mform->addElement('select', 'navmethod', get_string('navmethod', 'quiz'),
                 quiz_get_navigation_options());
         $mform->addHelpButton('navmethod', 'navmethod', 'quiz');
 
-        // -------------------------------------------------------------------------------
-        $mform->addElement('header', 'interactionhdr', get_string('questionbehaviour', 'quiz'));
+        // // -------------------------------------------------------------------------------
+        // $mform->addElement('header', 'interactionhdr', get_string('questionbehaviour', 'quiz'));
 
-        // Shuffle within questions.
+        // // // Shuffle within questions.
         $mform->addElement('selectyesno', 'shuffleanswers', get_string('shufflewithin', 'quiz'));
         $mform->addHelpButton('shuffleanswers', 'shufflewithin', 'quiz');
 
-        // How questions behave (question behaviour).
+        // // // How questions behave (question behaviour).
         if (!empty($this->current->preferredbehaviour)) {
             $currentbehaviour = $this->current->preferredbehaviour;
         } else {
@@ -179,7 +181,7 @@ class mod_quiz_mod_form extends moodleform_mod {
                 get_string('howquestionsbehave', 'question'), $behaviours);
         $mform->addHelpButton('preferredbehaviour', 'howquestionsbehave', 'question');
 
-        // Can redo completed questions.
+        // // // Can redo completed questions.
         $redochoices = array(0 => get_string('no'), 1 => get_string('canredoquestionsyes', 'quiz'));
         $mform->addElement('select', 'canredoquestions', get_string('canredoquestions', 'quiz'), $redochoices);
         $mform->addHelpButton('canredoquestions', 'canredoquestions', 'quiz');
@@ -189,7 +191,7 @@ class mod_quiz_mod_form extends moodleform_mod {
             }
         }
 
-        // Each attempt builds on last.
+        // // // Each attempt builds on last.
         $mform->addElement('selectyesno', 'attemptonlast',
                 get_string('eachattemptbuildsonthelast', 'quiz'));
         $mform->addHelpButton('attemptonlast', 'eachattemptbuildsonthelast', 'quiz');
@@ -197,7 +199,7 @@ class mod_quiz_mod_form extends moodleform_mod {
             $mform->hideIf('attemptonlast', 'attempts', 'eq', 1);
         }
 
-        // -------------------------------------------------------------------------------
+        // // -------------------------------------------------------------------------------
         $mform->addElement('header', 'reviewoptionshdr',
                 get_string('reviewoptionsheading', 'quiz'));
         $mform->addHelpButton('reviewoptionshdr', 'reviewoptionsheading', 'quiz');
@@ -227,10 +229,10 @@ class mod_quiz_mod_form extends moodleform_mod {
             $mform->disabledIf($field . 'closed', 'timeclose[enabled]');
         }
 
-        // -------------------------------------------------------------------------------
-        $mform->addElement('header', 'display', get_string('appearance'));
+        // // -------------------------------------------------------------------------------
+        // $mform->addElement('header', 'display', get_string('appearance'));
 
-        // Show user picture.
+        // // Show user picture.
         $mform->addElement('select', 'showuserpicture', get_string('showuserpicture', 'quiz'),
                 quiz_get_user_image_options());
         $mform->addHelpButton('showuserpicture', 'showuserpicture', 'quiz');
@@ -353,14 +355,14 @@ class mod_quiz_mod_form extends moodleform_mod {
         }
 
         // -------------------------------------------------------------------------------
-        $this->standard_coursemodule_elements();
+        $this->standard_coursemodule_elements2();
 
         // Check and act on whether setting outcomes is considered an advanced setting.
         $mform->setAdvanced('modoutcomes', !empty($quizconfig->outcomes_adv));
 
         // The standard_coursemodule_elements method sets this to 100, but the
         // quiz has its own setting, so use that.
-        $mform->setDefault('grade', $quizconfig->maximumgrade);
+        // $mform->setDefault('grade', $quizconfig->maximumgrade);
 
         // -------------------------------------------------------------------------------
         $this->apply_admin_defaults();
@@ -608,13 +610,13 @@ class mod_quiz_mod_form extends moodleform_mod {
         $mform->disabledIf('completionattemptsexhausted', 'completionpassgrade', 'notchecked');
         $items[] = 'completionattemptsexhausted';
 
-        $group = array();
-        $group[] = $mform->createElement('checkbox', 'completionminattemptsenabled', '',
-            get_string('completionminattempts', 'quiz'));
-        $group[] = $mform->createElement('text', 'completionminattempts', '', array('size' => 3));
-        $mform->setType('completionminattempts', PARAM_INT);
-        $mform->addGroup($group, 'completionminattemptsgroup', get_string('completionminattemptsgroup', 'quiz'), array(' '), false);
-        $mform->disabledIf('completionminattempts', 'completionminattemptsenabled', 'notchecked');
+        // $group = array();
+        // $group[] = $mform->createElement('checkbox', 'completionminattemptsenabled', '',
+        //     get_string('completionminattempts', 'quiz'));
+        // $group[] = $mform->createElement('text', 'completionminattempts', '', array('size' => 3));
+        // $mform->setType('completionminattempts', PARAM_INT);
+        // $mform->addGroup($group, 'completionminattemptsgroup', get_string('completionminattemptsgroup', 'quiz'), array(' '), false);
+        // $mform->disabledIf('completionminattempts', 'completionminattemptsenabled', 'notchecked');
 
         $items[] = 'completionminattemptsgroup';
 
@@ -661,3 +663,283 @@ class mod_quiz_mod_form extends moodleform_mod {
         return $this->maxattemptsanyoverride;
     }
 }
+?>
+<style>
+    #page-mod-quiz-mod #fitem_id_name,
+    #page-mod-quiz-mod #fitem_id_introeditor,
+    #page-mod-quiz-mod #fitem_id_cmidnumber,
+    #page-mod-quiz-mod #fgroup_id_visible{
+        display: block;
+    }
+    #page-mod-quiz-mod #fitem_id_introeditor{
+        padding-top: 24px;
+    }
+    #page-mod-quiz-mod #fitem_id_name .col-md-3,
+    #page-mod-quiz-mod #fitem_id_introeditor .col-md-3{
+        text-align: left !important;
+    }
+    #page-mod-quiz-mod #fitem_id_name .col-md-9,
+    #page-mod-quiz-mod #fitem_id_introeditor .col-md-9{
+        padding-top: 12px;
+    }
+    #page-mod-quiz-mod #content{
+        padding: 24px 0 10px 20%;
+    }
+    #page-mod-quiz-mod #content_settings{
+        padding: 24px 0 0 0;
+    }
+    #page-mod-quiz-mod #nav_menu_create{
+        border-right: 1px solid #D6D6D6;
+    }
+    #page-mod-quiz-mod #btn_content,
+    #page-mod-quiz-mod #btn_settings1,
+    #page-mod-quiz-mod #btn_setting_all,
+    #page-mod-quiz-mod #btn_setting_grade,
+    #page-mod-quiz-mod #btn_setting_limit{
+        color: #555555;
+        padding: 0 4px;
+        border: none;
+        background: #FCFCFC;
+    }
+    #page-mod-quiz-mod #fitem_id_completion{
+        display: none;
+    }
+    #page-mod-quiz-mod #id_modstandardgrade legend{
+        display: none !important;
+    }
+    #page-mod-quiz-mod #content_setting_all,
+    #page-mod-quiz-mod #content_setting_limit,
+    #page-mod-quiz-mod #content_grade
+    {
+        margin: 0 0 0 10%;
+    }
+    #page-mod-quiz-mod #content_grade #fitem_fgroup_id_grade .col-md-3,
+    #page-mod-quiz-mod #fitem_fgroup_id_grade .col-md-9 label:first-child,
+    #page-mod-quiz-mod #id_grade_modgrade_type
+    {
+        display: none;
+    }
+    #page-mod-quiz-mod #content_grade #fitem_fgroup_id_grade .col-md-9 fieldset
+    {
+        border: none !important;
+    }
+    #page-mod-quiz-mod #content_require .form-group .col-md-3{
+        display: none;
+    }
+    #page-mod-quiz-mod #fitem_id_cmidnumber .col-md-3,
+    #page-mod-quiz-mod #fgroup_id_visible .col-md-3,
+    #page-mod-quiz-mod #fgroup_id_completiontimespentgroup .col-md-3,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .col-md-3{
+        text-align: left !important;
+    }
+    #page-mod-quiz-mod #fgroup_id_completiontimespentgroup,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson{
+        display: block;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .col-md-9,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .col-md-9 .availability-field,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .col-md-9 .availability-field .availability-inner
+    {
+        width: 100%;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .col-md-9{
+        max-width: 100%;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-header,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-connector
+    {
+        display: none;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-inner,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-inner .availability-item,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-inner .availability-item .availability_completion,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-item .availability_date,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-item .availability_grade,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-item .availability_profile
+    {
+        border: none;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_completion .form-group label:last-child,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_profile  .availability-group label:nth-child(2) {
+        display: none;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_completion,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_date,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade
+    {
+        display: block;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade label{
+        justify-content: normal;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade .custom-select{
+        width: 80%;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_completion .availability-group,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade .availability-group,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_completion,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_grade,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_date,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile{
+        width: 100%;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile .availability-group{
+        width: 100%;
+        display: block;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile .custom-select{
+        width: 30%;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile .custom-select{
+        width: 30%;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile #user-profile-f label{
+        width: 60%;
+    }
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability-children .availability_profile #user-profile-f label input{
+        width: 100% !important;
+    }
+    #page-mod-quiz-mod .availability-delete img{
+        margin-top: 10px;
+    }
+    #page-mod-quiz-mod #fgroup_id_completiontimespentgroup .ios-switch-label{
+        display: none;
+    }
+    #page-mod-quiz-mod #fgroup_id_completiontimespentgroup .col-md-9,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_completion .availability-group,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_date  .availability-group,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_grade  .availability-group,
+    #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_profile  #user-profile-f
+    {
+        margin-top: 8px;
+    }
+    @media only screen and (min-width: 1900px) {
+        #page-mod-quiz-mod .availability-children {
+            width: 60%;
+        } 
+        #page-mod-quiz-mod .availability-button{
+            max-width: 60%;
+        }
+        #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_completion,
+        #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_grade{
+            display: block;
+        }
+        #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_completion .availability-group,
+        #page-mod-quiz-mod #fitem_id_availabilityconditionsjson .availability_grade .availability-group{
+            width: 100%;
+        }
+        #page-mod-quiz-mod #fitem_id_gradepass .col-md-3{
+            flex: 0 0 11% !important;
+        }
+        #page-mod-quiz-mod #fitem_id_gradepass .col-md-9 input{
+            width: 24%;
+        }
+    }
+    #page-mod-quiz-mod #fgroup_id_visible,
+    #page-mod-quiz-mod .pl-3
+    {
+        margin-top: 24px;
+    }
+    #page-mod-quiz-mod #fitem_id_cmidnumber .col-md-9,
+    #page-mod-quiz-mod #fgroup_id_visible .col-md-9
+    {
+        margin-top: 8px;
+    }
+    #page-mod-quiz-mod #content_require .form-group .col-md-9 .form-check,
+    #page-mod-quiz-mod .form-group .col-md-9 .form-check{
+        background: none;
+    }
+    #page-mod-quiz-mod .custom-control .ios-switch-control-input:checked ~.ios-switch-control-indicator{
+        background-color: #0095F6 !important;
+        border :2px solid #0095F6 !important;
+    }
+    #page-mod-quiz-mod #content_require .form-check .text{
+        color: #1D1C20 !important;
+    }
+    #page-mod-quiz-mod .availability-delete img{
+        width: 12px;
+    }
+    #page-mod-quiz-mod .availability-delete{
+        background-color: none !important;
+    }
+    #page-mod-quiz-mod .availability-children .availability-eye{
+        margin-top: 0.5% ;
+    }
+    #page-mod-quiz-mod .availability-item > :nth-child(2){
+        align-self: start;
+    }
+    #page-mod-quiz-mod #fitem_fgroup_id_grade .col-md-9 .d-flex.flex-wrap.align-items-center.rui-form-element-group{
+        padding-left: 0 !important;
+    }
+    #page-mod-quiz-mod #id_modstandardgradecontainer,
+    #page-mod-quiz-mod #switch-i{
+        margin-left: -3%;
+    }
+    #page-mod-quiz-mod #switch-i p{
+        font-size: 13px;
+        font-weight: 600;
+    }
+    #page-mod-quiz-mod #id_grade_modgrade_point{
+        height: calc(1.5em + 1.5rem + 5px);
+        padding: 0.75rem 1.25rem;
+    }
+    #page-mod-quiz-mod #fitem_id_gradepass .col-md-3{
+        text-align: left !important;
+        padding: 0 !important;
+        max-width: 17% !important;
+    }
+    #page-mod-quiz-mod #fitem_fgroup_id_grade .col-md-9 fieldset{
+        padding: 0 !important;
+    }
+    #page-mod-quiz-mod #fitem_fgroup_id_grade .col-md-9 .form-group span{
+        padding-left: 5%;
+    }
+    #page-mod-quiz-mod #fitem_id_gradepass .col-md-9 input{
+        width: 38%;
+    }
+    #page-mod-quiz-mod #fitem_fgroup_id_grade{
+        display: none;
+    }
+    #page-mod-quiz-mod #fitem_id_timelimit,
+    #page-mod-quiz-mod #fitem_id_attempts,
+    #page-mod-quiz-mod #fgroup_id_completionminattemptsgroup,
+    #page-mod-quiz-mod #fitem_id_timeopen,
+    #page-mod-quiz-mod #fitem_id_timeclose
+    {
+        display: block;
+    }
+    #page-mod-quiz-mod #fitem_id_timelimit .col-md-3,
+    #page-mod-quiz-mod #fitem_id_attempts .col-md-3,
+    #page-mod-quiz-mod #fgroup_id_completionminattemptsgroup .col-md-3,
+    #page-mod-quiz-mod #fitem_id_timeopen .col-md-3,
+    #page-mod-quiz-mod #fitem_id_timeclose .col-md-3
+    {
+        text-align: left !important;
+    }
+    #page-mod-quiz-mod #fitem_id_timelimit .col-md-9 .d-flex.flex-wrap.align-items-center.rui-form-element-group
+    {
+        padding-left: 0 !important;
+    }
+    #page-mod-quiz-mod #fitem_id_timeopen .col-md-9,
+    #page-mod-quiz-mod #fitem_id_timeclose .col-md-9{
+        max-width: 100%;
+    }
+    #page-mod-quiz-mod #fitem_id_timeopen,
+    #page-mod-quiz-mod #fitem_id_timeclose{
+        margin-left: 10px;
+    }
+    #page-mod-quiz-mod #fgroup_id_questionsperpagegrp,
+    #page-mod-quiz-mod #fitem_id_navmethod, #page-mod-quiz-mod #fitem_id_shuffleanswers,
+    #page-mod-quiz-mod #fitem_id_preferredbehaviour, #page-mod-quiz-mod #fitem_id_attemptonlast,
+    #page-mod-quiz-mod #id_reviewoptionshdr,
+    #page-mod-quiz-mod #id_seb , #page-mod-quiz-mod #id_security , #page-mod-quiz-mod #id_overallfeedbackhdr legend,
+    #page-mod-quiz-mod #id_overallfeedbackhdr #fitem_id_gradeboundarystatic1,
+    #page-mod-quiz-mod #id_overallfeedbackhdr #fitem_id_feedbacktext_0,
+    #page-mod-quiz-mod #id_overallfeedbackhdr #fitem_id_feedbackboundaries_0,
+    #page-mod-quiz-mod #id_overallfeedbackhdr #fitem_id_feedbacktext_1, 
+    #page-mod-quiz-mod #id_overallfeedbackhdr #fitem_id_gradeboundarystatic2,
+    #page-mod-quiz-mod #id_overallfeedbackhdr #fitem_id_boundary_add_fields,
+    #page-mod-quiz-mod #id_competenciessection{
+        display: none !important;
+    }
+</style>
