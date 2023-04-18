@@ -35,6 +35,9 @@ use core_reportbuilder\output\dynamictabs\schedules;
 require_once(__DIR__ . '/../config.php');
 require_once("{$CFG->libdir}/adminlib.php");
 
+// $sql = 'SELECT c.fullname, COUNT(DISTINCT ue.userid) AS student_count FROM mdl_course c JOIN mdl_enrol e ON e.courseid = c.id JOIN mdl_user_enrolments ue ON ue.enrolid = e.id GROUP BY c.fullname';
+// var_dump($DB->get_records_sql($sql));
+
 $reportid = required_param('id', PARAM_INT);
 
 admin_externalpage_setup('customreports', null, ['id' => $reportid], new moodle_url('/reportbuilder/edit.php'));
