@@ -1554,7 +1554,7 @@ class core_renderer extends \core_renderer
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
                             'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
-                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('id' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('contextid' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
@@ -1812,7 +1812,7 @@ class core_renderer extends \core_renderer
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
                             'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
-                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('id' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('contextid' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),

@@ -515,18 +515,53 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
         if (empty($summarydata)) {
             return '';
         }
-
+        $graded = floatval($_SESSION['grade']);
         $output = '';
+        // Nếu lớn hơn hoặc bằng 5 thì svg tích Việt
+        $svg = '';
+        if ($graded >= 5) {
+            $svg = '<svg width="150" height="107" viewBox="0 0 150 107" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M148.117 1.88037C150.628 4.38754 150.628 8.45246 148.117 10.9596L53.8314 105.12C51.3209 107.627 47.2505 107.627 44.74 105.12L1.88288 62.3196C-0.627628 59.8125 -0.627628 55.7475 1.88288 53.2404C4.3934 50.7332 8.46374 50.7332 10.9743 53.2404L49.2857 91.5008L139.026 1.88037C141.536 -0.626792 145.607 -0.626792 148.117 1.88037Z" fill="#09BD3C"/>
+            </svg>
+            ';
+        } else {
+            $svg = '<svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M132 132L7 7" stroke="#B23333" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M132 7L7 132" stroke="#B23333" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            ';
+        }
 
+        $totalquestion = count($_SESSION['questions']);
+        $totalcorrect = $_SESSION['count'];
+
+        $output .= $svg;
         $output .= html_writer::start_tag('div', array('class' => 'rui-summary-table'));
 
         $output .= html_writer::start_tag('div', array('class' => 'rui-info-container rui-quizreviewsummary'));
+
+        $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100'));
+
+        $output .= html_writer::tag(
+            'div',
+            html_writer::tag('h5', 'Tổng số câu hỏi', array('class' => 'rui-infobox-title')) .
+                html_writer::tag('div',  $totalquestion, array('class' => 'rui-infobox-content--small')),
+            array('class' => 'd-flex justify-content-between w-100')
+        );
+        $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100'));
+
+        $output .= html_writer::tag(
+            'div',
+            html_writer::tag('h5', 'Câu trả lời đúng', array('class' => 'rui-infobox-title')) .
+                html_writer::tag('div',  $totalcorrect, array('class' => 'rui-infobox-content--small')),
+            array('class' => 'd-flex justify-content-between w-100')
+        );
+        $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100'));
 
 
         foreach ($summarydata as $rowdata => $val) {
 
             $csstitle = $rowdata;
-
             if ($val['title'] instanceof renderable) {
                 $title = $this->render($val['title']);
             } else {
@@ -551,14 +586,14 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
                     'div',
                     html_writer::tag('h5', $title, array('class' => 'rui-infobox-title')) .
                         html_writer::tag('div', $content, array('class' => 'rui-infobox-content--small')),
-                    array('class' => 'rui-infobox rui-infobox--' . strtolower(str_replace(' ', '', $csstitle)))
+                    array('class' => 'd-flex justify-content-between w-100 ' . strtolower(str_replace(' ', '', $csstitle)))
                 );
+                $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100'));
             }
         }
 
         $output .= html_writer::end_tag('div');
         $output .= html_writer::end_tag('div');
-
         return $output;
     }
 

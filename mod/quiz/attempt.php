@@ -148,4 +148,3 @@ echo $output->attempt_page($attemptobj, $page, $accessmanager, $messages, $slots
 
 // echo $output->summary_page_controls($attemptobj);
 
-

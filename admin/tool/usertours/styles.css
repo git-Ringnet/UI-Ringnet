@@ -1509,7 +1509,8 @@ body#page-admin-cohort-index>div#page-wrapper>div#page>div#topofscroll>div#page-
 #page-mod-survey-view #btnCourseIndex,
 #page-mod-survey-view #sidepreopen-control,
 #page-mod-wiki-view #btnCourseIndex,
-#page-mod-wiki-view #sidepreopen-control {
+#page-mod-wiki-view #sidepreopen-control,
+#page-mod-quiz-review #sidepreopen-control {
     display: none;
 }
 
@@ -2295,7 +2296,7 @@ h3.discussionname.rui-main-content-title.rui-main-content-title--h3 {
 #page-mod-quiz-review .sticky-header-settings-menu,
 #page-mod-quiz-edit #mainNav,
 #page-mod-quiz-edit .course-navigation,
-#page-mod-quiz-edit .sticky-header-settings-menu{
+#page-mod-quiz-edit .sticky-header-settings-menu {
     display: none !important;
 }
 
@@ -2308,7 +2309,7 @@ body#page-mod-quiz-view,
 body#page-mod-quiz-attempt,
 body#page-mod-quiz-summary,
 body#page-mod-quiz-review,
-body#page-mod-quiz-edit{
+body#page-mod-quiz-edit {
     margin: 0;
 }
 
@@ -2322,7 +2323,7 @@ body#page-mod-quiz-edit{
 #page-mod-quiz-attempt div#nav-drawer,
 #page-mod-quiz-summary div#nav-drawer,
 #page-mod-quiz-review div#nav-drawer,
-#page-mod-quiz-edit div#nav-drawer{
+#page-mod-quiz-edit div#nav-drawer {
     display: none !important;
 }
 
@@ -2335,7 +2336,7 @@ body#page-mod-quiz-edit{
 #page-mod-quiz-attempt #page,
 #page-mod-quiz-summary #page,
 #page-mod-quiz-review #page,
-#page-mod-quiz-edit #page{
+#page-mod-quiz-edit #page {
     padding: 0 !important;
 }
 
@@ -2347,7 +2348,7 @@ body#page-mod-quiz-edit{
 #page-mod-quiz-view .wrapper-course,
 #page-mod-quiz-summary .wrapper-course,
 #page-mod-quiz-review .wrapper-course,
-#page-mod-quiz-edit .wrapper-course{
+#page-mod-quiz-edit .wrapper-course {
     padding: 10px 20% !important;
 }
 
@@ -2371,14 +2372,17 @@ body#page-mod-quiz-edit{
     float: none !important;
 }
 
-#page-mod-quiz-attempt #sidepre-blocks {
+#page-mod-quiz-attempt #sidepre-blocks,
+#page-mod-quiz-review #sidepre-blocks
+{
     margin-top: 16px;
     background-color: #fff;
     border-radius: 7px;
     padding: 10px 15px;
 }
 
-#page-mod-quiz-attempt .qn_buttons.clearfix.multipages {
+#page-mod-quiz-attempt .qn_buttons.clearfix.multipages,
+#page-mod-quiz-review .qn_buttons.clearfix.multipages {
     grid-gap: 0 !important;
     flex-direction: column;
     width: 100%;
@@ -2386,7 +2390,8 @@ body#page-mod-quiz-edit{
   max-height: 300px;  */
 }
 
-#page-mod-quiz-attempt .qnbutton {
+#page-mod-quiz-attempt .qnbutton,
+#page-mod-quiz-review .qnbutton {
     padding: 0px 15px;
     display: flex;
     justify-content: space-between;
@@ -2397,7 +2402,7 @@ body#page-mod-quiz-edit{
     border-radius: initial !important;
 }
 
-#page-mod-quiz-attempt .qn_buttons .title {
+.path-mod-quiz .qn_buttons .title {
     font-weight: 600;
     font-size: 16px;
     color: #1D1C20;
@@ -2408,7 +2413,7 @@ body#page-mod-quiz-edit{
     fill: red !important;
 }
 
-.path-mod-quiz .qnbutton.thispage {
+#page-mod-quiz-attempt .qnbutton.thispage {
     background: #E5E5E5 !important;
 }
 
@@ -2427,13 +2432,15 @@ body#page-mod-quiz-edit{
     margin: 0 !important;
 }
 
-#page-mod-quiz-attempt #sidepre-blocks {
+#page-mod-quiz-attempt #sidepre-blocks,
+#page-mod-quiz-review #sidepre-blocks {
     right: 40px !important;
     overflow-y: scroll;
     max-height: 500px;
 }
 
-#page-mod-quiz-view #theme_alpha-drawers-courseindex {
+#page-mod-quiz-view #theme_alpha-drawers-courseindex,
+#page-mod-quiz-attempt #theme_alpha-drawers-courseindex {
     z-index: 1 !important;
 }
 
@@ -2467,7 +2474,7 @@ body#page-mod-quiz-edit{
 /*  */
 
 #page-mod-forum-discuss #region-main,
-#page-mod-lti-view #region-main{
+#page-mod-lti-view #region-main {
     margin: 0 !important;
 }
 
@@ -2480,7 +2487,8 @@ body#page-mod-quiz-edit{
 #page-mod-quiz-attempt .othernav,
 #page-mod-lti-view #theme_alpha-drawers-courseindex,
 #page-mod-lti-view #btnCourseIndex,
-#page-mod-lti-view #click_showListCourse {
+#page-mod-lti-view #click_showListCourse,
+#page-mod-quiz-review #btnCourseIndex {
     display: none !important;
 }
 
@@ -2511,6 +2519,31 @@ body#page-mod-quiz-edit{
     padding: 8px 16px;
 }
 
-#page-my-index #form_submit .input-group {
+#page-my-index #form_submit .input-group,
+#page-mod-quiz-attempt .yui3-widget-hd h5 {
     display: none;
+}
+
+#page-mod-quiz-attempt .confirmation-buttons {
+    flex-flow: row-reverse;
+}
+
+#page-mod-quiz-attempt .yui3-widget-hd {
+    border: none;
+}
+
+#page-mod-quiz-attempt .confirmation-buttons .btn-primary {
+    padding: 4px 16px;
+    background: #0095F6;
+    border-radius: 6px;
+}
+
+#page-mod-quiz-attempt .confirmation-buttons .btn-secondary {
+    background: none;
+}
+
+#page-mod-quiz-attempt .confirmation-buttons .btn {
+    width: inherit;
+    font-weight: 500;
+    font-size: 14px;
 }
