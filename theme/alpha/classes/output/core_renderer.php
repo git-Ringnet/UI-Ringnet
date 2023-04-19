@@ -420,8 +420,8 @@ class core_renderer extends \core_renderer
             if (is_siteadmin() || is_teacher()) {
                 $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
                 // $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
-                $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
             }
+            $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
 
             $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 

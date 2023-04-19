@@ -59,7 +59,14 @@ class edit_renderer extends \plugin_renderer_base {
         // Page title.
         $output .= $this->heading(get_string('questions', 'quiz'));
 
+        $output .= html_writer::start_div('d-flex w-100 justify-content-center');
+        $output .= html_writer::tag('h2', get_string('addquestion', 'quiz'), array('class' => 'quiz-addquestion-title'));
+        $output .= html_writer::end_tag('div');
+
+
+
         // Information at the top.
+        $output .= html_writer::start_div('d-none');
         $output .= $this->quiz_state_warnings($structure);
 
         $output .= html_writer::start_div('mod_quiz-edit-top-controls');
@@ -87,13 +94,14 @@ class edit_renderer extends \plugin_renderer_base {
 
         // Show the questions organised into sections and pages.
         $output .= $this->start_section_list($structure);
+        $output .= html_writer::end_tag('div');
 
         foreach ($structure->get_sections() as $section) {
             $output .= $this->start_section($structure, $section);
             $output .= $this->questions_in_section($structure, $section, $contexts, $pagevars, $pageurl);
 
             if ($structure->is_last_section($section)) {
-                $output .= \html_writer::start_div('last-add-menu');
+                $output .= \html_writer::start_div('last-add-menu justify-content-center');
                 $output .= html_writer::tag('span', $this->add_menu_actions($structure, 0,
                         $pageurl, $contexts, $pagevars), array('class' => 'add-menu-outer'));
                 $output .= \html_writer::end_div();
@@ -418,7 +426,8 @@ class edit_renderer extends \plugin_renderer_base {
         if (!$structure->is_first_section($section) && $structure->can_be_edited()) {
             $output .= $this->section_remove_icon($section);
         }
-        $output .= $this->section_shuffle_questions($structure, $section);
+
+        // $output .= $this->section_shuffle_questions($structure, $section);
 
         $output .= html_writer::end_div($output, 'section-heading');
 
@@ -619,7 +628,9 @@ class edit_renderer extends \plugin_renderer_base {
         // Prioritise the menu ahead of all other actions.
         $menu->prioritise = true;
 
+        // Việt ẩn thêm từ ngân hàng
         return $this->render($menu);
+        // return $actions;
     }
 
     /**
