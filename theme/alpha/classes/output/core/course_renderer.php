@@ -296,7 +296,7 @@ class course_renderer extends \core_course_renderer
             $content .= ' <table class="table table-striped projects">
             <thead>
                 <tr>
-                    <th style="width: 2%;font-size: 1rem;">
+                    <th class="d-none" style="width: 2%;font-size: 1rem;">
                         <input type="checkbox" id="checkall" onclick="checkAll()">
                     </th>
                     <th style="width: 30%;font-size: 1rem;">
@@ -363,7 +363,7 @@ class course_renderer extends \core_course_renderer
         // var_dump($SESSION->bulk_category);
         if (checkRole() == true) {
             $content .= "<p class='mt-3'>
-            <select class'custom selectcheckbox ml-2' name='bulk_action' id='bulk_action'>
+            <select class='custom selectcheckbox ml-2 d-none' name='bulk_action' id='bulk_action'>
               <option value=''>Thao tác hàng loạt</option>
               <option value='delete'>Delete</option>
             </select>
@@ -630,7 +630,7 @@ class course_renderer extends \core_course_renderer
             $content .= ' <table class="listcourse table table-striped" style="margin-bottom: 0 !important;">
             <thead>
                 <tr>
-                <th style="width: 2%;border-bottom: 0 !important;">';
+                <th class="d-none" style="width: 2%;border-bottom: 0 !important;">';
             $attributes = array('class' => 'checkbox', 'onchange' => 'uncheckAll()');
             $content .= html_writer::checkbox('selected_categories[]', $coursecat->id, false, '', $attributes);
             $content .= '
@@ -657,11 +657,11 @@ class course_renderer extends \core_course_renderer
                 </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="max-width:65px; min-width:0;overflow-x:hidden;">
                 <a href="' . $CFG->wwwroot . '/course/editcategory.php?id=' . $coursecat->id . '" class="dropdown-item dropdown-item-wrapper action-edit menu-action" data-action="edit" role="menuitem" tabindex="-1">
-                    <span class="rui-icon-container"><img class="icon " alt="Edit" title="Edit" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/edit"></span>
+                    <span class="rui-icon-container"><img class="icon " alt="Edit" title="Edit" src="'.$CFG->wwwroot.'/theme/image.php/alpha/core/1672911781/t/edit"></span>
                     <span class="dropdown-item--text"></span>
                 </a>
                 <a href="' . $CFG->wwwroot . '/course/management.php?categoryid=' . $coursecat->id . '&amp;sesskey=' . sesskey() . '&amp;action=deletecategory" class="dropdown-item dropdown-item-wrapper action-delete menu-action" data-action="delete" role="menuitem" tabindex="-1" aria-labelledby="actionmenuaction-8">
-                    <span class="rui-icon-container"><img class="icon " alt="Delete" title="Delete" src="https://localhost/ringnet/theme/image.php/alpha/core/1672911781/t/delete"></span>
+                    <span class="rui-icon-container"><img class="icon " alt="Delete" title="Delete" src="'.$CFG->wwwroot.'/theme/image.php/alpha/core/1672911781/t/delete"></span>
                     <span class="dropdown-item--text"></span>
                 </a>
             </div>

@@ -233,12 +233,21 @@ if (!empty($course->id)) {
 global $CFG, $COURSE, $DB;
 $course = $DB->get_record('course', ['id' => $COURSE->id]);
 $content = html_writer::start_div('course-teachers-box');
+
+$idcourse = $_GET['id'];
+
 if (is_siteadmin()) {
-    $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+    if (!isset($idcourse)) {
+        $urledit = $CFG->wwwroot . '/course/edit.php?returnto=catmanage';
+    } else
+        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
     // '&returnto=catmanage'
 } else if (is_teacher()) {
     if (is_course_creator($COURSE->id)) {
-        $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+        if (!isset($idcourse)) {
+            $urledit = $CFG->wwwroot . '/course/edit.php?returnto=catmanage';
+        } else
+            $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
         // '&returnto=catmanage'
     } else {
         $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
@@ -246,7 +255,6 @@ if (is_siteadmin()) {
 } else {
     $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
 }
-
 $content = html_writer::start_div('course-navigation');
 //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
 $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
@@ -256,7 +264,8 @@ $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
 
 //Thảo luận
 $id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
-$sql = sprintf("
+$sql = sprintf(
+    "
     SELECT f.id
     FROM mdl_forum f
     INNER JOIN mdl_course_modules cm ON f.id = cm.instance
@@ -265,21 +274,26 @@ $sql = sprintf("
     $id_khoa_hoc
 );
 $idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
-$urlforum = $CFG->wwwroot . '/mod/forum/view.php?f='.$idforum;
+$urlforum = $CFG->wwwroot . '/mod/forum/view.php?f=' . $idforum;
 
 $pages = new stdClass();
 $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
-$pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
-$pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
-if (is_siteadmin() || is_teacher()) {
-    $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-    $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
-    $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
-}
 
+// Get id nếu có id là chỉnh sửa không có là tạo mới Việt
+if (isset($idcourse)) {
+    $pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
+    $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
+    if (is_siteadmin() || is_teacher()) {
+        $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
+        // $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+        $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
+    }
+}
 $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 
 $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+
 
 $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
 <div id='navbarNav'>
@@ -296,10 +310,14 @@ $content .= "</ul>
   </nav> <hr/>";
 //     echo '<br/>';
 $content .= html_writer::end_div(); // navigation-box
-
-$PAGE->set_title($title);
+if (!isset($idcourse)) {
+    $PAGE->set_title($straddnewcourse);
+} else {
+    $PAGE->set_title($streditcoursesettings);
+}
 $PAGE->add_body_class('limitedwidth');
 $PAGE->set_heading($fullname);
+
 
 echo $OUTPUT->header();
 

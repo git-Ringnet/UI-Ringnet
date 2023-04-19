@@ -50,6 +50,7 @@ $PAGE->set_url($attemptobj->attempt_url(null, $page));
 $PAGE->set_cacheable(false);
 
 $PAGE->set_secondary_active_tab("modulepage");
+$USER->editing = 0;
 
 // Check login.
 require_login($attemptobj->get_course(), false, $attemptobj->get_cm());
@@ -147,4 +148,8 @@ if ($attemptobj->is_last_page($page)) {
 echo $output->attempt_page($attemptobj, $page, $accessmanager, $messages, $slots, $id, $nextpage);
 
 // echo $output->summary_page_controls($attemptobj);
-
+?> <script>
+    function submitForm() {
+        document.getElementById('responseform').submit();
+    }
+</script>

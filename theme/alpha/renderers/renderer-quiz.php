@@ -149,7 +149,7 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
 
         $output .= '';
 
-        $divsvg = html_writer::div($svg, 'd-flex justify-content-center');
+        $divsvg = html_writer::div($svg, 'd-flex justify-content-center mt-3');
         $output .= html_writer::div(html_writer::tag('h2', $quiz->name), 'd-flex justify-content-center');
         $output .= html_writer::empty_tag('hr');
         // Output any access messages.
@@ -408,7 +408,7 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
     {
         $output = '';
         $output .= $this->view_information($quiz, $cm, $context, $viewobj->infomessages);
-        // $output .= $this->view_table($quiz, $context, $viewobj);
+        $output .= $this->view_table($quiz, $context, $viewobj);
         $output .= $this->view_result_info($quiz, $context, $cm, $viewobj);
         $output .= $this->box($this->view_page_buttons($viewobj), 'rui-quizattempt');
         $output .= $this->view_page_tertiary_nav($viewobj);
@@ -535,7 +535,8 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
         $totalquestion = count($_SESSION['questions']);
         $totalcorrect = $_SESSION['count'];
 
-        $output .= $svg;
+        $output .= html_writer::tag('div',  $svg, array('class' => 'd-flex justify-content-center'));
+        
         $output .= html_writer::start_tag('div', array('class' => 'rui-summary-table'));
 
         $output .= html_writer::start_tag('div', array('class' => 'rui-info-container rui-quizreviewsummary'));
@@ -544,17 +545,17 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
 
         $output .= html_writer::tag(
             'div',
-            html_writer::tag('h5', 'Tổng số câu hỏi', array('class' => 'rui-infobox-title')) .
+            html_writer::tag('div', 'Tổng số câu hỏi', array('class' => 'infobox-title')) .
                 html_writer::tag('div',  $totalquestion, array('class' => 'rui-infobox-content--small')),
-            array('class' => 'd-flex justify-content-between w-100')
+            array('class' => 'd-flex justify-content-between align-items-center w-100 box-sumary py-3')
         );
         $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100'));
 
         $output .= html_writer::tag(
             'div',
-            html_writer::tag('h5', 'Câu trả lời đúng', array('class' => 'rui-infobox-title')) .
+            html_writer::tag('div', 'Câu trả lời đúng', array('class' => 'infobox-title')) .
                 html_writer::tag('div',  $totalcorrect, array('class' => 'rui-infobox-content--small')),
-            array('class' => 'd-flex justify-content-between w-100')
+            array('class' => 'd-flex justify-content-between align-items-center w-100 box-sumary py-3')
         );
         $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100'));
 
@@ -577,20 +578,22 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
             if ($val['title'] instanceof renderable) {
                 $output .= html_writer::tag(
                     'div',
-                    html_writer::tag('h5', $title, array('class' => 'rui-infobox-title')) .
+                    html_writer::tag('div', $title, array('class' => 'infobox-title')) .
                         html_writer::tag('div', $content, array('class' => 'rui-infobox-content--small')),
                     array('class' => 'rui-infobox rui-infobox--avatar')
                 );
             } else {
                 $output .= html_writer::tag(
                     'div',
-                    html_writer::tag('h5', $title, array('class' => 'rui-infobox-title')) .
+                    html_writer::tag('div', $title, array('class' => 'infobox-title')) .
                         html_writer::tag('div', $content, array('class' => 'rui-infobox-content--small')),
-                    array('class' => 'd-flex justify-content-between w-100 ' . strtolower(str_replace(' ', '', $csstitle)))
+                    array('class' => 'd-flex justify-content-between align-items-center w-100 box-sumary py-3 ' . strtolower(str_replace(' ', '', $csstitle)))
                 );
-                $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100'));
+                $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100 '. strtolower(str_replace(' ', '', $csstitle))));
             }
         }
+        unset($_SESSION['count']);
+        unset($_SESSION['questions']);
 
         $output .= html_writer::end_tag('div');
         $output .= html_writer::end_tag('div');
@@ -627,7 +630,7 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
             'cmid' => $attemptobj->get_cmid(),
             'sesskey' => sesskey(),
         );
-
+        
         $button = new single_button(
             new moodle_url($attemptobj->processattempt_url(), $options),
             get_string('submitallandfinish', 'quiz'),
@@ -656,7 +659,7 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
         //     $message = get_string('mustbesubmittedby', 'quiz', userdate($duedate));
         //     $output .= '<div class="alert alert-info d-flex align-items-center"><svg class="mr-2" width="20" height="20" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10V12"></path><circle cx="12" cy="16" r="1" fill="currentColor"></circle></svg>' . $message . '</div>';
         // }
-
+            
         $output .= $this->container($this->container($this->render($button), 'rui-controls'), 'rui-submitbtns');
 
         return $output;

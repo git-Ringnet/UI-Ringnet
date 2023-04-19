@@ -107,7 +107,7 @@ Example context (json):
         </div>
         <div class="col-10 rounded-right" style="background: #ECECEC;">
             <div class="d-flex flex-column w-100" data-region-content="forum-post-core">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between" style="font-size: 14px;">
                     {{< core/time_element }} {{$elementid}}created-{{id}}-{{uniqid}}{{/elementid}}
                         {{$timestampval}}{{timecreated}}{{/timestampval}} {{/core/time_element}} <div
                         class="icon-share">
@@ -173,7 +173,7 @@ Example context (json):
                             {{{urls.messageparent}}}
                         </div>
                     </div>
-                    <div id="post-content-{{id}}" class="post-content-container mb-2">
+                    <div id="post-content-{{id}}" class="post-content-container mb-2 mt-2" style="font-size: 16px;">
                         {{{message}}}
                     </div>
 

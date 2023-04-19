@@ -34,23 +34,23 @@ Example context (json):
                 class="title mr-2 pt-2 px-1 {{#check}}active{{/check}} before">
                 Danh Mục
             </a>
-            <a href="#" class="title pt-2 px-1 before">
+            <a href="#" class="title pt-2 px-1 before d-none">
                 Lộ Trình
             </a>
         </div>
     </div>
     <div class="d-inline-flex justify-content-between flex-wrap w-100 align-items-center">
         <div class="course-child mb-1 mr-auto d-flex mt-auto">
-            <a class="title-child mr-2 pt-2 px-1 {{#test}}active{{/test}} before"
+            <a class="title-child mr-2 pt-2 px-1 {{#test}}active{{/test}} {{#check}}d-none{{/check}} before"
                 href="{{config.wwwroot}}/my/courses.php">
                 Của tôi
             </a>
-            <a href="{{config.wwwroot}}/my/coursesall.php"
+            <a href="{{#check}}{{config.wwwroot}}/course/index.php{{/check}}{{^check}}{{config.wwwroot}}/my/coursesall.php{{/check}}"
                 class="title-child mr-2 pt-2 px-1 {{#active}}active{{/active}}{{#check}}active{{/check}} before">
                 Tất cả
             </a>
             <a href="{{config.wwwroot}}/my/favouritecourses.php"
-                class="{{#activefavourites}}active{{/activefavourites}} title-child pt-2 px-1 before">
+                class="{{#activefavourites}}active{{/activefavourites}}{{#check}}d-none{{/check}} title-child pt-2 px-1 before">
                 Yêu thích
             </a>
         </div>

@@ -561,7 +561,10 @@ class mod_quiz_renderer extends plugin_renderer_base
         $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom mt-2'));
         $output .= '<div class="d-flex justify-content-between">';
         $output .= html_writer::div($this->countdown_timer($attemptobj, time()), 'py-3 mr-auto');
-        $output .= $this->summary_page_controls($attemptobj);
+        global $CFG;
+        $output .= '<div class="py-3">';
+        $output .= '<a class="endtestlink aalink" href="' . $CFG->wwwroot . '/mod/quiz/summary.php?attempt=' . $_GET['attempt'] . '&amp;cmid=' . $_GET['cmid'] . '">Làm xong ...</a>';
+        $output .= '</div>';
         $output .= '</div>';
         $output .= $this->footer();
         return $output;
@@ -717,10 +720,10 @@ class mod_quiz_renderer extends plugin_renderer_base
         } else {
             $nextlabel = get_string('navigatenext', 'quiz') . ' >';
         }
-        
+
         $output .= html_writer::empty_tag('input', array(
             'type' => 'submit', 'name' => 'next',
-            'value' => $nextlabel, 'class' => 'mod_quiz-next-nav btn-next'.($lastpage ? ' d-none' : ''), 'id' => 'mod_quiz-next-nav'
+            'value' => $nextlabel, 'class' => 'mod_quiz-next-nav btn-next' . ($lastpage ? ' d-none' : ''), 'id' => 'mod_quiz-next-nav'
         ));
         $output .= html_writer::end_tag('div');
         $this->page->requires->js_call_amd('core_form/submit', 'init', ['mod_quiz-next-nav']);

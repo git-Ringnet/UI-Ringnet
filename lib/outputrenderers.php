@@ -5895,7 +5895,7 @@ class core_renderer_maintenance extends core_renderer
         $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
         if (is_siteadmin() || is_teacher()) {
             $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-            $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+            // $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
             $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
         }
 
