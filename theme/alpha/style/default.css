@@ -37322,7 +37322,7 @@ div#dock {
 .rui-forum-border-left {
   position: relative;
 }
-.rui-forum-border-left:before {
+/* .rui-forum-border-left:before {
   content: "";
   background-color: #E1E1E1;
   height: 16px;
@@ -37330,7 +37330,7 @@ div#dock {
   position: absolute;
   top: calc(50% - 8px);
   left: 0;
-}
+} */
 .theme-dark .rui-forum-border-left:before {
   background-color: #2E3134;
 }

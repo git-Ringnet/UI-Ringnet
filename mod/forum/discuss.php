@@ -34,7 +34,7 @@ $mark   = optional_param('mark', '', PARAM_ALPHA);       // Used for tracking re
 $postid = optional_param('postid', 0, PARAM_INT);        // Used for tracking read posts if user initiated.
 $pin    = optional_param('pin', -1, PARAM_INT);          // If set, pin or unpin this discussion.
 
-$url = new moodle_url('/mod/forum/discuss.php', array('d'=>$d));
+$url = new moodle_url('/mod/forum/discuss.php', array('d' => $d));
 if ($parent !== 0) {
     $url->param('parent', $parent);
 }
@@ -284,7 +284,7 @@ if (!$capabilitymanager->can_view_post($USER, $discussion, $post)) {
 }
 
 $istracked = forum_tp_is_tracked($forumrecord, $USER);
-if ($mark == 'read'|| $mark == 'unread') {
+if ($mark == 'read' || $mark == 'unread') {
     if ($CFG->forum_usermarksread && forum_tp_can_track_forums($forumrecord) && $istracked) {
         if ($mark == 'read') {
             forum_tp_add_read_record($USER->id, $postid);
@@ -347,9 +347,20 @@ if ($istracked && !$CFG->forum_usermarksread) {
     if ($displaymode == FORUM_MODE_THREADED) {
         forum_tp_add_read_record($USER->id, $post->get_id());
     } else {
-        $postids = array_map(function($post) {
+        $postids = array_map(function ($post) {
             return $post->get_id();
         }, array_merge([$post], array_values($replies)));
         forum_tp_mark_posts_read($USER, $postids);
     }
 }
+
+?>
+<script>
+    function myFunction(id) {
+        var copyText = document.getElementById("show_input_modal_"+id);
+        console.log(copyText);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+    }
+</script>

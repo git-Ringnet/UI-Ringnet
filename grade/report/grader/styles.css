@@ -24,8 +24,98 @@
 /**
  * The table.
  */
+#page-grade-report-grader-index .gradeparent .username .username-email p:nth-last-child(1) {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 18px;
+}
+#page-grade-report-grader-index .gradeparent .grade_type_value {
+    text-align: center;
+}
+#page-grade-report-grader-index .gradereport-grader-table .user.cell {
+    position: static;
+}
+
+#page-grade-report-grader-index .highlightable .rui-icon-container,
+#page-grade-report-grader-index .grade_type_value .rui-icon-container,
+#page-grade-report-grader-index .highlightable .gradeitemheader img,
+#page-grade-report-user-index .generaltable .rui-icon-container,
+#page-grade-report-user-index #contributiontocoursetotal,
+#page-grade-report-user-index .column-contributiontocoursetotal,
+#page-grade-report-singleview-index .page-context-header .header-button-group {
+    display: none;
+}
+
+#page-grade-report-singleview-index .generaltable .dropdown-item,
+#page-grade-report-singleview-index .generaltable thead .c2,
+#page-grade-report-singleview-index .generaltable tbody .category {
+    display: none;
+}
+
+#page-grade-report-singleview-index .reporttable .singleview_bulk{
+    display: none;
+}
+
+#page-grade-report-grader-index .gradeparent tbody .controls{
+    display: none;
+}
+
+#page-grade-report-grader-index .gradeparent .submit {
+    opacity: 0;
+}
+
+/*Phân trang phần chỉnh sửa điểm số*/
+#page-grade-report-singleview-index .main-content .nextitem,
+#page-grade-report-singleview-index .main-content .previtem,
+#page-grade-report-singleview-index .reporttable .selectitems {
+    display: none;
+}
+
+#page-grade-report-grader-index .userreport .dropdown-item-text {
+    opacity: 0;
+}
+
+#page-grade-report-grader-index .username img,
+#page-grade-report-grader-index .username .userinitials {
+    max-width: 32px;
+    max-height: 32px;
+}
+
+#page-grade-report-user-index .column-itemname {
+    width: 25%;
+}
+
+#page-grade-report-user-index .column-weight,
+#page-grade-report-user-index .column-grade,
+#page-grade-report-user-index .column-range,
+#page-grade-report-user-index .column-percentage {
+    width: 14%;
+}
+
+#page-grade-report-grader-index .grade_type_value a {
+    position: absolute;
+    left: 65px;
+    top: 15px;
+    opacity: 0;
+}
+
+#page-grade-report-user-index .page-context-header .header-button-group,
+#page-grade-report-user-index #graded_users_selector,
+#page-grade-report-user-index .view_users_selector {
+    display: none;
+}
+
+#page-grade-report-user-index .generaltable .column-leader {
+    min-width: 0;
+    width: 0;
+}
+
+#page-grade-report-grader-index .grade_type_value {
+    position: relative;
+}
+
 .path-grade-report-grader .gradeparent table {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     border-collapse: separate;
     border-spacing: 0;
     border-bottom-width: 0;
@@ -37,7 +127,7 @@
  * All the cells.
  */
 .path-grade-report-grader .gradeparent .cell {
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     border-top-width: 0;
     border-left-width: 0;
     padding: 4px 5px;
@@ -45,6 +135,63 @@
     text-align: right;
     white-space: nowrap;
 }
+
+.path-grade-report-grader #region-main {
+    overflow-x: visible;
+    min-width: 100%;
+    display: block !important;
+    width: auto;
+}
+
+.path-grade-report-grader .gradeparent {
+    max-width: 1260px;
+    width: auto !important;
+    overflow-x: auto;
+}
+
+#page-grade-report-grader-index .gradeparent tr:first-of-type {
+    display: none;
+}
+
+#page-grade-report-grader-index .gradereport-grader-table th {
+    padding: 9px 0 !important;
+}
+
+#page-grade-report-grader-index .gradeparent::-webkit-scrollbar {
+    width: auto;
+    height: 10px;
+}
+#page-grade-report-grader-index .gradeparent::-webkit-scrollbar-thumb {
+    background: #555555;
+}
+#page-grade-report-grader-index .gradeparent::-webkit-scrollbar-button:start:increment {
+    width: 25%;
+    display: block;
+    background: transparent;
+}
+#page-grade-report-grader-index .gradeparent::-webkit-scrollbar-button:end:increment {
+    width: 25%;
+    display: block;
+    background: transparent;
+}
+
+#page-grade-report-grader-index .gradeparent::-webkit-scrollbar-track-piece {
+    background: #d6d6d6;
+}
+
+#page-grade-report-grader-index .gradeparent .highlightable .gradeitemheader {
+    display: inline-block;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 140px;
+}
+
+/* #page-grade-report-grader-index .c1 {
+    display: none;
+} */
 
 /**
  * All the floating divs.

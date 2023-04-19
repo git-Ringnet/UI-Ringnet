@@ -62,7 +62,7 @@ Example context (json):
 
         <div id="page" data-region="mainpage" data-usertour="scroller"
             class="container-fluid drawers {{#courseindexopen}}show-drawer-right{{/courseindexopen}} {{#blockdraweropen}}show-hidden-drawer{{/blockdraweropen}} drag-container">
-            {{> theme_alpha/navbar }}
+            {{> theme_alpha/navbar-incourse }}
             <div id="topofscroll" class="main-inner">
                 <div id="page-content" class="page-content wrapper-page">
                     {{> theme_alpha/navbar-secondary }}
@@ -100,46 +100,7 @@ Example context (json):
                                         </div>
                                     </div>
                                     {{/overflow}}
-                                    <div style="height: 32px; display:flex; margin-bottom:10px; margin-top:24px;"
-                                        id="navbar_PNSection">
-                                        <div id="btn_showListCourse"
-                                            style="margin-right:16px; border-radius:8px; border:1px solid gray; width:32px; background:#D6D6D6;">
-                                            <button data-target="theme_alpha-drawers-courseindex" data-action="toggle"
-                                                data-toggler="drawers" id="click_showListCourse"
-                                                style="background:none;border:none; padding:2px 7px;">
-                                                <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                    version="1.1" viewBox="0 0 17 17" height="1em" width="1em"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <g></g>
-                                                    <path id="btn_showListCourse_path" style="fill: #000000;"
-                                                        d="M16 2v2h-11v-2h11zM5 9h11v-2h-11v2zM5 14h11v-2h-11v2zM2 2c-0.552 0-1 0.447-1 1s0.448 1 1 1 1-0.447 1-1-0.448-1-1-1zM2 7c-0.552 0-1 0.447-1 1s0.448 1 1 1 1-0.447 1-1-0.448-1-1-1zM2 12c-0.552 0-1 0.447-1 1s0.448 1 1 1 1-0.447 1-1-0.448-1-1-1z">
-                                                    </path>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <a href="{{btnUrlPre}}" id="pre_section"
-                                            style="border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
-                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                viewBox="0 0 24 24" height="1em" width="1em"
-                                                xmlns="http://www.w3.org/2000/svg" style="transform: rotate(180deg);">
-                                                <polyline fill="none" stroke="#000" stroke-width="2"
-                                                    points="7 2 17 12 7 22"></polyline>
-                                            </svg>
-                                        </a>
-                                        <div id="title"
-                                            style="margin-left:5px; text-align:center; padding:5px 5px; width:17.81%;white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size:14px;font-weight:400; line-height:24px;">
-                                            {{title}}
-                                        </div>
-                                        <a href="{{btnUrlNext}}" id="next_section"
-                                            style="margin-left:5px; border: 1px solid gray;padding:2px 7px; border-radius:8px; width:32px;">
-                                            <svg stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                viewBox="0 0 24 24" height="1em" width="1em"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <polyline fill="none" stroke="#000" stroke-width="2"
-                                                    points="7 2 17 12 7 22"></polyline>
-                                            </svg>
-                                        </a>
-                                    </div>
+
 
                                     {{{ output.main_content }}}
                                 </div>
@@ -179,41 +140,23 @@ M.util.js_complete('theme_alpha/loader');
     var mainNav = document.getElementById('mainNav');
     var num = 1;
     var menu_list = document.getElementById('theme_alpha-drawers-courseindex');
-    var close_menu = document.querySelector('.icon-no-margin');
-    var body = document.getElementsByTagName('body')[0];
+    var body = document.getElementById('region-main');
+    
     window.onload = function () {
         // JS button show menu
         if (menu_list.getAttribute('aria-hidden') == 'true') {
             num = 1;
-            list.style.background = "#D6D6D6";
             document.getElementById('btn_showListCourse_path').style.fill = "#000000";
         } else {
             num = 2;
-            list.style.background = "#555555";
-            document.getElementById('btn_showListCourse_path').style.fill = "#FFFFFF";
+            document.getElementById('btn_showListCourse_path').style.fill = "#EC212D";
             body.style.marginLeft = "290px";
         }
     }
-    mainNav.addEventListener('click', function () {
-        body.style.marginLeft = (mainNav.getAttribute('aria-expanded') == 'true') ? "0px" : "290px";
-    });
-
     list.addEventListener('click', function () {
-        list.style.background = num == 1 ? "#555555" : "#D6D6D6";
-        document.getElementById('btn_showListCourse_path').style.fill = num == 1 ? "#FFFFFF" : "#000000";
+        document.getElementById('btn_showListCourse_path').style.fill = num == 1 ? "#EC212D" : "#000000";
         num = num == 1 ? 2 : 1;
-        body.style.marginLeft = mainNav.getAttribute('aria-expanded') == 'false' ? (num == 1 ? "0px" : "290px") : "290px";
+        body.style.marginLeft = mainNav.getAttribute('aria-expanded') == 'true' ? (num == 1 ? "0px" : "290px") : "290px";
     });
 
-    close_menu.addEventListener('click', function () {
-        num = 1;
-        list.style.background = "#D6D6D6";
-        document.getElementById('btn_showListCourse_path').style.fill = "#000000";
-        if (document.getElementById('mainNav').getAttribute('aria-expanded') == 'true') {
-            body.style.marginLeft = "290px";
-        } else {
-            body.style.marginLeft = "0px";
-        }
-
-    });
 </script>

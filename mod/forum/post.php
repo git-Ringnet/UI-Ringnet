@@ -24,7 +24,7 @@
 
 require_once('../../config.php');
 require_once('lib.php');
-require_once($CFG->libdir.'/completionlib.php');
+require_once($CFG->libdir . '/completionlib.php');
 
 $reply   = optional_param('reply', 0, PARAM_INT);
 $forum   = optional_param('forum', 0, PARAM_INT);
@@ -105,7 +105,7 @@ if (!isloggedin() or isguestuser()) {
     $referer = get_local_referer(false);
 
     echo $OUTPUT->header();
-    echo $OUTPUT->confirm(get_string('noguestpost', 'forum').'<br /><br />'.get_string('liketologin'), get_login_url(), $referer);
+    echo $OUTPUT->confirm(get_string('noguestpost', 'forum') . '<br /><br />' . get_string('liketologin'), get_login_url(), $referer);
     echo $OUTPUT->footer();
     exit;
 }
@@ -142,9 +142,13 @@ if (!empty($forum)) {
                 if (enrol_selfenrol_available($course->id)) {
                     $SESSION->wantsurl = qualified_me();
                     $SESSION->enrolcancel = get_local_referer(false);
-                    redirect(new moodle_url('/enrol/index.php', array('id' => $course->id,
-                        'returnurl' => '/mod/forum/view.php?f=' . $forum->id)),
-                        get_string('youneedtoenrol'));
+                    redirect(
+                        new moodle_url('/enrol/index.php', array(
+                            'id' => $course->id,
+                            'returnurl' => '/mod/forum/view.php?f=' . $forum->id
+                        )),
+                        get_string('youneedtoenrol')
+                    );
                 }
             }
         }
@@ -153,11 +157,11 @@ if (!empty($forum)) {
 
     if (!$cm->visible and !has_capability('moodle/course:viewhiddenactivities', $modcontext)) {
         redirect(
-                $urlfactory->get_course_url_from_forum($forumentity),
-                get_string('activityiscurrentlyhidden'),
-                null,
-                \core\output\notification::NOTIFY_ERROR
-            );
+            $urlfactory->get_course_url_from_forum($forumentity),
+            get_string('activityiscurrentlyhidden'),
+            null,
+            \core\output\notification::NOTIFY_ERROR
+        );
     }
 
     // Load up the $post variable.
@@ -176,7 +180,6 @@ if (!empty($forum)) {
 
     // Unsetting this will allow the correct return URL to be calculated later.
     unset($SESSION->fromdiscussion);
-
 } else if (!empty($reply)) {
     // User is writing a new reply.
 
@@ -215,9 +218,13 @@ if (!empty($forum)) {
             if (!is_enrolled($coursecontext)) {  // User is a guest here!
                 $SESSION->wantsurl = qualified_me();
                 $SESSION->enrolcancel = get_local_referer(false);
-                redirect(new moodle_url('/enrol/index.php', array('id' => $course->id,
-                    'returnurl' => '/mod/forum/view.php?f=' . $forum->id)),
-                    get_string('youneedtoenrol'));
+                redirect(
+                    new moodle_url('/enrol/index.php', array(
+                        'id' => $course->id,
+                        'returnurl' => '/mod/forum/view.php?f=' . $forum->id
+                    )),
+                    get_string('youneedtoenrol')
+                );
             }
 
             // The forum has been locked. Just redirect back to the discussion page.
@@ -268,6 +275,7 @@ if (!empty($forum)) {
     $post->course      = $course->id;
     $post->forum       = $forum->id;
     $post->discussion  = $parent->discussion;
+    $post->text        = $parent->discussion;
     $post->parent      = $parent->id;
     $post->subject     = $subject ? $subject : $parent->subject;
     $post->userid      = $USER->id;
@@ -281,12 +289,11 @@ if (!empty($forum)) {
 
     $strre = get_string('re', 'forum');
     if (!(substr($post->subject, 0, strlen($strre)) == $strre)) {
-        $post->subject = $strre.' '.$post->subject;
+        $post->subject = $strre . ' ' . $post->subject;
     }
 
     // Unsetting this will allow the correct return URL to be calculated later.
     unset($SESSION->fromdiscussion);
-
 } else if (!empty($edit)) {
     // User is editing their own post.
 
@@ -325,12 +332,14 @@ if (!empty($forum)) {
 
     if (!($forum->type == 'news' && !$post->parent && $discussion->timestart > time())) {
         if (((time() - $post->created) > $CFG->maxeditingtime) and
-            !has_capability('mod/forum:editanypost', $modcontext)) {
+            !has_capability('mod/forum:editanypost', $modcontext)
+        ) {
             print_error('maxtimehaspassed', 'forum', '', format_time($CFG->maxeditingtime));
         }
     }
     if (($post->userid <> $USER->id) and
-        !has_capability('mod/forum:editanypost', $modcontext)) {
+        !has_capability('mod/forum:editanypost', $modcontext)
+    ) {
         print_error('cannoteditposts', 'forum');
     }
 
@@ -347,7 +356,6 @@ if (!empty($forum)) {
 
     // Unsetting this will allow the correct return URL to be calculated later.
     unset($SESSION->fromdiscussion);
-
 } else if (!empty($delete)) {
     // User is deleting a post.
 
@@ -374,7 +382,11 @@ if (!empty($forum)) {
     require_login($course, false, $cm);
 
     $replycount = $postvault->get_reply_count_for_post_id_in_discussion_id(
-        $USER, $postentity->get_id(), $discussionentity->get_id(), true);
+        $USER,
+        $postentity->get_id(),
+        $discussionentity->get_id(),
+        true
+    );
 
     if (!empty($confirm) && confirm_sesskey()) {
         // Do further checks and delete the post.
@@ -430,16 +442,15 @@ if (!empty($forum)) {
                 \core\output\notification::NOTIFY_ERROR
             );
         }
-
     } else {
 
         if (!$capabilitymanager->can_delete_post($USER, $discussionentity, $postentity)) {
             redirect(
-                    $urlfactory->get_discussion_view_url_from_discussion($discussionentity),
-                    get_string('cannotdeletepost', 'forum'),
-                    null,
-                    \core\output\notification::NOTIFY_ERROR
-                );
+                $urlfactory->get_discussion_view_url_from_discussion($discussionentity),
+                get_string('cannotdeletepost', 'forum'),
+                null,
+                \core\output\notification::NOTIFY_ERROR
+            );
         }
 
         $post = $postdatamapper->to_legacy_object($postentity);
@@ -456,31 +467,33 @@ if (!empty($forum)) {
         if ($replycount) {
             if (!has_capability('mod/forum:deleteanypost', $modcontext)) {
                 redirect(
-                        forum_go_back_to($urlfactory->get_view_post_url_from_post($postentity)),
-                        get_string('couldnotdeletereplies', 'forum'),
-                        null,
-                        \core\output\notification::NOTIFY_ERROR
-                    );
+                    forum_go_back_to($urlfactory->get_view_post_url_from_post($postentity)),
+                    get_string('couldnotdeletereplies', 'forum'),
+                    null,
+                    \core\output\notification::NOTIFY_ERROR
+                );
             }
 
             echo $OUTPUT->header();
             if (!$PAGE->has_secondary_navigation()) {
                 echo $OUTPUT->heading(format_string($forum->name), 2);
             }
-            echo $OUTPUT->confirm(get_string("deletesureplural", "forum", $replycount + 1),
+            echo $OUTPUT->confirm(
+                get_string("deletesureplural", "forum", $replycount + 1),
                 "post.php?delete=$delete&confirm=$delete",
-                $CFG->wwwroot.'/mod/forum/discuss.php?d='.$post->discussion.'#p'.$post->id);
+                $CFG->wwwroot . '/mod/forum/discuss.php?d=' . $post->discussion . '#p' . $post->id
+            );
 
             $postentities = [$postentity];
             if (empty($post->edit)) {
                 $postvault = $vaultfactory->get_post_vault();
                 $replies = $postvault->get_replies_to_post(
-                        $USER,
-                        $postentity,
-                        // Note: All replies are fetched here as the user has deleteanypost.
-                        true,
-                        'created ASC'
-                    );
+                    $USER,
+                    $postentity,
+                    // Note: All replies are fetched here as the user has deleteanypost.
+                    true,
+                    'created ASC'
+                );
                 $postentities = array_merge($postentities, $replies);
             }
 
@@ -492,19 +505,19 @@ if (!empty($forum)) {
             if (!$PAGE->has_secondary_navigation()) {
                 echo $OUTPUT->heading(format_string($forum->name), 2);
             }
-            echo $OUTPUT->confirm(get_string("deletesure", "forum", $replycount),
+            echo $OUTPUT->confirm(
+                get_string("deletesure", "forum", $replycount),
                 "post.php?delete=$delete&confirm=$delete",
-                $CFG->wwwroot.'/mod/forum/discuss.php?d='.$post->discussion.'#p'.$post->id);
+                $CFG->wwwroot . '/mod/forum/discuss.php?d=' . $post->discussion . '#p' . $post->id
+            );
 
             $rendererfactory = mod_forum\local\container::get_renderer_factory();
             $postsrenderer = $rendererfactory->get_single_discussion_posts_renderer(null, true);
             echo $postsrenderer->render($USER, [$forumentity], [$discussionentity], [$postentity]);
         }
-
     }
     echo $OUTPUT->footer();
     die;
-
 } else if (!empty($prune)) {
     // Pruning.
 
@@ -537,19 +550,19 @@ if (!empty($forum)) {
 
     if (!$postentity->has_parent()) {
         redirect(
-                $urlfactory->get_discussion_view_url_from_discussion($discussionentity),
-                get_string('alreadyfirstpost', 'forum'),
-                null,
-                \core\output\notification::NOTIFY_ERROR
-            );
+            $urlfactory->get_discussion_view_url_from_discussion($discussionentity),
+            get_string('alreadyfirstpost', 'forum'),
+            null,
+            \core\output\notification::NOTIFY_ERROR
+        );
     }
     if (!$capabilitymanager->can_split_post($USER, $discussionentity, $postentity)) {
         redirect(
-                $urlfactory->get_discussion_view_url_from_discussion($discussionentity),
-                get_string('cannotsplit', 'forum'),
-                null,
-                \core\output\notification::NOTIFY_ERROR
-            );
+            $urlfactory->get_discussion_view_url_from_discussion($discussionentity),
+            get_string('cannotsplit', 'forum'),
+            null,
+            \core\output\notification::NOTIFY_ERROR
+        );
     }
 
     $PAGE->set_cm($cm);
@@ -637,7 +650,7 @@ if (!empty($forum)) {
         $subjectstr = format_string($post->subject, true);
         $PAGE->navbar->add($subjectstr, new moodle_url('/mod/forum/discuss.php', array('d' => $discussion->id)));
         $PAGE->navbar->add(get_string("prunediscussion", "forum"));
-        $PAGE->set_title(format_string($discussion->name).": ".format_string($post->subject));
+        $PAGE->set_title(format_string($discussion->name) . ": " . format_string($post->subject));
         $PAGE->set_heading($course->fullname);
         echo $OUTPUT->header();
         if (!$PAGE->has_secondary_navigation()) {
@@ -659,7 +672,6 @@ if (!empty($forum)) {
     die;
 } else {
     print_error('unknowaction');
-
 }
 
 // From now on user must be logged on properly.
@@ -673,17 +685,17 @@ if (isguestuser()) {
 
 $thresholdwarning = forum_check_throttling($forum, $cm);
 $mformpost = new mod_forum_post_form('post.php', [
-        'course' => $course,
-        'cm' => $cm,
-        'coursecontext' => $coursecontext,
-        'modcontext' => $modcontext,
-        'forum' => $forum,
-        'post' => $post,
-        'subscribe' => \mod_forum\subscriptions::is_subscribed($USER->id, $forum, null, $cm),
-        'thresholdwarning' => $thresholdwarning,
-        'edit' => $edit,
-        'canreplyprivately' => $canreplyprivately,
-    ], 'post', '', array('id' => 'mformforum'));
+    'course' => $course,
+    'cm' => $cm,
+    'coursecontext' => $coursecontext,
+    'modcontext' => $modcontext,
+    'forum' => $forum,
+    'post' => $post,
+    'subscribe' => \mod_forum\subscriptions::is_subscribed($USER->id, $forum, null, $cm),
+    'thresholdwarning' => $thresholdwarning,
+    'edit' => $edit,
+    'canreplyprivately' => $canreplyprivately,
+], 'post', '', array('id' => 'mformforum'));
 
 $draftitemid = file_get_submitted_draft_itemid('attachments');
 $postid = empty($post->id) ? null : $post->id;
@@ -696,12 +708,12 @@ if ($USER->id != $post->userid) {   // Not the original author, so add a message
     $data = new stdClass();
     $data->date = userdate($post->created);
     if ($post->messageformat == FORMAT_HTML) {
-        $data->name = '<a href="'.$CFG->wwwroot.'/user/view.php?id='.$USER->id.'&course='.$post->course.'">'.
-            fullname($USER).'</a>';
-        $post->message .= '<p><span class="edited">('.get_string('editedby', 'forum', $data).')</span></p>';
+        $data->name = '<a href="' . $CFG->wwwroot . '/user/view.php?id=' . $USER->id . '&course=' . $post->course . '">' .
+            fullname($USER) . '</a>';
+        $post->message .= '<p><span class="edited">(' . get_string('editedby', 'forum', $data) . ')</span></p>';
     } else {
         $data->name = fullname($USER);
-        $post->message .= "\n\n(".get_string('editedby', 'forum', $data).')';
+        $post->message .= "\n\n(" . get_string('editedby', 'forum', $data) . ')';
     }
     unset($data);
 }
@@ -745,19 +757,19 @@ $mformpost->set_data(
         'isprivatereply' => $post->isprivatereply ?? false
     ) +
 
-    $pageparams +
+        $pageparams +
 
-    (isset($post->format) ? array('format' => $post->format) : array()) +
+        (isset($post->format) ? array('format' => $post->format) : array()) +
 
-    (isset($discussion->timestart) ? array('timestart' => $discussion->timestart) : array()) +
+        (isset($discussion->timestart) ? array('timestart' => $discussion->timestart) : array()) +
 
-    (isset($discussion->timeend) ? array('timeend' => $discussion->timeend) : array()) +
+        (isset($discussion->timeend) ? array('timeend' => $discussion->timeend) : array()) +
 
-    (isset($discussion->pinned) ? array('pinned' => $discussion->pinned) : array()) +
+        (isset($discussion->pinned) ? array('pinned' => $discussion->pinned) : array()) +
 
-    (isset($post->groupid) ? array('groupid' => $post->groupid) : array()) +
+        (isset($post->groupid) ? array('groupid' => $post->groupid) : array()) +
 
-    (isset($discussion->id) ? array('discussion' => $discussion->id) : array())
+        (isset($discussion->id) ? array('discussion' => $discussion->id) : array())
 );
 
 // If we are being redirected via a no_submit_button press OR if the message is being prefilled.
@@ -807,11 +819,11 @@ if ($mformpost->is_cancelled()) {
 
         if (!$capabilitymanager->can_edit_post($USER, $discussionentity, $postentity)) {
             redirect(
-                    $urlfactory->get_view_post_url_from_post($postentity),
-                    get_string('cannotupdatepost', 'forum'),
-                    null,
-                    \core\output\notification::ERROR
-                );
+                $urlfactory->get_view_post_url_from_post($postentity),
+                get_string('cannotupdatepost', 'forum'),
+                null,
+                \core\output\notification::ERROR
+            );
         }
 
         if (isset($fromform->groupinfo) && $capabilitymanager->can_move_discussions($USER)) {
@@ -822,11 +834,11 @@ if ($mformpost->is_cancelled()) {
 
             if (!$capabilitymanager->can_create_discussions($USER, $fromform->groupinfo)) {
                 redirect(
-                        $urlfactory->get_view_post_url_from_post($postentity),
-                        get_string('cannotupdatepost', 'forum'),
-                        null,
-                        \core\output\notification::ERROR
-                    );
+                    $urlfactory->get_view_post_url_from_post($postentity),
+                    get_string('cannotupdatepost', 'forum'),
+                    null,
+                    \core\output\notification::ERROR
+                );
             }
 
             if ($discussionentity->get_group_id() != $fromform->groupinfo) {
@@ -874,7 +886,6 @@ if ($mformpost->is_cancelled()) {
             null,
             \core\output\notification::NOTIFY_SUCCESS
         );
-
     } else if ($fromform->discussion) {
         // Adding a new post to an existing discussion
         // Before we add this we must check that the user will not exceed the blocking threshold.
@@ -892,8 +903,8 @@ if ($mformpost->is_cancelled()) {
             if (!empty($fromform->mailnow)) {
                 $message .= get_string("postmailnow", "forum");
             } else {
-                $message .= '<p>'.get_string("postaddedsuccess", "forum") . '</p>';
-                $message .= '<p>'.get_string("postaddedtimeleft", "forum", format_time($CFG->maxeditingtime)) . '</p>';
+                $message .= '<p>' . get_string("postaddedsuccess", "forum") . '</p>';
+                $message .= '<p>' . get_string("postaddedtimeleft", "forum", format_time($CFG->maxeditingtime)) . '</p>';
             }
 
             if ($forum->type == 'single') {
@@ -920,8 +931,10 @@ if ($mformpost->is_cancelled()) {
 
             // Update completion state.
             $completion = new completion_info($course);
-            if ($completion->is_enabled($cm) &&
-                ($forum->completionreplies || $forum->completionposts)) {
+            if (
+                $completion->is_enabled($cm) &&
+                ($forum->completionreplies || $forum->completionposts)
+            ) {
                 $completion->update_state($cm, COMPLETION_COMPLETE);
             }
 
@@ -931,12 +944,10 @@ if ($mformpost->is_cancelled()) {
                 null,
                 \core\output\notification::NOTIFY_SUCCESS
             );
-
         } else {
             print_error("couldnotadd", "forum", $errordestination);
         }
         exit;
-
     } else {
         // Adding a new discussion.
         // The location to redirect to after successfully posting.
@@ -1014,8 +1025,8 @@ if ($mformpost->is_cancelled()) {
                 if ($fromform->mailnow) {
                     $message .= get_string("postmailnow", "forum");
                 } else {
-                    $message .= '<p>'.get_string("postaddedsuccess", "forum") . '</p>';
-                    $message .= '<p>'.get_string("postaddedtimeleft", "forum", format_time($CFG->maxeditingtime)) . '</p>';
+                    $message .= '<p>' . get_string("postaddedsuccess", "forum") . '</p>';
+                    $message .= '<p>' . get_string("postaddedtimeleft", "forum", format_time($CFG->maxeditingtime)) . '</p>';
                 }
 
                 $subscribemessage = forum_post_subscription($fromform, $forum, $discussion);
@@ -1026,8 +1037,10 @@ if ($mformpost->is_cancelled()) {
 
         // Update completion status.
         $completion = new completion_info($course);
-        if ($completion->is_enabled($cm) &&
-            ($forum->completiondiscussions || $forum->completionposts)) {
+        if (
+            $completion->is_enabled($cm) &&
+            ($forum->completiondiscussions || $forum->completionposts)
+        ) {
             $completion->update_state($cm, COMPLETION_COMPLETE);
         }
 
@@ -1136,11 +1149,11 @@ if (!empty($parententity)) {
     if (empty($post->edit)) {
         if ('qanda' != $forumentity->get_type() || forum_user_can_see_discussion($forum, $discussion, $modcontext)) {
             $replies = $postvault->get_replies_to_post(
-                    $USER,
-                    $parententity,
-                    $capabilitymanager->can_view_any_private_reply($USER),
-                    'created ASC'
-                );
+                $USER,
+                $parententity,
+                $capabilitymanager->can_view_any_private_reply($USER),
+                'created ASC'
+            );
             $postentities = array_merge($postentities, $replies);
         }
     }
@@ -1152,7 +1165,7 @@ if (!empty($parententity)) {
 
 // Call print disclosure for enabled plagiarism plugins.
 if (!empty($CFG->enableplagiarism)) {
-    require_once($CFG->libdir.'/plagiarismlib.php');
+    require_once($CFG->libdir . '/plagiarismlib.php');
     echo plagiarism_print_disclosure($cm->id);
 }
 

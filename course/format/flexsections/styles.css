@@ -14,8 +14,9 @@
 }
 
 @media (min-width: 576px) {
+
     .course-content ul.flexsections li.section .summary,
-    .course-content ul.flexsections li.section .content > .availabilityinfo {
+    .course-content ul.flexsections li.section .content>.availabilityinfo {
         margin-left: 25px;
     }
 }
@@ -28,21 +29,27 @@
 }
 
 @media (max-width: 767.98px) {
+
     body:not(.editing) .course-content ul.flexsections li.section .left,
     body:not(.editing) .course-content ul.flexsections li.section .right {
         display: none;
     }
 }
+
 /* Xóa section-0 Việt comments */
 .course-content ul.flexsections li#section-0 {
     display: none;
 }
 
 /* Nav drawer icon Việt Comments */
-.nav-drawer-btn[aria-expanded="true"], .nav-drawer-btn,
-.nav-drawer-btn[aria-expanded="true"], .nav-drawer-btn:hover{
+.nav-drawer-btn[aria-expanded="true"],
+.nav-drawer-btn,
+.nav-drawer-btn[aria-expanded="true"],
+.nav-drawer-btn:hover {
     background-color: #ffffff !important;
 }
-.nav-drawer-btn[aria-expanded="false"] svg path{
+
+.nav-drawer-btn[aria-expanded="false"] svg path {
     fill: black;
 }
+
