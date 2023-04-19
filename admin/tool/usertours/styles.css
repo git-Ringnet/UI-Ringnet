@@ -2954,3 +2954,11 @@ input:checked + .slider:before {
     margin-top: 24px;
 }
 /* / CSS Moi TUAN */
+#page-mod-quiz-edit .menubar{
+    background: #0095F6;
+    padding: 4px 16px;
+    border-radius: 6px;
+}
+#page-mod-quiz-edit  .dropdown-btn .add-menu{
+    color: #FFFFFF;
+}
