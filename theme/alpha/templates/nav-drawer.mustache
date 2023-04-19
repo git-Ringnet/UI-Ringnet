@@ -270,6 +270,9 @@ Example context (json): {}
         btn_content.addEventListener('click', function (e) {
         e.preventDefault();
         btn_setting_limit.classList.remove('active_nav_right');
+        if(btn_setting_grade){
+              btn_setting_grade.classList.remove('active_nav_right');
+        }
         btn_setting_all.classList.add('active_nav_right');
         content.style.display = "block";
         content_settings.style.display = "none";
@@ -354,7 +357,9 @@ Example context (json): {}
     for (var i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function() {
     var current = document.getElementsByClassName("active_nav_right");
-    current[0].className = current[0].className.replace('active_nav_right','');
+    if(current){
+         current[0].className = current[0].className.replace('active_nav_right','');
+    }
     this.className += " active_nav_right";
     });
     }

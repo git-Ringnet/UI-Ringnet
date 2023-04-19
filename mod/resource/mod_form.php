@@ -101,22 +101,22 @@ class mod_resource_mod_form extends moodleform_mod {
         //-------------------------------------------------------
         // $mform->addElement('header', 'optionssection', get_string('appearance'));
 
-        // if ($this->current->instance) {
-        //     $options = resourcelib_get_displayoptions(explode(',', $config->displayoptions), $this->current->display);
-        // } else {
-        //     $options = resourcelib_get_displayoptions(explode(',', $config->displayoptions));
-        // }
+        if ($this->current->instance) {
+            $options = resourcelib_get_displayoptions(explode(',', $config->displayoptions), $this->current->display);
+        } else {
+            $options = resourcelib_get_displayoptions(explode(',', $config->displayoptions));
+        }
 
-        // if (count($options) == 1) {
-        //     $mform->addElement('hidden', 'display');
-        //     $mform->setType('display', PARAM_INT);
-        //     reset($options);
-        //     $mform->setDefault('display', key($options));
-        // } else {
-        //     $mform->addElement('select', 'display', get_string('displayselect', 'resource'), $options);
-        //     $mform->setDefault('display', $config->display);
-        //     $mform->addHelpButton('display', 'displayselect', 'resource');
-        // }
+        if (count($options) == 1) {
+            $mform->addElement('hidden', 'display');
+            $mform->setType('display', PARAM_INT);
+            reset($options);
+            $mform->setDefault('display', key($options));
+        } else {
+            $mform->addElement('select', 'display', get_string('displayselect', 'resource'), $options);
+            $mform->setDefault('display', $config->display);
+            $mform->addHelpButton('display', 'displayselect', 'resource');
+        }
 
         // $mform->addElement('checkbox', 'showsize', get_string('showsize', 'resource'));
         // $mform->setDefault('showsize', $config->showsize);
@@ -464,10 +464,6 @@ class mod_resource_mod_form extends moodleform_mod {
         #page-mod-resource-mod #fitem_id_gradepass .col-md-9 input{
             width: 24%;
         }
-        #page-mod-resource-mod .div_img{
-        top: 63%;
-        left: 67%;
-    }
     }
     #page-mod-resource-mod #fgroup_id_visible,
     #page-mod-resource-mod .pl-3
@@ -578,7 +574,7 @@ class mod_resource_mod_form extends moodleform_mod {
     }
     #page-mod-resource-mod .div_img{
         top: 63%;
-        left: 67%;
+        left: 480px;
     }
     #page-mod-resource-mod .div_img .upload_image,
     #page-mod-resource-mod .div_img .delete_image{
@@ -588,10 +584,27 @@ class mod_resource_mod_form extends moodleform_mod {
         font-weight: 500;
         padding: 6px 14px 6px 14px;
     }
+    #page-mod-resource-mod #fitem_id_display{
+        display: none;
+    }
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-navbar,
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-content .fp-saveas,
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-content .fp-setauthor,
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-content .fp-setlicense{
+        display: none;
+    }
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(1),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(2),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(5),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(6),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(7)
+    {
+        display: none;
+    }
 </style>
 <script>
     window.onload = function(){
-        var delete1 =  document.querySelector('.delete_image');
+    var delete1 =  document.querySelector('.delete_image');
     var upload_image = document.getElementById('btn_upload');
     if(delete1){
         delete1.addEventListener('click',function(e){
@@ -620,7 +633,10 @@ class mod_resource_mod_form extends moodleform_mod {
         upload_image.addEventListener('click',function(e){
             e.preventDefault();
                 upload = document.querySelector('.dndupload-arrow').click();
-                setTimeout(function(){
+                var activ = document.querySelectorAll('.flex-md-column');
+                if(activ){
+                    activ[3].click();
+                    setTimeout(function(){
                     var up = document.querySelector('.fp-formset');
                 if(up){
                     var img_extent = up.querySelector('input');
@@ -643,6 +659,7 @@ class mod_resource_mod_form extends moodleform_mod {
                     }
                 }
                 },300)
+                }
             });
         }
     }

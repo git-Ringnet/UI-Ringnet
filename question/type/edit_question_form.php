@@ -342,16 +342,17 @@ abstract class question_edit_form extends question_wizard_form {
         $repeated = array();
         $answeroptions = array();
         $answeroptions[] = $mform->createElement('text', 'answer',
-                $label, array('size' => 40));
+            $label, array('size' => 40));
         $answeroptions[] = $mform->createElement('select', 'fraction',
-                get_string('gradenoun'), $gradeoptions);
+            get_string('gradenoun'), $gradeoptions);
         $repeated[] = $mform->createElement('group', 'answeroptions',
-                $label, $answeroptions, null, false);
+            $label, $answeroptions, null, false);
         $repeated[] = $mform->createElement('editor', 'feedback',
-                get_string('feedback', 'question'), array('rows' => 5), $this->editoroptions);
+            get_string('feedback', 'question'), array('rows' => 5), $this->editoroptions);
         $repeatedoptions['answer']['type'] = PARAM_RAW;
         $repeatedoptions['fraction']['default'] = 0;
         $answersoption = 'answers';
+       
         return $repeated;
     }
 
@@ -443,13 +444,11 @@ abstract class question_edit_form extends question_wizard_form {
         $repeatedoptions = array();
         $repeated = $this->get_per_answer_fields($mform, $label, $gradeoptions,
                 $repeatedoptions, $answersoption);
-
         if (isset($this->question->options)) {
             $repeatsatstart = count($this->question->options->$answersoption);
         } else {
             $repeatsatstart = $minoptions;
         }
-
         $this->repeat_elements($repeated, $repeatsatstart, $repeatedoptions,
                 'noanswers', 'addanswers', $addoptions,
                 $this->get_more_choices_string(), true);
@@ -920,3 +919,256 @@ abstract class question_edit_form extends question_wizard_form {
     }
 
 }
+?>
+<style>
+    #page-question-type-multichoice #fitem_id_category,
+    #page-question-type-multichoice #fitem_id_status,
+    #page-question-type-multichoice #fitem_id_defaultmark,
+    #page-question-type-multichoice #fitem_id_generalfeedback,
+    #page-question-type-multichoice #fitem_id_single,
+    #page-question-type-multichoice #fitem_id_answernumbering,
+    #page-question-type-multichoice #fitem_id_showstandardinstruction{
+        display: none;
+    }
+    #page-question-type-multichoice #fitem_id_feedback_0,
+    #page-question-type-multichoice #fitem_id_feedback_1,
+    #page-question-type-multichoice #fitem_id_feedback_2,
+    #page-question-type-multichoice #fitem_id_feedback_3,
+    #page-question-type-multichoice #fitem_id_feedback_4,
+    #page-question-type-multichoice #fitem_id_feedback_5,
+    #page-question-type-multichoice #fitem_id_feedback_6,
+    #page-question-type-multichoice #fitem_id_feedback_7,
+    #page-question-type-multichoice #fitem_id_feedback_8,
+    #page-question-type-multichoice #fitem_id_feedback_9{
+        display: none;
+    }
+    #page-question-type-multichoice #id_combinedfeedbackhdr,
+    #page-question-type-multichoice #id_multitriesheader,
+    #page-question-type-multichoice #id_tagsheader,
+    #page-question-type-multichoice #fitem_id_idnumber{
+        display: none;
+    }
+    .form-group .col-md-9 .form-checkbox{
+        display: none;
+    }
+    #page-question-type-multichoice #id_generalheader legend
+    /* #page-question-type-multichoice #id_answerhdr legend */
+    {
+        display: none !important;
+    }
+    #page-question-type-multichoice .col-md-9 .editor_atto_wrap .sr-only{
+        display: none;
+    }
+    #page-question-type-multichoice #fitem_id_name,
+    #page-question-type-multichoice #fitem_id_questiontext{
+        display: block;
+        margin-left: 20%;
+    }
+    #page-question-type-multichoice #fitem_id_name .col-md-3,
+    #page-question-type-multichoice #fitem_id_questiontext .col-md-3{
+        text-align: left !important;
+    }
+    #page-question-type-multichoice #fitem_id_fraction_0,
+    #page-question-type-multichoice #fitem_id_fraction_1,
+    #page-question-type-multichoice #fitem_id_fraction_2,
+    #page-question-type-multichoice #fitem_id_fraction_3,
+    #page-question-type-multichoice #fitem_id_fraction_4,
+    #page-question-type-multichoice #fitem_id_fraction_5,
+    #page-question-type-multichoice #fitem_id_fraction_6,
+    #page-question-type-multichoice #fitem_id_fraction_7,
+    #page-question-type-multichoice #fitem_id_fraction_8,
+    #page-question-type-multichoice #fitem_id_fraction_9,
+    #page-question-type-multichoice #fitem_id_fraction_10
+    {
+        border: none !important;
+    }
+    #page-question-type-multichoice #fitem_id_answer_0,
+    #page-question-type-multichoice #fitem_id_answer_1,
+    #page-question-type-multichoice #fitem_id_answer_2,
+    #page-question-type-multichoice #fitem_id_answer_3,
+    #page-question-type-multichoice #fitem_id_answer_4,
+    #page-question-type-multichoice #fitem_id_answer_5,
+    #page-question-type-multichoice #fitem_id_answer_6,
+    #page-question-type-multichoice #fitem_id_answer_7,
+    #page-question-type-multichoice #fitem_id_answer_8,
+    #page-question-type-multichoice #fitem_id_answer_9,
+    #page-question-type-multichoice #fitem_id_answer_10
+    {
+        border: none !important;
+        display: block;
+    }
+    #page-question-type-multichoice #fitem_id_answer_0,
+    #page-question-type-multichoice #fitem_id_answer_1,
+    #page-question-type-multichoice #fitem_id_answer_2,
+    #page-question-type-multichoice #fitem_id_answer_3,
+    #page-question-type-multichoice #fitem_id_answer_4,
+    #page-question-type-multichoice #fitem_id_answer_5,
+    #page-question-type-multichoice #fitem_id_answer_6,
+    #page-question-type-multichoice #fitem_id_answer_7,
+    #page-question-type-multichoice #fitem_id_answer_8,
+    #page-question-type-multichoice #fitem_id_answer_9,
+    #page-question-type-multichoice #fitem_id_answer_10
+    {
+        margin-left: 20%;
+    }
+    #page-question-type-multichoice #fitem_id_answer_0 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_1 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_2 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_3 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_4 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_5 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_6 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_7 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_8 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_9 .col-md-3,
+    #page-question-type-multichoice #fitem_id_answer_10 .col-md-3
+    {
+        text-align: left !important;
+    }
+
+    /*  */
+    #page-question-type-multichoice #fitem_id_answer_0 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_1 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_2 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_3 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_4 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_5 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_6 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_7 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_8 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_9 .col-md-9 .editor_atto_toolbar,
+    #page-question-type-multichoice #fitem_id_answer_10 .col-md-9 .editor_atto_toolbar
+    {
+        display: none;
+    }
+    #page-question-type-multichoice #fitem_id_answer_0 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_1 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_2 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_3 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_4 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_5 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_6 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_7 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_8 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_9 .col-md-9 .editor_atto_content_wrap,
+    #page-question-type-multichoice #fitem_id_answer_10 .col-md-9 .editor_atto_content_wrap
+    {
+        border-radius: 6px !important;
+    }
+    #page-question-type-multichoice #id_answer_0editable,
+    #page-question-type-multichoice #id_answer_1editable,
+    #page-question-type-multichoice #id_answer_2editable,
+    #page-question-type-multichoice #id_answer_3editable,
+    #page-question-type-multichoice #id_answer_4editable,
+    #page-question-type-multichoice #id_answer_5editable,
+    #page-question-type-multichoice #id_answer_6editable,
+    #page-question-type-multichoice #id_answer_7editable,
+    #page-question-type-multichoice #id_answer_8editable,
+    #page-question-type-multichoice #id_answer_9editable,
+    #page-question-type-multichoice #id_answer_10editable
+    {
+        min-height : 32px !important;
+        padding : 4px 16px 4px 16px !important;
+    }
+    #page-question-type-multichoice #fitem_id_fraction_0,
+    #page-question-type-multichoice #fitem_id_fraction_1,
+    #page-question-type-multichoice #fitem_id_fraction_2,
+    #page-question-type-multichoice #fitem_id_fraction_3,
+    #page-question-type-multichoice #fitem_id_fraction_4,
+    #page-question-type-multichoice #fitem_id_fraction_5,
+    #page-question-type-multichoice #fitem_id_fraction_6,
+    #page-question-type-multichoice #fitem_id_fraction_7,
+    #page-question-type-multichoice #fitem_id_fraction_8,
+    #page-question-type-multichoice #fitem_id_fraction_9,
+    #page-question-type-multichoice #fitem_id_fraction_10
+    {
+        margin-left: 20%;
+    }
+    #page-question-type-multichoice #fitem_id_fraction_0 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_1 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_2 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_3 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_4 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_5 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_6 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_7 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_8 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_9 .col-md-3,
+    #page-question-type-multichoice #fitem_id_fraction_10 .col-md-3
+    {
+        display: none;
+    }
+    #page-question-type-multichoice #fitem_id_fraction_0 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_1 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_2 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_3 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_4 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_5 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_6 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_7 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_8 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_9 .custom-select option,
+    #page-question-type-multichoice #fitem_id_fraction_10 .custom-select option
+    {
+        display: none;
+    }
+    #page-question-type-multichoice #fitem_id_fraction_0 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_1 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_2 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_3 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_4 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_5 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_6 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_7 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_8 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_9 .custom-select,
+    #page-question-type-multichoice #fitem_id_fraction_10 .custom-select
+    {
+        height: 32px !important;
+        padding: 4px 16px 4px 16px !important;
+    }
+    #page-question-type-multichoice #fitem_id_fraction_0 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_0 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_1 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_1 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_2 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_2 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_3 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_3 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_4 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_4 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_5 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_5 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_6 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_6 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_7 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_7 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_8 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_8 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_9 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_9 .custom-select option:nth-child(2),
+    #page-question-type-multichoice #fitem_id_fraction_10 .custom-select option:nth-child(1),
+    #page-question-type-multichoice #fitem_id_fraction_10 .custom-select option:nth-child(2)
+    {
+        display: block !important;
+    }
+    #page-question-type-multichoice #fitem_id_name .col-md-9,
+    #page-question-type-multichoice #fitem_id_questiontext .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_0 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_1 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_2 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_3 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_4 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_5 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_6 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_7 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_8 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_9 .col-md-9,
+    #page-question-type-multichoice #fitem_id_answer_10 .col-md-9
+    {
+        padding-top: 8px;
+    }
+    #page-question-type-multichoice #fgroup_id_updatebuttonar{
+        display: none;
+    }
+</style>

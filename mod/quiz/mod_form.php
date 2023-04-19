@@ -944,4 +944,10 @@ class mod_quiz_mod_form extends moodleform_mod {
     #page-mod-quiz-mod #id_competenciessection{
         display: none !important;
     }
+    #page-mod-quiz-mod #fitem_id_timelimit .col-md-9,
+    #page-mod-quiz-mod #fitem_id_attempts .col-md-9,
+    #page-mod-quiz-mod #fitem_id_timeopen .col-md-9,
+    #page-mod-quiz-mod #fitem_id_timeclose .col-md-9{
+        margin-top: 8px;
+    }
 </style>
