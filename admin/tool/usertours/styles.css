@@ -2433,6 +2433,16 @@ border-radius: 50%;
 }
 
 
-
+.active_nav{
+    color: #0095F6 !important;
+    border-bottom : 2px solid #0095F6 !important;
+    padding-bottom : 20px !important;
+}
+.active_nav_right{
+    background : #ECECEC !important; 
+    border-left : 3px solid #555555 !important;
+    text-align: left;
+    width: 100%;
+}
 
 

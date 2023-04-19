@@ -268,8 +268,10 @@ Example context (json): {}
     var content_setting_grade = document.getElementById('content_grade');
     var switch1 = document.getElementById('switch-i');
     if(btn_content){
-         btn_content.addEventListener('click', function (e) {
+        btn_content.addEventListener('click', function (e) {
         e.preventDefault();
+        btn_setting_limit.classList.remove('active_nav_right');
+        btn_setting_all.classList.add('active_nav_right');
         content.style.display = "block";
         content_settings.style.display = "none";
         content_setting_all.style.display = 'block';
@@ -336,6 +338,25 @@ Example context (json): {}
             }
             numcheck = 1;
         }
+    });
+    }
+    // Active navbar create course
+    var header = document.getElementById("menu_create");
+    var btns = header.querySelectorAll("button");
+    for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active_nav");
+    current[0].className = current[0].className.replace('active_nav','');
+    this.className += " active_nav";
+    });
+    }
+    var header = document.getElementById("nav_menu_create");
+    var btns = header.querySelectorAll("button");
+    for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active_nav_right");
+    current[0].className = current[0].className.replace('active_nav_right','');
+    this.className += " active_nav_right";
     });
     }
 </script>

@@ -880,7 +880,7 @@ abstract class moodleform_mod extends moodleform {
         }
         $mform->addElement('html','<div id="content_settings" class="justify-content-between" style="display:none">');
         $mform->addElement('html','<div id="nav_menu_create" style="width:20%;">');
-        $mform->addElement('html','<button id="btn_setting_all">Chung</button><br>');
+        $mform->addElement('html','<button class="active_nav_right" id="btn_setting_all">Chung</button><br>');
         if($PAGE->pagetype == "mod-quiz-mod"){
             $mform->addElement('html','<button class="mt-2" id="btn_setting_grade">Điểm số</button><br>');
         }

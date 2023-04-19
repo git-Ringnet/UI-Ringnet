@@ -47,8 +47,10 @@ class mod_resource_mod_form extends moodleform_mod {
 
         //-------------------------------------------------------
         // $mform->addElement('header', 'general', get_string('general', 'form'));
-        $mform->addElement("html","<button id='btn_content'>Nội dung</button>");
+        $mform->addElement('html','<div id="menu_create">');
+        $mform->addElement("html","<button class='active_nav' id='btn_content'>Nội dung</button>");
         $mform->addElement("html","<button class='ml-3' id='btn_settings1'>Cài đặt</button>");
+        $mform->addElement('html','</div>');
         $mform->addElement('html','<div id="content">');
         $mform->addElement('text', 'name', get_string('name'), array('size'=>'48'));
         if (!empty($CFG->formatstringstriptags)) {
@@ -316,6 +318,8 @@ class mod_resource_mod_form extends moodleform_mod {
     #page-mod-resource-mod #btn_setting_all,
     #page-mod-resource-mod #btn_setting_grade,
     #page-mod-resource-mod #btn_setting_limit{
+        font-size: 16px;
+        font-weight: 600;
         color: #555555;
         padding: 0 4px;
         border: none;

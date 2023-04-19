@@ -39,8 +39,10 @@ class mod_page_mod_form extends moodleform_mod {
 
         //-------------------------------------------------------
         // $mform->addElement('header', 'general', get_string('general', 'form'));
-        $mform->addElement("html","<button id='btn_content'>Nội dung</button>");
+        $mform->addElement('html','<div id="menu_create">');
+        $mform->addElement("html","<button class='active_nav' id='btn_content'>Nội dung</button>");
         $mform->addElement("html","<button class='ml-3' id='btn_settings1'>Cài đặt</button>");
+        $mform->addElement('html','</div>');
         $mform->addElement('html','<div id="content">');
         $mform->addElement('text', 'name', get_string('name'), array('size'=>'48'));
         if (!empty($CFG->formatstringstriptags)) {
