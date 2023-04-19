@@ -2914,4 +2914,7 @@ border-radius: 50%;
 #page-question-type-multichoice #id_questiontexteditable{
     height: 200px !important;
 }
+#page-question-type-multichoice #fitem_id_questiontext{
+    margin-top: 24px;
+}
 /* / CSS Moi TUAN */
