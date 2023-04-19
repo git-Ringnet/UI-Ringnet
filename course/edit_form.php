@@ -590,15 +590,23 @@ class course_edit_form extends moodleform
 ?>
 <script>
     window.onload = function(){
-        var num = 1;
         var delete1 =  document.querySelector('.delete_image');
         var upload_image = document.getElementById('btn_upload');
         if(delete1){
             delete1.addEventListener('click',function(e){
                 e.preventDefault();
-                click_image = document.querySelector('.fp-thumbnail').click();
-                document.querySelector('.fp-file-delete').click();
-                document.querySelector('.fp-dlg-butconfirm').click();
+                var click_image = document.querySelector('.fp-thumbnail');
+                if(click_image){
+                    click_image.click();
+                    var file_delete = document.querySelector('.fp-file-delete');
+                    if(file_delete){
+                        file_delete.click();
+                        var dlg_butconfirm = document.querySelector('.fp-dlg-butconfirm');
+                        if(dlg_butconfirm){
+                            dlg_butconfirm.click();
+                        }
+                    }
+                }
                 upload_image.style.display = "block";
                 delete1.style.display = "none";
             });
@@ -612,12 +620,14 @@ class course_edit_form extends moodleform
                     if(up)
                     {
                         var img_extent = up.querySelector('input');
-                        img_extent.click();
-                        img_extent.addEventListener('change',function(){
-                        document.querySelector('.fp-upload-btn').click()
-                        upload_image.style.display = "none";
-                        delete1.style.display = "block";
+                        if(img_extent){
+                            img_extent.click();
+                            img_extent.addEventListener('change',function(){
+                            document.querySelector('.fp-upload-btn').click()
+                            upload_image.style.display = "none";
+                            delete1.style.display = "block";
                         });
+                        }
                     }
                     },200)
             });
