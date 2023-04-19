@@ -2940,6 +2940,10 @@ input:checked + .slider:before {
 #page-mod-page-mod #fitem_id_page .col-md-9 div:nth-child(1) {
     width: 100% !important;
 }
+#page-admin-user .admintable thead tr .c3,
+#page-admin-user .admintable tbody tr .c3 {
+    opacity: 0 !important;
+}
 /**/
 .fdescription {
     display: none !important;
