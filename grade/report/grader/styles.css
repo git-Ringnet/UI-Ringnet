@@ -91,7 +91,7 @@
 
 #page-grade-report-user-index .user-grade tbody tr .column-grade:last-of-type {
     position: absolute;
-    top: -1px;
+    top: -5px;
     left: 160px;
     width: 100%;
     background-color: transparent;
