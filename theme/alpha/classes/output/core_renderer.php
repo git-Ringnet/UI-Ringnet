@@ -383,7 +383,7 @@ class core_renderer extends \core_renderer
             // '&returnto=catmanage'
         } else if (is_teacher()) {
             if (is_course_creator($COURSE->id)) {
-                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id ;
+                $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
                 // '&returnto=catmanage'
             } else {
                 $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
@@ -392,8 +392,7 @@ class core_renderer extends \core_renderer
             $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
         }
 
-        if($course->id!=1)
-        {
+        if ($course->id != 1) {
             $content = html_writer::start_div('course-navigation');
             //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
             $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
@@ -413,28 +412,28 @@ class core_renderer extends \core_renderer
             );
             $idforum = $DB->get_field_sql($sql); // lấy giá trị của cột đầu tiên trong kết quả truy vấn
             $urlforum = $CFG->wwwroot . '/mod/forum/view.php?f=' . $idforum;
-    
+
             $pages = new stdClass();
             $pages->urledit = ['title' => 'Thông tin', 'url' => $urledit];
             $pages->urlcontent = ['title' => 'Bài học', 'url' => $urlcontent];
             $pages->urlforum = ['title' => 'Thảo luận', 'url' => $urlforum];
             if (is_siteadmin() || is_teacher()) {
                 $pages->urlparticipant = ['title' => 'Thành viên', 'url' => $urlparticipant];
-                $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
+                // $pages->urlbades = ['title' => 'Chứng chỉ', 'url' => $urlbades];
                 $pages->urlgrades = ['title' => 'Điểm số', 'url' => $urlgrades];
             }
-    
+
             $protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    
+
             $urltest = $protocol . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    
+
             $content .= "<nav class='navbar navbar-expand-lg navbar-light'>
     <div id='navbarNav'>
       <ul class='navbar-nav'>";
             foreach ($pages as $key => $value) {
                 $active = $urltest === $value['url'] ? 'active' : 'before';
                 $content .=
-                    "<li class='nav-item {$active}  mr-2'>
+                    "<li class='nav-item {$active} mr-2'>
             <a class='nav-link title' href='{$value['url']}'>{$value['title']} <span class='sr-only'>(current)</span></a>
             </li>";
             }
@@ -443,10 +442,8 @@ class core_renderer extends \core_renderer
       </nav> <hr/>";
             //     echo '<br/>';
             $content .= html_writer::end_div(); // navigation-box
-        }
-        else
-        {
-            $content="";
+        } else {
+            $content = "";
         }
         return $content;
     }
@@ -961,8 +958,8 @@ class core_renderer extends \core_renderer
 
         //$html .= $this->courseprogress($this->page->course);
 
-        
-  
+
+
         $html .= html_writer::start_tag('div', array('class' => 'rui-course-navigation'));
         $html .= $this->course_navigate();
         $html .= html_writer::end_tag('div'); //rui-course-navigation
@@ -1234,7 +1231,7 @@ class core_renderer extends \core_renderer
             $course = $this->page->course;
             $context = context_course::instance($course->id);
             $hasadminlink = has_capability('moodle/site:configview', $context);
-           
+
             if ($COURSE->id > 1 && isloggedin() && !isguestuser() && is_enrolled($context, $USER->id, '', true) || is_siteadmin() || $hasadminlink) {
                 global $CFG;
                 $headerlinks = [
@@ -1484,23 +1481,18 @@ class core_renderer extends \core_renderer
             $calendarurl = new moodle_url('/calendar/view.php?view=month');
         }
 
-        if($_SESSION["sessionzoomid"]==null)
-        {        
+        if ($_SESSION["sessionzoomid"] == null) {
             session_start();
             $coursezoom = get_course(1);
             $basicltis = get_all_instances_in_course("lti", $coursezoom);
-            foreach ($basicltis as $basiclti)
-           {
-              if ($basiclti->visible)
-              {
-               $idzoom = $basiclti->coursemodule;
+            foreach ($basicltis as $basiclti) {
+                if ($basiclti->visible) {
+                    $idzoom = $basiclti->coursemodule;
                 }
-               break;
+                break;
             }
             $_SESSION["sessionzoomid"] = $idzoom;
-        }
-        else
-        {
+        } else {
             $idzoom = $_SESSION["sessionzoomid"];
         }
         // Header links on non course areas.
@@ -1554,11 +1546,11 @@ class core_renderer extends \core_renderer
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
                             'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
-                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('id' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('contextid' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
-                   
+
                         //Quản lí khóa học
                         array(
                             'status' => !isguestuser(),
@@ -1683,7 +1675,7 @@ class core_renderer extends \core_renderer
                                -225 102 0 81 58 137 142 137 38 0 54 -6 82 -30z"/>
                                </g>
                                </svg>',
-                            'title' =>  is_siteadmin() ? get_string('usermanager', 'moodle') : get_string('groupsmanager','moodle'),
+                            'title' =>  is_siteadmin() ? get_string('usermanager', 'moodle') : get_string('groupsmanager', 'moodle'),
                             'url' => is_siteadmin() ? new moodle_url('/admin/user.php') : new moodle_url('/cohort/index.php?contextid=1'),
                             'isactiveitem' => is_siteadmin() ? $this->isMenuActive('/admin/user.php') : $this->isMenuActive('/cohort/index.php?contextid=1'),
                             'itemid' => 'itemCourseManager',
@@ -1812,7 +1804,7 @@ class core_renderer extends \core_renderer
                             'title' => get_string('meeting', 'moodle'),
                             //Sửa meeting sidebar
                             'url' => new moodle_url('/mod/lti/view.php', array('id' => $idzoom)),
-                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('id' => $idzoom)),
+                            'isactiveitem' => $this->isMenuActive('/mod/lti/view.php', array('contextid' => $idzoom)),
                             'itemid' => 'itemMeeting',
                             'visability' => true,
                         ),
@@ -1941,7 +1933,7 @@ class core_renderer extends \core_renderer
                            -225 102 0 81 58 137 142 137 38 0 54 -6 82 -30z"/>
                            </g>
                            </svg>',
-                            'title' => is_siteadmin() ? get_string('usermanager', 'moodle') : get_string('groupsmanager','moodle'),
+                            'title' => is_siteadmin() ? get_string('usermanager', 'moodle') : get_string('groupsmanager', 'moodle'),
                             'url' => is_siteadmin() ? new moodle_url('/admin/user.php') : new moodle_url('/cohort/index.php?contextid=1'),
                             'isactiveitem' => is_siteadmin() ? $this->isMenuActive('/admin/user.php') : $this->isMenuActive('/cohort/index.php?contextid=1'),
                             'itemid' => 'itemCourseManager',

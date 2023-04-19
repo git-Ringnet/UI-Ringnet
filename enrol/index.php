@@ -91,7 +91,7 @@ if (is_enrolled($context, $USER, '', true)) {
     redirect($destination);   // Bye!
 }
 
-$PAGE->set_title($course->shortname);
+$PAGE->set_title('Đăng ký khóa học');
 $PAGE->set_heading($course->fullname);
 $PAGE->navbar->add(get_string('enrolmentoptions','enrol'));
 

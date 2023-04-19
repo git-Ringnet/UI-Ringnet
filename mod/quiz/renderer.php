@@ -398,7 +398,7 @@ class mod_quiz_renderer extends plugin_renderer_base
 
         $bcc = $panel->get_button_container_class();
         $output .= html_writer::start_tag('div', array('class' => "qn_buttons clearfix $bcc"));;
-        $content = html_writer::tag('span', 'Câu hỏi', array('class' => 'pr-4')) . html_writer::tag('span', 'Trạng thái') . html_writer::tag('span', '');
+        $content = html_writer::tag('span', 'Câu hỏi', array('class' => 'pr-3')) . html_writer::tag('span', 'Trạng thái') . html_writer::tag('span', '');
         $output .= html_writer::div($content, 'd-flex title');
         foreach ($panel->get_question_buttons() as $button) {
             $output .= $this->render($button);
@@ -455,7 +455,6 @@ class mod_quiz_renderer extends plugin_renderer_base
         $a = new stdClass();
         $a->number = $button->number;
         $a->attributes = implode(' ', $extrainfo);
-
         $svg = '<svg width="18" height="18" fill="none" viewBox="0 0 24 24">
         <path class="star" stroke="#555555" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 4.75L13.75 10.25H19.25L14.75 13.75L16.25 19.25L12 15.75L7.75 19.25L9.25 13.75L4.75 10.25H10.25L12 4.75Z"></path>
     </svg>';
@@ -471,7 +470,6 @@ class mod_quiz_renderer extends plugin_renderer_base
             'class' => implode(' ', $classes), 'id' => $button->id,
             'title' => $button->statestring, 'data-quiz-page' => $button->page
         );
-
         if ($button->url) {
             return html_writer::link($button->url, $tagcontents, $tagattributes) . '<hr>';
         } else {
@@ -563,7 +561,10 @@ class mod_quiz_renderer extends plugin_renderer_base
         $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom mt-2'));
         $output .= '<div class="d-flex justify-content-between">';
         $output .= html_writer::div($this->countdown_timer($attemptobj, time()), 'py-3 mr-auto');
-        $output .= $this->summary_page_controls($attemptobj);
+        global $CFG;
+        $output .= '<div class="py-3">';
+        $output .= '<a class="endtestlink aalink" href="' . $CFG->wwwroot . '/mod/quiz/summary.php?attempt=' . $_GET['attempt'] . '&amp;cmid=' . $_GET['cmid'] . '">Làm xong ...</a>';
+        $output .= '</div>';
         $output .= '</div>';
         $output .= $this->footer();
         return $output;
@@ -715,13 +716,14 @@ class mod_quiz_renderer extends plugin_renderer_base
             $this->page->requires->js_call_amd('core_form/submit', 'init', ['mod_quiz-prev-nav']);
         }
         if ($lastpage) {
-            $nextlabel = get_string('endtest', 'quiz');
+            // $nextlabel = get_string('endtest', 'quiz');
         } else {
             $nextlabel = get_string('navigatenext', 'quiz') . ' >';
         }
+
         $output .= html_writer::empty_tag('input', array(
             'type' => 'submit', 'name' => 'next',
-            'value' => $nextlabel, 'class' => 'mod_quiz-next-nav btn-next', 'id' => 'mod_quiz-next-nav'
+            'value' => $nextlabel, 'class' => 'mod_quiz-next-nav btn-next' . ($lastpage ? ' d-none' : ''), 'id' => 'mod_quiz-next-nav'
         ));
         $output .= html_writer::end_tag('div');
         $this->page->requires->js_call_amd('core_form/submit', 'init', ['mod_quiz-next-nav']);

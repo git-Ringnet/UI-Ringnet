@@ -2786,6 +2786,7 @@ abstract class quiz_nav_panel_base {
      */
     public function get_question_buttons() {
         $buttons = array();
+        $count = 0;
         foreach ($this->attemptobj->get_slots() as $slot) {
             $heading = $this->attemptobj->get_heading_before_slot($slot);
             if (!is_null($heading)) {
@@ -2807,6 +2808,9 @@ abstract class quiz_nav_panel_base {
                 $button->stateclass = 'complete';
             }
             $button->statestring = $this->get_state_string($qa, $showcorrectness);
+            if($button->statestring===get_string('correct','quiz')){
+                $count++;
+            }
             $button->page        = $this->attemptobj->get_question_page($slot);
             $button->currentpage = $this->showall || $button->page == $this->page;
             $button->flagged     = $qa->is_flagged();
@@ -2816,6 +2820,7 @@ abstract class quiz_nav_panel_base {
                 $button->stateclass = 'blocked';
                 $button->statestring = get_string('questiondependsonprevious', 'quiz');
             }
+            $_SESSION['count'] = $count;
             $buttons[] = $button;
         }
 
