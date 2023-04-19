@@ -2896,4 +2896,19 @@ border-radius: 50%;
     text-align: left;
     width: 100%;
 }
+.dropdown-menu .dropdown-item-wrapper .dropdown-item-wrapper,
+.dropdown-menu-right .dropdown-item-wrapper:nth-child(6),
+.dropdown-menu-right .dropdown-item-wrapper:nth-child(7),
+.dropdown-menu-right .dropdown-item-wrapper:nth-child(8),
+.dropdown-menu-right .dropdown-item-wrapper:nth-child(9),
+.dropdown-menu-right .dropdown-item-wrapper:nth-child(10)
+{
+    display: none;
+}
+#page-course-edit #fitem_id_numsections{
+    display: none;
+}
+#fitem_id_availabilityconditionsjson .col-md-9 .availability-field .availability-none{
+    display: none !important;
+}
 /* / CSS Moi TUAN */
