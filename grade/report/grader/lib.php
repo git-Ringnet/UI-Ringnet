@@ -752,7 +752,7 @@ class grade_report_grader extends grade_report
             $fullname = fullname($user, $viewfullnames);
             $usercell->text = html_writer::link(
                 new moodle_url('/grade/report/user/index.php', ['userid' => $user->id, 'id' => $this->course->id]),
-                    $usercell->text . '<div class="username-email">' . '<p class="m-0" style="font-size: 14px;line-height: 24px;">' . $fullname . '</p>' . '<p class="m-0">' . $user->email . '</p>' . '</div>',
+                $usercell->text . '<div class="username-email">' . '<p class="m-0" style="font-size: 14px;line-height: 24px;">' . $fullname . '</p>' . '<p class="m-0">' . $user->email . '</p>' . '</div>',
                 ['class' => 'username']
             );
 

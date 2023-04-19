@@ -139,7 +139,6 @@ if (!empty($grading_info->items)) {
         }
     }
 }
-
 $title = $course->shortname . ': ' . format_string($quiz->name);
 $PAGE->set_title($title);
 $PAGE->set_heading($course->fullname);
@@ -200,6 +199,7 @@ if ($item && grade_floats_different($item->gradepass, 0)) {
     $viewobj->infomessages[] = get_string('gradetopassoutof', 'quiz', $a);
 }
 
+$_SESSION['gradepass']=$item->gradepass;
 // Determine wheter a start attempt button should be displayed.
 $viewobj->quizhasquestions = $quizobj->has_questions();
 $viewobj->preventmessages = array();

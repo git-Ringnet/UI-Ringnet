@@ -35,7 +35,7 @@ $page      = optional_param('page', 0, PARAM_INT);
 $showall   = optional_param('showall', null, PARAM_BOOL);
 $cmid      = optional_param('cmid', null, PARAM_INT);
 
-$url = new moodle_url('/mod/quiz/review.php', array('attempt'=>$attemptid));
+$url = new moodle_url('/mod/quiz/review.php', array('attempt' => $attemptid));
 if ($page !== 0) {
     $url->param('page', $page);
 } else if ($showall) {
@@ -43,6 +43,7 @@ if ($page !== 0) {
 }
 $PAGE->set_url($url);
 $PAGE->set_secondary_active_tab("modulepage");
+$PAGE->add_body_class('drawer-open-right');
 
 $attemptobj = quiz_create_attempt_handling_errors($attemptid, $cmid);
 $attemptobj->preload_all_attempt_step_users();
@@ -69,12 +70,12 @@ $options = $attemptobj->get_display_options(true);
 if ($attemptobj->is_own_attempt()) {
     if (!$attemptobj->is_finished()) {
         redirect($attemptobj->attempt_url(null, $page));
-
     } else if (!$options->attempt) {
-        $accessmanager->back_to_view_page($PAGE->get_renderer('mod_quiz'),
-                $attemptobj->cannot_review_message());
+        $accessmanager->back_to_view_page(
+            $PAGE->get_renderer('mod_quiz'),
+            $attemptobj->cannot_review_message()
+        );
     }
-
 } else if (!$attemptobj->is_review_allowed()) {
     throw new moodle_quiz_exception($attemptobj->get_quizobj(), 'noreviewattempt');
 }
@@ -87,8 +88,11 @@ if ($showall) {
 }
 
 // Save the flag states, if they are being changed.
-if ($options->flags == question_display_options::EDITABLE && optional_param('savingflags', false,
-        PARAM_BOOL)) {
+if ($options->flags == question_display_options::EDITABLE && optional_param(
+    'savingflags',
+    false,
+    PARAM_BOOL
+)) {
     require_sesskey();
     $attemptobj->save_question_flags();
     redirect($attemptobj->review_url(null, $page, $showall));
@@ -97,7 +101,6 @@ if ($options->flags == question_display_options::EDITABLE && optional_param('sav
 // Work out appropriate title and whether blocks should be shown.
 if ($attemptobj->is_own_preview()) {
     navigation_node::override_active_url($attemptobj->start_attempt_url());
-
 } else {
     if (empty($attemptobj->get_quiz()->showblocks) && !$attemptobj->is_preview_user()) {
         $PAGE->blocks->show_only_fake_blocks();
@@ -140,15 +143,21 @@ if (!$attemptobj->get_quiz()->showuserpicture && $attemptobj->get_userid() != $U
     $userpicture->courseid = $attemptobj->get_courseid();
     $summarydata['user'] = array(
         'title'   => $userpicture,
-        'content' => new action_link(new moodle_url('/user/view.php', array(
-                                'id' => $student->id, 'course' => $attemptobj->get_courseid())),
-                          fullname($student, true)),
+        'content' => new action_link(
+            new moodle_url('/user/view.php', array(
+                'id' => $student->id, 'course' => $attemptobj->get_courseid()
+            )),
+            fullname($student, true)
+        ),
     );
 }
 
 if ($attemptobj->has_capability('mod/quiz:viewreports')) {
-    $attemptlist = $attemptobj->links_to_other_attempts($attemptobj->review_url(null, $page,
-            $showall));
+    $attemptlist = $attemptobj->links_to_other_attempts($attemptobj->review_url(
+        null,
+        $page,
+        $showall
+    ));
     if ($attemptlist) {
         $summarydata['attemptlist'] = array(
             'title'   => get_string('attempts', 'quiz'),
@@ -198,7 +207,6 @@ if ($options->marks >= question_display_options::MARK_AND_MAX && quiz_has_grades
             'title'   => get_string('grade', 'quiz'),
             'content' => quiz_format_grade($quiz, $grade),
         );
-
     } else {
         // Show raw marks only if they are different from the grade (like on the view page).
         if ($quiz->grade != $quiz->sumgrades) {
@@ -210,17 +218,20 @@ if ($options->marks >= question_display_options::MARK_AND_MAX && quiz_has_grades
                 'content' => get_string('outofshort', 'quiz', $a),
             );
         }
-
         // Now the scaled grade.
         $a = new stdClass();
         $a->grade = html_writer::tag('b', quiz_format_grade($quiz, $grade));
         $a->maxgrade = quiz_format_grade($quiz, $quiz->grade);
+        $_SESSION['grade'] = quiz_format_grade($quiz, $grade);
         if ($quiz->grade != 100) {
             // Show the percentage using the configured number of decimal places,
             // but without trailing zeroes.
             $a->percent = html_writer::tag('b', format_float(
-                    $attempt->sumgrades * 100 / $quiz->sumgrades,
-                    $quiz->decimalpoints, true, true));
+                $attempt->sumgrades * 100 / $quiz->sumgrades,
+                $quiz->decimalpoints,
+                true,
+                true
+            ));
             $formattedgrade = get_string('outofpercent', 'quiz', $a);
         } else {
             $formattedgrade = get_string('outof', 'quiz', $a);
@@ -249,6 +260,7 @@ if ($options->overallfeedback && $feedback) {
 if ($showall) {
     $slots = $attemptobj->get_slots();
     $lastpage = true;
+    $_SESSION['questions'] = $slots;
 } else {
     $slots = $attemptobj->get_slots($page);
     $lastpage = $attemptobj->is_last_page($page);
