@@ -545,7 +545,7 @@ class edit_renderer extends \plugin_renderer_base {
         // Question HTML.
         $questionhtml = $this->question($structure, $slot, $pageurl);
         $qtype = $structure->get_question_type_for_slot($slot);
-        $questionclasses = 'activity ' . $qtype . ' qtype_' . $qtype . ' slot';
+        $questionclasses = 'activity ' . $qtype . ' qtype_' . $qtype . ' slot border rounded mb-2';
 
         $output .= html_writer::tag('li', $questionhtml . $joinhtml,
                 array('class' => $questionclasses, 'id' => 'slot-' . $structure->get_slot_id_for_slot($slot),
@@ -582,7 +582,7 @@ class edit_renderer extends \plugin_renderer_base {
                     $pagenumber, $pageurl, $pagevars);
 
             $output .= html_writer::tag('li', $page . $addmenu . $addquestionform,
-                    array('class' => 'pagenumber activity yui3-dd-drop page', 'id' => 'page-' . $pagenumber));
+                    array('class' => 'pagenumber activity yui3-dd-drop page d-none', 'id' => 'page-' . $pagenumber));
         }
 
         return $output;
@@ -852,7 +852,7 @@ class edit_renderer extends \plugin_renderer_base {
     public function question_move_icon(structure $structure, $slot) {
         return html_writer::link(new \moodle_url('#'),
             $this->pix_icon('i/dragdrop', get_string('move'), 'moodle', array('class' => 'iconsmall', 'title' => '')),
-            array('class' => 'editing_move', 'data-action' => 'move')
+            array('class' => 'editing_move d-none', 'data-action' => 'move')
         );
     }
 
@@ -951,7 +951,7 @@ class edit_renderer extends \plugin_renderer_base {
         }
         return html_writer::span($this->action_link($url, $image, null, array('title' => $title,
                     'class' => 'page_split_join cm-edit-action', 'disabled' => $disabled, 'data-action' => $action)),
-                'page_split_join_wrapper');
+                'page_split_join_wrapper d-none');
     }
 
     /**
@@ -990,7 +990,7 @@ class edit_renderer extends \plugin_renderer_base {
         }
         return html_writer::span($this->action_link('#', $image, null, array('title' => $title,
                 'class' => 'cm-edit-action', 'disabled' => $disabled, 'data-action' => $action)),
-                'question_dependency_wrapper' . $extraclass);
+                'question_dependency_wrapper d-none' . $extraclass);
     }
 
     /**
@@ -1026,7 +1026,7 @@ class edit_renderer extends \plugin_renderer_base {
         $title = shorten_text(format_string($question->name), 100);
 
         // Display the link itself.
-        $activitylink = $icon . html_writer::tag('span', $editicon . $instancename, array('class' => 'instancename'));
+        $activitylink = $icon . html_writer::tag('span', $instancename.$editicon, array('class' => 'instancename'));
         $output .= html_writer::link($editurl, $activitylink,
                 array('title' => get_string('editquestion', 'quiz').' '.$title));
 
@@ -1118,7 +1118,7 @@ class edit_renderer extends \plugin_renderer_base {
                 )
             )
         );
-        return html_writer::span($output, 'instancemaxmarkcontainer');
+        return html_writer::span($output, 'instancemaxmarkcontainer d-none');
     }
 
     /**

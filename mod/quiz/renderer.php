@@ -563,7 +563,7 @@ class mod_quiz_renderer extends plugin_renderer_base
         $output .= html_writer::div($this->countdown_timer($attemptobj, time()), 'py-3 mr-auto');
         global $CFG;
         $output .= '<div class="py-3">';
-        $output .= '<a class="endtestlink aalink" href="' . $CFG->wwwroot . '/mod/quiz/summary.php?attempt=' . $_GET['attempt'] . '&amp;cmid=' . $_GET['cmid'] . '">Làm xong ...</a>';
+        $output .= '<a class="endtestlink aalink" href="' . $CFG->wwwroot . '/mod/quiz/summary.php?attempt=' . $_GET['attempt'] . '&amp;cmid=' . $_GET['cmid'] . '">Lưu bài làm</a>';
         $output .= '</div>';
         $output .= '</div>';
         $output .= $this->footer();

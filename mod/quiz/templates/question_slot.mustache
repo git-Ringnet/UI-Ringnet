@@ -27,17 +27,17 @@
     }
 }}
 
-<div class="mod-indent-outer" id="mod-indent-outer-slot-{{slotid}}">
+<div class="mod-indent-outer d-flex justify-contents-between align-items-center" id="mod-indent-outer-slot-{{slotid}}">
     {{{checkbox}}}
     {{{questionnumber}}}
     <div class="mod-indent"></div>
-    <div class="activityinstance">
+    <div class="activityinstance mr-auto d-flex align-items-center pl-3">
         {{{questionname}}}
     </div>
     <span class="actions">
         {{#versionselection}}
             <label for="version-{{slotid}}"> </label>
-            <select id="version-{{slotid}}" name="version" class="form-control mr-2 h-auto version-selection"
+            <select id="version-{{slotid}}" name="version" class="form-control mr-2 h-auto version-selection d-none"
             data-action="mod_quiz-select_slot" data-slot-id="{{slotid}}">
                 {{#versionoption}}
                     <option value="{{version}}" {{#selected}}selected="selected"{{/selected}}>{{versionvalue}}</option>

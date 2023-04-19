@@ -611,16 +611,16 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
         $output = '';
 
         // Return to place button.
-        // if ($attemptobj->get_state() == quiz_attempt::IN_PROGRESS) {
-        //     $button = new single_button(
-        //         new moodle_url($attemptobj->attempt_url(null, $attemptobj->get_currentpage())),
-        //         get_string('returnattempt', 'quiz')
-        //     );
-        //     $output .= $this->container($this->container(
-        //         $this->render($button),
-        //         'rui-controls'
-        //     ), 'rui-submitbtns rui-submitbtns--back');
-        // }
+        if ($attemptobj->get_state() == quiz_attempt::IN_PROGRESS) {
+            $button = new single_button(
+                new moodle_url($attemptobj->attempt_url(null, $attemptobj->get_currentpage())),
+                get_string('returnattempt', 'quiz')
+            );
+            $output .= $this->container($this->container(
+                $this->render($button),
+                'rui-controls'
+            ), 'rui-submitbtns rui-submitbtns--back');
+        }
         // Finish attempt button.
         $options = array(
             'attempt' => $attemptobj->get_attemptid(),
