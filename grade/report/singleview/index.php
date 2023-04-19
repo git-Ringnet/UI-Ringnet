@@ -55,12 +55,6 @@ if (empty($USER->editing)) {
 }
 
 //JS
-echo '<script>
-var inputElements = document.getElementsByTagName("input");
-for (var i = 0; i < inputElements.length; i++) {
-  inputElements[i].removeAttribute("disabled");
-}
-</script>';
 
 $courseparams = array('id' => $courseid);
 $pageparams = array(
@@ -257,3 +251,16 @@ $event = \gradereport_singleview\event\grade_report_viewed::create(
 $event->trigger();
 
 echo $OUTPUT->footer();
+?>
+<script>
+    //remove all disabled
+    let inputElements = document.getElementsByTagName("input");
+    for (let i = 0; i < inputElements.length; i++) {
+        inputElements[i].removeAttribute("disabled");
+    }
+    //checkbox
+    let checkboxes = document.querySelectorAll('.c6 input[type="checkbox"]');
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = true;
+    }
+</script>

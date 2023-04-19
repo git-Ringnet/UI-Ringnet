@@ -164,7 +164,7 @@ abstract class moodleform_mod extends moodleform {
     public function get_section() {
         return $this->_section;
     }
-
+    public static $datefieldoptions = array('optional' => true);
     /**
      * Get the course id.
      * @return int
@@ -337,7 +337,7 @@ abstract class moodleform_mod extends moodleform {
                 // Automatically set to unlocked (note: this is necessary
                 // in order to make it recalculate completion once the option
                 // is changed, maybe someone has completed it now)
-                $mform->getElement('completionunlocked')->setValue(1);
+                $mform->getElement('completionunlocked')->setValue(2);
             } else {
                 // Has the element been unlocked, either by the button being pressed
                 // in this request, or the field already being set from a previous one?
@@ -350,7 +350,7 @@ abstract class moodleform_mod extends moodleform {
                             get_string('completedunlockedtext', 'completion')),
                         'unlockcompletion');
                     $mform->removeElement('unlockcompletion');
-                    $mform->getElement('completionunlocked')->setValue(1);
+                    $mform->getElement('completionunlocked')->setValue(2);
                 } else {
                     // No, add in the warning text with the count (now we know
                     // it) before the unlock button
@@ -623,7 +623,7 @@ abstract class moodleform_mod extends moodleform {
                 $mform->hardFreeze('visible');
             }
         }
-
+      
         if ($this->_features->idnumber) {
             $mform->addElement('text', 'cmidnumber', get_string('idnumbermod'));
             $mform->setType('cmidnumber', PARAM_RAW);
@@ -862,7 +862,488 @@ abstract class moodleform_mod extends moodleform {
 
         $this->plugin_extend_coursemodule_standard_elements();
     }
+    protected function standard_coursemodule_elements1() {
+        global $COURSE, $CFG, $DB, $PAGE;
+        $mform =& $this->_form;
+        $this->_outcomesused = false;
+        if ($this->_features->outcomes) {
+            if ($outcomes = grade_outcome::fetch_all_available($COURSE->id)) {
+                $this->_outcomesused = true;
+                $mform->addElement('header', 'modoutcomes', get_string('outcomes', 'grades'));
+                foreach($outcomes as $outcome) {
+                    $mform->addElement('advcheckbox', 'outcome_'.$outcome->id, $outcome->get_name());
+                }
+            }
+        }
+        if ($this->_features->rating) {
+            $this->add_rating_settings($mform, 0);
+        }
+        $mform->addElement('html','<div id="content_settings" class="justify-content-between" style="display:none">');
+        $mform->addElement('html','<div id="nav_menu_create" style="width:20%;">');
+        $mform->addElement('html','<button class="active_nav_right" id="btn_setting_all">Chung</button><br>');
+        if($PAGE->pagetype == "mod-quiz-mod"){
+            $mform->addElement('html','<button class="mt-2" id="btn_setting_grade">Điểm số</button><br>');
+        }
+        $mform->addElement('html','<button class="mt-2" id="btn_setting_limit">Giới hạn</button>');
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','<div id="settings" class="w-100">');
+        $mform->addElement('html','<div id="content_setting_all">');
+        // ID number
+        if ($this->_features->idnumber) {
+            $mform->addElement('text', 'cmidnumber', get_string('idnumbermod'));
+            $mform->setType('cmidnumber', PARAM_RAW);
+            $mform->addHelpButton('cmidnumber', 'idnumbermod');
+        }
 
+        $section = get_fast_modinfo($COURSE)->get_section_info($this->_section);
+        $allowstealth = !empty($CFG->allowstealth) && $this->courseformat->allow_stealth_module_visibility($this->_cm, $section);
+        if ($allowstealth && $section->visible) {
+            $modvisiblelabel = 'modvisiblewithstealth';
+        } else if ($section->visible) {
+            $modvisiblelabel = 'modvisible';
+        } else {
+            $modvisiblelabel = 'modvisiblehiddensection';
+        }
+        // Visible
+        $radioarray = array();
+        $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('show'), 1);
+        $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('hide'), 0);
+        $mform->addGroup($radioarray, 'visible', get_string('coursevisibility'), array(' ', ' '), false);
+        $mform->addHelpButton('visible', 'visible');
+        $mform->setDefault('sectionvisible', $section->visible);
+            
+        // Conditional activities: completion tracking section
+        if(!isset($completion)) {
+            $completion = new completion_info($COURSE);
+        }
+
+        // Activity complete
+        if ($completion->is_enabled()) {
+            $mform->addElement('submit', 'unlockcompletion', get_string('unlockcompletion', 'completion'));
+            $mform->registerNoSubmitButton('unlockcompletion');
+            $mform->addElement('hidden', 'completionunlocked', 2);
+            $mform->setType('completionunlocked', PARAM_INT);
+
+            $trackingdefault = COMPLETION_TRACKING_NONE;
+            // If system and activity default is on, set it.
+            if ($CFG->completiondefault && $this->_features->defaultcompletion) {
+                $hasrules = plugin_supports('mod', $this->_modname, FEATURE_COMPLETION_HAS_RULES, true);
+                $tracksviews = plugin_supports('mod', $this->_modname, FEATURE_COMPLETION_TRACKS_VIEWS, true);
+                if ($hasrules || $tracksviews) {
+                    $trackingdefault = COMPLETION_TRACKING_AUTOMATIC;
+                } else {
+                    $trackingdefault = COMPLETION_TRACKING_MANUAL;
+                }
+            }
+            $mform->addElement('select', 'completion', get_string('completion', 'completion'),
+                array(COMPLETION_TRACKING_AUTOMATIC=>get_string('completion_automatic', 'completion')));
+            $mform->setDefault('completion',$trackingdefault);
+            $mform->addHelpButton('completion', 'completion', 'completion');
+            // Automatic completion once you view it
+            $gotcompletionoptions = false;
+            if (plugin_supports('mod', $this->_modname, FEATURE_COMPLETION_TRACKS_VIEWS, false)) {
+                $mform->addElement('html','<label class="pl-3">Điều kiện hoàn thành</label>');
+                $mform->addElement('html','<div id="content_require">');
+                $mform->addElement('checkbox', 'completionview', get_string('completionview', 'completion'),
+                    get_string('completionview_desc', 'completion'));
+                $mform->hideIf('completionview', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+                // Check by default if automatic completion tracking is set.
+                if ($trackingdefault == COMPLETION_TRACKING_AUTOMATIC) {
+                    $mform->setDefault('completionview', 1);
+                }
+                $gotcompletionoptions = true;
+            }
+            
+            if (plugin_supports('mod', $this->_modname, FEATURE_GRADE_HAS_GRADE, false)) {
+                // This activity supports grading.
+                $gotcompletionoptions = true;
+
+                $component = "mod_{$this->_modname}";
+                $itemnames = component_gradeitems::get_itemname_mapping_for_component($component);
+
+                if (count($itemnames) === 1) {
+                    $mform->addElement(
+                        'checkbox',
+                        'completionusegrade',
+                        get_string('completionusegrade', 'completion'),
+                        get_string('completionusegrade_desc', 'completion')
+                    );
+                    $mform->hideIf('completionusegrade', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+                    // $mform->addHelpButton('completionusegrade', 'completionusegrade', 'completion');
+
+                    // Complete if the user has reached the pass grade.
+                    // Student must receive a passing grade to complete this activity
+                    $mform->addElement(
+                        'checkbox',
+                        'completionpassgrade', null,
+                        get_string('completionpassgrade_desc', 'completion'),
+
+                    );
+                    // $mform->hideIf('completionpassgrade', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+                    $mform->disabledIf('completionpassgrade', 'completionusegrade', 'notchecked');
+                    // $mform->addHelpButton('completionpassgrade', 'completionpassgrade', 'completion');
+
+                    // The disabledIf logic differs between ratings and other grade items due to different field types.
+                    if ($this->_features->rating) {
+                        // If using the rating system, there is no grade unless ratings are enabled.
+                        $mform->disabledIf('completionusegrade', 'assessed', 'eq', 0);
+                        $mform->disabledIf('completionpassgrade', 'assessed', 'eq', 0);
+                    } else {
+                        // All other field types use the '$gradefieldname' field's modgrade_type.
+                        $itemnumbers = array_keys($itemnames);
+                        $itemnumber = array_shift($itemnumbers);
+                        $gradefieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'grade');
+                        $mform->disabledIf('completionusegrade', "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+                        $mform->disabledIf('completionpassgrade', "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+                    }
+                } else if (count($itemnames) > 1) {
+                    $options = [
+                        '' => get_string('activitygradenotrequired', 'completion'),
+                    ];
+                    foreach ($itemnames as $itemnumber => $itemname) {
+                        $options[$itemnumber] = get_string("grade_{$itemname}_name", $component);
+                    }
+
+                    $mform->addElement(
+                        'select',
+                        'completiongradeitemnumber',
+                        get_string('completionusegrade', 'completion'),
+                        $options
+                    );
+                    $mform->hideIf('completiongradeitemnumber', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+
+                    $mform->addElement(
+                        'checkbox',
+                        'completionpassgrade', null,
+                        get_string('completionpassgrade_desc', 'completion')
+                    );
+                    $mform->hideIf('completionpassgrade', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+                    $mform->disabledIf('completionpassgrade', 'completiongradeitemnumber', 'eq', '');
+                    $mform->addHelpButton('completionpassgrade', 'completionpassgrade', 'completion');
+                }
+            }
+            
+            $this->_customcompletionelements = $this->add_completion_rules();
+            foreach ($this->_customcompletionelements as $element) {
+                $mform->hideIf($element, 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+            }
+
+            $gotcompletionoptions = $gotcompletionoptions ||
+                count($this->_customcompletionelements)>0;
+
+            if ($gotcompletionoptions) {
+                $mform->getElement('completion')->addOption(
+                    get_string('completion_automatic', 'completion'),
+                    COMPLETION_TRACKING_AUTOMATIC);
+            }
+            $mform->addElement('html','</div>');
+        }
+        $mform->addElement('html','</div>');
+        // Limit date
+        $mform->addElement('html','<div id="content_setting_limit" style="display:none;">');
+        // Hoàn thành bài học trong
+        if($PAGE->pagetype == "mod-lesson-mod"){
+            $group = array();
+            $group[] =& $mform->createElement('checkbox', 'completiontimespentenabled', '',
+                    get_string('completiontimespent', 'lesson'));
+            $group[] =& $mform->createElement('duration', 'completiontimespent', '', array('optional' => false));
+            $mform->addGroup($group, 'completiontimespentgroup', get_string('completiontimespentgroup', 'lesson'), array(' '), false);
+            $mform->disabledIf('completiontimespent[number]', 'completiontimespentenabled', 'notchecked');
+            $mform->disabledIf('completiontimespent[timeunit]', 'completiontimespentenabled', 'notchecked');
+        }
+
+        if (!empty($CFG->enableavailability)) {
+            $availabilityplugins = \core\plugininfo\availability::get_enabled_plugins();
+            $groupavailability = $this->_features->groups && array_key_exists('group', $availabilityplugins);
+            $groupingavailability = $this->_features->groupings && array_key_exists('grouping', $availabilityplugins);
+
+            if ($groupavailability || $groupingavailability) {
+                // When creating the button, we need to set type=button to prevent it behaving as a submit.
+                $mform->addElement('static', 'restrictgroupbutton', '',
+                    html_writer::tag('button', get_string('restrictbygroup', 'availability'), [
+                        'id' => 'restrictbygroup',
+                        'type' => 'button',
+                        'disabled' => 'disabled',
+                        'class' => 'btn btn-secondary',
+                        'data-groupavailability' => $groupavailability,
+                        'data-groupingavailability' => $groupingavailability
+                    ])
+                );
+            }
+
+            $mform->addElement('textarea', 'availabilityconditionsjson',
+                    get_string('accessrestrictions', 'availability'));
+            // The _cm variable may not be a proper cm_info, so get one from modinfo.
+            if ($this->_cm) {
+                $modinfo = get_fast_modinfo($COURSE);
+                $cm = $modinfo->get_cm($this->_cm->id);
+            } else {
+                $cm = null;
+            }
+            \core_availability\frontend::include_all_javascript($COURSE, $cm);
+        }
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','<div id="content_grade" style="display:none;">');
+        $mform->addElement('html',' <div id="switch-i" class="d-flex">
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round" id="checkbox_grade"></span>
+        </label>
+        <p class="ml-2">Điểm số</p>
+        </div>
+        ');
+        $this->standard_grading_coursemodule_elements1();
+        $mform->addElement('html','</div>');
+
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','</div>');
+        $this->standard_hidden_coursemodule_elements();
+
+        $this->plugin_extend_coursemodule_standard_elements();
+    }
+    protected function standard_coursemodule_elements2() {
+        global $COURSE, $CFG, $DB;
+        $mform =& $this->_form;
+
+        $this->_outcomesused = false;
+        if ($this->_features->outcomes) {
+            if ($outcomes = grade_outcome::fetch_all_available($COURSE->id)) {
+                $this->_outcomesused = true;
+                $mform->addElement('header', 'modoutcomes', get_string('outcomes', 'grades'));
+                foreach($outcomes as $outcome) {
+                    $mform->addElement('advcheckbox', 'outcome_'.$outcome->id, $outcome->get_name());
+                }
+            }
+        }
+
+        if ($this->_features->rating) {
+            $this->add_rating_settings($mform, 0);
+        }
+
+        $mform->addElement('html','<div id="content_settings" class="justify-content-between" style="display:none">');
+        $mform->addElement('html','<div id="nav_menu_create" style="width:20%;">');
+        $mform->addElement('html','<button class="active_nav_right" id="btn_setting_all">Chung</button><br>');
+        $mform->addElement('html','<button class="mt-2" id="btn_setting_grade">Điểm số</button><br>');
+        $mform->addElement('html','<button class="mt-2" id="btn_setting_limit">Giới hạn</button>');
+        $mform->addElement('html','</div>');
+        $mform->addElement('html','<div id="settings" class="w-100">');
+        $mform->addElement('html','<div id="content_setting_all">');
+
+        // ID number
+        if ($this->_features->idnumber) {
+            $mform->addElement('text', 'cmidnumber', get_string('idnumbermod'));
+            $mform->setType('cmidnumber', PARAM_RAW);
+            $mform->addHelpButton('cmidnumber', 'idnumbermod');
+        }
+
+       $section = get_fast_modinfo($COURSE)->get_section_info($this->_section);
+        $allowstealth = !empty($CFG->allowstealth) && $this->courseformat->allow_stealth_module_visibility($this->_cm, $section);
+        if ($allowstealth && $section->visible) {
+            $modvisiblelabel = 'modvisiblewithstealth';
+        } else if ($section->visible) {
+            $modvisiblelabel = 'modvisible';
+        } else {
+            $modvisiblelabel = 'modvisiblehiddensection';
+        }
+       // Visible
+       $radioarray = array();
+       $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('show'), 1);
+       $radioarray[] = $mform->createElement('radio', 'visible', '', get_string('hide'), 0);
+       $mform->addGroup($radioarray, 'visible', get_string('coursevisibility'), array(' ', ' '), false);
+       $mform->addHelpButton('visible', 'visible');
+       $mform->setDefault('sectionvisible', $section->visible);
+        // Thời gian làm bài
+        $mform->addElement('duration', 'timelimit', get_string('timelimit', 'quiz'),
+            array('optional' => true));
+        $mform->addHelpButton('timelimit', 'timelimit', 'quiz');
+
+        // Giới hạn số lần làm bài
+        $attemptoptions = array('0' => get_string('unlimited'));
+        for ($i = 1; $i <= QUIZ_MAX_ATTEMPT_OPTION; $i++) {
+            $attemptoptions[$i] = $i;
+        }
+        $mform->addElement('select', 'attempts', get_string('attemptsallowed', 'quiz'),
+                $attemptoptions);
+
+
+       // Conditional activities: completion tracking section
+       if(!isset($completion)) {
+           $completion = new completion_info($COURSE);
+       }
+        $group = array();
+        $group[] = $mform->createElement('checkbox', 'completionminattemptsenabled', '',
+            get_string('completionminattempts', 'quiz'));
+        $group[] = $mform->createElement('text', 'completionminattempts', '', array('size' => 3));
+        $mform->setType('completionminattempts', PARAM_INT);
+        $mform->addGroup($group, 'completionminattemptsgroup', get_string('completionminattemptsgroup', 'quiz'), array(' '), false);
+        $mform->disabledIf('completionminattempts', 'completionminattemptsenabled', 'notchecked');
+       // Activity complete
+       if ($completion->is_enabled()) {
+           $mform->addElement('submit', 'unlockcompletion', get_string('unlockcompletion', 'completion'));
+           $mform->registerNoSubmitButton('unlockcompletion');
+           $mform->addElement('hidden', 'completionunlocked', 2);
+           $mform->setType('completionunlocked', PARAM_INT);
+
+           $trackingdefault = COMPLETION_TRACKING_NONE;
+           // If system and activity default is on, set it.
+           if ($CFG->completiondefault && $this->_features->defaultcompletion) {
+               $hasrules = plugin_supports('mod', $this->_modname, FEATURE_COMPLETION_HAS_RULES, true);
+               $tracksviews = plugin_supports('mod', $this->_modname, FEATURE_COMPLETION_TRACKS_VIEWS, true);
+               if ($hasrules || $tracksviews) {
+                   $trackingdefault = COMPLETION_TRACKING_AUTOMATIC;
+               } else {
+                   $trackingdefault = COMPLETION_TRACKING_MANUAL;
+               }
+           }
+           $mform->addElement('select', 'completion', get_string('completion', 'completion'),
+               array(COMPLETION_TRACKING_AUTOMATIC=>get_string('completion_automatic', 'completion')));
+           $mform->setDefault('completion',$trackingdefault);
+           $mform->addHelpButton('completion', 'completion', 'completion');
+           $gotcompletionoptions = false;
+           if (plugin_supports('mod', $this->_modname, FEATURE_COMPLETION_TRACKS_VIEWS, false)) {
+               $mform->addElement('html','<label class="pl-3">Điều kiện hoàn thành</label>');
+               $mform->addElement('html','<div id="content_require">');
+               $mform->addElement('checkbox', 'completionview', get_string('completionview', 'completion'),
+                   get_string('completionview_desc', 'completion'));
+               $mform->hideIf('completionview', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+               if ($trackingdefault == COMPLETION_TRACKING_AUTOMATIC) {
+                   $mform->setDefault('completionview', 1);
+               }
+               $gotcompletionoptions = true;
+           }
+           
+           if (plugin_supports('mod', $this->_modname, FEATURE_GRADE_HAS_GRADE, false)) {
+               $gotcompletionoptions = true;
+
+               $component = "mod_{$this->_modname}";
+               $itemnames = component_gradeitems::get_itemname_mapping_for_component($component);
+
+               if (count($itemnames) === 1) {
+                   $mform->addElement(
+                       'checkbox',
+                       'completionusegrade',
+                       get_string('completionusegrade', 'completion'),
+                       get_string('completionusegrade_desc', 'completion')
+                   );
+                   $mform->hideIf('completionusegrade', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+                
+                   $mform->addElement(
+                       'checkbox',
+                       'completionpassgrade', null,
+                       get_string('completionpassgrade_desc', 'completion'),
+
+                   );
+                   $mform->disabledIf('completionpassgrade', 'completionusegrade', 'notchecked');
+            
+                   if ($this->_features->rating) {
+                       $mform->disabledIf('completionusegrade', 'assessed', 'eq', 0);
+                       $mform->disabledIf('completionpassgrade', 'assessed', 'eq', 0);
+                   } else {
+                       $itemnumbers = array_keys($itemnames);
+                       $itemnumber = array_shift($itemnumbers);
+                       $gradefieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'grade');
+                       $mform->disabledIf('completionusegrade', "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+                       $mform->disabledIf('completionpassgrade', "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+                   }
+               } else if (count($itemnames) > 1) {
+                   $options = [
+                       '' => get_string('activitygradenotrequired', 'completion'),
+                   ];
+                   foreach ($itemnames as $itemnumber => $itemname) {
+                       $options[$itemnumber] = get_string("grade_{$itemname}_name", $component);
+                   }
+
+                   $mform->addElement(
+                       'select',
+                       'completiongradeitemnumber',
+                       get_string('completionusegrade', 'completion'),
+                       $options
+                   );
+                   $mform->hideIf('completiongradeitemnumber', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+
+                   $mform->addElement(
+                       'checkbox',
+                       'completionpassgrade', null,
+                       get_string('completionpassgrade_desc', 'completion')
+                   );
+                   $mform->hideIf('completionpassgrade', 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+                   $mform->disabledIf('completionpassgrade', 'completiongradeitemnumber', 'eq', '');
+                   $mform->addHelpButton('completionpassgrade', 'completionpassgrade', 'completion');
+               }
+           }
+           
+           $this->_customcompletionelements = $this->add_completion_rules();
+           foreach ($this->_customcompletionelements as $element) {
+               $mform->hideIf($element, 'completion', 'ne', COMPLETION_TRACKING_AUTOMATIC);
+           }
+
+           $gotcompletionoptions = $gotcompletionoptions ||
+               count($this->_customcompletionelements)>0;
+
+           if ($gotcompletionoptions) {
+               $mform->getElement('completion')->addOption(
+                   get_string('completion_automatic', 'completion'),
+                   COMPLETION_TRACKING_AUTOMATIC);
+           }
+           $mform->addElement('html','</div>');
+       }
+       $mform->addElement('html','<label>Cài đặt thời gian</lable>');
+        $mform->addElement('date_time_selector', 'timeopen', get_string('quizopen', 'quiz'),
+            self::$datefieldoptions);
+        $mform->addHelpButton('timeopen', 'quizopenclose', 'quiz');
+
+        $mform->addElement('date_time_selector', 'timeclose', get_string('quizclose', 'quiz'),
+            self::$datefieldoptions);
+        $mform->addElement('html','</div>');
+       // Limit date
+       $mform->addElement('html','<div id="content_setting_limit" style="display:none;">');
+
+       if (!empty($CFG->enableavailability)) {
+           $availabilityplugins = \core\plugininfo\availability::get_enabled_plugins();
+           $groupavailability = $this->_features->groups && array_key_exists('group', $availabilityplugins);
+           $groupingavailability = $this->_features->groupings && array_key_exists('grouping', $availabilityplugins);
+
+           if ($groupavailability || $groupingavailability) {
+               $mform->addElement('static', 'restrictgroupbutton', '',
+                   html_writer::tag('button', get_string('restrictbygroup', 'availability'), [
+                       'id' => 'restrictbygroup',
+                       'type' => 'button',
+                       'disabled' => 'disabled',
+                       'class' => 'btn btn-secondary',
+                       'data-groupavailability' => $groupavailability,
+                       'data-groupingavailability' => $groupingavailability
+                   ])
+               );
+           }
+
+           $mform->addElement('textarea', 'availabilityconditionsjson',
+                   get_string('accessrestrictions', 'availability'));
+           if ($this->_cm) {
+               $modinfo = get_fast_modinfo($COURSE);
+               $cm = $modinfo->get_cm($this->_cm->id);
+           } else {
+               $cm = null;
+           }
+           \core_availability\frontend::include_all_javascript($COURSE, $cm);
+       }
+       $mform->addElement('html','</div>');
+       $mform->addElement('html','<div id="content_grade" style="display:none;">');
+       $mform->addElement('html',' <div id="switch-i" class="d-flex">
+       <label class="switch">
+           <input type="checkbox">
+           <span class="slider round" id="checkbox_grade"></span>
+       </label>
+       <p class="ml-2">Điểm số</p>
+       </div>
+       ');
+       $this->standard_grading_coursemodule_elements2();
+       $mform->addElement('html','</div>');
+       $mform->addElement('html','</div>');
+       $mform->addElement('html','</div>');
+       $this->standard_hidden_coursemodule_elements();
+
+       $this->plugin_extend_coursemodule_standard_elements();
+    }
     /**
      * Add rating settings.
      *
@@ -1143,7 +1624,160 @@ abstract class moodleform_mod extends moodleform {
             $mform->hideIf($gradepassfieldname, "{$gradefieldname}[modgrade_type]", 'eq', 'none');
         }
     }
+    public function standard_grading_coursemodule_elements1() {
+        global $COURSE, $CFG ,$PAGE;
 
+        if ($this->gradedorrated && $this->gradedorrated !== 'graded') {
+            return;
+        }
+        if ($this->_features->rating) {
+            return;
+        }
+        $this->gradedorrated = 'graded';
+
+        $itemnumber = 0;
+        $component = "mod_{$this->_modname}";
+        $gradefieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'grade');
+        $gradecatfieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'gradecat');
+        $gradepassfieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'gradepass');
+        $mform =& $this->_form;
+        $isupdate = !empty($this->_cm);
+        $gradeoptions = array('isupdate' => $isupdate,
+                              'currentgrade' => false,
+                              'hasgrades' => false,
+                              'canrescale' => $this->_features->canrescale,
+                              'useratings' => $this->_features->rating);
+
+        if ($this->_features->hasgrades) {
+            if ($this->_features->gradecat) {
+                $mform->addElement('header', 'modstandardgrade', get_string('gradenoun'));
+            }
+
+            if ($isupdate) {
+                $gradeitem = grade_item::fetch(array('itemtype' => 'mod',
+                                                        'itemmodule' => $this->_cm->modname,
+                                                        'iteminstance' => $this->_cm->instance,
+                                                        'itemnumber' => 0,
+                                                        'courseid' => $COURSE->id));
+                if ($gradeitem) {
+                    $gradeoptions['currentgrade'] = $gradeitem->grademax;
+                    $gradeoptions['currentgradetype'] = $gradeitem->gradetype;
+                    $gradeoptions['currentscaleid'] = $gradeitem->scaleid;
+                    $gradeoptions['hasgrades'] = $gradeitem->has_grades();
+                }
+            }
+            $mform->addElement('modgrade', $gradefieldname, get_string('gradenoun'), $gradeoptions);
+            $mform->addHelpButton($gradefieldname, 'modgrade', 'grades');
+            $mform->setDefault($gradefieldname, $CFG->gradepointdefault);
+
+            if ($this->_features->advancedgrading
+                    and !empty($this->current->_advancedgradingdata['methods'])
+                    and !empty($this->current->_advancedgradingdata['areas'])) {
+
+                if (count($this->current->_advancedgradingdata['areas']) == 1) {
+                    $areadata = reset($this->current->_advancedgradingdata['areas']);
+                    $areaname = key($this->current->_advancedgradingdata['areas']);
+                    $mform->addElement('select', 'advancedgradingmethod_'.$areaname,
+                        get_string('gradingmethod', 'core_grading'), $this->current->_advancedgradingdata['methods']);
+                    $mform->addHelpButton('advancedgradingmethod_'.$areaname, 'gradingmethod', 'core_grading');
+                    $mform->hideIf('advancedgradingmethod_'.$areaname, "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+
+                } else {
+                    $areasgroup = array();
+                    foreach ($this->current->_advancedgradingdata['areas'] as $areaname => $areadata) {
+                        $areasgroup[] = $mform->createElement('select', 'advancedgradingmethod_'.$areaname,
+                            $areadata['title'], $this->current->_advancedgradingdata['methods']);
+                        $areasgroup[] = $mform->createElement('static', 'advancedgradingareaname_'.$areaname, '', $areadata['title']);
+                    }
+                    $mform->addGroup($areasgroup, 'advancedgradingmethodsgroup', get_string('gradingmethods', 'core_grading'),
+                        array(' ', '<br />'), false);
+                }
+            }
+            //   Grade to pass.
+                $mform->addElement('text', $gradepassfieldname, get_string($gradepassfieldname, 'grades'));
+                $mform->addHelpButton($gradepassfieldname, $gradepassfieldname, 'grades');
+                $mform->setDefault($gradepassfieldname, 5);
+                $mform->setType($gradepassfieldname, PARAM_RAW);
+                $mform->hideIf($gradepassfieldname, "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+        }
+    }
+    public function standard_grading_coursemodule_elements2() {
+        global $COURSE, $CFG ,$PAGE;
+
+        if ($this->gradedorrated && $this->gradedorrated !== 'graded') {
+            return;
+        }
+        if ($this->_features->rating) {
+            return;
+        }
+        $this->gradedorrated = 'graded';
+
+        $itemnumber = 0;
+        $component = "mod_{$this->_modname}";
+        $gradefieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'grade');
+        $gradecatfieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'gradecat');
+        $gradepassfieldname = component_gradeitems::get_field_name_for_itemnumber($component, $itemnumber, 'gradepass');
+        $mform =& $this->_form;
+        $isupdate = !empty($this->_cm);
+        $gradeoptions = array('isupdate' => $isupdate,
+                              'currentgrade' => false,
+                              'hasgrades' => false,
+                              'canrescale' => $this->_features->canrescale,
+                              'useratings' => $this->_features->rating);
+
+        if ($this->_features->hasgrades) {
+            if ($this->_features->gradecat) {
+                // $mform->addElement('header', 'modstandardgrade', get_string('gradenoun'));
+            }
+
+            if ($isupdate) {
+                $gradeitem = grade_item::fetch(array('itemtype' => 'mod',
+                                                        'itemmodule' => $this->_cm->modname,
+                                                        'iteminstance' => $this->_cm->instance,
+                                                        'itemnumber' => 0,
+                                                        'courseid' => $COURSE->id));
+                if ($gradeitem) {
+                    $gradeoptions['currentgrade'] = $gradeitem->grademax;
+                    $gradeoptions['currentgradetype'] = $gradeitem->gradetype;
+                    $gradeoptions['currentscaleid'] = $gradeitem->scaleid;
+                    $gradeoptions['hasgrades'] = $gradeitem->has_grades();
+                }
+            }
+            $mform->addElement('modgrade', $gradefieldname, get_string('gradenoun'), $gradeoptions);
+            $mform->addHelpButton($gradefieldname, 'modgrade', 'grades');
+            $mform->setDefault($gradefieldname, $CFG->gradepointdefault);
+
+            if ($this->_features->advancedgrading
+                    and !empty($this->current->_advancedgradingdata['methods'])
+                    and !empty($this->current->_advancedgradingdata['areas'])) {
+
+                if (count($this->current->_advancedgradingdata['areas']) == 1) {
+                    $areadata = reset($this->current->_advancedgradingdata['areas']);
+                    $areaname = key($this->current->_advancedgradingdata['areas']);
+                    $mform->addElement('select', 'advancedgradingmethod_'.$areaname,
+                        get_string('gradingmethod', 'core_grading'), $this->current->_advancedgradingdata['methods']);
+                    $mform->addHelpButton('advancedgradingmethod_'.$areaname, 'gradingmethod', 'core_grading');
+                    $mform->hideIf('advancedgradingmethod_'.$areaname, "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+
+                } else {
+                    $areasgroup = array();
+                    foreach ($this->current->_advancedgradingdata['areas'] as $areaname => $areadata) {
+                        $areasgroup[] = $mform->createElement('select', 'advancedgradingmethod_'.$areaname,
+                            $areadata['title'], $this->current->_advancedgradingdata['methods']);
+                        $areasgroup[] = $mform->createElement('static', 'advancedgradingareaname_'.$areaname, '', $areadata['title']);
+                    }
+                    $mform->addGroup($areasgroup, 'advancedgradingmethodsgroup', get_string('gradingmethods', 'core_grading'),
+                        array(' ', '<br />'), false);
+                }
+            }
+            //   Grade to pass.
+                $mform->addElement('text', $gradepassfieldname, get_string($gradepassfieldname, 'grades'));
+                $mform->addHelpButton($gradepassfieldname, $gradepassfieldname, 'grades');
+                $mform->setDefault($gradepassfieldname, '');
+                $mform->setType($gradepassfieldname, PARAM_RAW);
+                $mform->hideIf($gradepassfieldname, "{$gradefieldname}[modgrade_type]", 'eq', 'none');
+        }
+    }
     /**
      * Add an editor for an activity's introduction field.
      * @deprecated since MDL-49101 - use moodleform_mod::standard_intro_elements() instead.
@@ -1182,10 +1816,11 @@ abstract class moodleform_mod extends moodleform {
 
         // If the 'show description' feature is enabled, this checkbox appears below the intro.
         // We want to hide that when using the singleactivity course format because it is confusing.
-        if ($this->_features->showdescription  && $this->courseformat->has_view_page()) {
-            $mform->addElement('advcheckbox', 'showdescription', get_string('showdescription'));
-            $mform->addHelpButton('showdescription', 'showdescription');
-        }
+        // Display des on page
+        // if ($this->_features->showdescription  && $this->courseformat->has_view_page()) {
+        //     $mform->addElement('advcheckbox', 'showdescription', get_string('showdescription'));
+        //     $mform->addHelpButton('showdescription', 'showdescription');
+        // }
     }
 
     /**

@@ -44,7 +44,7 @@ $output = "
                     <img src='$img'>
                 </div>
             </div>
-            <div class'p-2' id='content_course_student'>
+            <div id='content_course_student'>
                 <div class='d-flex'>
                     <div class='p-1'>
                         <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>
@@ -241,7 +241,7 @@ $button1 = "
         </div>
         <br>
         <div id='show_title_modal' class='mb-2'>Đường dẫn</div>
-        <div d-flex justify-content-between>
+        <div class='d-flex justify-content-between'>
         <input id='show_input_modal' readonly type='text' value='$CFG->wwwroot/show.php?id=$course->id'> 
         <button id='show_button_modal' onclick='myFunction()'>
         Sao chép</button> </div>
