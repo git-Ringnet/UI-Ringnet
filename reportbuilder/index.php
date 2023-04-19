@@ -46,22 +46,36 @@ $resultCountUser = $DB->get_records_sql($sqlCountUser);
 foreach ($resultCountUser as $row) {
     $countUser = intval($row->{'count(*)'});
 }
+//get count cohort
+$sqlCountCohort = 'SELECT COUNT(*) FROM `mdl_cohort`';
+$resultCountCohort = $DB->get_records_sql($sqlCountCohort);
+foreach ($resultCountCohort as $row) {
+    $countCohort = intval($row->{'count(*)'});
+}
 
 echo $OUTPUT->header();
-echo '<div class="row py-3">
+echo '
+<div class="container">
+<div class="row py-5">
 <div class="col-md-4">
-<div class="px-4 pt-3 pb-5 shadow-lg">
-    <p class="my-0 h1 fw-bold" style="font-size: 32px;border-radius: 8px;">' . $countCourse . '</p>
+<div class="px-4 pt-3 pb-5 shadow-lg" style="border-radius: 8px;">
+    <p class="my-0 h1 fw-bold" style="font-size: 32px;">' . $countCourse . '</p>
     <span style="font-size: 14px;">Tổng số khóa học</span>
 </div>
 </div>
 <div class="col-md-4">
-<div class="px-4 pt-3 pb-5 shadow-lg">
-    <p class="my-0 h1 fw-bold" style="font-size: 32px;border-radius: 8px;">' . $countUser . '</p>
+<div class="px-4 pt-3 pb-5 shadow-lg" style="border-radius: 8px;">
+    <p class="my-0 h1 fw-bold" style="font-size: 32px;">' . $countUser . '</p>
     <span style="font-size: 14px;">Tổng số người dùng</span>
 </div>
 </div>
-<div class="col-md-4"></div>
+<div class="col-md-4">
+<div class="px-4 pt-3 pb-5 shadow-lg" style="border-radius: 8px;">
+    <p class="my-0 h1 fw-bold" style="font-size: 32px;">' . $countCohort . '</p>
+    <span style="font-size: 14px;">Tổng số lượng nhóm</span>
+</div>
+</div>
+</div>
 </div>';
 echo html_writer::start_div('d-flex justify-content-between mb-2');
 echo $OUTPUT->heading(get_string('customreports', 'core_reportbuilder'));

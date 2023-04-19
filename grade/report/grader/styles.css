@@ -91,7 +91,7 @@
 
 #page-grade-report-user-index .user-grade tbody tr .column-grade:last-of-type {
     position: absolute;
-    top: -5px;
+    top: -3px;
     left: 160px;
     width: 100%;
     background-color: transparent;
@@ -401,4 +401,18 @@
     font-size: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+/*report grade user*/
+#page-grade-report-user-index .boxaligncenter thead tr .column-weight,
+#page-grade-report-user-index .boxaligncenter thead .column-grade,
+#page-grade-report-user-index .boxaligncenter thead .column-feedback,
+#page-grade-report-user-index .boxaligncenter tbody tr:not(:last-child) {
+    text-align: center;
+}
+#page-mod-page-mod #content_settings .availability-none{
+    display: none!important;
+}
+.dropdown-menu .dropdown-item-wrapper .dropdown-item-wrapper
+{
+    display: none!important;
 }
