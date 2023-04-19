@@ -34,8 +34,35 @@ require_once("{$CFG->libdir}/adminlib.php");
 admin_externalpage_setup('customreports');
 
 $PAGE->requires->js_call_amd('core_reportbuilder/reports_list', 'init');
+//get count course
+$sqlCountCourse = 'SELECT COUNT(*) FROM mdl_course';
+$resultCountCourse = $DB->get_records_sql($sqlCountCourse);
+foreach ($resultCountCourse as $row) {
+    $countCourse = intval($row->{'count(*)'});
+}
+//get count user
+$sqlCountUser = 'SELECT COUNT(*) FROM mdl_user';
+$resultCountUser = $DB->get_records_sql($sqlCountUser);
+foreach ($resultCountUser as $row) {
+    $countUser = intval($row->{'count(*)'});
+}
 
 echo $OUTPUT->header();
+echo '<div class="row py-3">
+<div class="col-md-4">
+<div class="px-4 pt-3 pb-5 shadow-lg">
+    <p class="my-0 h1 fw-bold" style="font-size: 32px;border-radius: 8px;">' . $countCourse . '</p>
+    <span style="font-size: 14px;">Tổng số khóa học</span>
+</div>
+</div>
+<div class="col-md-4">
+<div class="px-4 pt-3 pb-5 shadow-lg">
+    <p class="my-0 h1 fw-bold" style="font-size: 32px;border-radius: 8px;">' . $countUser . '</p>
+    <span style="font-size: 14px;">Tổng số người dùng</span>
+</div>
+</div>
+<div class="col-md-4"></div>
+</div>';
 echo html_writer::start_div('d-flex justify-content-between mb-2');
 echo $OUTPUT->heading(get_string('customreports', 'core_reportbuilder'));
 
