@@ -2911,4 +2911,7 @@ border-radius: 50%;
 #fitem_id_availabilityconditionsjson .col-md-9 .availability-field .availability-none{
     display: none !important;
 }
+#page-question-type-multichoice #id_questiontexteditable{
+    height: 200px !important;
+}
 /* / CSS Moi TUAN */
