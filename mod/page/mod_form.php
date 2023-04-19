@@ -440,7 +440,7 @@ class mod_page_mod_form extends moodleform_mod {
         display: none !important;
     }
     #page-mod-page-mod .div_upload_video{
-        top: 13%;
+        top: 60px;
         left: 78%;
     }
     #page-mod-page-mod #btn_upload_videos{
@@ -454,6 +454,20 @@ class mod_page_mod_form extends moodleform_mod {
     #page-mod-page-mod #id_page_atto_media_form a,
     #page-mod-page-mod #id_page_atto_media_form h3 {
         display: none !important;
+    }
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(1),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(2),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(3),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(6),
+    .moodle-dialogue-wrap .rui-nav-col ul:nth-child(7)
+    {
+        display: none;
+    }
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-navbar,
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-saveas,
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-setauthor,
+    .moodle-dialogue-wrap .moodle-dialogue-bd .fp-setlicense{
+        display: none;
     }
 </style>
 <script>
