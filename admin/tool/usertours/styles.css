@@ -2983,10 +2983,10 @@ input:checked+.slider:before {
     width: 100% !important;
 }
 
-#page-admin-user .admintable thead tr .c3,
+/* #page-admin-user .admintable thead tr .c3,
 #page-admin-user .admintable tbody tr .c3 {
     opacity: 0 !important;
-}
+} */
 
 /**/
 .fdescription {
