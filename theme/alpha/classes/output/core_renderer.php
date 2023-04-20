@@ -378,27 +378,39 @@ class core_renderer extends \core_renderer
         // Kiểm tra role có phải là admin hay không
         // Kiểm tra role có phải là teacher hay không
         // sau đó kiểm tra có phải là người tạo khóa học hay không
+        $urlgrades = '';
         if (is_siteadmin()) {
             $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+        $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
             // '&returnto=catmanage'
         } else if (is_teacher()) {
             if (is_course_creator($COURSE->id)) {
                 $urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id;
+        $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+
                 // '&returnto=catmanage'
             } else {
-                $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
+        $urlgrades = $CFG->wwwroot . '/grade/report/user/index.php?id=' . $course->id;
+        $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
             }
         } else {
             $urledit = $CFG->wwwroot . '/course/show.php?id=' . $course->id;
-        }
+        $urlgrades = $CFG->wwwroot . '/grade/report/user/index.php?id=' . $course->id;
 
+        }
+        $content = html_writer::start_div('course-navigation');
+        //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
+        $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
+        $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
+        $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
+        // $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
         if ($course->id != 1) {
             $content = html_writer::start_div('course-navigation');
             //$urledit = $CFG->wwwroot . '/course/edit.php?id=' . $course->id . '&returnto=catmanage';
             $urlcontent = $CFG->wwwroot . '/course/view.php?id=' . $course->id;
             $urlparticipant = $CFG->wwwroot . '/user/index.php?id=' . $course->id;
             $urlbades = $CFG->wwwroot . '/badges/view.php?type=2&id=' . $course->id;
-            $urlgrades = $CFG->wwwroot . '/grade/report/grader/index.php?id=' . $course->id;
+            $urlgrades = $urlgrades;
             //Thảo luận
             $id_khoa_hoc = $course->id; // thay bằng id khóa học cần truy vấn
             $sql = sprintf(
