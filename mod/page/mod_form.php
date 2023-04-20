@@ -52,7 +52,7 @@ class mod_page_mod_form extends moodleform_mod {
         }
         $mform->addRule('name', null, 'required', null, 'client');
         $mform->addRule('name', get_string('maximumchars', '', 255), 'maxlength', 255, 'client');
-        // $this->standard_intro_elements();
+        $this->standard_intro_elements();
 
         //-------------------------------------------------------
         // $mform->addElement('header', 'contentsection', get_string('contentheader', 'page'));
@@ -467,6 +467,9 @@ class mod_page_mod_form extends moodleform_mod {
     .moodle-dialogue-wrap .moodle-dialogue-bd .fp-saveas,
     .moodle-dialogue-wrap .moodle-dialogue-bd .fp-setauthor,
     .moodle-dialogue-wrap .moodle-dialogue-bd .fp-setlicense{
+        display: none;
+    }
+    #page-mod-page-mod #fitem_id_introeditor{
         display: none;
     }
 </style>
