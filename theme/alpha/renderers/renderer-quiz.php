@@ -519,24 +519,34 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
         $output = '';
         // Nếu lớn hơn hoặc bằng 5 thì svg tích Việt
         $svg = '';
+        $message = '';
         if ($graded >= 5) {
             $svg = '<svg width="150" height="107" viewBox="0 0 150 107" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M148.117 1.88037C150.628 4.38754 150.628 8.45246 148.117 10.9596L53.8314 105.12C51.3209 107.627 47.2505 107.627 44.74 105.12L1.88288 62.3196C-0.627628 59.8125 -0.627628 55.7475 1.88288 53.2404C4.3934 50.7332 8.46374 50.7332 10.9743 53.2404L49.2857 91.5008L139.026 1.88037C141.536 -0.626792 145.607 -0.626792 148.117 1.88037Z" fill="#09BD3C"/>
             </svg>
             ';
+            $message = 'Bạn đã đã vượt qua bài kiểm tra';
         } else {
             $svg = '<svg width="139" height="139" viewBox="0 0 139 139" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M132 132L7 7" stroke="#B23333" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M132 7L7 132" stroke="#B23333" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             ';
+            $message = 'Bạn không vượt qua bài kiểm tra';
         }
 
         $totalquestion = count($_SESSION['questions']);
         $totalcorrect = $_SESSION['count'];
 
-        $output .= html_writer::tag('div',  $svg, array('class' => 'd-flex justify-content-center'));
-        
+        // $output .= html_writer::tag('div',  $svg, array('class' => 'd-flex justify-content-center'));
+
+        $output .= html_writer::tag(
+            'div',
+            html_writer::tag('div', $svg, array('class' => 'svg-icon')) .
+                html_writer::tag('h3',  $message, array('class' => 'message py-3')),
+            array('class' => 'd-flex justify-content-center flex-column align-items-center')
+        );
+
         $output .= html_writer::start_tag('div', array('class' => 'rui-summary-table'));
 
         $output .= html_writer::start_tag('div', array('class' => 'rui-info-container rui-quizreviewsummary'));
@@ -589,7 +599,7 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
                         html_writer::tag('div', $content, array('class' => 'rui-infobox-content--small')),
                     array('class' => 'd-flex justify-content-between align-items-center w-100 box-sumary py-3 ' . strtolower(str_replace(' ', '', $csstitle)))
                 );
-                $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100 '. strtolower(str_replace(' ', '', $csstitle))));
+                $output .= html_writer::tag('hr', '', array('class' => 'hr-bottom my-2 w-100 ' . strtolower(str_replace(' ', '', $csstitle))));
             }
         }
         unset($_SESSION['count']);
@@ -630,7 +640,7 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
             'cmid' => $attemptobj->get_cmid(),
             'sesskey' => sesskey(),
         );
-        
+
         $button = new single_button(
             new moodle_url($attemptobj->processattempt_url(), $options),
             get_string('submitallandfinish', 'quiz'),
@@ -659,7 +669,7 @@ class theme_alpha_mod_quiz_renderer extends mod_quiz_renderer
         //     $message = get_string('mustbesubmittedby', 'quiz', userdate($duedate));
         //     $output .= '<div class="alert alert-info d-flex align-items-center"><svg class="mr-2" width="20" height="20" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.9522 16.3536L10.2152 5.85658C10.9531 4.38481 13.0539 4.3852 13.7913 5.85723L19.0495 16.3543C19.7156 17.6841 18.7487 19.25 17.2613 19.25H6.74007C5.25234 19.25 4.2854 17.6835 4.9522 16.3536Z"></path><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10V12"></path><circle cx="12" cy="16" r="1" fill="currentColor"></circle></svg>' . $message . '</div>';
         // }
-            
+
         $output .= $this->container($this->container($this->render($button), 'rui-controls'), 'rui-submitbtns');
 
         return $output;

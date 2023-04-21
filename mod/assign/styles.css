@@ -9,8 +9,7 @@
 .path-mod-assign div.submissionfull,
 .path-mod-assign div.submissionlinks,
 .path-mod-assign div.usersummary,
-.path-mod-assign div.feedback,
-.path-mod-assign div.gradingsummary {
+.path-mod-assign div.feedback {
     margin-bottom: 1.5em;
 }
 
@@ -1232,4 +1231,7 @@ div[id*='mod_assign-timer-'] {
     display: block;
     font-weight: 600;
     font-size: 1.4em;
+}
+#page-mod-assign-editsubmission .activity-description#intro{
+    display: block !important;
 }

@@ -2369,7 +2369,6 @@ body#page-mod-quiz-edit {
 #page-mod-page-view .wrapper-course,
 #page-mod-assign-view .wrapper-course,
 #page-mod-assign-editsubmission .wrapper-course,
-#page-mod-assign-grading .wrapper-course,
 #page-mod-resource-view .wrapper-course,
 #page-mod-quiz-view .wrapper-course,
 #page-mod-quiz-summary .wrapper-course,
@@ -2569,7 +2568,7 @@ body#page-mod-quiz-edit {
 }
 
 .box-sumary {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .rui-summary-table .startedon,
@@ -3021,6 +3020,35 @@ input:checked+.slider:before {
 #page-mod-quiz-edit .activity .questionname {
     display: none;
 }
-th#weight,.column-weight{
+
+th#weight,
+.column-weight {
     opacity: 0;
 }
+
+
+/* btn-viewgrades mod assign Việt */
+.view-grades .btn {
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.view-grades a.btn.btn-grades {
+    background: #0095F6;
+    color: #ffff;
+}
+.view-grades a.btn.btn-grades:hover {
+    background: #007FD1;
+}
+.view-grades a.btn.btn-grades:active {
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.view-grades .btn-viewsubmits {
+    color: #0095F6;
+    border: 1px solid #0095F6;
+}
+/*  */
+
